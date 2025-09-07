@@ -1,0 +1,168 @@
+import run.GUI;
+
+Plant(
+		input signal pusherExtend,vacOn,armSource,armDest;
+		input signal enable,refill;
+		output signal pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,empty;
+		output signal pusherRetractedE,pusherExtendedE,WPgrippedE,armAtSourceE,armAtDestE,emptyE;
+		)
+->
+{
+	new Thread(new GUI()).start();
+
+//	signal capDec;
+//	int signal capPos;
+//	emit capPos(0);
+//	{// Arm
+//		while(true){
+//			abort(armSource && enable){
+//				sustain armAtDest;
+//			}
+//			await(!enable);
+//			abort(armDest && enable){
+//				sustain armAtSource;
+//			}
+//			await(!enable);
+//		}
+//	}
+//	||
+//	{// Pusher
+//		while(true){
+//			abort(pusherExtend && enable){
+//				sustain pusherRetracted;
+//			}
+//			await(!enable);
+//			abort(!pusherExtend && enable){
+//				sustain pusherExtended;
+//			}
+//			await(!enable);
+//		}
+//	}
+//	||
+//	{// Vacuum
+//		while(true){
+//			present(vacOn && armAtSource){
+//				if((Integer)#capPos == 1){
+//					emit capPos(0);
+//					abort(!vacOn){
+//						sustain WPgripped; 
+//					}
+//					present(armAtSource){
+//						emit capPos(1);
+//					}
+//				}
+//			}
+//			pause;
+//		}
+//	}
+//	||
+//	{
+//		/*
+//		 * Cap positions
+//		 * 0 = at Mag
+//		 * 1 = at pick-up
+//		 */
+//		while(true){
+//			// At mag
+//			abort(empty){
+//				while(true){
+//						await(pusherRetracted);
+//						await(pusherExtended);
+//						// At pick-up
+//						emit capPos(1);
+//						await(pusherRetracted);
+//						emit capDec;
+//				}
+//			}
+//			await(refill);
+//		}
+//	}
+//	||
+//	{
+//		int capcount = 5;
+//		while(true){
+//			present(capDec){
+//				if(capcount > 0)
+//					capcount--;
+//			}
+//			present(refill){
+//				capcount = 5;
+//			}
+////			present(pusherRetracted){
+//				if(capcount == 0)
+//					emit empty;
+////			}
+//			pause;
+//		}
+//	}
+//	||
+//	{// To viz
+//		{while(true){present(pusherRetracted){emit pusherRetractedE;} pause;}}
+//		||
+//		{while(true){present(pusherExtended){emit pusherExtendedE;} pause;}}
+//		||
+//		{while(true){present(WPgripped){emit WPgrippedE;} pause;}}
+//		||
+//		{while(true){present(armAtSource){emit armAtSourceE;} pause;}}
+//		||
+//		{while(true){present(armAtDest){emit armAtDestE;} pause;}}
+//		||
+//		{while(true){present(empty){emit emptyE;} pause;}}
+//	}
+}
+
+
+rPlant(
+		input signal rotaryTableTrigger;
+		output signal bottleAtPos5, tableAlignedWithSensor, capOnBottleAtPos1, tableAlignedWithSensorC;
+		// GUI signal
+		output signal rotTurn, rotContent;
+)
+->
+{
+	int signal posOne, posFive, turn;
+	{
+		int[] packedArray = new int[6]; 
+		int pos = 0;
+		for(int i = 0; i < 6; i++){
+		    packedArray[i] = 0;
+		}
+		
+	    packedArray[0] = 5;
+	    packedArray[3] = 1;
+	    
+		while(true){
+			await(rotaryTableTrigger);
+
+			int pos1 = packedArray[0];
+			int pos5 = packedArray[4];
+			emit rotTurn(packedArray);
+			emit posOne(pos1);
+			emit posFive(pos5);
+			int[] newPackedArray = new int[6]; 
+			newPackedArray[0] = packedArray[5];
+
+			for(int i = 1; i < 6; i++){
+				newPackedArray[i] = packedArray[i - 1];
+			}
+			packedArray = newPackedArray;
+			emit tableAlignedWithSensorC;
+			await(!rotaryTableTrigger);
+		}
+	}
+	
+	||
+	
+	{
+		while(true) {
+			if((Integer)#posOne == 5){
+				emit capOnBottleAtPos1;
+			}
+			if((Integer)#posFive != 0){
+				emit bottleAtPos5;
+			}
+			pause;
+		}
+	}
+}
+
