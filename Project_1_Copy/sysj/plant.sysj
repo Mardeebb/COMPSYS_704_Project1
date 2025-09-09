@@ -132,22 +132,23 @@ rPlant(
 	    packedArray[3] = 1;
 	    
 		while(true){
-			await(rotaryTableTrigger);
-
-			int pos1 = packedArray[0];
-			int pos5 = packedArray[4];
-			emit rotTurn(packedArray);
-			emit posOne(pos1);
-			emit posFive(pos5);
-			int[] newPackedArray = new int[6]; 
-			newPackedArray[0] = packedArray[5];
-
-			for(int i = 1; i < 6; i++){
-				newPackedArray[i] = packedArray[i - 1];
+			abort(!rotaryTableTrigger){
+				await(rotaryTableTrigger);
+	
+				int pos1 = packedArray[0];
+				int pos5 = packedArray[4];
+				emit rotTurn(packedArray);
+				emit posOne(pos1);
+				emit posFive(pos5);
+				int[] newPackedArray = new int[6]; 
+				newPackedArray[0] = packedArray[5];
+	
+				for(int i = 1; i < 6; i++){
+					newPackedArray[i] = packedArray[i - 1];
+				}
+				packedArray = newPackedArray;
+				sustain tableAlignedWithSensorC;
 			}
-			packedArray = newPackedArray;
-			emit tableAlignedWithSensorC;
-			await(!rotaryTableTrigger);
 		}
 	}
 	
