@@ -145,12 +145,9 @@ public class Canvas extends JPanel {
 	        drawRotatedImage(g2d, rotary_table, rotTable_X, rotTable_Y, 300);
 		}
 
-<<<<<<< Updated upstream
 	    
 	    
 		
-=======
->>>>>>> Stashed changes
 		int x_1 = rotTable_X + 5;
 		int y_1 = rotTable_Y + 50;
 		int x_0 = rotTable_X + 5;

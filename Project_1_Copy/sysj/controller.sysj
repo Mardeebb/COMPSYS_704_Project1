@@ -1,10 +1,10 @@
-Orchestrator(
-		input signal conveyorStatus, fillerStatus, capperStatus, rotaryTableStatus;
-		input signal capLoaderStatus, robotLoaderStatus, robotUnloaderStatus;
-		output signal rotaryTableRequest;
+Controller(
+		input signal pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,empty,request;
+		output signal pusherExtend,vacOn,armSource,armDest;
+		input Integer signal mode;
+		input signal pusherExtendM,vacOnM,armSourceM,armDestM;
 		)
 ->{
-<<<<<<< HEAD
 /* TODO: Write control-logic */
     System.out.println("Controller startedh");
     signal automode, manual, startauto;
@@ -117,41 +117,14 @@ Orchestrator(
 			}
 		}
 	}
-<<<<<<< Updated upstream
-=======
-=======
-	System.out.println("Orchestrator");
-	{
-		while(true) {
-			emit rotaryTableRequest;
-			
-			pause;
-		}
-	}
->>>>>>> af53be5449f55306e870e1151cf69cfc012489e8
->>>>>>> Stashed changes
 }
 
-FillerController(
-		input signal bottleAtPos2, dosUnitEvac, dosUnitFilled, fillerRequest;
-		)
--> {
-	System.out.println("Filler");
-	{
-		
-	}
-}
-
-
-
-RotaryTableController(
-		input signal rotaryTableRequest;
-		input signal enable, tableAlignedWithSensorC;
+rController(
+		input signal enable, tableAlignedWithSensorC ;
 		output signal rotaryTableTrigger;
 		)
 ->{
-/* TODO: Write control-logic */
-    System.out.println("Rotary table controller started");
+    System.out.println("Controller startedh");
 	{
 		// pusher control
 		while(true){
@@ -163,7 +136,6 @@ RotaryTableController(
 		}
 	}
 }
-
 	
 
 
