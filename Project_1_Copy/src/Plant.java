@@ -30,6 +30,10 @@ public class Plant extends ClockDomain{
   public Signal armAtSourceE = new Signal("armAtSourceE", Signal.OUTPUT);
   public Signal armAtDestE = new Signal("armAtDestE", Signal.OUTPUT);
   public Signal emptyE = new Signal("emptyE", Signal.OUTPUT);
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+>>>>>>> Stashed changes
   private Signal capDec_1;
   private Signal capPos_1;
   private int capcount_thread_6;//sysj\plant.sysj line: 82, column: 3
@@ -52,6 +56,13 @@ public class Plant extends ClockDomain{
   private int S1334 = 1;
   private int S1342 = 1;
   private int S1350 = 1;
+<<<<<<< Updated upstream
+=======
+=======
+  private int S86 = 1;
+  private int S85 = 1;
+>>>>>>> af53be5449f55306e870e1151cf69cfc012489e8
+>>>>>>> Stashed changes
   
   private int[] ends = new int[17];
   private int[] tdone = new int[17];
@@ -967,6 +978,10 @@ public class Plant extends ClockDomain{
     }
     
     RUN: while(true){
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+>>>>>>> Stashed changes
       switch(S2348){
         case 0 : 
           S2348=0;
@@ -1011,6 +1026,7 @@ public class Plant extends ClockDomain{
             ends[1]=1;
             break RUN;
           }
+<<<<<<< Updated upstream
         
         case 2 : 
           capDec_1.setClear();//sysj\plant.sysj line: 13, column: 2
@@ -1052,6 +1068,68 @@ public class Plant extends ClockDomain{
             ends[1]=0;
             S2348=0;
             break RUN;
+=======
+        
+        case 2 : 
+          capDec_1.setClear();//sysj\plant.sysj line: 13, column: 2
+          capPos_1.setClear();//sysj\plant.sysj line: 14, column: 2
+          thread2442(tdone,ends);
+          thread2443(tdone,ends);
+          thread2444(tdone,ends);
+          thread2445(tdone,ends);
+          thread2446(tdone,ends);
+          thread2447(tdone,ends);
+          int biggest2455 = 0;
+          if(ends[2]>=biggest2455){
+            biggest2455=ends[2];
+          }
+          if(ends[3]>=biggest2455){
+            biggest2455=ends[3];
+          }
+          if(ends[4]>=biggest2455){
+            biggest2455=ends[4];
+          }
+          if(ends[5]>=biggest2455){
+            biggest2455=ends[5];
+          }
+          if(ends[6]>=biggest2455){
+            biggest2455=ends[6];
+          }
+          if(ends[7]>=biggest2455){
+            biggest2455=ends[7];
+          }
+          if(biggest2455 == 1){
+            active[1]=1;
+            ends[1]=1;
+            break RUN;
+          }
+          //FINXME code
+          if(biggest2455 == 0){
+            S2348=0;
+            active[1]=0;
+            ends[1]=0;
+            S2348=0;
+            break RUN;
+=======
+      switch(S86){
+        case 0 : 
+          S86=0;
+          break RUN;
+        
+        case 1 : 
+          S86=2;
+          S86=2;
+          new Thread(new GUI()).start();//sysj\plant.sysj line: 11, column: 2
+          S86=0;
+          active[1]=0;
+          ends[1]=0;
+          S86=0;
+          break RUN;
+        
+        case 2 : 
+          switch(S85){
+>>>>>>> af53be5449f55306e870e1151cf69cfc012489e8
+>>>>>>> Stashed changes
           }
         
       }
