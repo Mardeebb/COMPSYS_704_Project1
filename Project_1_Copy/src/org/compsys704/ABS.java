@@ -23,21 +23,18 @@ public class ABS extends JFrame {
 	public ABS() {
 //		this.setPreferredSize(new Dimension(200, 300));
 		panel = new Canvas();
-		panel.setPreferredSize(new Dimension(600, 600));
+		panel.setPreferredSize(new Dimension(1300, 800));
 		panel.setBackground(Color.WHITE);
 		JButton enable = new JButton("rotaryTableTrigger");
-//		enable.addActionListener(new SignalClient(Ports.PORT_LOADER_PLANT, Ports.ENABLE_SIGNAL));
-//		enable.addActionListener(e -> {
-//		    States.RT_PS++;
-//			if(States.RT_PS == 6) {
-//				States.RT_PS = 0;
-//			}
-//		});
-
+		enable.addActionListener(new SignalClient(Ports.PORT_LOADER_PLANT, Ports.ENABLE_SIGNAL));
 		enable.addActionListener(new SignalClient(10003, "rotaryTableControllerCD.enable"));
-		
+		JButton request = new JButton("request");
+		request.addActionListener(new SignalClient(Ports.PORT_LOADER_CONTROLLER, Ports.REQUEST_SIGNAL));
+
 		JPanel ss = new JPanel();
 		ss.add(enable);
+		ss.add(request);
+
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;

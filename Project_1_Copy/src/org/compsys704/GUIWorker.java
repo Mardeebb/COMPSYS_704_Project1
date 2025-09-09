@@ -38,6 +38,7 @@ public class GUIWorker extends Worker{
 			break;
 		case"rotContent":
 	        break;
+	        
 		case"rotTurn":
 			System.err.println(signame);
 			if (status) {
@@ -71,7 +72,6 @@ public class GUIWorker extends Worker{
 			System.exit(1);
 		}
 	}
-	
 	
 	static final List<String> signames = Arrays.asList("pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1");
 	
