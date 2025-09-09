@@ -1,6 +1,6 @@
 <System xmlns="http://systemjtechnology.com">
 	<SubSystem Name="SS1" Local="true">
-		<ClockDomain Name="orchestratorCD" Class="Orchestrator">
+		<ClockDomain Name="OrchestratorCD" Class="Orchestrator">
 			<iSignal Name="conveyorStatus" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
 			<iSignal Name="fillerStatus" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
 			<iSignal Name="capperStatus" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
@@ -9,12 +9,21 @@
 			<iSignal Name="robotLoaderStatus" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
 			<iSignal Name="robotUnloaderStatus" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
 			
-			<oSignal Name="rotaryTableRequest" To="rotaryTableControllerCD.rotaryTableRequest" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10002" />
+			<oSignal Name="rotaryTableRequest" To="RotaryTableControllerCD.rotaryTableRequest" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10002" />
+		</ClockDomain>
+		
+		<ClockDomain Name="FillerControllerCD" Class="FillerController">
+		
+			<iSignal Name="bottleAtPos2" From="OrchestratorCD.rotaryTableRequest" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10002" />
+			<iSignal Name="dosUnitEvac" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
+			<iSignal Name="dosUnitFilled" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
+			<iSignal Name="fillerRequest" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
+
 		</ClockDomain>
 		
 		<ClockDomain Name="RotaryTableControllerCD" Class="RotaryTableController">
 		
-			<iSignal Name="rotaryTableRequest" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10002" />
+			<iSignal Name="rotaryTableRequest" From="OrchestratorCD.rotaryTableRequest" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10002" />
 			<iSignal Name="enable" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
 			<iSignal Name="tableAlignedWithSensorC" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
 			

@@ -21,8 +21,8 @@ public class Orchestrator extends ClockDomain{
   public Signal rotaryTableRequest = new Signal("rotaryTableRequest", Signal.OUTPUT);
   private int S7 = 1;
   
-  private int[] ends = new int[3];
-  private int[] tdone = new int[3];
+  private int[] ends = new int[4];
+  private int[] tdone = new int[4];
   
   public void runClockDomain(){
     for(int i=0;i<ends.length;i++){
@@ -42,7 +42,6 @@ public class Orchestrator extends ClockDomain{
           System.out.println("Orchestrator");//sysj\controller.sysj line: 7, column: 2
           rotaryTableRequest.setPresent();//sysj\controller.sysj line: 10, column: 4
           currsigs.addElement(rotaryTableRequest);
-          System.out.println("Emitted rotaryTableRequest");
           active[1]=1;
           ends[1]=1;
           break RUN;
@@ -50,7 +49,6 @@ public class Orchestrator extends ClockDomain{
         case 2 : 
           rotaryTableRequest.setPresent();//sysj\controller.sysj line: 10, column: 4
           currsigs.addElement(rotaryTableRequest);
-          System.out.println("Emitted rotaryTableRequest");
           active[1]=1;
           ends[1]=1;
           break RUN;
@@ -60,9 +58,9 @@ public class Orchestrator extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1};
-    char [] paused1 = {0, 0, 0};
-    char [] suspended1 = {0, 0, 0};
+    char [] active1 = {1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;

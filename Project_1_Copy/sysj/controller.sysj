@@ -14,6 +14,18 @@ Orchestrator(
 	}
 }
 
+FillerController(
+		input signal bottleAtPos2, dosUnitEvac, dosUnitFilled, fillerRequest;
+		)
+-> {
+	System.out.println("Filler");
+	{
+		
+	}
+}
+
+
+
 RotaryTableController(
 		input signal rotaryTableRequest;
 		input signal enable, tableAlignedWithSensorC;

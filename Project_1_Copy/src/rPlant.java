@@ -27,16 +27,16 @@ public class rPlant extends ClockDomain{
   private int pos1_thread_3;//sysj\plant.sysj line: 138, column: 5
   private int pos5_thread_3;//sysj\plant.sysj line: 139, column: 5
   private int[] newPackedArray_thread_3;//sysj\plant.sysj line: 143, column: 5
+  private int S164 = 1;
+  private int S145 = 1;
+  private int S92 = 1;
   private int S162 = 1;
-  private int S143 = 1;
-  private int S90 = 1;
-  private int S160 = 1;
   
   private int[] ends = new int[5];
   private int[] tdone = new int[5];
   
-  public void thread168(int [] tdone, int [] ends){
-        switch(S160){
+  public void thread170(int [] tdone, int [] ends){
+        switch(S162){
       case 0 : 
         active[4]=0;
         ends[4]=0;
@@ -47,11 +47,9 @@ public class rPlant extends ClockDomain{
         if((Integer)(posOne_2.getpreval() == null ? 0 : ((Integer)posOne_2.getpreval()).intValue()) == 5){//sysj\plant.sysj line: 159, column: 7
           capOnBottleAtPos1.setPresent();//sysj\plant.sysj line: 160, column: 5
           currsigs.addElement(capOnBottleAtPos1);
-          System.out.println("Emitted capOnBottleAtPos1");
           if((Integer)(posFive_2.getpreval() == null ? 0 : ((Integer)posFive_2.getpreval()).intValue()) != 0){//sysj\plant.sysj line: 162, column: 7
             bottleAtPos5.setPresent();//sysj\plant.sysj line: 163, column: 5
             currsigs.addElement(bottleAtPos5);
-            System.out.println("Emitted bottleAtPos5");
             active[4]=1;
             ends[4]=1;
             tdone[4]=1;
@@ -66,7 +64,6 @@ public class rPlant extends ClockDomain{
           if((Integer)(posFive_2.getpreval() == null ? 0 : ((Integer)posFive_2.getpreval()).intValue()) != 0){//sysj\plant.sysj line: 162, column: 7
             bottleAtPos5.setPresent();//sysj\plant.sysj line: 163, column: 5
             currsigs.addElement(bottleAtPos5);
-            System.out.println("Emitted bottleAtPos5");
             active[4]=1;
             ends[4]=1;
             tdone[4]=1;
@@ -82,8 +79,8 @@ public class rPlant extends ClockDomain{
     }
   }
 
-  public void thread167(int [] tdone, int [] ends){
-        switch(S143){
+  public void thread169(int [] tdone, int [] ends){
+        switch(S145){
       case 0 : 
         active[3]=0;
         ends[3]=0;
@@ -92,13 +89,13 @@ public class rPlant extends ClockDomain{
       
       case 1 : 
         if(!rotaryTableTrigger.getprestatus()){//sysj\plant.sysj line: 135, column: 10
-          S90=0;
+          S92=0;
           active[3]=1;
           ends[3]=1;
           tdone[3]=1;
         }
         else {
-          switch(S90){
+          switch(S92){
             case 0 : 
               if(rotaryTableTrigger.getprestatus()){//sysj\plant.sysj line: 136, column: 11
                 pos1_thread_3 = packedArray_thread_3[0];//sysj\plant.sysj line: 138, column: 5
@@ -106,25 +103,21 @@ public class rPlant extends ClockDomain{
                 rotTurn.setPresent();//sysj\plant.sysj line: 140, column: 5
                 currsigs.addElement(rotTurn);
                 rotTurn.setValue(packedArray_thread_3);//sysj\plant.sysj line: 140, column: 5
-                System.out.println("Emitted rotTurn");
                 posOne_2.setPresent();//sysj\plant.sysj line: 141, column: 5
                 currsigs.addElement(posOne_2);
                 posOne_2.setValue(pos1_thread_3);//sysj\plant.sysj line: 141, column: 5
-                System.out.println("Emitted posOne_2");
                 posFive_2.setPresent();//sysj\plant.sysj line: 142, column: 5
                 currsigs.addElement(posFive_2);
                 posFive_2.setValue(pos5_thread_3);//sysj\plant.sysj line: 142, column: 5
-                System.out.println("Emitted posFive_2");
                 newPackedArray_thread_3 = new int[6];//sysj\plant.sysj line: 143, column: 5
                 newPackedArray_thread_3[0] = packedArray_thread_3[5];//sysj\plant.sysj line: 144, column: 5
                 for(int i_thread_3 = 1; i_thread_3 < 6; i_thread_3 = i_thread_3 + 1) {//sysj\plant.sysj line: 146, column: 31
                   newPackedArray_thread_3[i_thread_3] = packedArray_thread_3[i_thread_3 - 1];//sysj\plant.sysj line: 147, column: 6
                 }
                 packedArray_thread_3 = newPackedArray_thread_3;//sysj\plant.sysj line: 149, column: 5
-                S90=1;
+                S92=1;
                 tableAlignedWithSensorC.setPresent();//sysj\plant.sysj line: 150, column: 5
                 currsigs.addElement(tableAlignedWithSensorC);
-                System.out.println("Emitted tableAlignedWithSensorC");
                 active[3]=1;
                 ends[3]=1;
                 tdone[3]=1;
@@ -139,7 +132,6 @@ public class rPlant extends ClockDomain{
             case 1 : 
               tableAlignedWithSensorC.setPresent();//sysj\plant.sysj line: 150, column: 5
               currsigs.addElement(tableAlignedWithSensorC);
-              System.out.println("Emitted tableAlignedWithSensorC");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -152,16 +144,14 @@ public class rPlant extends ClockDomain{
     }
   }
 
-  public void thread165(int [] tdone, int [] ends){
-        S160=1;
+  public void thread167(int [] tdone, int [] ends){
+        S162=1;
     if((Integer)(posOne_2.getpreval() == null ? 0 : ((Integer)posOne_2.getpreval()).intValue()) == 5){//sysj\plant.sysj line: 159, column: 7
       capOnBottleAtPos1.setPresent();//sysj\plant.sysj line: 160, column: 5
       currsigs.addElement(capOnBottleAtPos1);
-      System.out.println("Emitted capOnBottleAtPos1");
       if((Integer)(posFive_2.getpreval() == null ? 0 : ((Integer)posFive_2.getpreval()).intValue()) != 0){//sysj\plant.sysj line: 162, column: 7
         bottleAtPos5.setPresent();//sysj\plant.sysj line: 163, column: 5
         currsigs.addElement(bottleAtPos5);
-        System.out.println("Emitted bottleAtPos5");
         active[4]=1;
         ends[4]=1;
         tdone[4]=1;
@@ -176,7 +166,6 @@ public class rPlant extends ClockDomain{
       if((Integer)(posFive_2.getpreval() == null ? 0 : ((Integer)posFive_2.getpreval()).intValue()) != 0){//sysj\plant.sysj line: 162, column: 7
         bottleAtPos5.setPresent();//sysj\plant.sysj line: 163, column: 5
         currsigs.addElement(bottleAtPos5);
-        System.out.println("Emitted bottleAtPos5");
         active[4]=1;
         ends[4]=1;
         tdone[4]=1;
@@ -189,8 +178,8 @@ public class rPlant extends ClockDomain{
     }
   }
 
-  public void thread164(int [] tdone, int [] ends){
-        S143=1;
+  public void thread166(int [] tdone, int [] ends){
+        S145=1;
     packedArray_thread_3 = new int[6];//sysj\plant.sysj line: 125, column: 3
     pos_thread_3 = 0;//sysj\plant.sysj line: 126, column: 3
     for(int i_thread_3 = 0; i_thread_3 < 6; i_thread_3 = i_thread_3 + 1) {//sysj\plant.sysj line: 127, column: 29
@@ -198,7 +187,7 @@ public class rPlant extends ClockDomain{
     }
     packedArray_thread_3[0] = 5;//sysj\plant.sysj line: 131, column: 6
     packedArray_thread_3[3] = 1;//sysj\plant.sysj line: 132, column: 6
-    S90=0;
+    S92=0;
     active[3]=1;
     ends[3]=1;
     tdone[3]=1;
@@ -211,27 +200,27 @@ public class rPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S162){
+      switch(S164){
         case 0 : 
-          S162=0;
+          S164=0;
           break RUN;
         
         case 1 : 
-          S162=2;
-          S162=2;
+          S164=2;
+          S164=2;
           posOne_2.setClear();//sysj\plant.sysj line: 123, column: 2
           posFive_2.setClear();//sysj\plant.sysj line: 123, column: 2
           turn_2.setClear();//sysj\plant.sysj line: 123, column: 2
-          thread164(tdone,ends);
-          thread165(tdone,ends);
-          int biggest166 = 0;
-          if(ends[3]>=biggest166){
-            biggest166=ends[3];
+          thread166(tdone,ends);
+          thread167(tdone,ends);
+          int biggest168 = 0;
+          if(ends[3]>=biggest168){
+            biggest168=ends[3];
           }
-          if(ends[4]>=biggest166){
-            biggest166=ends[4];
+          if(ends[4]>=biggest168){
+            biggest168=ends[4];
           }
-          if(biggest166 == 1){
+          if(biggest168 == 1){
             active[2]=1;
             ends[2]=1;
             break RUN;
@@ -241,26 +230,26 @@ public class rPlant extends ClockDomain{
           posOne_2.setClear();//sysj\plant.sysj line: 123, column: 2
           posFive_2.setClear();//sysj\plant.sysj line: 123, column: 2
           turn_2.setClear();//sysj\plant.sysj line: 123, column: 2
-          thread167(tdone,ends);
-          thread168(tdone,ends);
-          int biggest169 = 0;
-          if(ends[3]>=biggest169){
-            biggest169=ends[3];
+          thread169(tdone,ends);
+          thread170(tdone,ends);
+          int biggest171 = 0;
+          if(ends[3]>=biggest171){
+            biggest171=ends[3];
           }
-          if(ends[4]>=biggest169){
-            biggest169=ends[4];
+          if(ends[4]>=biggest171){
+            biggest171=ends[4];
           }
-          if(biggest169 == 1){
+          if(biggest171 == 1){
             active[2]=1;
             ends[2]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest169 == 0){
-            S162=0;
+          if(biggest171 == 0){
+            S164=0;
             active[2]=0;
             ends[2]=0;
-            S162=0;
+            S164=0;
             break RUN;
           }
         
