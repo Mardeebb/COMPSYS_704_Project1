@@ -15,8 +15,8 @@ public class RotaryTableController extends ClockDomain{
   public Signal enable = new Signal("enable", Signal.INPUT);
   public Signal tableAlignedWithSensorC = new Signal("tableAlignedWithSensorC", Signal.INPUT);
   public Signal rotaryTableTrigger = new Signal("rotaryTableTrigger", Signal.OUTPUT);
-  private int S83 = 1;
-  private int S19 = 1;
+  private int S77 = 1;
+  private int S13 = 1;
   
   private int[] ends = new int[4];
   private int[] tdone = new int[4];
@@ -28,27 +28,28 @@ public class RotaryTableController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S83){
+      switch(S77){
         case 0 : 
-          S83=0;
+          S77=0;
           break RUN;
         
         case 1 : 
-          S83=2;
-          S83=2;
-          System.out.println("Rotary table controller started");//sysj\controller.sysj line: 36, column: 5
-          S19=0;
+          S77=2;
+          S77=2;
+          System.out.println("Rotary table controller started");//sysj\controller.sysj line: 35, column: 5
+          S13=0;
           active[3]=1;
           ends[3]=1;
           break RUN;
         
         case 2 : 
-          switch(S19){
+          switch(S13){
             case 0 : 
-              if(enable.getprestatus()){//sysj\controller.sysj line: 40, column: 10
-                S19=1;
-                rotaryTableTrigger.setPresent();//sysj\controller.sysj line: 42, column: 5
+              if(enable.getprestatus()){//sysj\controller.sysj line: 39, column: 10
+                S13=1;
+                rotaryTableTrigger.setPresent();//sysj\controller.sysj line: 41, column: 5
                 currsigs.addElement(rotaryTableTrigger);
+                System.out.println("Emitted rotaryTableTrigger");
                 active[3]=1;
                 ends[3]=1;
                 break RUN;
@@ -60,23 +61,24 @@ public class RotaryTableController extends ClockDomain{
               }
             
             case 1 : 
-              if(tableAlignedWithSensorC.getprestatus()){//sysj\controller.sysj line: 41, column: 10
-                S19=2;
+              if(tableAlignedWithSensorC.getprestatus()){//sysj\controller.sysj line: 40, column: 10
+                S13=2;
                 active[3]=1;
                 ends[3]=1;
                 break RUN;
               }
               else {
-                rotaryTableTrigger.setPresent();//sysj\controller.sysj line: 42, column: 5
+                rotaryTableTrigger.setPresent();//sysj\controller.sysj line: 41, column: 5
                 currsigs.addElement(rotaryTableTrigger);
+                System.out.println("Emitted rotaryTableTrigger");
                 active[3]=1;
                 ends[3]=1;
                 break RUN;
               }
             
             case 2 : 
-              if(!enable.getprestatus()){//sysj\controller.sysj line: 44, column: 10
-                S19=0;
+              if(!enable.getprestatus()){//sysj\controller.sysj line: 43, column: 10
+                S13=0;
                 active[3]=1;
                 ends[3]=1;
                 break RUN;

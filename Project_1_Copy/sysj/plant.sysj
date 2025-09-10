@@ -134,7 +134,8 @@ rPlant(
 		while(true){
 			abort(!rotaryTableTrigger){
 				await(rotaryTableTrigger);
-	
+				System.err.println("aaaaaaa");
+
 				int pos1 = packedArray[0];
 				int pos5 = packedArray[4];
 				emit rotTurn(packedArray);

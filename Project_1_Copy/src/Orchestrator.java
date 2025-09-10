@@ -19,7 +19,7 @@ public class Orchestrator extends ClockDomain{
   public Signal robotLoaderStatus = new Signal("robotLoaderStatus", Signal.INPUT);
   public Signal robotUnloaderStatus = new Signal("robotUnloaderStatus", Signal.INPUT);
   public Signal rotaryTableRequest = new Signal("rotaryTableRequest", Signal.OUTPUT);
-  private int S7 = 1;
+  private int S1 = 1;
   
   private int[] ends = new int[4];
   private int[] tdone = new int[4];
@@ -31,24 +31,20 @@ public class Orchestrator extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S7){
+      switch(S1){
         case 0 : 
-          S7=0;
+          S1=0;
           break RUN;
         
         case 1 : 
-          S7=2;
-          S7=2;
+          S1=2;
+          S1=2;
           System.out.println("Orchestrator");//sysj\controller.sysj line: 7, column: 2
-          rotaryTableRequest.setPresent();//sysj\controller.sysj line: 10, column: 4
-          currsigs.addElement(rotaryTableRequest);
           active[1]=1;
           ends[1]=1;
           break RUN;
         
         case 2 : 
-          rotaryTableRequest.setPresent();//sysj\controller.sysj line: 10, column: 4
-          currsigs.addElement(rotaryTableRequest);
           active[1]=1;
           ends[1]=1;
           break RUN;

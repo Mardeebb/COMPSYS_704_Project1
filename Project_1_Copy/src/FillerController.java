@@ -15,7 +15,7 @@ public class FillerController extends ClockDomain{
   public Signal dosUnitEvac = new Signal("dosUnitEvac", Signal.INPUT);
   public Signal dosUnitFilled = new Signal("dosUnitFilled", Signal.INPUT);
   public Signal fillerRequest = new Signal("fillerRequest", Signal.INPUT);
-  private int S9 = 1;
+  private int S3 = 1;
   
   private int[] ends = new int[4];
   private int[] tdone = new int[4];
@@ -27,18 +27,18 @@ public class FillerController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S9){
+      switch(S3){
         case 0 : 
-          S9=0;
+          S3=0;
           break RUN;
         
         case 1 : 
-          S9=2;
-          System.out.println("Filler");//sysj\controller.sysj line: 21, column: 2
-          S9=0;
+          S3=2;
+          System.out.println("Filler");//sysj\controller.sysj line: 20, column: 2
+          S3=0;
           active[2]=0;
           ends[2]=0;
-          S9=0;
+          S3=0;
           break RUN;
         
       }

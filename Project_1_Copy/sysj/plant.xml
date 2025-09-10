@@ -23,10 +23,10 @@
 			<oSignal Name="emptyE"           To="UI.emptyE"           Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 		</ClockDomain>
 		
-		<ClockDomain Name="rotaryTablePlantCD" Class="rPlant">
+		<ClockDomain Name="RotaryTablePlantCD" Class="rPlant">
 			<iSignal Name="rotaryTableTrigger" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10002" />
 			
-			<oSignal Name="tableAlignedWithSensorC" To="rotaryTableControllerCD.tableAlignedWithSensorC" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10003" />
+			<oSignal Name="tableAlignedWithSensorC" To="RotaryTableControllerCD.tableAlignedWithSensorC" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10003" />
 			
 			<oSignal Name="rotTurn" To="UI.rotTurn" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="rotContent" To="UI.rotContent" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
