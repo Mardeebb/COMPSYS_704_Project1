@@ -1,3 +1,5 @@
+import run.BottleTwin;
+
 Controller(
 		input signal pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,empty,request;
 		output signal pusherExtend,vacOn,armSource,armDest;
@@ -5,122 +7,124 @@ Controller(
 		input signal pusherExtendM,vacOnM,armSourceM,armDestM;
 		)
 ->{
-/* TODO: Write control-logic */
-    System.out.println("Controller startedh");
-    signal automode, manual, startauto;
-	{
-		// pusher control
-		while(true){
-			abort(!automode){
-				await(request && !empty);
-				abort(armAtDest){
-					sustain armDest;
-				}; 
-				pause;
-				abort(pusherExtended){
-					sustain pusherExtend;
-				}
-				pause;
-				await(pusherRetracted);
-				abort(armAtSource){
-					sustain armSource;
-				};
-				pause;
-				abort(WPgripped){
-					sustain vacOn;
-					await(WPgripped);
-				};
-				pause;
-				abort(armAtDest){
-					while(true){
-						emit vacOn;
-						emit armDest;
-						pause;
-					}
-				}
-				await(!WPgripped);
-				abort(armAtSource){
-					sustain armSource;
-				};
-			}
-		}
-	}
-	||
-	{
-		while(true){
-		    	abort(manual){
-			    	sustain automode;
-		    	}
-			await(!manual);
-		}
-	}
-	||
-	{
-		while(true){
-			Integer m = (Integer)#mode;
-			if (m != null) {
-			    if (m.intValue() == 1) {
-			    	abort(startauto){
-				    	sustain manual;
-			    	}
-			    }
-			}
-			pause;
-		}
-	}
-	||
-	{
-		while(true){
-			Integer m = (Integer)#mode;
-			if (m != null) {
-			    if (m.intValue() == 0) {
-			    	emit startauto;
-			    }
-			}
-			await(manual);
-		}
-	}
-
-	||
-	{
-		while(true){
-			await(pusherExtendM && manual);
-			abort(!pusherExtendM || automode){
-				sustain pusherExtend;
-			}
-		}
-	}
-	||
-	{
-		while(true){
-			await(vacOnM && manual);
-			abort(!vacOnM || automode){
-				sustain vacOn;
-			}
-		}
-	}
-	||
-	{
-		while(true){
-			await(armSourceM && manual);
-			abort(!armSourceM || automode){
-				sustain armSource;
-			}
-		}
-	}
-	||
-	{
-		while(true){
-			await(armDestM && manual);
-			abort(!armDestM || automode){
-				sustain armDest;
-			}
-		}
-	}
+///* TODO: Write control-logic */
+//    System.out.println("Controller startedh");
+//    signal automode, manual, startauto;
+//	{
+//		// pusher control
+//		while(true){
+//			abort(!automode){
+//				await(request && !empty);
+//				abort(armAtDest){
+//					sustain armDest;
+//				}; 
+//				pause;
+//				abort(pusherExtended){
+//					sustain pusherExtend;
+//				}
+//				pause;
+//				await(pusherRetracted);
+//				abort(armAtSource){
+//					sustain armSource;
+//				};
+//				pause;
+//				abort(WPgripped){
+//					sustain vacOn;
+//					await(WPgripped);
+//				};
+//				pause;
+//				abort(armAtDest){
+//					while(true){
+//						emit vacOn;
+//						emit armDest;
+//						pause;
+//					}
+//				}
+//				await(!WPgripped);
+//				abort(armAtSource){
+//					sustain armSource;
+//				};
+//			}
+//		}
+//	}
+//	||
+//	{
+//		while(true){
+//		    	abort(manual){
+//			    	sustain automode;
+//		    	}
+//			await(!manual);
+//		}
+//	}
+//	||
+//	{
+//		while(true){
+//			Integer m = (Integer)#mode;
+//			if (m != null) {
+//			    if (m.intValue() == 1) {
+//			    	abort(startauto){
+//				    	sustain manual;
+//			    	}
+//			    }
+//			}
+//			pause;
+//		}
+//	}
+//	||
+//	{
+//		while(true){
+//			Integer m = (Integer)#mode;
+//			if (m != null) {
+//			    if (m.intValue() == 0) {
+//			    	emit startauto;
+//			    }
+//			}
+//			await(manual);
+//		}
+//	}
+//
+//	||
+//	{
+//		while(true){
+//			await(pusherExtendM && manual);
+//			abort(!pusherExtendM || automode){
+//				sustain pusherExtend;
+//			}
+//		}
+//	}
+//	||
+//	{
+//		while(true){
+//			await(vacOnM && manual);
+//			abort(!vacOnM || automode){
+//				sustain vacOn;
+//			}
+//		}
+//	}
+//	||
+//	{
+//		while(true){
+//			await(armSourceM && manual);
+//			abort(!armSourceM || automode){
+//				sustain armSource;
+//			}
+//		}
+//	}
+//	||
+//	{
+//		while(true){
+//			await(armDestM && manual);
+//			abort(!armDestM || automode){
+//				sustain armDest;
+//			}
+//		}
+//	}
 }
 
 rController(
-		input signal enable, tableAlignedWithSensorC ;
+		input BottleTwin signal enable;
+
+		input signal tableAlignedWithSensorC ;
 		output signal rotaryTableTrigger;
 		)
 ->{
@@ -129,6 +133,13 @@ rController(
 		// pusher control
 		while(true){
 			await(enable);
+			BottleTwin b = (BottleTwin)#enable;
+			int ID = b.ID;
+			String name = b.name;
+		    System.out.println("fffffffffffffffffffffffffffffffffffff " + b);
+		    System.out.println("fffffffffffffffffffffffffffffffffffff " + ID);
+		    System.out.println("fffffffffffffffffffffffffffffffffffff " + name);
+
 			abort(tableAlignedWithSensorC){
 				sustain rotaryTableTrigger;
 			}

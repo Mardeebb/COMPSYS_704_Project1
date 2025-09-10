@@ -17,6 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import run.BottleTwin;
+
 public class ABS extends JFrame {
 	private JPanel panel;
 	
@@ -26,10 +28,11 @@ public class ABS extends JFrame {
 		panel.setPreferredSize(new Dimension(1300, 800));
 		panel.setBackground(Color.WHITE);
 		JButton enable = new JButton("rotaryTableTrigger");
-		enable.addActionListener(new SignalClient(Ports.PORT_LOADER_PLANT, Ports.ENABLE_SIGNAL));
-		enable.addActionListener(new SignalClient(10003, "rotaryTableControllerCD.enable"));
+		BottleTwin bottle = new BottleTwin();
+		enable.addActionListener(new SignalClient(Ports.PORT_LOADER_PLANT, Ports.ENABLE_SIGNAL, null));
+		enable.addActionListener(new SignalClient(10003, "rotaryTableControllerCD.enable", bottle));
 		JButton request = new JButton("request");
-		request.addActionListener(new SignalClient(Ports.PORT_LOADER_CONTROLLER, Ports.REQUEST_SIGNAL));
+		request.addActionListener(new SignalClient(Ports.PORT_LOADER_CONTROLLER, Ports.REQUEST_SIGNAL, null));
 
 		JPanel ss = new JPanel();
 		ss.add(enable);
