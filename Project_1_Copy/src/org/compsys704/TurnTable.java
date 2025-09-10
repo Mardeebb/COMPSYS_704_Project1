@@ -11,5 +11,4 @@ public class TurnTable {
 	public TurnTable(int p){
 	}
 	
-
 }
