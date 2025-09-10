@@ -50,7 +50,6 @@ public class SignalClient implements ActionListener {
             oos.writeObject(new Object[]{true, msg});
             Thread.sleep(50);
             oos.writeObject(new Object[]{false});
-
             System.out.println("Sent signal: " + dest);
 
         } catch (Exception ex) {

@@ -145,9 +145,6 @@ public class Canvas extends JPanel {
 	        drawRotatedImage(g2d, rotary_table, rotTable_X, rotTable_Y, 300);
 		}
 
-	    
-	    
-		
 		int x_1 = rotTable_X + 5;
 		int y_1 = rotTable_Y + 50;
 		int x_0 = rotTable_X + 5;
@@ -163,7 +160,7 @@ public class Canvas extends JPanel {
 		
 		for (int i = 0; i < 6; i++) {
 
-			if(States.RT[i] == 1) {
+			if(TurnTable.RT[i] == 1) {
 				switch(i){
 					case 0:
 						g.drawImage(empty_bottle,x_0, y_0, null);
@@ -184,7 +181,7 @@ public class Canvas extends JPanel {
 						g.drawImage(empty_bottle,x_5, y_5, null);
 				}
 			}
-			if(States.RT[i] == 5) {
+			if(TurnTable.RT[i] == 5) {
 				switch(i){
 					case 0:
 						g.drawImage(finished_bottle,x_0, y_0, null);

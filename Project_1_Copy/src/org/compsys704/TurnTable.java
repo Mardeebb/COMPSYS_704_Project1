@@ -2,13 +2,14 @@ package org.compsys704;
 
 public class TurnTable {
 	
-	public int[] RT = {0, 0, 1, 0, 0, 5};
-	public int RT_PS = 0;
-	public boolean bottleAtPos5;
-	public boolean tableAlignedWithSensor;
-	public boolean capOnBottleAtPos1;
+	public static volatile int[] RT = {0, 0, 1, 0, 0, 5};
+	public static volatile int RT_PS = 0;
+	public static volatile boolean bottleAtPos5;
+	public static volatile boolean tableAlignedWithSensor;
+	public static volatile boolean capOnBottleAtPos1;
 
-	public TurnTable(){
+	public TurnTable(int p){
 	}
+	
 
 }
