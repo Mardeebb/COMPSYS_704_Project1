@@ -16,9 +16,11 @@ public class SignalClient implements ActionListener {
     private final int port;
     private final String ip = "127.0.0.1";
     private final String dest;  // signal name
-
-	public SignalClient(int p, String dest){
+    private final Object object;
+    
+	public SignalClient(int p, String dest, Object object){
 		this.dest = dest;
+		this.object = object;
 		port = p;
 		try {
 			s.close();
@@ -45,8 +47,9 @@ public class SignalClient implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try {
             connect();
+            System.err.println("ActionEvent: " + e);
 
-            SignalMessage msg = new SignalMessage(dest, 42);
+            SignalMessage msg = new SignalMessage(dest, object);
             oos.writeObject(new Object[]{true, msg});
             Thread.sleep(50);
             oos.writeObject(new Object[]{false});
