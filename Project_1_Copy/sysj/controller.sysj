@@ -4,13 +4,13 @@ import run.BottleTwin;
 Orchestrator(
 		input BottleTwin signal newBottleTwin;
 		input signal request;
-		output signal recieveTwin;
-		
+		output signal recieveTwin, moveConveyor;
+		output BottleTwin signal bottleToConveyor;
 		)
 ->{
 	{
 		while(true){
-		    System.err.println("newBottleTwin   34 ");
+		    System.err.println("new Orchestrator Cycle");
 
 			await(newBottleTwin);
 		    System.err.println("newBottleTwin ");
@@ -24,6 +24,10 @@ Orchestrator(
 			    System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOo " + name);
 			    await(!newBottleTwin);
 				await(request);
+				emit bottleToConveyor(b);
+				emit moveConveyor;
+				
+				
 				emit recieveTwin;
 			}
 		}
@@ -35,6 +39,7 @@ conveyorController(
 
 		input signal bottleAtPos1, bottleLeftPos5;
 		output signal motConveyorOnOff;
+		output signal conveyorMoving, conveyorStop;
 		)
 ->{
 	{
@@ -42,8 +47,10 @@ conveyorController(
 			await(move);
 			await(!bottleAtPos1);
 			abort(bottleAtPos1){
+				emit conveyorMoving;
 				sustain motConveyorOnOff;
 			}
+			emit conveyorStop;
 		}
 	}
 }

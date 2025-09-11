@@ -15,11 +15,11 @@ public class rController extends ClockDomain{
   public Signal enable = new Signal("enable", Signal.INPUT);
   public Signal tableAlignedWithSensorC = new Signal("tableAlignedWithSensorC", Signal.INPUT);
   public Signal rotaryTableTrigger = new Signal("rotaryTableTrigger", Signal.OUTPUT);
-  private BottleTwin b_thread_4;//sysj\controller.sysj line: 186, column: 4
-  private int ID_thread_4;//sysj\controller.sysj line: 187, column: 4
-  private String name_thread_4;//sysj\controller.sysj line: 188, column: 4
-  private int S174 = 1;
-  private int S102 = 1;
+  private BottleTwin b_thread_4;//sysj\controller.sysj line: 193, column: 4
+  private int ID_thread_4;//sysj\controller.sysj line: 194, column: 4
+  private String name_thread_4;//sysj\controller.sysj line: 195, column: 4
+  private int S198 = 1;
+  private int S126 = 1;
   
   private int[] ends = new int[5];
   private int[] tdone = new int[5];
@@ -31,32 +31,32 @@ public class rController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S174){
+      switch(S198){
         case 0 : 
-          S174=0;
+          S198=0;
           break RUN;
         
         case 1 : 
-          S174=2;
-          S174=2;
-          System.out.println("Controller startedh");//sysj\controller.sysj line: 181, column: 5
-          S102=0;
+          S198=2;
+          S198=2;
+          System.out.println("Controller startedh");//sysj\controller.sysj line: 188, column: 5
+          S126=0;
           active[4]=1;
           ends[4]=1;
           break RUN;
         
         case 2 : 
-          switch(S102){
+          switch(S126){
             case 0 : 
-              if(enable.getprestatus()){//sysj\controller.sysj line: 185, column: 10
-                b_thread_4 = (BottleTwin)(enable.getpreval() == null ? null : ((BottleTwin)enable.getpreval()));//sysj\controller.sysj line: 186, column: 4
-                ID_thread_4 = b_thread_4.ID;//sysj\controller.sysj line: 187, column: 4
-                name_thread_4 = b_thread_4.name;//sysj\controller.sysj line: 188, column: 4
-                System.out.println("fffffffffffffffffffffffffffffffffffff " + b_thread_4);//sysj\controller.sysj line: 189, column: 7
-                System.out.println("fffffffffffffffffffffffffffffffffffff " + ID_thread_4);//sysj\controller.sysj line: 190, column: 7
-                System.out.println("fffffffffffffffffffffffffffffffffffff " + name_thread_4);//sysj\controller.sysj line: 191, column: 7
-                S102=1;
-                rotaryTableTrigger.setPresent();//sysj\controller.sysj line: 194, column: 5
+              if(enable.getprestatus()){//sysj\controller.sysj line: 192, column: 10
+                b_thread_4 = (BottleTwin)(enable.getpreval() == null ? null : ((BottleTwin)enable.getpreval()));//sysj\controller.sysj line: 193, column: 4
+                ID_thread_4 = b_thread_4.ID;//sysj\controller.sysj line: 194, column: 4
+                name_thread_4 = b_thread_4.name;//sysj\controller.sysj line: 195, column: 4
+                System.out.println("fffffffffffffffffffffffffffffffffffff " + b_thread_4);//sysj\controller.sysj line: 196, column: 7
+                System.out.println("fffffffffffffffffffffffffffffffffffff " + ID_thread_4);//sysj\controller.sysj line: 197, column: 7
+                System.out.println("fffffffffffffffffffffffffffffffffffff " + name_thread_4);//sysj\controller.sysj line: 198, column: 7
+                S126=1;
+                rotaryTableTrigger.setPresent();//sysj\controller.sysj line: 201, column: 5
                 currsigs.addElement(rotaryTableTrigger);
                 System.out.println("Emitted rotaryTableTrigger");
                 active[4]=1;
@@ -70,14 +70,14 @@ public class rController extends ClockDomain{
               }
             
             case 1 : 
-              if(tableAlignedWithSensorC.getprestatus()){//sysj\controller.sysj line: 193, column: 10
-                S102=2;
+              if(tableAlignedWithSensorC.getprestatus()){//sysj\controller.sysj line: 200, column: 10
+                S126=2;
                 active[4]=1;
                 ends[4]=1;
                 break RUN;
               }
               else {
-                rotaryTableTrigger.setPresent();//sysj\controller.sysj line: 194, column: 5
+                rotaryTableTrigger.setPresent();//sysj\controller.sysj line: 201, column: 5
                 currsigs.addElement(rotaryTableTrigger);
                 System.out.println("Emitted rotaryTableTrigger");
                 active[4]=1;
@@ -86,8 +86,8 @@ public class rController extends ClockDomain{
               }
             
             case 2 : 
-              if(!enable.getprestatus()){//sysj\controller.sysj line: 196, column: 10
-                S102=0;
+              if(!enable.getprestatus()){//sysj\controller.sysj line: 203, column: 10
+                S126=0;
                 active[4]=1;
                 ends[4]=1;
                 break RUN;

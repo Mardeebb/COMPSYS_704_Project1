@@ -183,10 +183,10 @@ rPlant(
 	{
 		while(true) {
 			if((Integer)#posOne == 5){
-				emit capOnBottleAtPos1;
+//				emit capOnBottleAtPos1;
 			}
 			if((Integer)#posFive != 0){
-				emit bottleAtPos5;
+//				emit bottleAtPos5;
 			}
 			pause;
 		}
@@ -201,6 +201,10 @@ conveyorPlant(
 		input BottleTwin signal bottleArriveToZero, bottleArriveToFive, roturn;
 		
 		output signal bottleAtPos1, bottleLeftPos5;
+		
+		// backend update
+		output signal pos0, pos1, pos5, pos7;
+
 )
 ->
 {
@@ -209,6 +213,7 @@ conveyorPlant(
 	{
 		while(true) {
 			await(motConveyorOnOff);
+			await(enable);
 			abort(!motConveyorOnOff){
 				BottleTwin bZero = (BottleTwin)#posZero;
 				BottleTwin bFive = (BottleTwin)#posFive;
@@ -216,10 +221,13 @@ conveyorPlant(
 				if(bZero != null) {
 					emit posOne(bZero);
 					emit posZero(null);
+					emit pos0(-1);
+
 				}
 				if(bFive != null) {
 					emit posSeven(bFive);
 					emit posFive(null);
+					emit pos5(-1);
 				}
 
 			}
@@ -235,6 +243,8 @@ conveyorPlant(
 //			abort(conveyorMove){
 //				sustain posZero(b)
 //			}
+			int id = b.ID;
+			emit pos0(id);
 			emit posZero(b);
 		}
 		
@@ -249,6 +259,8 @@ conveyorPlant(
 //			abort(conveyorMove){
 //				sustain posFive(b)
 //			}
+			int id = b.ID;
+			emit pos5(id);
 			emit posFive(b);
 		}
 	}
@@ -267,7 +279,10 @@ conveyorPlant(
 	{
 		while(true) {
 			await(posOne);
+			BottleTwin b = (BottleTwin)#posOne;
+			int id = b.ID;
 			abort(roturn){
+				emit pos1(id);
 				sustain bottleAtPos1;
 			}
 		}

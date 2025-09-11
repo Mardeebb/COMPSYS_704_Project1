@@ -48,4 +48,47 @@ public class EABSBackend {
         }
         return next;
     }
+    
+    public BottleTwin getBottleFromID(int ID) {
+        // check current processing order
+        if (processingOrder != null) {
+            for (BottleTwin b : processingOrder.bottles) {
+                if (b.ID == ID) {
+                	return b;
+
+                }
+            }
+        }
+
+        // check waiting orders
+        for (Order o : waitingOrders) {
+            for (BottleTwin b : o.bottles) {
+
+                if (b.ID == ID) {
+                	return b;
+                }
+            }
+        }
+
+        // check completed orders
+        for (Order o : completedOrders) {
+            for (BottleTwin b : o.bottles) {
+
+                if (b.ID == ID) {
+                	return b;
+                }
+            }
+        }
+
+        return null; // not found
+    }
+    
+    public int getGUIrep(int ID) {
+    	BottleTwin bottle = getBottleFromID(ID);
+
+    	if(bottle != null) {
+    		return bottle.getGUIint();
+    	}
+    	return -1;
+    }
 }

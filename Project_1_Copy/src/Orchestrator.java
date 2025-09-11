@@ -15,6 +15,8 @@ public class Orchestrator extends ClockDomain{
   public Signal newBottleTwin = new Signal("newBottleTwin", Signal.INPUT);
   public Signal request = new Signal("request", Signal.INPUT);
   public Signal recieveTwin = new Signal("recieveTwin", Signal.OUTPUT);
+  public Signal moveConveyor = new Signal("moveConveyor", Signal.OUTPUT);
+  public Signal bottleToConveyor = new Signal("bottleToConveyor", Signal.OUTPUT);
   private BottleTwin b_thread_1;//sysj\controller.sysj line: 18, column: 4
   private int ID_thread_1;//sysj\controller.sysj line: 20, column: 5
   private String name_thread_1;//sysj\controller.sysj line: 21, column: 5
@@ -40,7 +42,7 @@ public class Orchestrator extends ClockDomain{
         case 1 : 
           S61=2;
           S61=2;
-          System.err.println("newBottleTwin   34 ");//sysj\controller.sysj line: 13, column: 7
+          System.err.println("new Orchestrator Cycle");//sysj\controller.sysj line: 13, column: 7
           S2=0;
           active[1]=1;
           ends[1]=1;
@@ -65,7 +67,7 @@ public class Orchestrator extends ClockDomain{
                   break RUN;
                 }
                 else {
-                  System.err.println("newBottleTwin   34 ");//sysj\controller.sysj line: 13, column: 7
+                  System.err.println("new Orchestrator Cycle");//sysj\controller.sysj line: 13, column: 7
                   S2=0;
                   active[1]=1;
                   ends[1]=1;
@@ -95,10 +97,17 @@ public class Orchestrator extends ClockDomain{
                 
                 case 1 : 
                   if(request.getprestatus()){//sysj\controller.sysj line: 26, column: 11
-                    recieveTwin.setPresent();//sysj\controller.sysj line: 27, column: 5
+                    bottleToConveyor.setPresent();//sysj\controller.sysj line: 27, column: 5
+                    currsigs.addElement(bottleToConveyor);
+                    bottleToConveyor.setValue(b_thread_1);//sysj\controller.sysj line: 27, column: 5
+                    System.out.println("Emitted bottleToConveyor");
+                    moveConveyor.setPresent();//sysj\controller.sysj line: 28, column: 5
+                    currsigs.addElement(moveConveyor);
+                    System.out.println("Emitted moveConveyor");
+                    recieveTwin.setPresent();//sysj\controller.sysj line: 31, column: 5
                     currsigs.addElement(recieveTwin);
                     System.out.println("Emitted recieveTwin");
-                    System.err.println("newBottleTwin   34 ");//sysj\controller.sysj line: 13, column: 7
+                    System.err.println("new Orchestrator Cycle");//sysj\controller.sysj line: 13, column: 7
                     S2=0;
                     active[1]=1;
                     ends[1]=1;
@@ -150,6 +159,8 @@ public class Orchestrator extends ClockDomain{
       newBottleTwin.setpreclear();
       request.setpreclear();
       recieveTwin.setpreclear();
+      moveConveyor.setpreclear();
+      bottleToConveyor.setpreclear();
       int dummyint = 0;
       for(int qw=0;qw<currsigs.size();++qw){
         dummyint = ((Signal)currsigs.elementAt(qw)).getStatus() ? ((Signal)currsigs.elementAt(qw)).setprepresent() : ((Signal)currsigs.elementAt(qw)).setpreclear();
@@ -164,6 +175,10 @@ public class Orchestrator extends ClockDomain{
       request.setClear();
       recieveTwin.sethook();
       recieveTwin.setClear();
+      moveConveyor.sethook();
+      moveConveyor.setClear();
+      bottleToConveyor.sethook();
+      bottleToConveyor.setClear();
       if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
         newBottleTwin.gethook();

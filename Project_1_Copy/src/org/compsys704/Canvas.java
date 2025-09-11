@@ -33,9 +33,11 @@ public class Canvas extends JPanel {
 	BufferedImage injecotr_off;
 	BufferedImage injector_on_extend;
 	BufferedImage injecotr_off_extend;
+    private EABSBackend backend;
 
 
-	public Canvas(){
+	public Canvas(EABSBackend backend){
+		this.backend = backend;
 		try {
 			BufferedImage bi = ImageIO.read(new File("res/arm.png"));
 			arm1 = bi.getSubimage(0, 0, 64, 256);
@@ -64,7 +66,7 @@ public class Canvas extends JPanel {
 				System.exit(1);;
 			}
 		}
-	
+	 
 	
 //	@Override
 //	public Dimension getPreferredSize() {
@@ -96,7 +98,27 @@ public class Canvas extends JPanel {
 	    // Restore original transform
 	    g2d.setTransform(old);
 	}
+	
+	private void drawBottle(int id, int bottle, int x, int y, Graphics g) {
+		switch(bottle){
+			case 0:
+				g.drawImage(empty_bottle,x, y, null);
+		        break;
+			case 1:
+				g.drawImage(empty_bottle,x, y, null);
+		        break;
+			case 2:
+				g.drawImage(empty_bottle,x, y, null);
+		        break;
+			case 3:
+				g.drawImage(finished_bottle,x, y, null);
+		        break;
+		}
+	    g.setColor(Color.BLACK);
+	    g.drawString(String.valueOf(id), x + 20, y + 20); 
 
+
+	}
 	
 	@Override
 	protected void paintComponent(Graphics g){
@@ -109,8 +131,8 @@ public class Canvas extends JPanel {
 		
 		super.paintComponent(g);
 	    Graphics2D g2d = (Graphics2D) g;
-	    boolean signal1 = States.capOnBottleAtPos1;  // replace with your actual signal
-	    boolean signal2 = States.bottleAtPos5;
+	    boolean signal1 = TurnTable.capOnBottleAtPos1;  // replace with your actual signal
+	    boolean signal2 = TurnTable.bottleAtPos5;
 
 	    // Draw Signal 1
 	    if(signal1) {
@@ -129,19 +151,41 @@ public class Canvas extends JPanel {
 	    }
 	    g2d.drawString("bottleAtPos5", 450, 130); // slightly lower y for separation
 	    
-		g.drawImage(conveyor_static, rotTable_X + -250, rotTable_Y + 190, null);
+	    if(Conveyor.moving) {
+			g.drawImage(conveyor_moving, rotTable_X + -250, rotTable_Y + 190, null);
+	    }else {
+			g.drawImage(conveyor_static, rotTable_X + -250, rotTable_Y + 190, null);
+	    }
+		int posZero = backend.getGUIrep(Conveyor.posZeroID);
+		int posOne = backend.getGUIrep(Conveyor.posOneID);
+		int posFive = backend.getGUIrep(Conveyor.posFiveID);
+		int posSeven = backend.getGUIrep(Conveyor.posSevenID);
+//		System.err.println(Conveyor.posZeroID);
 
-		if(States.RT_PS == 0) {
+	    if(posZero != -1) {
+	    	drawBottle(Conveyor.posZeroID, posZero, rotTable_X + -250, rotTable_Y + 190, g);
+	    }
+	    if(posOne != -1) {
+	    	drawBottle(Conveyor.posOneID, posOne, rotTable_X + 0, rotTable_Y + 190, g);
+	    }
+	    if(posFive != -1) {
+	    	drawBottle(Conveyor.posFiveID, posFive, rotTable_X + 250, rotTable_Y + 190, g);
+	    }
+	    if(posSeven != -1) {
+	    	drawBottle(Conveyor.posSevenID, posSeven, rotTable_X + 500, rotTable_Y + 190, g);
+	    }
+
+		if(TurnTable.RT_PS == 0) {
 			g.drawImage(rotary_table, rotTable_X, rotTable_Y, null);
-		}else if(States.RT_PS == 1){
+		}else if(TurnTable.RT_PS == 1){
 	        drawRotatedImage(g2d, rotary_table, rotTable_X, rotTable_Y, 60);
-		}else if(States.RT_PS == 2){
+		}else if(TurnTable.RT_PS == 2){
 	        drawRotatedImage(g2d, rotary_table, rotTable_X, rotTable_Y, 120);
-		}else if(States.RT_PS == 3){
+		}else if(TurnTable.RT_PS == 3){
 	        drawRotatedImage(g2d, rotary_table, rotTable_X, rotTable_Y, 180);
-		}else if(States.RT_PS == 4){
+		}else if(TurnTable.RT_PS == 4){
 	        drawRotatedImage(g2d, rotary_table, rotTable_X, rotTable_Y, 240);
-		}else if(States.RT_PS == 5){
+		}else if(TurnTable.RT_PS == 5){
 	        drawRotatedImage(g2d, rotary_table, rotTable_X, rotTable_Y, 300);
 		}
 

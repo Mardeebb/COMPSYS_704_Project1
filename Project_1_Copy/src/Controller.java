@@ -28,7 +28,7 @@ public class Controller extends ClockDomain{
   public Signal vacOn = new Signal("vacOn", Signal.OUTPUT);
   public Signal armSource = new Signal("armSource", Signal.OUTPUT);
   public Signal armDest = new Signal("armDest", Signal.OUTPUT);
-  private int S100 = 1;
+  private int S124 = 1;
   
   private int[] ends = new int[5];
   private int[] tdone = new int[5];
@@ -40,17 +40,17 @@ public class Controller extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S100){
+      switch(S124){
         case 0 : 
-          S100=0;
+          S124=0;
           break RUN;
         
         case 1 : 
-          S100=2;
-          S100=2;
+          S124=2;
+          S124=2;
           active[3]=0;
           ends[3]=0;
-          S100=0;
+          S124=0;
           break RUN;
         
       }

@@ -6,8 +6,25 @@
 			<iSignal Name="request" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
 			
 			<oSignal Name="recieveTwin" To="UI.recieveTwin" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			
+			<oSignal Name="moveConveyor" To="conveyorControllerCD.move" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10006" />
+			<oSignal Name="bottleToConveyor" To="conveyorPlantCD.bottleArriveToZero" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10005" />
+			
+			
 		</ClockDomain>
 
+		<ClockDomain Name="conveyorControllerCD" Class="conveyorController">
+			<iSignal Name="move" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10006" />
+			
+			<iSignal Name="bottleAtPos1" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10006" />
+			<iSignal Name="bottleLeftPos5" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10006" />
+
+			<oSignal Name="conveyorMoving" To="UI.conveyorMoving" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="conveyorStop" To="UI.conveyorStop" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+
+			<oSignal Name="motConveyorOnOff" To="conveyorPlantCD.motConveyorOnOff" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10005" />
+		</ClockDomain>
+		
 		<ClockDomain Name="ControllerCD" Class="Controller">
 			<iSignal Name="pusherRetracted" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 			<iSignal Name="pusherExtended"  Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
@@ -28,6 +45,7 @@
 			<iSignal Name="armSourceM"    Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 			<iSignal Name="armDestM"      Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 		</ClockDomain>
+		
 		<ClockDomain Name="rotaryTableControllerCD" Class="rController">
 			<iSignal Name="enable" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
 			<iSignal Name="tableAlignedWithSensorC" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />

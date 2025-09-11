@@ -42,29 +42,29 @@ public class SysJWorker extends Worker{
 		case"rotTurn":
 			System.err.println(signame);
 			if (status) {
-				int pos = States.RT_PS;
+				int pos = TurnTable.RT_PS;
 				pos++;
 				if (pos == 6) {
 					pos = 0;
 				}
-				States.RT_PS = pos;
+				TurnTable.RT_PS = pos;
 		        if (status && value != null) {
 		            int[] val = (int[]) value;
-		            States.RT = val;
+		            TurnTable.RT = val;
 		        }
 			}
 			break;
 			
 		case "bottleAtPos5":
-			States.bottleAtPos5 = status;
+			TurnTable.bottleAtPos5 = status;
 			break;
 			
 		case "capOnBottleAtPos1":
-			States.capOnBottleAtPos1 = status;
+			TurnTable.capOnBottleAtPos1 = status;
 			break;
 
 		case "tableAlignedWithSensor":
-			States.tableAlignedWithSensor = status;
+			TurnTable.tableAlignedWithSensor = status;
 			break;
 			
 		case "recieveTwin":
@@ -72,7 +72,44 @@ public class SysJWorker extends Worker{
 			if (status) {
 				States.recieveTwin = false;
 			}
-		break;
+			break;
+		
+		case "pos0":
+	        if (status && value != null) {
+	            int id = (int) value;
+				Conveyor.posZeroID = id;
+	        }
+			break;
+			
+		case "pos1":
+	        if (status && value != null) {
+	            int id = (int) value;
+				Conveyor.posOneID = id;
+	        }
+			break;
+		case "pos5":
+	        if (status && value != null) {
+	            int id = (int) value;
+				Conveyor.posFiveID = id;
+	        }
+			break;
+		case "pos7":
+	        if (status && value != null) {
+	            int id = (int) value;
+				Conveyor.posSevenID = id;
+	        }
+			break;
+		case "conveyorMoving":
+			if (status) {
+				Conveyor.moving = true;
+			}
+			break;
+		case "conveyorStop":
+			if (status) {
+				Conveyor.moving = false;
+			}
+			break;
+
 			
 		default: 
 			System.err.println("Wrong sig name : "+signame);
@@ -80,7 +117,7 @@ public class SysJWorker extends Worker{
 		}
 	}
 	
-	static final List<String> signames = Arrays.asList("pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin");
+	static final List<String> signames = Arrays.asList("pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","pos0","pos1","pos5","pos7","conveyorMoving","conveyorStop");
 	
 	@Override
 	public boolean hasSignal(String sn) {

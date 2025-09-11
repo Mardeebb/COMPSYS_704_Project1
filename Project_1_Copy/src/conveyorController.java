@@ -16,7 +16,9 @@ public class conveyorController extends ClockDomain{
   public Signal bottleAtPos1 = new Signal("bottleAtPos1", Signal.INPUT);
   public Signal bottleLeftPos5 = new Signal("bottleLeftPos5", Signal.INPUT);
   public Signal motConveyorOnOff = new Signal("motConveyorOnOff", Signal.OUTPUT);
-  private int S99 = 1;
+  public Signal conveyorMoving = new Signal("conveyorMoving", Signal.OUTPUT);
+  public Signal conveyorStop = new Signal("conveyorStop", Signal.OUTPUT);
+  private int S123 = 1;
   private int S65 = 1;
   
   private int[] ends = new int[5];
@@ -29,14 +31,14 @@ public class conveyorController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S99){
+      switch(S123){
         case 0 : 
-          S99=0;
+          S123=0;
           break RUN;
         
         case 1 : 
-          S99=2;
-          S99=2;
+          S123=2;
+          S123=2;
           S65=0;
           active[2]=1;
           ends[2]=1;
@@ -45,7 +47,7 @@ public class conveyorController extends ClockDomain{
         case 2 : 
           switch(S65){
             case 0 : 
-              if(move.getprestatus()){//sysj\controller.sysj line: 42, column: 10
+              if(move.getprestatus()){//sysj\controller.sysj line: 47, column: 10
                 S65=1;
                 active[2]=1;
                 ends[2]=1;
@@ -58,9 +60,12 @@ public class conveyorController extends ClockDomain{
               }
             
             case 1 : 
-              if(!bottleAtPos1.getprestatus()){//sysj\controller.sysj line: 43, column: 10
+              if(!bottleAtPos1.getprestatus()){//sysj\controller.sysj line: 48, column: 10
                 S65=2;
-                motConveyorOnOff.setPresent();//sysj\controller.sysj line: 45, column: 5
+                conveyorMoving.setPresent();//sysj\controller.sysj line: 50, column: 5
+                currsigs.addElement(conveyorMoving);
+                System.out.println("Emitted conveyorMoving");
+                motConveyorOnOff.setPresent();//sysj\controller.sysj line: 51, column: 5
                 currsigs.addElement(motConveyorOnOff);
                 System.out.println("Emitted motConveyorOnOff");
                 active[2]=1;
@@ -74,14 +79,17 @@ public class conveyorController extends ClockDomain{
               }
             
             case 2 : 
-              if(bottleAtPos1.getprestatus()){//sysj\controller.sysj line: 44, column: 10
+              if(bottleAtPos1.getprestatus()){//sysj\controller.sysj line: 49, column: 10
+                conveyorStop.setPresent();//sysj\controller.sysj line: 53, column: 4
+                currsigs.addElement(conveyorStop);
+                System.out.println("Emitted conveyorStop");
                 S65=0;
                 active[2]=1;
                 ends[2]=1;
                 break RUN;
               }
               else {
-                motConveyorOnOff.setPresent();//sysj\controller.sysj line: 45, column: 5
+                motConveyorOnOff.setPresent();//sysj\controller.sysj line: 51, column: 5
                 currsigs.addElement(motConveyorOnOff);
                 System.out.println("Emitted motConveyorOnOff");
                 active[2]=1;
@@ -128,6 +136,8 @@ public class conveyorController extends ClockDomain{
       bottleAtPos1.setpreclear();
       bottleLeftPos5.setpreclear();
       motConveyorOnOff.setpreclear();
+      conveyorMoving.setpreclear();
+      conveyorStop.setpreclear();
       int dummyint = 0;
       for(int qw=0;qw<currsigs.size();++qw){
         dummyint = ((Signal)currsigs.elementAt(qw)).getStatus() ? ((Signal)currsigs.elementAt(qw)).setprepresent() : ((Signal)currsigs.elementAt(qw)).setpreclear();
@@ -145,6 +155,10 @@ public class conveyorController extends ClockDomain{
       bottleLeftPos5.setClear();
       motConveyorOnOff.sethook();
       motConveyorOnOff.setClear();
+      conveyorMoving.sethook();
+      conveyorMoving.setClear();
+      conveyorStop.sethook();
+      conveyorStop.setClear();
       if(paused[2]!=0 || suspended[2]!=0 || active[2]!=1);
       else{
         move.gethook();

@@ -95,13 +95,14 @@ public class ABS extends JFrame {
 	public ABS() {
 //		this.setPreferredSize(new Dimension(200, 300));
 
-		panel = new Canvas();
+		panel = new Canvas(backend);
 		panel.setPreferredSize(new Dimension(1000, 600));
 		panel.setBackground(Color.WHITE);
-		JButton enable = new JButton("rotaryTableTrigger");
+		JButton enable = new JButton("Enable");
 		BottleTwin bottle = new BottleTwin(5, "name");
 		enable.addActionListener(new SignalClient(Ports.PORT_LOADER_PLANT, Ports.ENABLE_SIGNAL, null));
 		enable.addActionListener(new SignalClient(10003, "rotaryTableControllerCD.enable", bottle));
+		enable.addActionListener(new SignalClient(10005, "conveyorPlantCD.enable", bottle));
 
 		JButton request = new JButton("request");
 		request.addActionListener(new SignalClient(Ports.PORT_LOADER_CONTROLLER, Ports.REQUEST_SIGNAL, null));
