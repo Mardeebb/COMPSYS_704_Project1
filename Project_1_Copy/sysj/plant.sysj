@@ -1,6 +1,31 @@
 import run.GUI;
 import run.BottleTwin;
 
+//loaderPlant(
+//	input signal move, bottleLeftPos5;
+//	output signal motConveyorOnOff;
+//	// GUI signal
+//	output signal motConveyor;
+//)
+//->
+//{
+//	signal conveyorRunning, conveyorStop;
+//	int signal posZero, posOne, posFive;
+//	{
+//		while(true) {
+//			abort(bottleAtPos1){
+//				emit conveyorRunning;
+//			}
+//		}
+//	}
+//}
+
+
+
+
+
+
+
 Plant(
 		input signal pusherExtend,vacOn,armSource,armDest;
 		input signal enable,refill;
@@ -121,7 +146,7 @@ rPlant(
 )
 ->
 {
-	BottleTwin signal posOne, posFive, turn;
+	int signal posOne, posFive, turn;
 	{
 		int[] packedArray = new int[6]; 
 		int pos = 0;
@@ -170,19 +195,33 @@ rPlant(
 
 
 conveyorPlant(
-		input signal bottleAtPos1, bottleLeftPos5;
-		output signal motConveyorOnOff;
-		// GUI signal
-		output signal motConveyor;
+		input signal motConveyorOnOff, enable;
+		
+		// real world sim signal a bottle has been placed
+		input BottleTwin signal bottleArriveToZero, bottleArriveToFive, roturn;
+		
+		output signal bottleAtPos1, bottleLeftPos5;
 )
 ->
 {
-	signal conveyorRunning, conveyorStop;
-	int signal posZero, posOne, posFive;
+	signal conveyorMove;
+	BottleTwin signal posZero, posOne, posFive, posSeven;
 	{
 		while(true) {
-			abort(bottleAtPos1){
-				emit conveyorRunning;
+			await(motConveyorOnOff);
+			abort(!motConveyorOnOff){
+				BottleTwin bZero = (BottleTwin)#posZero;
+				BottleTwin bFive = (BottleTwin)#posFive;
+
+				if(bZero != null) {
+					emit posOne(bZero);
+					emit posZero(null);
+				}
+				if(bFive != null) {
+					emit posSeven(bFive);
+					emit posFive(null);
+				}
+
 			}
 		}
 	}
@@ -191,11 +230,49 @@ conveyorPlant(
 	
 	{
 		while(true) {
-			await conveyorRunning;
-			sustain motConveyorOnOff;
-			pause;
+			await(bottleArriveToZero);
+			BottleTwin b = (BottleTwin)#bottleArriveToZero;
+//			abort(conveyorMove){
+//				sustain posZero(b)
+//			}
+			emit posZero(b);
+		}
+		
+	}
+	
+	||
+	
+	{
+		while(true) {
+			await(bottleArriveToFive);
+			BottleTwin b = (BottleTwin)#bottleArriveToFive;
+//			abort(conveyorMove){
+//				sustain posFive(b)
+//			}
+			emit posFive(b);
 		}
 	}
+	
+	||
+	
+	{
+		while(true) {
+			await(roturn);
+			emit posOne(null);
+		}
+	}
+	
+	||
+	
+	{
+		while(true) {
+			await(posOne);
+			abort(roturn){
+				sustain bottleAtPos1;
+			}
+		}
+	}
+
 }
 
 

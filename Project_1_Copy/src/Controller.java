@@ -28,10 +28,10 @@ public class Controller extends ClockDomain{
   public Signal vacOn = new Signal("vacOn", Signal.OUTPUT);
   public Signal armSource = new Signal("armSource", Signal.OUTPUT);
   public Signal armDest = new Signal("armDest", Signal.OUTPUT);
-  private int S0 = 1;
+  private int S100 = 1;
   
-  private int[] ends = new int[3];
-  private int[] tdone = new int[3];
+  private int[] ends = new int[5];
+  private int[] tdone = new int[5];
   
   public void runClockDomain(){
     for(int i=0;i<ends.length;i++){
@@ -40,17 +40,17 @@ public class Controller extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S0){
+      switch(S100){
         case 0 : 
-          S0=0;
+          S100=0;
           break RUN;
         
         case 1 : 
-          S0=2;
-          S0=2;
-          active[1]=0;
-          ends[1]=0;
-          S0=0;
+          S100=2;
+          S100=2;
+          active[3]=0;
+          ends[3]=0;
+          S100=0;
           break RUN;
         
       }
@@ -58,9 +58,9 @@ public class Controller extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1};
-    char [] paused1 = {0, 0, 0};
-    char [] suspended1 = {0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;
@@ -69,14 +69,14 @@ public class Controller extends ClockDomain{
   }
   
   public void run(){
-    while(active[1] != 0){
-      int index = 1;
+    while(active[3] != 0){
+      int index = 3;
       if(paused[index]==1 || suspended[index]==1 || active[index] == 0){
         for(int h=1;h<paused.length;++h){
           paused[h]=0;
         }
       }
-      if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
+      if(paused[3]!=0 || suspended[3]!=0 || active[3]!=1);
       else{
         if(!df){
           pusherRetracted.gethook();
@@ -161,7 +161,7 @@ public class Controller extends ClockDomain{
       armSource.setClear();
       armDest.sethook();
       armDest.setClear();
-      if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
+      if(paused[3]!=0 || suspended[3]!=0 || active[3]!=1);
       else{
         pusherRetracted.gethook();
         pusherExtended.gethook();
@@ -177,7 +177,7 @@ public class Controller extends ClockDomain{
         armDestM.gethook();
       }
       runFinisher();
-      if(active[1] == 0){
+      if(active[3] == 0){
       	this.terminated = true;
       }
       if(!threaded) break;

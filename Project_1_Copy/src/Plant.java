@@ -4,6 +4,7 @@ import com.systemj.Signal;
 import com.systemj.input_Channel;
 import com.systemj.output_Channel;
 import run.GUI;//sysj\plant.sysj line: 1, column: 1
+import run.BottleTwin;//sysj\plant.sysj line: 2, column: 1
 
 public class Plant extends ClockDomain{
   public Plant(String name){super(name);}
@@ -30,11 +31,11 @@ public class Plant extends ClockDomain{
   public Signal armAtSourceE = new Signal("armAtSourceE", Signal.OUTPUT);
   public Signal armAtDestE = new Signal("armAtDestE", Signal.OUTPUT);
   public Signal emptyE = new Signal("emptyE", Signal.OUTPUT);
-  private int S77 = 1;
-  private int S76 = 1;
+  private int S177 = 1;
+  private int S176 = 1;
   
-  private int[] ends = new int[5];
-  private int[] tdone = new int[5];
+  private int[] ends = new int[11];
+  private int[] tdone = new int[11];
   
   public void runClockDomain(){
     for(int i=0;i<ends.length;i++){
@@ -43,23 +44,23 @@ public class Plant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S77){
+      switch(S177){
         case 0 : 
-          S77=0;
+          S177=0;
           break RUN;
         
         case 1 : 
-          S77=2;
-          S77=2;
-          new Thread(new GUI()).start();//sysj\plant.sysj line: 11, column: 2
-          S77=0;
+          S177=2;
+          S177=2;
+          new Thread(new GUI()).start();//sysj\plant.sysj line: 37, column: 2
+          S177=0;
           active[1]=0;
           ends[1]=0;
-          S77=0;
+          S177=0;
           break RUN;
         
         case 2 : 
-          switch(S76){
+          switch(S176){
           }
         
       }
@@ -67,9 +68,9 @@ public class Plant extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;

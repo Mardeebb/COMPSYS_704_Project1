@@ -68,7 +68,7 @@ public class Canvas extends JPanel {
 	
 //	@Override
 //	public Dimension getPreferredSize() {
-//	    return new Dimension(1300, 900);
+//	    return new Dimension(600, 400); // smaller canvas area
 //	}
 
 	private BufferedImage scaleImage(BufferedImage img, int width, int height) {

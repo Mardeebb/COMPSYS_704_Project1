@@ -1,5 +1,55 @@
 import run.BottleTwin;
 
+
+Orchestrator(
+		input BottleTwin signal newBottleTwin;
+		input signal request;
+		output signal recieveTwin;
+		
+		)
+->{
+	{
+		while(true){
+		    System.err.println("newBottleTwin   34 ");
+
+			await(newBottleTwin);
+		    System.err.println("newBottleTwin ");
+
+			BottleTwin b = (BottleTwin)#newBottleTwin;
+			if(b != null) {
+				int ID = b.ID;
+				String name = b.name;
+			    System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOo " + b);
+			    System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOo " + ID);
+			    System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOo " + name);
+			    await(!newBottleTwin);
+				await(request);
+				emit recieveTwin;
+			}
+		}
+	}
+}
+
+conveyorController(
+		input signal move;
+
+		input signal bottleAtPos1, bottleLeftPos5;
+		output signal motConveyorOnOff;
+		)
+->{
+	{
+		while(true){
+			await(move);
+			await(!bottleAtPos1);
+			abort(bottleAtPos1){
+				sustain motConveyorOnOff;
+			}
+		}
+	}
+}
+
+
+
 Controller(
 		input signal pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,empty,request;
 		output signal pusherExtend,vacOn,armSource,armDest;

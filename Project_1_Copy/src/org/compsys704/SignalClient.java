@@ -42,22 +42,23 @@ public class SignalClient implements ActionListener {
 				throw new ConnectException("Not thru");
         }
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    
+    public void send() {
         try {
             connect();
-            System.err.println("ActionEvent: " + e);
-
             SignalMessage msg = new SignalMessage(dest, object);
             oos.writeObject(new Object[]{true, object});
             Thread.sleep(50);
             oos.writeObject(new Object[]{false});
             System.out.println("Sent signal: " + dest);
-
         } catch (Exception ex) {
             System.err.println("Error sending signal: " + ex);
             try { s.close(); } catch (Exception ignored) {}
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+    	send();
     }
 }

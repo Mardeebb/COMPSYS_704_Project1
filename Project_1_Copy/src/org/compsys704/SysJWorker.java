@@ -67,13 +67,20 @@ public class SysJWorker extends Worker{
 			States.tableAlignedWithSensor = status;
 			break;
 			
+		case "recieveTwin":
+			System.err.println("recieveTwin");
+			if (status) {
+				States.recieveTwin = false;
+			}
+		break;
+			
 		default: 
 			System.err.println("Wrong sig name : "+signame);
 			System.exit(1);
 		}
 	}
 	
-	static final List<String> signames = Arrays.asList("pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1");
+	static final List<String> signames = Arrays.asList("pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin");
 	
 	@Override
 	public boolean hasSignal(String sn) {

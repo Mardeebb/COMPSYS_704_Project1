@@ -15,6 +15,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -25,16 +26,18 @@ import run.BottleTwin;
 
 class POSPanel extends JPanel {
     private EABSBackend backend;
-    private DefaultListModel<String> ordersModel = new DefaultListModel<>();
+    private DefaultListModel<String> waitingModel = new DefaultListModel<>();
+    private DefaultListModel<String> completedModel = new DefaultListModel<>();
+    private JLabel processingLabel = new JLabel("No order processing");
 
     public POSPanel(EABSBackend backend) {
         this.backend = backend;
         setLayout(new GridLayout(0,1));
 
+        // Input fields
         JTextField orderIdField = new JTextField("Order1");
         JTextField qtyField = new JTextField("5");
         JButton submitBtn = new JButton("Submit Order");
-        JList<String> ordersList = new JList<>(ordersModel);
 
         submitBtn.addActionListener(e -> {
             String orderId = orderIdField.getText();
@@ -46,32 +49,64 @@ class POSPanel extends JPanel {
         add(orderIdField);
         add(qtyField);
         add(submitBtn);
-        add(new JScrollPane(ordersList));
 
-        // Refresh every second
-        new Timer(1000, e -> {
-            ordersModel.clear();
-            for (Order o : backend.getOrders()) {
-                ordersModel.addElement(o.id + " (" + o.getCompletedCount() + "/" + o.bottles.size() + ")");
-            }
-        }).start();
+        // Waiting orders
+        add(new JLabel("Waiting Orders:"));
+        JList<String> waitingList = new JList<>(waitingModel);
+        add(new JScrollPane(waitingList));
+
+        // Processing order
+        add(new JLabel("Processing Order:"));
+        add(processingLabel);
+
+        // Completed orders
+        add(new JLabel("Completed Orders:"));
+        JList<String> completedList = new JList<>(completedModel);
+        add(new JScrollPane(completedList));
+
+        // Refresh UI every 0.5s
+        new Timer(500, e -> refreshUI()).start();
+    }
+
+    private void refreshUI() {
+        waitingModel.clear();
+        for (Order o : backend.getWaitingOrders()) {
+            waitingModel.addElement(o.id + " (" + o.getCompletedCount() + "/" + o.bottles.size() + ")");
+        }
+
+        Order processing = backend.getProcessingOrder();
+        if (processing != null) {
+            processingLabel.setText(processing.id + " (" + processing.getCompletedCount() + "/" + processing.bottles.size() + ")");
+        } else {
+            processingLabel.setText("No order processing");
+        }
+
+        completedModel.clear();
+        for (Order o : backend.getCompletedOrders()) {
+            completedModel.addElement(o.id + " (done)");
+        }
     }
 }
 
 public class ABS extends JFrame {
 	private JPanel panel;
-	
+    private EABSBackend backend = new EABSBackend();
+
 	public ABS() {
 //		this.setPreferredSize(new Dimension(200, 300));
+
 		panel = new Canvas();
-		panel.setPreferredSize(new Dimension(1300, 800));
+		panel.setPreferredSize(new Dimension(1000, 600));
 		panel.setBackground(Color.WHITE);
 		JButton enable = new JButton("rotaryTableTrigger");
-		BottleTwin bottle = new BottleTwin();
+		BottleTwin bottle = new BottleTwin(5, "name");
 		enable.addActionListener(new SignalClient(Ports.PORT_LOADER_PLANT, Ports.ENABLE_SIGNAL, null));
 		enable.addActionListener(new SignalClient(10003, "rotaryTableControllerCD.enable", bottle));
+
 		JButton request = new JButton("request");
 		request.addActionListener(new SignalClient(Ports.PORT_LOADER_CONTROLLER, Ports.REQUEST_SIGNAL, null));
+		request.addActionListener(new SignalClient(10004, "OrchestratorCD.request", null));
+        POSPanel posPanel = new POSPanel(backend);
 
 		JPanel ss = new JPanel();
 		ss.add(enable);
@@ -81,16 +116,25 @@ public class ABS extends JFrame {
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
-		this.add(panel,c);
+		c.weightx = 1.0;
+		c.weighty = 1.0;
+		c.fill = GridBagConstraints.BOTH;
+		this.add(panel, c);
+
 		c.gridx = 0;
 		c.gridy = 1;
-		this.add(ss,c);
-		
-		// Radio buttons
-		JPanel pan3 = new JPanel(new GridLayout(0, 2));
-		c.gridx = 0;
-		c.gridy = 2;
-		this.add(pan3,c);
+		c.weightx = 0;
+		c.weighty = 0.1;
+		c.fill = GridBagConstraints.NONE;
+		this.add(ss, c);
+
+		c.gridx = 1;
+		c.gridy = 0;
+		c.weightx = 0.1;
+		c.weighty = 1.0;
+		c.fill = GridBagConstraints.VERTICAL;
+		this.add(posPanel, c);
+
 		
 		this.setTitle("ABS_roTable");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -102,7 +146,8 @@ public class ABS extends JFrame {
 		ABS cl = new ABS();
 		cl.pack();
 		cl.setVisible(true);
-		
+        new Thread(new OrderDispatcher(cl.backend)).start();
+
 		SignalServer<SysJWorker> server = new SignalServer<SysJWorker>(Ports.PORT_LOADER_VIZ, SysJWorker.class);
 		
 		new Thread(server).start();
