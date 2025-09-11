@@ -11,13 +11,52 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.Timer;
 import run.BottleTwin;
+
+class POSPanel extends JPanel {
+    private EABSBackend backend;
+    private DefaultListModel<String> ordersModel = new DefaultListModel<>();
+
+    public POSPanel(EABSBackend backend) {
+        this.backend = backend;
+        setLayout(new GridLayout(0,1));
+
+        JTextField orderIdField = new JTextField("Order1");
+        JTextField qtyField = new JTextField("5");
+        JButton submitBtn = new JButton("Submit Order");
+        JList<String> ordersList = new JList<>(ordersModel);
+
+        submitBtn.addActionListener(e -> {
+            String orderId = orderIdField.getText();
+            int qty = Integer.parseInt(qtyField.getText());
+            Order o = new Order(orderId, qty);
+            backend.enqueueOrder(o);
+        });
+
+        add(orderIdField);
+        add(qtyField);
+        add(submitBtn);
+        add(new JScrollPane(ordersList));
+
+        // Refresh every second
+        new Timer(1000, e -> {
+            ordersModel.clear();
+            for (Order o : backend.getOrders()) {
+                ordersModel.addElement(o.id + " (" + o.getCompletedCount() + "/" + o.bottles.size() + ")");
+            }
+        }).start();
+    }
+}
 
 public class ABS extends JFrame {
 	private JPanel panel;
@@ -64,7 +103,8 @@ public class ABS extends JFrame {
 		cl.pack();
 		cl.setVisible(true);
 		
-		SignalServer<GUIWorker> server = new SignalServer<GUIWorker>(Ports.PORT_LOADER_VIZ, GUIWorker.class);
+		SignalServer<SysJWorker> server = new SignalServer<SysJWorker>(Ports.PORT_LOADER_VIZ, SysJWorker.class);
+		
 		new Thread(server).start();
 		while(true){
 			try {

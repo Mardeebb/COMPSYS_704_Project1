@@ -3,7 +3,7 @@ package org.compsys704;
 import java.util.Arrays;
 import java.util.List;
 
-public class GUIWorker extends Worker{
+public class SysJWorker extends Worker{
 
 	@Override
 	public void setSignal(boolean status, Object value) {

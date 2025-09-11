@@ -1,4 +1,5 @@
 import run.GUI;
+import run.BottleTwin;
 
 Plant(
 		input signal pusherExtend,vacOn,armSource,armDest;
@@ -113,14 +114,14 @@ Plant(
 
 
 rPlant(
-		input signal rotaryTableTrigger;
+		input signal rotaryTableTrigger, bottleIn;
 		output signal bottleAtPos5, tableAlignedWithSensor, capOnBottleAtPos1, tableAlignedWithSensorC;
 		// GUI signal
 		output signal rotTurn, rotContent;
 )
 ->
 {
-	int signal posOne, posFive, turn;
+	BottleTwin signal posOne, posFive, turn;
 	{
 		int[] packedArray = new int[6]; 
 		int pos = 0;
@@ -166,4 +167,35 @@ rPlant(
 		}
 	}
 }
+
+
+conveyorPlant(
+		input signal bottleAtPos1, bottleLeftPos5;
+		output signal motConveyorOnOff;
+		// GUI signal
+		output signal motConveyor;
+)
+->
+{
+	signal conveyorRunning, conveyorStop;
+	int signal posZero, posOne, posFive;
+	{
+		while(true) {
+			abort(bottleAtPos1){
+				emit conveyorRunning;
+			}
+		}
+	}
+	
+	||
+	
+	{
+		while(true) {
+			await conveyorRunning;
+			sustain motConveyorOnOff;
+			pause;
+		}
+	}
+}
+
 
