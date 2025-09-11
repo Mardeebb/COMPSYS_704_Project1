@@ -104,7 +104,7 @@ public class Orchestrator extends ClockDomain{
                     moveConveyor.setPresent();//sysj\controller.sysj line: 28, column: 5
                     currsigs.addElement(moveConveyor);
                     System.out.println("Emitted moveConveyor");
-                    recieveTwin.setPresent();//sysj\controller.sysj line: 31, column: 5
+                    recieveTwin.setPresent();//sysj\controller.sysj line: 30, column: 5
                     currsigs.addElement(recieveTwin);
                     System.out.println("Emitted recieveTwin");
                     System.err.println("new Orchestrator Cycle");//sysj\controller.sysj line: 13, column: 7

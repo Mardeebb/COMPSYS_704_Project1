@@ -93,16 +93,15 @@ public class ABS extends JFrame {
     private EABSBackend backend = new EABSBackend();
 
 	public ABS() {
-//		this.setPreferredSize(new Dimension(200, 300));
+//		this.setPreferredSize(new Dimension(200, 300));S
 
 		panel = new Canvas(backend);
 		panel.setPreferredSize(new Dimension(1000, 600));
 		panel.setBackground(Color.WHITE);
 		JButton enable = new JButton("Enable");
-		BottleTwin bottle = new BottleTwin(5, "name");
 		enable.addActionListener(new SignalClient(Ports.PORT_LOADER_PLANT, Ports.ENABLE_SIGNAL, null));
-		enable.addActionListener(new SignalClient(10003, "rotaryTableControllerCD.enable", bottle));
-		enable.addActionListener(new SignalClient(10005, "conveyorPlantCD.enable", bottle));
+		enable.addActionListener(new SignalClient(10002, "rotaryTablePlantCD.enable", null));
+		enable.addActionListener(new SignalClient(10005, "conveyorPlantCD.enable", null));
 
 		JButton request = new JButton("request");
 		request.addActionListener(new SignalClient(Ports.PORT_LOADER_CONTROLLER, Ports.REQUEST_SIGNAL, null));

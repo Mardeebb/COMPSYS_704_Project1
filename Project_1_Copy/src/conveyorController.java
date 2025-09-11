@@ -47,7 +47,7 @@ public class conveyorController extends ClockDomain{
         case 2 : 
           switch(S65){
             case 0 : 
-              if(move.getprestatus()){//sysj\controller.sysj line: 47, column: 10
+              if(move.getprestatus()){//sysj\controller.sysj line: 46, column: 10
                 S65=1;
                 active[2]=1;
                 ends[2]=1;
@@ -60,12 +60,12 @@ public class conveyorController extends ClockDomain{
               }
             
             case 1 : 
-              if(!bottleAtPos1.getprestatus()){//sysj\controller.sysj line: 48, column: 10
+              if(!bottleAtPos1.getprestatus()){//sysj\controller.sysj line: 47, column: 10
                 S65=2;
-                conveyorMoving.setPresent();//sysj\controller.sysj line: 50, column: 5
+                conveyorMoving.setPresent();//sysj\controller.sysj line: 49, column: 5
                 currsigs.addElement(conveyorMoving);
                 System.out.println("Emitted conveyorMoving");
-                motConveyorOnOff.setPresent();//sysj\controller.sysj line: 51, column: 5
+                motConveyorOnOff.setPresent();//sysj\controller.sysj line: 50, column: 5
                 currsigs.addElement(motConveyorOnOff);
                 System.out.println("Emitted motConveyorOnOff");
                 active[2]=1;
@@ -79,8 +79,8 @@ public class conveyorController extends ClockDomain{
               }
             
             case 2 : 
-              if(bottleAtPos1.getprestatus()){//sysj\controller.sysj line: 49, column: 10
-                conveyorStop.setPresent();//sysj\controller.sysj line: 53, column: 4
+              if(bottleAtPos1.getprestatus()){//sysj\controller.sysj line: 48, column: 10
+                conveyorStop.setPresent();//sysj\controller.sysj line: 52, column: 4
                 currsigs.addElement(conveyorStop);
                 System.out.println("Emitted conveyorStop");
                 S65=0;
@@ -89,7 +89,7 @@ public class conveyorController extends ClockDomain{
                 break RUN;
               }
               else {
-                motConveyorOnOff.setPresent();//sysj\controller.sysj line: 51, column: 5
+                motConveyorOnOff.setPresent();//sysj\controller.sysj line: 50, column: 5
                 currsigs.addElement(motConveyorOnOff);
                 System.out.println("Emitted motConveyorOnOff");
                 active[2]=1;

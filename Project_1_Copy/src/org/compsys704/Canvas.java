@@ -4,13 +4,22 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import run.BottleTwin;
 
 public class Canvas extends JPanel {
 	BufferedImage arm1;
@@ -35,9 +44,37 @@ public class Canvas extends JPanel {
 	BufferedImage injecotr_off_extend;
     private EABSBackend backend;
 
+    private Map<Integer, Rectangle> clickableAreas = new HashMap<>();
+    
+    private void showBottleInfo(BottleTwin bottle) {
+        // A small popup, you can use JDialog if you want more custom UI
+        JOptionPane.showMessageDialog(
+            this,
+            "Bottle ID: " + bottle.ID +"\nOrder: " + bottle.order + "\nName: " + bottle.name + "\nStatus: " + bottle.status,
+            "Bottle Info",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }
 
 	public Canvas(EABSBackend backend){
 		this.backend = backend;
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Point p = e.getPoint();
+                for (Map.Entry<Integer, Rectangle> entry : clickableAreas.entrySet()) {
+                    if (entry.getValue().contains(p)) {
+                        int bottleId = entry.getKey();
+                        BottleTwin bottle = backend.getBottleFromID(bottleId);
+                        if (bottle != null) {
+                            showBottleInfo(bottle);
+                        }
+                        break;
+                    }
+                }
+            }
+        });
+
 		try {
 			BufferedImage bi = ImageIO.read(new File("res/arm.png"));
 			arm1 = bi.getSubimage(0, 0, 64, 256);
@@ -99,8 +136,12 @@ public class Canvas extends JPanel {
 	    g2d.setTransform(old);
 	}
 	
-	private void drawBottle(int id, int bottle, int x, int y, Graphics g) {
-		switch(bottle){
+	private void drawBottle(int id, int x, int y, Graphics g) {
+		int type = backend.getGUIrep(id);
+		if(type == -1) {
+			return;
+		}
+		switch(type){
 			case 0:
 				g.drawImage(empty_bottle,x, y, null);
 		        break;
@@ -116,6 +157,7 @@ public class Canvas extends JPanel {
 		}
 	    g.setColor(Color.BLACK);
 	    g.drawString(String.valueOf(id), x + 20, y + 20); 
+        clickableAreas.put(id, new Rectangle(x, y, empty_bottle.getWidth(), empty_bottle.getHeight()));
 
 
 	}
@@ -127,6 +169,7 @@ public class Canvas extends JPanel {
 	    int rotTable_Y = 400;
 	    int cap_X = 400;
 	    int cap_Y = -60;
+        clickableAreas.clear(); // reset each repaint
 
 		
 		super.paintComponent(g);
@@ -156,25 +199,13 @@ public class Canvas extends JPanel {
 	    }else {
 			g.drawImage(conveyor_static, rotTable_X + -250, rotTable_Y + 190, null);
 	    }
-		int posZero = backend.getGUIrep(Conveyor.posZeroID);
-		int posOne = backend.getGUIrep(Conveyor.posOneID);
-		int posFive = backend.getGUIrep(Conveyor.posFiveID);
-		int posSeven = backend.getGUIrep(Conveyor.posSevenID);
 //		System.err.println(Conveyor.posZeroID);
 
-	    if(posZero != -1) {
-	    	drawBottle(Conveyor.posZeroID, posZero, rotTable_X + -250, rotTable_Y + 190, g);
-	    }
-	    if(posOne != -1) {
-	    	drawBottle(Conveyor.posOneID, posOne, rotTable_X + 0, rotTable_Y + 190, g);
-	    }
-	    if(posFive != -1) {
-	    	drawBottle(Conveyor.posFiveID, posFive, rotTable_X + 250, rotTable_Y + 190, g);
-	    }
-	    if(posSeven != -1) {
-	    	drawBottle(Conveyor.posSevenID, posSeven, rotTable_X + 500, rotTable_Y + 190, g);
-	    }
-
+    	drawBottle(Conveyor.posZeroID, rotTable_X + -250, rotTable_Y + 190, g);
+    	drawBottle(Conveyor.posOneID, rotTable_X + 0, rotTable_Y + 190, g);
+    	drawBottle(Conveyor.posFiveID, rotTable_X + 250, rotTable_Y + 190, g);
+    	drawBottle(Conveyor.posSevenID, rotTable_X + 500, rotTable_Y + 190, g);
+	    	
 		if(TurnTable.RT_PS == 0) {
 			g.drawImage(rotary_table, rotTable_X, rotTable_Y, null);
 		}else if(TurnTable.RT_PS == 1){

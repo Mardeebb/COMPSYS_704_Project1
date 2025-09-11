@@ -41,9 +41,10 @@
 		</ClockDomain>
 
 		
-		<ClockDomain Name="rotaryTablePlantCD" Class="rPlant">
+		<ClockDomain Name="rotaryTablePlantCD" Class="rotPlant">
 			<iSignal Name="rotaryTableTrigger" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10002" />
-			
+			<iSignal Name="enable" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10002" />
+
 			<oSignal Name="tableAlignedWithSensorC" To="rotaryTableControllerCD.tableAlignedWithSensorC" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10003" />
 			
 			<oSignal Name="rotTurn" To="UI.rotTurn" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />

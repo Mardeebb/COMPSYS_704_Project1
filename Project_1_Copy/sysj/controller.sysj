@@ -27,7 +27,6 @@ Orchestrator(
 				emit bottleToConveyor(b);
 				emit moveConveyor;
 				
-				
 				emit recieveTwin;
 			}
 		}
@@ -178,8 +177,8 @@ Controller(
 //	}
 }
 
-rController(
-		input BottleTwin signal enable;
+rotController(
+		input signal turn;
 
 		input signal tableAlignedWithSensorC ;
 		output signal rotaryTableTrigger;
@@ -189,18 +188,12 @@ rController(
 	{
 		// pusher control
 		while(true){
-			await(enable);
-			BottleTwin b = (BottleTwin)#enable;
-			int ID = b.ID;
-			String name = b.name;
-		    System.out.println("fffffffffffffffffffffffffffffffffffff " + b);
-		    System.out.println("fffffffffffffffffffffffffffffffffffff " + ID);
-		    System.out.println("fffffffffffffffffffffffffffffffffffff " + name);
+			await(turn);
 
 			abort(tableAlignedWithSensorC){
 				sustain rotaryTableTrigger;
 			}
-			await(!enable);
+			await(!turn);
 		}
 	}
 }

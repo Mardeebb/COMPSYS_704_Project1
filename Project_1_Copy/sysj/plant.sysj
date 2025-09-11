@@ -138,8 +138,8 @@ Plant(
 }
 
 
-rPlant(
-		input signal rotaryTableTrigger, bottleIn;
+rotPlant(
+		input signal rotaryTableTrigger, enable, bottleIn;
 		output signal bottleAtPos5, tableAlignedWithSensor, capOnBottleAtPos1, tableAlignedWithSensorC;
 		// GUI signal
 		output signal rotTurn, rotContent;
@@ -160,7 +160,7 @@ rPlant(
 		while(true){
 			abort(!rotaryTableTrigger){
 				await(rotaryTableTrigger);
-	
+				await(enable);
 				int pos1 = packedArray[0];
 				int pos5 = packedArray[4];
 				emit rotTurn(packedArray);

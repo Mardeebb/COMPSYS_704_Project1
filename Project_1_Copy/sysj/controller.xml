@@ -46,8 +46,8 @@
 			<iSignal Name="armDestM"      Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 		</ClockDomain>
 		
-		<ClockDomain Name="rotaryTableControllerCD" Class="rController">
-			<iSignal Name="enable" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
+		<ClockDomain Name="rotaryTableControllerCD" Class="rotController">
+			<iSignal Name="turn" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
 			<iSignal Name="tableAlignedWithSensorC" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
 			
 			<oSignal Name="rotaryTableTrigger" To="rotaryTablePlantCD.rotaryTableTrigger" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10002" />

@@ -3,3 +3,7 @@
 /run/
 /conveyorController.class
 /conveyorPlant.class
+/rotController.class
+/rotPlant.class
+/Controller.class
+/Plant.class

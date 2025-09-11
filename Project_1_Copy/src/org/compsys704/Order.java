@@ -16,7 +16,7 @@ public class Order {
         this.id = id;
         for (int i = 0; i < qty; i++) {
             int uniqueId = globalIdGenerator.getAndIncrement(); // global unique ID
-            bottles.add(new BottleTwin(uniqueId, "name"));
+            bottles.add(new BottleTwin(uniqueId, "name", id));
         }
     }
 
