@@ -36,7 +36,7 @@ public class RotaryTableController extends ClockDomain{
         case 1 : 
           S77=2;
           S77=2;
-          System.out.println("Controller started");//sysj\controller.sysj line: 35, column: 5
+          System.out.println("Rotary Table started");//sysj\controller.sysj line: 35, column: 5
           S13=0;
           active[3]=1;
           ends[3]=1;

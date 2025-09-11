@@ -32,7 +32,7 @@ RotaryTableController(
 		output signal rotaryTableTrigger;
 		)
 ->{
-    System.out.println("Controller started");
+    System.out.println("Rotary Table started");
 	{
 		// pusher control
 		while(true){
