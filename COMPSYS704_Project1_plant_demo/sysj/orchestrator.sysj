@@ -1,0 +1,13 @@
+Orchestrator(
+		input String channel rotaryTableStatus;
+		output Boolean channel rotaryTableRequest;
+		)
+->{
+	System.out.println("Hello Machine");
+	{
+		while(true) {
+			send rotaryTableRequest(true);
+			pause;
+		}
+	}
+}

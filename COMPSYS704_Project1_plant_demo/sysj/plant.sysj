@@ -147,6 +147,7 @@ RotaryTablePlant(
 			}
 			packedArray = newPackedArray;
 			emit tableAlignedWithSensorC;
+			System.out.println("table aligned");
 			await(!rotaryTableTrigger);
 		}
 	}

@@ -1,9 +1,9 @@
 <System xmlns="http://systemjtechnology.com">
 	<SubSystem Name="SS1" Local="true">
 			<ClockDomain Name="OrchestratorCD" Class="Orchestrator">
-			<iSignal Name="rotaryTableStatus" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
+			<iChannel Name="rotaryTableStatus" From="RotaryTableControllerCD.rotaryTableStatus" />
 
-			<oSignal Name="rotaryTableRequest" To="RotaryTableControllerCD.rotaryTableRequest" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10001" />
+			<oChannel Name="rotaryTableRequest" To="RotaryTableControllerCD.rotaryTableRequest" />
 		</ClockDomain>
 		
 		<ClockDomain Name="CapLoaderControllerCD" Class="CapLoaderController">
@@ -30,10 +30,11 @@
 		<ClockDomain Name="RotaryTableControllerCD" Class="RotaryTableController">
 			<iSignal Name="enable" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
 			<iSignal Name="tableAlignedWithSensorC" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
-			<iSignal Name="rotaryTableRequest" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
+			
+			<iChannel Name="rotaryTableRequest" From="OrchestratorCD.rotaryTableRequest" />
 			
 			<oSignal Name="rotaryTableTrigger" To="RotaryTablePlantCD.rotaryTableTrigger" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10002" />
-
+			<oChannel Name="rotaryTableStatus"  To="OrchestratorCD.rotaryTableStatus" />
 		</ClockDomain>
 
 	</SubSystem>
