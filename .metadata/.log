@@ -3561,3 +3561,12 @@ java.net.UnknownHostException: No such host is known (marketplace.eclipse.org)
 	at org.eclipse.epp.internal.mpc.ui.discovery.DiscoverFileSupportJob.run(DiscoverFileSupportJob.java:85)
 	at org.eclipse.epp.internal.mpc.ui.discovery.DiscoverFileSupportJob.run(DiscoverFileSupportJob.java:69)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.launching 4 107 2025-09-10 19:18:36.744
+!MESSAGE Launch configuration RunController references non-existing project COMPSYS704_plant_demo.
+
+!ENTRY org.eclipse.jdt.launching 4 107 2025-09-11 20:40:53.922
+!MESSAGE Launch configuration BuildAll references non-existing project COMPSYS704_plant_demo.
+
+!ENTRY org.eclipse.jdt.launching 4 107 2025-09-11 20:41:12.495
+!MESSAGE Launch configuration BuildAll references non-existing project COMPSYS704_plant_demo.

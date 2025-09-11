@@ -49,7 +49,6 @@ public class RotaryTableController extends ClockDomain{
                 S13=1;
                 rotaryTableTrigger.setPresent();//sysj\controller.sysj line: 41, column: 5
                 currsigs.addElement(rotaryTableTrigger);
-                System.out.println("Emitted rotaryTableTrigger");
                 active[3]=1;
                 ends[3]=1;
                 break RUN;
@@ -70,7 +69,6 @@ public class RotaryTableController extends ClockDomain{
               else {
                 rotaryTableTrigger.setPresent();//sysj\controller.sysj line: 41, column: 5
                 currsigs.addElement(rotaryTableTrigger);
-                System.out.println("Emitted rotaryTableTrigger");
                 active[3]=1;
                 ends[3]=1;
                 break RUN;

@@ -34,7 +34,7 @@ public class ABS extends JFrame {
 //			}
 //		});
 
-		enable.addActionListener(new SignalClient(10003, "rotaryTableControllerCD.enable"));
+		enable.addActionListener(new SignalClient(10003, "RotaryTableControllerCD.enable"));
 		
 		JPanel ss = new JPanel();
 		ss.add(enable);

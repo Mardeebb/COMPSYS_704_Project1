@@ -4,8 +4,8 @@ import com.systemj.Signal;
 import com.systemj.input_Channel;
 import com.systemj.output_Channel;
 
-public class Controller extends ClockDomain{
-  public Controller(String name){super(name);}
+public class CapLoaderController extends ClockDomain{
+  public CapLoaderController(String name){super(name);}
   Vector currsigs = new Vector();
   private boolean df = false;
   private char [] active;
@@ -27,10 +27,10 @@ public class Controller extends ClockDomain{
   public Signal vacOn = new Signal("vacOn", Signal.OUTPUT);
   public Signal armSource = new Signal("armSource", Signal.OUTPUT);
   public Signal armDest = new Signal("armDest", Signal.OUTPUT);
-  private int S1 = 1;
+  private int S3 = 1;
   
-  private int[] ends = new int[3];
-  private int[] tdone = new int[3];
+  private int[] ends = new int[4];
+  private int[] tdone = new int[4];
   
   public void runClockDomain(){
     for(int i=0;i<ends.length;i++){
@@ -39,18 +39,22 @@ public class Controller extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S1){
+      switch(S3){
         case 0 : 
-          S1=0;
+          S3=0;
           break RUN;
         
         case 1 : 
-          S1=2;
-          System.out.println("Controller startedh");//sysj\controller.sysj line: 9, column: 5
-          S1=0;
-          active[1]=0;
-          ends[1]=0;
-          S1=0;
+          S3=2;
+          S3=2;
+          System.out.println("Cap Loader CD");//sysj\controller.sysj line: 21, column: 2
+          active[2]=1;
+          ends[2]=1;
+          break RUN;
+        
+        case 2 : 
+          active[2]=1;
+          ends[2]=1;
           break RUN;
         
       }
@@ -58,9 +62,9 @@ public class Controller extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1};
-    char [] paused1 = {0, 0, 0};
-    char [] suspended1 = {0, 0, 0};
+    char [] active1 = {1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;
@@ -69,14 +73,14 @@ public class Controller extends ClockDomain{
   }
   
   public void run(){
-    while(active[1] != 0){
-      int index = 1;
+    while(active[2] != 0){
+      int index = 2;
       if(paused[index]==1 || suspended[index]==1 || active[index] == 0){
         for(int h=1;h<paused.length;++h){
           paused[h]=0;
         }
       }
-      if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
+      if(paused[2]!=0 || suspended[2]!=0 || active[2]!=1);
       else{
         if(!df){
           pusherRetracted.gethook();
@@ -161,7 +165,7 @@ public class Controller extends ClockDomain{
       armSource.setClear();
       armDest.sethook();
       armDest.setClear();
-      if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
+      if(paused[2]!=0 || suspended[2]!=0 || active[2]!=1);
       else{
         pusherRetracted.gethook();
         pusherExtended.gethook();
@@ -177,7 +181,7 @@ public class Controller extends ClockDomain{
         armDestM.gethook();
       }
       runFinisher();
-      if(active[1] == 0){
+      if(active[2] == 0){
       	this.terminated = true;
       }
       if(!threaded) break;

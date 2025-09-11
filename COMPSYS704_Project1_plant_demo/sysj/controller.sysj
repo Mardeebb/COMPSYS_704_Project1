@@ -1,18 +1,38 @@
-Controller(
+Orchestrator(
+		input signal rotaryTableStatus;
+		output signal rotaryTableRequest;
+		)
+->{
+	System.out.println("Hello Machines");
+	{
+		while(true) {
+			pause;
+		}
+	}
+}
+
+CapLoaderController(
 		input signal pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,empty,request;
 		output signal pusherExtend,vacOn,armSource,armDest;
 		input Integer signal mode;
 		input signal pusherExtendM,vacOnM,armSourceM,armDestM;
 		)
 ->{
+	System.out.println("Cap Loader CD");
+	{
+		while(true ) {
+			pause;
+		}
+	}
 }
 
-rController(
+RotaryTableController(
 		input signal enable, tableAlignedWithSensorC ;
+		input signal rotaryTableRequest;
 		output signal rotaryTableTrigger;
 		)
 ->{
-    System.out.println("Controller startedh");
+    System.out.println("Controller started");
 	{
 		// pusher control
 		while(true){

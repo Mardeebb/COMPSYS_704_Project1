@@ -112,7 +112,7 @@ Plant(
 }
 
 
-rPlant(
+RotaryTablePlant(
 		input signal rotaryTableTrigger;
 		output signal bottleAtPos5, tableAlignedWithSensor, capOnBottleAtPos1, tableAlignedWithSensorC;
 		// GUI signal

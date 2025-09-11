@@ -27,7 +27,7 @@ public class Controller extends ClockDomain{
   public Signal vacOn = new Signal("vacOn", Signal.OUTPUT);
   public Signal armSource = new Signal("armSource", Signal.OUTPUT);
   public Signal armDest = new Signal("armDest", Signal.OUTPUT);
-  private int S1 = 1;
+  private int S0 = 1;
   
   private int[] ends = new int[3];
   private int[] tdone = new int[3];
@@ -39,18 +39,17 @@ public class Controller extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S1){
+      switch(S0){
         case 0 : 
-          S1=0;
+          S0=0;
           break RUN;
         
         case 1 : 
-          S1=2;
-          System.out.println("Controller startedh");//sysj\controller.sysj line: 9, column: 5
-          S1=0;
+          S0=2;
+          S0=2;
           active[1]=0;
           ends[1]=0;
-          S1=0;
+          S0=0;
           break RUN;
         
       }
