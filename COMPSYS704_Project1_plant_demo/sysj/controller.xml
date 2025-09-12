@@ -1,11 +1,9 @@
 <System xmlns="http://systemjtechnology.com">
 	<SubSystem Name="SS1" Local="true">
-			<ClockDomain Name="OrchestratorCD" Class="Orchestrator">
+		<ClockDomain Name="OrchestratorCD" Class="Orchestrator">
 			<iChannel Name="rotaryTableStatus" From="RotaryTableControllerCD.rotaryTableStatus" />
-			<iChannel Name="capperStatus" From="CapperControllerCD.Status" />
 			
 			<oChannel Name="rotaryTableRequest" To="RotaryTableControllerCD.rotaryTableRequest" />
-			<oChannel Name="capperRequest" To="CapperControllerCD.capperRequest" />
 		</ClockDomain>
 		
 		<ClockDomain Name="CapLoaderControllerCD" Class="CapLoaderController">
@@ -34,6 +32,7 @@
 			<iSignal Name="gripperZAxisLowered" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
 			<iSignal Name="gripperZAxisLifted" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
 			<iSignal Name="gripperTurnHomePos" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
+			<iSignal Name="gripperTurnFinalPos" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
 			
 			<oSignal Name="cylPos5ZaxisExtend"  To="CapperPlantCD.cylPos5ZaxisExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10005" />
 			<oSignal Name="gripperTurnRetracted"  To="CapperPlantCD.gripperTurnRetracted" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10005" />

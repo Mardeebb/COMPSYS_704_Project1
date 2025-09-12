@@ -29,16 +29,16 @@ public class RotaryTablePlant extends ClockDomain{
   private int pos5_thread_11;//sysj\plant.sysj line: 196, column: 4
   private int pos4_thread_11;//sysj\plant.sysj line: 197, column: 4
   private int[] newPackedArray_thread_11;//sysj\plant.sysj line: 202, column: 4
-  private int S600 = 1;
-  private int S581 = 1;
-  private int S558 = 1;
-  private int S598 = 1;
+  private int S1092 = 1;
+  private int S1073 = 1;
+  private int S1050 = 1;
+  private int S1090 = 1;
   
   private int[] ends = new int[13];
   private int[] tdone = new int[13];
   
-  public void thread624(int [] tdone, int [] ends){
-        switch(S598){
+  public void thread1116(int [] tdone, int [] ends){
+        switch(S1090){
       case 0 : 
         active[12]=0;
         ends[12]=0;
@@ -81,8 +81,8 @@ public class RotaryTablePlant extends ClockDomain{
     }
   }
 
-  public void thread623(int [] tdone, int [] ends){
-        switch(S581){
+  public void thread1115(int [] tdone, int [] ends){
+        switch(S1073){
       case 0 : 
         active[11]=0;
         ends[11]=0;
@@ -90,7 +90,7 @@ public class RotaryTablePlant extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S558){
+        switch(S1050){
           case 0 : 
             if(rotaryTableTrigger.getprestatus()){//sysj\plant.sysj line: 193, column: 10
               pos1_thread_11 = packedArray_thread_11[0];//sysj\plant.sysj line: 195, column: 4
@@ -114,7 +114,7 @@ public class RotaryTablePlant extends ClockDomain{
               tableAlignedWithSensorC.setPresent();//sysj\plant.sysj line: 209, column: 4
               currsigs.addElement(tableAlignedWithSensorC);
               System.out.println("table aligned");//sysj\plant.sysj line: 210, column: 4
-              S558=1;
+              S1050=1;
               active[11]=1;
               ends[11]=1;
               tdone[11]=1;
@@ -128,7 +128,7 @@ public class RotaryTablePlant extends ClockDomain{
           
           case 1 : 
             if(!rotaryTableTrigger.getprestatus()){//sysj\plant.sysj line: 211, column: 10
-              S558=0;
+              S1050=0;
               active[11]=1;
               ends[11]=1;
               tdone[11]=1;
@@ -146,8 +146,8 @@ public class RotaryTablePlant extends ClockDomain{
     }
   }
 
-  public void thread621(int [] tdone, int [] ends){
-        S598=1;
+  public void thread1113(int [] tdone, int [] ends){
+        S1090=1;
     if((Integer)(posOne_10.getpreval() == null ? 0 : ((Integer)posOne_10.getpreval()).intValue()) == 5){//sysj\plant.sysj line: 219, column: 7
       capOnBottleAtPos1.setPresent();//sysj\plant.sysj line: 220, column: 5
       currsigs.addElement(capOnBottleAtPos1);
@@ -180,8 +180,8 @@ public class RotaryTablePlant extends ClockDomain{
     }
   }
 
-  public void thread620(int [] tdone, int [] ends){
-        S581=1;
+  public void thread1112(int [] tdone, int [] ends){
+        S1073=1;
     packedArray_thread_11 = new int[6];//sysj\plant.sysj line: 182, column: 3
     pos_thread_11 = 0;//sysj\plant.sysj line: 183, column: 3
     for(int i_thread_11 = 0; i_thread_11 < 6; i_thread_11 = i_thread_11 + 1) {//sysj\plant.sysj line: 185, column: 29
@@ -189,7 +189,7 @@ public class RotaryTablePlant extends ClockDomain{
     }
     packedArray_thread_11[0] = 5;//sysj\plant.sysj line: 189, column: 6
     packedArray_thread_11[3] = 1;//sysj\plant.sysj line: 190, column: 6
-    S558=0;
+    S1050=0;
     active[11]=1;
     ends[11]=1;
     tdone[11]=1;
@@ -202,27 +202,27 @@ public class RotaryTablePlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S600){
+      switch(S1092){
         case 0 : 
-          S600=0;
+          S1092=0;
           break RUN;
         
         case 1 : 
-          S600=2;
-          S600=2;
+          S1092=2;
+          S1092=2;
           posOne_10.setClear();//sysj\plant.sysj line: 180, column: 2
           posFive_10.setClear();//sysj\plant.sysj line: 180, column: 2
           turn_10.setClear();//sysj\plant.sysj line: 180, column: 2
-          thread620(tdone,ends);
-          thread621(tdone,ends);
-          int biggest622 = 0;
-          if(ends[11]>=biggest622){
-            biggest622=ends[11];
+          thread1112(tdone,ends);
+          thread1113(tdone,ends);
+          int biggest1114 = 0;
+          if(ends[11]>=biggest1114){
+            biggest1114=ends[11];
           }
-          if(ends[12]>=biggest622){
-            biggest622=ends[12];
+          if(ends[12]>=biggest1114){
+            biggest1114=ends[12];
           }
-          if(biggest622 == 1){
+          if(biggest1114 == 1){
             active[10]=1;
             ends[10]=1;
             break RUN;
@@ -232,26 +232,26 @@ public class RotaryTablePlant extends ClockDomain{
           posOne_10.setClear();//sysj\plant.sysj line: 180, column: 2
           posFive_10.setClear();//sysj\plant.sysj line: 180, column: 2
           turn_10.setClear();//sysj\plant.sysj line: 180, column: 2
-          thread623(tdone,ends);
-          thread624(tdone,ends);
-          int biggest625 = 0;
-          if(ends[11]>=biggest625){
-            biggest625=ends[11];
+          thread1115(tdone,ends);
+          thread1116(tdone,ends);
+          int biggest1117 = 0;
+          if(ends[11]>=biggest1117){
+            biggest1117=ends[11];
           }
-          if(ends[12]>=biggest625){
-            biggest625=ends[12];
+          if(ends[12]>=biggest1117){
+            biggest1117=ends[12];
           }
-          if(biggest625 == 1){
+          if(biggest1117 == 1){
             active[10]=1;
             ends[10]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest625 == 0){
-            S600=0;
+          if(biggest1117 == 0){
+            S1092=0;
             active[10]=0;
             ends[10]=0;
-            S600=0;
+            S1092=0;
             break RUN;
           }
         

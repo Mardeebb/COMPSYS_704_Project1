@@ -30,8 +30,8 @@ public class CapLoaderPlant extends ClockDomain{
   public Signal armAtSourceE = new Signal("armAtSourceE", Signal.OUTPUT);
   public Signal armAtDestE = new Signal("armAtDestE", Signal.OUTPUT);
   public Signal emptyE = new Signal("emptyE", Signal.OUTPUT);
-  private int S371 = 1;
-  private int S370 = 1;
+  private int S863 = 1;
+  private int S862 = 1;
   
   private int[] ends = new int[13];
   private int[] tdone = new int[13];
@@ -43,23 +43,23 @@ public class CapLoaderPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S371){
+      switch(S863){
         case 0 : 
-          S371=0;
+          S863=0;
           break RUN;
         
         case 1 : 
-          S371=2;
-          S371=2;
+          S863=2;
+          S863=2;
           new Thread(new GUI()).start();//sysj\plant.sysj line: 11, column: 2
-          S371=0;
+          S863=0;
           active[1]=0;
           ends[1]=0;
-          S371=0;
+          S863=0;
           break RUN;
         
         case 2 : 
-          switch(S370){
+          switch(S862){
           }
         
       }
