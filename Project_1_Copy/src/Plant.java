@@ -31,11 +31,11 @@ public class Plant extends ClockDomain{
   public Signal armAtSourceE = new Signal("armAtSourceE", Signal.OUTPUT);
   public Signal armAtDestE = new Signal("armAtDestE", Signal.OUTPUT);
   public Signal emptyE = new Signal("emptyE", Signal.OUTPUT);
-  private int S373 = 1;
-  private int S372 = 1;
+  private int S928 = 1;
+  private int S927 = 1;
   
-  private int[] ends = new int[17];
-  private int[] tdone = new int[17];
+  private int[] ends = new int[22];
+  private int[] tdone = new int[22];
   
   public void runClockDomain(){
     for(int i=0;i<ends.length;i++){
@@ -44,23 +44,23 @@ public class Plant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S373){
+      switch(S928){
         case 0 : 
-          S373=0;
+          S928=0;
           break RUN;
         
         case 1 : 
-          S373=2;
-          S373=2;
-          new Thread(new GUI()).start();//sysj\plant.sysj line: 37, column: 2
-          S373=0;
+          S928=2;
+          S928=2;
+          new Thread(new GUI()).start();//sysj\plant.sysj line: 14, column: 2
+          S928=0;
           active[1]=0;
           ends[1]=0;
-          S373=0;
+          S928=0;
           break RUN;
         
         case 2 : 
-          switch(S372){
+          switch(S927){
           }
         
       }
@@ -68,9 +68,9 @@ public class Plant extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;

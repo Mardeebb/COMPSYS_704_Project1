@@ -38,6 +38,8 @@ public class Canvas extends JPanel {
 	BufferedImage conveyor_static;
 	BufferedImage filler_off;
 	BufferedImage filler_on;
+	BufferedImage LARM, LARM0, LARM1, LARM2, LARM3, LARM4;
+	BufferedImage RARM0, RARM1, RARM2, RARM3, RARM4;
     private EABSBackend backend;
 
     private Map<Integer, Rectangle> clickableAreas = new HashMap<>();
@@ -97,6 +99,10 @@ public class Canvas extends JPanel {
 			filler_off = scaleImage(filler_off, 170, 170);
 			filler_on = bi.getSubimage(1935, 0, 2050, 1685);
 			filler_on = scaleImage(filler_on, 170, 170);
+			bi = ImageIO.read(new File("res/robot.png"));
+			LARM = bi.getSubimage(30,100, 600,250);
+			LARM0 = scaleImage(LARM, 200, 100);
+			LARM1 = scaleImage(LARM, 140, 70);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -109,6 +115,8 @@ public class Canvas extends JPanel {
 //	public Dimension getPreferredSize() {
 //	    return new Dimension(600, 400); // smaller canvas area
 //	}
+	
+	
 
 	private BufferedImage scaleImage(BufferedImage img, int width, int height) {
 	    BufferedImage scaled = new BufferedImage(width, height, img.getType());
@@ -162,6 +170,8 @@ public class Canvas extends JPanel {
 
 	}
 	
+	
+	
 	@Override
 	protected void paintComponent(Graphics g){
 		
@@ -176,6 +186,20 @@ public class Canvas extends JPanel {
 	    Graphics2D g2d = (Graphics2D) g;
 	    boolean signal1 = TurnTable.capOnBottleAtPos1;  // replace with your actual signal
 	    boolean signal2 = TurnTable.bottleAtPos5;
+	    int leftImage = robot.leftImage(robot.cmdL);
+	    // draw left arm
+	    switch(leftImage) {
+	    case 0:
+	    	g.drawImage(LARM0, 0, 350, null);
+	    	break;
+	    case 1:
+	    	g.drawImage(LARM1, 0, 350, null);
+	    	break;
+	    	
+	    }
+	    
+	    	
+	    	
 
 	    // Draw Signal 1
 	    if(signal1) {

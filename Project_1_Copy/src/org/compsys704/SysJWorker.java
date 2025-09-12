@@ -3,6 +3,7 @@ package org.compsys704;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class SysJWorker extends Worker{
 
 	@Override
@@ -30,6 +31,19 @@ public class SysJWorker extends Worker{
 		case "armAtSourceE":
 			States.ARM_AT_SOURCE = status;
 			break;
+		case "CMD_LE":
+			if(status) {
+				System.err.println("CMD_LE is here ...........................................");
+				robot.cmdL = (String) value;
+
+			}
+
+		case "CMD_L2E":
+			if(status) {
+				System.err.println("CMD_L2E is here ............................................");
+				robot.cmdL = (String) value;
+			}
+
 		case "armAtDestE":
 			States.ARM_AT_DEST = status;
 			break;
@@ -125,7 +139,7 @@ public class SysJWorker extends Worker{
 		}
 	}
 	
-	static final List<String> signames = Arrays.asList("dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","pos0","pos1","pos5","pos7","conveyorMoving","conveyorStop");
+	static final List<String> signames = Arrays.asList("CMD_L2E", "CMD_LE", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","pos0","pos1","pos5","pos7","conveyorMoving","conveyorStop");
 	
 	@Override
 	public boolean hasSignal(String sn) {

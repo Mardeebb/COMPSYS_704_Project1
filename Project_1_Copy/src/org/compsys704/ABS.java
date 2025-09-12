@@ -46,6 +46,7 @@ class POSPanel extends JPanel {
             backend.enqueueOrder(o);
         });
 
+        
         add(orderIdField);
         add(qtyField);
         add(submitBtn);
@@ -102,7 +103,8 @@ public class ABS extends JFrame {
 		enable.addActionListener(new SignalClient(Ports.PORT_LOADER_PLANT, Ports.ENABLE_SIGNAL, null));
 		enable.addActionListener(new SignalClient(10002, "rotaryTablePlantCD.enable", null));
 		enable.addActionListener(new SignalClient(10005, "conveyorPlantCD.enable", null));
-		enable.addActionListener(new SignalClient(10005, "fillerPlantCD.enable", null));
+		enable.addActionListener(new SignalClient(10033, "fillerPlantCD.enable", null));
+		enable.addActionListener(new SignalClient(10031, "baxtorRobotPlantCD.enable", null));
 
 		JButton request = new JButton("request");
 		request.addActionListener(new SignalClient(Ports.PORT_LOADER_CONTROLLER, Ports.REQUEST_SIGNAL, null));
