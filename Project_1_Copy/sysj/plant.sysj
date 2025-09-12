@@ -291,3 +291,54 @@ conveyorPlant(
 }
 
 
+fPlant(
+    input signal valveInjectorOnOff, valveInletOnOff, dosUnitValveRetract, dosUnitValveExtend;
+    input signal enable;
+    output signal bottleAtPos2, dosUnitEvac, dosUnitFilled;
+    output signal dosUnitEvacE, dosUnitFilledE;
+)
+-> {
+
+    // Bottle at position 2 
+    {
+        while(true){
+            // For now simulate bottle always available when enabled
+            await(enable);
+            abort(!enable){
+                sustain bottleAtPos2;
+            }
+            
+        }
+    }
+    ||
+
+    //  canister unit 
+    {
+        while(true){
+            // Retract = canister up
+            abort(dosUnitValveRetract && enable){
+                sustain  dosUnitEvac;  // at top
+            }
+            await(!enable);
+
+            // Extend = canister down
+            abort(dosUnitValveExtend && enable){
+                sustain dosUnitFilled;    // at bottom
+            }
+            await(!enable);
+        }
+    }
+        ||
+
+    // To viz (for GUI signals) 
+    {
+        {while(true){present(dosUnitEvac){emit dosUnitEvacE;} pause;}}
+        ||
+        {while(true){present(dosUnitFilled){emit dosUnitFilledE;} pause;}}
+
+    }
+
+}
+
+
+

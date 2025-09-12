@@ -1,9 +1,3 @@
 /org/
-/Orchestrator.class
-/run/
-/conveyorController.class
-/conveyorPlant.class
-/rotController.class
-/rotPlant.class
-/Controller.class
-/Plant.class
+/fController.class
+/fPlant.class

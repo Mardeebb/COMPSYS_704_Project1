@@ -30,16 +30,16 @@ public class rotPlant extends ClockDomain{
   private int pos1_thread_3;//sysj\plant.sysj line: 164, column: 5
   private int pos5_thread_3;//sysj\plant.sysj line: 165, column: 5
   private int[] newPackedArray_thread_3;//sysj\plant.sysj line: 169, column: 5
-  private int S279 = 1;
-  private int S272 = 1;
-  private int S209 = 1;
-  private int S277 = 1;
+  private int S451 = 1;
+  private int S444 = 1;
+  private int S381 = 1;
+  private int S449 = 1;
   
-  private int[] ends = new int[11];
-  private int[] tdone = new int[11];
+  private int[] ends = new int[17];
+  private int[] tdone = new int[17];
   
-  public void thread626(int [] tdone, int [] ends){
-        switch(S277){
+  public void thread903(int [] tdone, int [] ends){
+        switch(S449){
       case 0 : 
         active[4]=0;
         ends[4]=0;
@@ -59,8 +59,8 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread625(int [] tdone, int [] ends){
-        switch(S272){
+  public void thread902(int [] tdone, int [] ends){
+        switch(S444){
       case 0 : 
         active[3]=0;
         ends[3]=0;
@@ -69,16 +69,16 @@ public class rotPlant extends ClockDomain{
       
       case 1 : 
         if(!rotaryTableTrigger.getprestatus()){//sysj\plant.sysj line: 161, column: 10
-          S209=0;
+          S381=0;
           active[3]=1;
           ends[3]=1;
           tdone[3]=1;
         }
         else {
-          switch(S209){
+          switch(S381){
             case 0 : 
               if(rotaryTableTrigger.getprestatus()){//sysj\plant.sysj line: 162, column: 11
-                S209=1;
+                S381=1;
                 active[3]=1;
                 ends[3]=1;
                 tdone[3]=1;
@@ -112,7 +112,7 @@ public class rotPlant extends ClockDomain{
                   newPackedArray_thread_3[i_thread_3] = packedArray_thread_3[i_thread_3 - 1];//sysj\plant.sysj line: 173, column: 6
                 }
                 packedArray_thread_3 = newPackedArray_thread_3;//sysj\plant.sysj line: 175, column: 5
-                S209=2;
+                S381=2;
                 tableAlignedWithSensorC.setPresent();//sysj\plant.sysj line: 176, column: 5
                 currsigs.addElement(tableAlignedWithSensorC);
                 System.out.println("Emitted tableAlignedWithSensorC");
@@ -143,8 +143,8 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread623(int [] tdone, int [] ends){
-        S277=1;
+  public void thread900(int [] tdone, int [] ends){
+        S449=1;
     if((Integer)(posOne_2.getpreval() == null ? 0 : ((Integer)posOne_2.getpreval()).intValue()) == 5) {//sysj\plant.sysj line: 185, column: 29
     }
     if((Integer)(posFive_2.getpreval() == null ? 0 : ((Integer)posFive_2.getpreval()).intValue()) != 0) {//sysj\plant.sysj line: 188, column: 30
@@ -154,8 +154,8 @@ public class rotPlant extends ClockDomain{
     tdone[4]=1;
   }
 
-  public void thread622(int [] tdone, int [] ends){
-        S272=1;
+  public void thread899(int [] tdone, int [] ends){
+        S444=1;
     packedArray_thread_3 = new int[6];//sysj\plant.sysj line: 151, column: 3
     pos_thread_3 = 0;//sysj\plant.sysj line: 152, column: 3
     for(int i_thread_3 = 0; i_thread_3 < 6; i_thread_3 = i_thread_3 + 1) {//sysj\plant.sysj line: 153, column: 29
@@ -163,7 +163,7 @@ public class rotPlant extends ClockDomain{
     }
     packedArray_thread_3[0] = 5;//sysj\plant.sysj line: 157, column: 6
     packedArray_thread_3[3] = 1;//sysj\plant.sysj line: 158, column: 6
-    S209=0;
+    S381=0;
     active[3]=1;
     ends[3]=1;
     tdone[3]=1;
@@ -176,27 +176,27 @@ public class rotPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S279){
+      switch(S451){
         case 0 : 
-          S279=0;
+          S451=0;
           break RUN;
         
         case 1 : 
-          S279=2;
-          S279=2;
+          S451=2;
+          S451=2;
           posOne_2.setClear();//sysj\plant.sysj line: 149, column: 2
           posFive_2.setClear();//sysj\plant.sysj line: 149, column: 2
           turn_2.setClear();//sysj\plant.sysj line: 149, column: 2
-          thread622(tdone,ends);
-          thread623(tdone,ends);
-          int biggest624 = 0;
-          if(ends[3]>=biggest624){
-            biggest624=ends[3];
+          thread899(tdone,ends);
+          thread900(tdone,ends);
+          int biggest901 = 0;
+          if(ends[3]>=biggest901){
+            biggest901=ends[3];
           }
-          if(ends[4]>=biggest624){
-            biggest624=ends[4];
+          if(ends[4]>=biggest901){
+            biggest901=ends[4];
           }
-          if(biggest624 == 1){
+          if(biggest901 == 1){
             active[2]=1;
             ends[2]=1;
             break RUN;
@@ -206,26 +206,26 @@ public class rotPlant extends ClockDomain{
           posOne_2.setClear();//sysj\plant.sysj line: 149, column: 2
           posFive_2.setClear();//sysj\plant.sysj line: 149, column: 2
           turn_2.setClear();//sysj\plant.sysj line: 149, column: 2
-          thread625(tdone,ends);
-          thread626(tdone,ends);
-          int biggest627 = 0;
-          if(ends[3]>=biggest627){
-            biggest627=ends[3];
+          thread902(tdone,ends);
+          thread903(tdone,ends);
+          int biggest904 = 0;
+          if(ends[3]>=biggest904){
+            biggest904=ends[3];
           }
-          if(ends[4]>=biggest627){
-            biggest627=ends[4];
+          if(ends[4]>=biggest904){
+            biggest904=ends[4];
           }
-          if(biggest627 == 1){
+          if(biggest904 == 1){
             active[2]=1;
             ends[2]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest627 == 0){
-            S279=0;
+          if(biggest904 == 0){
+            S451=0;
             active[2]=0;
             ends[2]=0;
-            S279=0;
+            S451=0;
             break RUN;
           }
         
@@ -234,9 +234,9 @@ public class rotPlant extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;

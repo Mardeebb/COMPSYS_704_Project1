@@ -38,10 +38,6 @@ public class Canvas extends JPanel {
 	BufferedImage conveyor_static;
 	BufferedImage filler_off;
 	BufferedImage filler_on;
-	BufferedImage injector_on;
-	BufferedImage injecotr_off;
-	BufferedImage injector_on_extend;
-	BufferedImage injecotr_off_extend;
     private EABSBackend backend;
 
     private Map<Integer, Rectangle> clickableAreas = new HashMap<>();
@@ -96,7 +92,11 @@ public class Canvas extends JPanel {
 			conveyor_moving = bi.getSubimage(38, 177, 1247, 107);
 			conveyor_moving = scaleImage(conveyor_moving, 800, 70);
 			conveyor_static = scaleImage(conveyor_static, 800, 70);
-//			filler_off = bi.getSubimage(338, 336, 1247, 107);
+			bi = ImageIO.read(new File("res/filler.png"));
+			filler_off = bi.getSubimage(0, 0, 2000, 1685);
+			filler_off = scaleImage(filler_off, 170, 170);
+			filler_on = bi.getSubimage(1935, 0, 2050, 1685);
+			filler_on = scaleImage(filler_on, 170, 170);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -205,6 +205,14 @@ public class Canvas extends JPanel {
     	drawBottle(Conveyor.posOneID, rotTable_X + 0, rotTable_Y + 190, g);
     	drawBottle(Conveyor.posFiveID, rotTable_X + 250, rotTable_Y + 190, g);
     	drawBottle(Conveyor.posSevenID, rotTable_X + 500, rotTable_Y + 190, g);
+    	
+		if(Filler.filler_on) {
+			g.drawImage(filler_on, 75, 75, null);
+		}else {		
+			g.drawImage(filler_off, 75, 75, null);
+
+		}
+
 	    	
 		if(TurnTable.RT_PS == 0) {
 			g.drawImage(rotary_table, rotTable_X, rotTable_Y, null);

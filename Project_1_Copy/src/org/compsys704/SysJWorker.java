@@ -109,6 +109,14 @@ public class SysJWorker extends Worker{
 				Conveyor.moving = false;
 			}
 			break;
+			
+		case "dosUnitEvacE":
+			Filler.filler_on = status;
+			break;			
+			
+		case "dosUnitFilledE":
+			Filler.filler_off = status;
+			break;
 
 			
 		default: 
@@ -117,7 +125,7 @@ public class SysJWorker extends Worker{
 		}
 	}
 	
-	static final List<String> signames = Arrays.asList("pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","pos0","pos1","pos5","pos7","conveyorMoving","conveyorStop");
+	static final List<String> signames = Arrays.asList("dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","pos0","pos1","pos5","pos7","conveyorMoving","conveyorStop");
 	
 	@Override
 	public boolean hasSignal(String sn) {

@@ -18,8 +18,8 @@ public class rotController extends ClockDomain{
   private int S198 = 1;
   private int S134 = 1;
   
-  private int[] ends = new int[5];
-  private int[] tdone = new int[5];
+  private int[] ends = new int[8];
+  private int[] tdone = new int[8];
   
   public void runClockDomain(){
     for(int i=0;i<ends.length;i++){
@@ -96,9 +96,9 @@ public class rotController extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;
