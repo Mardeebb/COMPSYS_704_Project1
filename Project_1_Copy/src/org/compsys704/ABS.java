@@ -102,7 +102,7 @@ public class ABS extends JFrame {
 		enable.addActionListener(new SignalClient(Ports.PORT_LOADER_PLANT, Ports.ENABLE_SIGNAL, null));
 		enable.addActionListener(new SignalClient(10002, "rotaryTablePlantCD.enable", null));
 		enable.addActionListener(new SignalClient(10005, "conveyorPlantCD.enable", null));
-		enable.addActionListener(new SignalClient(10005, "fillerPlantCD.enable", null));
+		enable.addActionListener(new SignalClient(10008, "fillerPlantCD.enable", null));
 
 		JButton request = new JButton("request");
 		request.addActionListener(new SignalClient(Ports.PORT_LOADER_CONTROLLER, Ports.REQUEST_SIGNAL, null));
@@ -118,21 +118,21 @@ public class ABS extends JFrame {
 		c.gridx = 0;
 		c.gridy = 0;
 		c.weightx = 1.0;
-		c.weighty = 0.5;
+		c.weighty = 1.0;
 		c.fill = GridBagConstraints.BOTH;
 		this.add(panel, c);
 
 		c.gridx = 0;
 		c.gridy = 1;
 		c.weightx = 0;
-		c.weighty = 0.5;
+		c.weighty = 0.2;
 		c.fill = GridBagConstraints.NONE;
 		this.add(ss, c);
 
 		c.gridx = 1;
 		c.gridy = 0;
 		c.weightx = 0.1;
-		c.weighty = 1;
+		c.weighty = 0.5;
 		c.fill = GridBagConstraints.VERTICAL;
 		this.add(posPanel, c);
 

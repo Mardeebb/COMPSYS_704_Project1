@@ -46,7 +46,7 @@ public class Canvas extends JPanel {
         // A small popup, you can use JDialog if you want more custom UI
         JOptionPane.showMessageDialog(
             this,
-            "Bottle ID: " + bottle.ID +"\nOrder: " + bottle.order + "\nName: " + bottle.name + "\nStatus: " + bottle.status,
+            "Bottle ID: " + bottle.ID +"\nOrder: " + bottle.order + "\nName: " + bottle.name + "\nStatus: " + bottle.status+ "\nFilled: " + bottle.isFilled,
             "Bottle Info",
             JOptionPane.INFORMATION_MESSAGE
         );
@@ -85,6 +85,8 @@ public class Canvas extends JPanel {
 			rotary_table = scaleImage(rotary_table, 300, 300);
 			empty_bottle = bi.getSubimage(89, 294, 200, 200);
 			empty_bottle = scaleImage(empty_bottle, 80, 80);
+			full_bottle = bi.getSubimage(322, 294, 200, 200);
+			full_bottle = scaleImage(full_bottle, 80, 80);
 			finished_bottle = bi.getSubimage(529, 296, 200, 200);
 			finished_bottle = scaleImage(finished_bottle, 80,80);
 			bi = ImageIO.read(new File("res/gui.png"));
@@ -146,7 +148,7 @@ public class Canvas extends JPanel {
 				g.drawImage(empty_bottle,x, y, null);
 		        break;
 			case 1:
-				g.drawImage(empty_bottle,x, y, null);
+				g.drawImage(full_bottle,x, y, null);
 		        break;
 			case 2:
 				g.drawImage(empty_bottle,x, y, null);
@@ -156,8 +158,8 @@ public class Canvas extends JPanel {
 		        break;
 		}
 	    g.setColor(Color.BLACK);
-	    g.drawString(String.valueOf(id), x + 20, y + 20); 
-        clickableAreas.put(id, new Rectangle(x, y, empty_bottle.getWidth(), empty_bottle.getHeight()));
+	    g.drawString(String.valueOf(id), x + 20, y + 30); 
+        clickableAreas.put(id, new Rectangle(x, y, 80, 80));
 
 
 	}
@@ -201,10 +203,6 @@ public class Canvas extends JPanel {
 	    }
 //		System.err.println(Conveyor.posZeroID);
 
-    	drawBottle(Conveyor.posZeroID, rotTable_X + -250, rotTable_Y + 190, g);
-    	drawBottle(Conveyor.posOneID, rotTable_X + 0, rotTable_Y + 190, g);
-    	drawBottle(Conveyor.posFiveID, rotTable_X + 250, rotTable_Y + 190, g);
-    	drawBottle(Conveyor.posSevenID, rotTable_X + 500, rotTable_Y + 190, g);
     	
 		if(Filler.filler_on) {
 			g.drawImage(filler_on, 75, 75, null);
@@ -227,6 +225,11 @@ public class Canvas extends JPanel {
 		}else if(TurnTable.RT_PS == 5){
 	        drawRotatedImage(g2d, rotary_table, rotTable_X, rotTable_Y, 300);
 		}
+		
+    	drawBottle(Conveyor.posZeroID, rotTable_X + -250, rotTable_Y + 190, g);
+    	drawBottle(Conveyor.posOneID, rotTable_X + 0, rotTable_Y + 190, g);
+    	drawBottle(Conveyor.posFiveID, rotTable_X + 250, rotTable_Y + 190, g);
+    	drawBottle(Conveyor.posSevenID, rotTable_X + 500, rotTable_Y + 190, g);
 
 		int x_1 = rotTable_X + 5;
 		int y_1 = rotTable_Y + 50;

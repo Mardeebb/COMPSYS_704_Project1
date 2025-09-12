@@ -3,6 +3,8 @@ package org.compsys704;
 import java.util.Arrays;
 import java.util.List;
 
+import run.BottleTwin;
+
 public class SysJWorker extends Worker{
 
 	@Override
@@ -117,15 +119,23 @@ public class SysJWorker extends Worker{
 		case "dosUnitFilledE":
 			Filler.filler_off = status;
 			break;
-
 			
+		case "fillID":
+	        if (status && value != null) {
+	            int id = (int) value;
+	            BottleTwin bottle = EABSBackend.getBottleFromID(id);
+	            bottle.isFilled = true;
+	            bottle.status = "Filled";
+	        }
+			break;
+
 		default: 
 			System.err.println("Wrong sig name : "+signame);
 			System.exit(1);
 		}
 	}
 	
-	static final List<String> signames = Arrays.asList("dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","pos0","pos1","pos5","pos7","conveyorMoving","conveyorStop");
+	static final List<String> signames = Arrays.asList("dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","pos0","pos1","pos5","pos7","conveyorMoving","conveyorStop","fillID");
 	
 	@Override
 	public boolean hasSignal(String sn) {

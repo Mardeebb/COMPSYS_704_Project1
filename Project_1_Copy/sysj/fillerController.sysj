@@ -1,43 +1,42 @@
 
 fController(
-		input signal bottleAtPos2, dosUnitEvac, dosUnitFilled;
+		input signal bottleAtPos2, dosUnitEvac, dosUnitFilled, startFilling;
 		// input signal fillerRequest
-		output signal valveInjectorOnOff, valveInletOnOff, dosUnitValveRetract, dosUnitValveExtend; 
+		output signal valveInjectorOnOff, valveInletOnOff, dosUnitValveRetract, dosUnitValveExtend, Filled; 
 		// output signal fillerStatus, bottleStatus; 
 		)
 ->{
-//	System.out.println("filler Controller started");
-//	{
-//
-//	  while (true) {
-//	    //await(bottleAtPos2);             // new bottle at P2
-//	    // Phase 1: go up & inject until TOP
-//	    abort(dosUnitFilled) {
-//	      sustain dosUnitValveRetract;
-//	    }
-//	    pause;                            
-//	
-//	    // Phase 2: open inlet & go down until BOTTOM
-//	    abort(dosUnitEvac) {
-//	      sustain dosUnitValveExtend;
-//	    }                        
-//	  }
-//	}
-//	||
-//	{
-//		while (true) {
-//	    //await(bottleAtPos2);             // new bottle at P2
-//	    // Phase 1: go up & inject until TOP
-//	    abort(dosUnitFilled) {
-//	      sustain valveInjectorOnOff;
-//	    }
-//	    pause;                            
-//	
-//	    // Phase 2: open inlet & go down until BOTTOM
-//	    abort(dosUnitEvac) {
-//	      sustain valveInletOnOff;
-//	    }                        
-//	  }
-//	}
+	System.out.println("filler Controller started");
+	{
+
+	  while (true) {
+	    await(startFilling);             // new bottle at P2
+	    await(bottleAtPos2);
+
+	    // Phase 1: go up & inject until TOP
+	    abort(dosUnitFilled) {
+	    	{
+	  	      	sustain dosUnitValveRetract;
+	    	}
+	    		||
+	    	{
+	    		sustain valveInjectorOnOff;
+	    	}
+	    }
+	    pause;                            
+	
+	    // Phase 2: open inlet & go down until BOTTOM
+	    abort(dosUnitEvac) {
+	    	{
+	  	      	sustain dosUnitValveExtend;
+	    	}
+	    		||
+	    	{
+	    		sustain valveInletOnOff;
+	    	}
+	    }
+	    emit Filled;
+	  }
+	}
 
 }

@@ -3,8 +3,9 @@ import run.BottleTwin;
 
 Orchestrator(
 		input BottleTwin signal newBottleTwin;
-		input signal request, conveyorMoved, rotTableTurned;
-		output signal recieveTwin, moveConveyor, turnRotTable;
+		input signal request, conveyorMoved, rotTableTurned, filled;
+		
+		output signal recieveTwin, moveConveyor, turnRotTable, fillerBottleOut, startFilling;
 		output BottleTwin signal bottlePos0, bottlePos1, bottlePos2, bottlePos3, bottlePos4, bottlePos5, bottlePos6, bottlePos7, bottlePos8;
 		)
 ->{	
@@ -45,12 +46,21 @@ Orchestrator(
 		await(posZero);
 		while(true){
 			BottleTwin b = (BottleTwin)#posZero;
-			emit moveConveyor;
-			await(conveyorMoved);
-			emit posOne(b);
-			emit posZeroLeft;
-			await(rotTableTurned || posZero);
+			if (b != null) {
+				emit moveConveyor;
+				await(conveyorMoved);
+				emit posOne(b);
+				emit posZeroLeft;
+				{
+				    await(rotTableTurned);
+				} 
+					||
+				{
+				    await(posZero);
+				}
 			}
+			pause;
+		}
 	}
 	
 	||
@@ -63,7 +73,7 @@ Orchestrator(
 
 			emit turnRotTable;
 			await(rotTableTurned);
-			
+			emit fillerBottleOut;
 			BottleTwin b1 = (BottleTwin)#posOne;
 			BottleTwin b2 = (BottleTwin)#posTwo;
 			BottleTwin b3 = (BottleTwin)#posThree;
@@ -84,11 +94,19 @@ Orchestrator(
 	
 	||
 
+	// filler control
+	{
+		while(true){
+			await(request);
+			emit startFilling;
+			await(filled);
+		}
+	}
+
 	
 	
 	
-	
-	
+	||
 	
 	
 	
@@ -101,13 +119,10 @@ Orchestrator(
 		while(true){
 			await(posZero);
 			BottleTwin b = (BottleTwin)#posZero;
-//			abort(posZeroLeft){
-//				sustain bottlePos0(b);
-//			}
-			emit bottlePos0(b);
-//			await(posZeroLeft);
-
-//			emit bottlePos0(null);
+			if (b != null) {
+				emit bottlePos0(b);
+			}
+			pause;
 		}
 	}
 	
@@ -117,10 +132,10 @@ Orchestrator(
 		while(true){
 			await(posOne);
 			BottleTwin b = (BottleTwin)#posOne;
-//			abort(posOneLeft){
-//				sustain bottlePos1(b);
-//			}
-			emit bottlePos1(b);
+			if (b != null) {
+				emit bottlePos1(b);
+			}
+			pause;
 		}
 	}
 	
@@ -130,13 +145,10 @@ Orchestrator(
 		while(true){
 			await(posTwo);
 			BottleTwin b = (BottleTwin)#posTwo;
-//			abort(posOneLeft){
-//				sustain bottlePos2(b);
-//				
-//			}
-//			emit bottlePos2(null);
+			if (b != null) {
 			emit bottlePos2(b);
-
+			}
+			pause;
 		}
 			
 	}
@@ -147,13 +159,10 @@ Orchestrator(
 		while(true){
 			await(posTwo);
 			BottleTwin b = (BottleTwin)#posTwo;
-//			abort(posOneLeft){
-//				sustain bottlePos2(b);
-//				
-//			}
-//			emit bottlePos2(null);
+			if (b != null) {
 			emit bottlePos2(b);
-
+			}
+			pause;
 		}
 			
 	}

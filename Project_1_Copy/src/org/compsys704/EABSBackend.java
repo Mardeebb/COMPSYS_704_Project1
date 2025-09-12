@@ -4,35 +4,35 @@ import java.util.List;
 import run.BottleTwin;
 
 public class EABSBackend {
-    private final List<Order> waitingOrders = new ArrayList<>();
-    private final List<Order> completedOrders = new ArrayList<>();
-    private Order processingOrder = null;
+    private static final List<Order> waitingOrders = new ArrayList<>();
+    private static final List<Order> completedOrders = new ArrayList<>();
+    private static Order processingOrder = null;
 
-    public void enqueueOrder(Order order) {
+    public static void enqueueOrder(Order order) {
         waitingOrders.add(order);
     }
 
-    public List<Order> getWaitingOrders() {
+    public static List<Order> getWaitingOrders() {
         return waitingOrders;
     }
 
-    public List<Order> getCompletedOrders() {
+    public static List<Order> getCompletedOrders() {
         return completedOrders;
     }
 
-    public Order getProcessingOrder() {
+    public static Order getProcessingOrder() {
         return processingOrder;
     }
 
     // Start next order if idle
-    public void startNextOrder() {
+    public static void startNextOrder() {
         if (processingOrder == null && !waitingOrders.isEmpty()) {
             processingOrder = waitingOrders.remove(0);
         }
     }
 
     // Take the next bottle from the active order
-    public BottleTwin takeBottle() {
+    public static BottleTwin takeBottle() {
         if (processingOrder == null) {
             startNextOrder();
             if (processingOrder == null) return null; // nothing available
@@ -49,7 +49,7 @@ public class EABSBackend {
         return next;
     }
     
-    public BottleTwin getBottleFromID(int ID) {
+    public static BottleTwin getBottleFromID(int ID) {
         // check current processing order
         if (processingOrder != null) {
             for (BottleTwin b : processingOrder.bottles) {
@@ -83,7 +83,7 @@ public class EABSBackend {
         return null; // not found
     }
     
-    public int getGUIrep(int ID) {
+    public static int getGUIrep(int ID) {
     	BottleTwin bottle = getBottleFromID(ID);
 
     	if(bottle != null) {

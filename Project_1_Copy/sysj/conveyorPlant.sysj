@@ -26,15 +26,15 @@ conveyorPlant(
 
 				if(bZero != null) {
 					emit posOne(bZero);
-					emit posZero;
+					emit posZero(null);
 					emit pos0(-1);
 
 				}
-				if(bFive != null) {
-					emit posSeven(bFive);
-					emit posFive(null);
-					emit pos5(-1);
-				}
+//				if(bFive != null) {
+//					emit posSeven(bFive);
+//					emit posFive;
+//					emit pos5(-1);
+//				}
 
 			}
 		}
