@@ -16,14 +16,35 @@ CapLoaderController(
 CapperController (
 		input signal bottleAtPos4, gripperZAxisLowered, gripperZAxisLifted;
 		input signal gripperTurnHomePos, girpperTurnFinalPos;
-		input Boolean channel capperRequest;
 		
-		output String channel capperStatus;
+		output signal cylPos5ZaxisExtend, gripperTurnRetracted, gripperTurnExtend, capGripperPos5Extend;
+		output signal cylClampBottleExtend;
 		)
 -> {
 	System.out.println("Capper CD");
 	{
-		
+		{
+			while(true) {
+				// wait until bottle is at position 4
+				await bottleAtPos4;
+				
+				pause;
+				// clamp bottle and lower gripper
+				abort(gripperZAxisLowered) {
+					{sustain cylClampBottleExtend;} || {sustain cylPos5ZaxisExtend;}
+				}
+				
+				
+				pause;
+				// grip the cap when gripper lowered
+				present(gripperZAxisLowered) {
+					abort(gripperTurnFinalPos) {
+						{sustain capGripperPos5Extend;} || {sustain gripperTurnExtend;}
+					}
+				}
+				
+				
+		}
 	}
 }
 
