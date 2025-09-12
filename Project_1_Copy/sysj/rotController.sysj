@@ -4,7 +4,7 @@ rotController(
 		input signal turn;
 
 		input signal tableAlignedWithSensorC ;
-		output signal rotaryTableTrigger;
+		output signal rotaryTableTrigger, rotTableTurned;
 		)
 ->{
     System.out.println("Controller startedh");
@@ -16,6 +16,7 @@ rotController(
 			abort(tableAlignedWithSensorC){
 				sustain rotaryTableTrigger;
 			}
+			emit rotTableTurned;
 			await(!turn);
 		}
 	}

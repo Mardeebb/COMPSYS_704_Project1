@@ -21,7 +21,7 @@ public class fPlant extends ClockDomain{
   public Signal dosUnitFilled = new Signal("dosUnitFilled", Signal.OUTPUT);
   public Signal dosUnitEvacE = new Signal("dosUnitEvacE", Signal.OUTPUT);
   public Signal dosUnitFilledE = new Signal("dosUnitFilledE", Signal.OUTPUT);
-  private int S427 = 1;
+  private int S555 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -33,17 +33,17 @@ public class fPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S427){
+      switch(S555){
         case 0 : 
-          S427=0;
+          S555=0;
           break RUN;
         
         case 1 : 
-          S427=2;
-          S427=2;
+          S555=2;
+          S555=2;
           active[1]=0;
           ends[1]=0;
-          S427=0;
+          S555=0;
           break RUN;
         
       }

@@ -18,7 +18,7 @@ public class fController extends ClockDomain{
   public Signal valveInletOnOff = new Signal("valveInletOnOff", Signal.OUTPUT);
   public Signal dosUnitValveRetract = new Signal("dosUnitValveRetract", Signal.OUTPUT);
   public Signal dosUnitValveExtend = new Signal("dosUnitValveExtend", Signal.OUTPUT);
-  private int S425 = 1;
+  private int S553 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -30,17 +30,17 @@ public class fController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S425){
+      switch(S553){
         case 0 : 
-          S425=0;
+          S553=0;
           break RUN;
         
         case 1 : 
-          S425=2;
-          S425=2;
+          S553=2;
+          S553=2;
           active[1]=0;
           ends[1]=0;
-          S425=0;
+          S553=0;
           break RUN;
         
       }

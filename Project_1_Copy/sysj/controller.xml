@@ -5,13 +5,15 @@
 			<iSignal Name="newBottleTwin" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
 			<iSignal Name="request" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
 			<iSignal Name="conveyorMoved" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
+			<iSignal Name="rotTableTurned" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
 
 			<oSignal Name="recieveTwin" To="UI.recieveTwin" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			
 			<oSignal Name="moveConveyor" To="conveyorControllerCD.move" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10006" />
-			
+			<oSignal Name="turnRotTable" To="rotaryTableControllerCD.turn" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10003" />
+
 			<oSignal Name="bottlePos0" To="conveyorPlantCD.bottleArriveToZero" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10005" />
-			<oSignal Name="bottlePos1" To="UI.bottlePos1" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos1" To="rotaryTablePlantCD.posOne" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10002" />
 			<oSignal Name="bottlePos2" To="UI.bottlePos2" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="bottlePos3" To="UI.bottlePos3" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="bottlePos4" To="UI.bottlePos4" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
@@ -61,6 +63,7 @@
 			<iSignal Name="turn" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
 			<iSignal Name="tableAlignedWithSensorC" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
 			
+			<oSignal Name="rotTableTurned" To="OrchestratorCD.rotTableTurned" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10004" />
 			<oSignal Name="rotaryTableTrigger" To="rotaryTablePlantCD.rotaryTableTrigger" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10002" />
 		</ClockDomain>
 		

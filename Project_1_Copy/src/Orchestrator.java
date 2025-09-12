@@ -15,8 +15,10 @@ public class Orchestrator extends ClockDomain{
   public Signal newBottleTwin = new Signal("newBottleTwin", Signal.INPUT);
   public Signal request = new Signal("request", Signal.INPUT);
   public Signal conveyorMoved = new Signal("conveyorMoved", Signal.INPUT);
+  public Signal rotTableTurned = new Signal("rotTableTurned", Signal.INPUT);
   public Signal recieveTwin = new Signal("recieveTwin", Signal.OUTPUT);
   public Signal moveConveyor = new Signal("moveConveyor", Signal.OUTPUT);
+  public Signal turnRotTable = new Signal("turnRotTable", Signal.OUTPUT);
   public Signal bottlePos0 = new Signal("bottlePos0", Signal.OUTPUT);
   public Signal bottlePos1 = new Signal("bottlePos1", Signal.OUTPUT);
   public Signal bottlePos2 = new Signal("bottlePos2", Signal.OUTPUT);
@@ -48,28 +50,83 @@ public class Orchestrator extends ClockDomain{
   private int ID_thread_2;//sysj\Orchestrator.sysj line: 23, column: 5
   private String name_thread_2;//sysj\Orchestrator.sysj line: 24, column: 5
   private BottleTwin b_thread_3;//sysj\Orchestrator.sysj line: 47, column: 4
-  private BottleTwin b_thread_4;//sysj\Orchestrator.sysj line: 75, column: 4
-  private BottleTwin b_thread_5;//sysj\Orchestrator.sysj line: 91, column: 4
-  private BottleTwin b_thread_6;//sysj\Orchestrator.sysj line: 104, column: 4
-  private int S619 = 1;
-  private int S524 = 1;
-  private int S449 = 1;
-  private int S450 = 1;
-  private int S557 = 1;
-  private int S556 = 1;
-  private int S526 = 1;
-  private int S571 = 1;
-  private int S559 = 1;
-  private int S603 = 1;
-  private int S573 = 1;
-  private int S617 = 1;
-  private int S605 = 1;
+  private BottleTwin b1_thread_4;//sysj\Orchestrator.sysj line: 67, column: 4
+  private BottleTwin b2_thread_4;//sysj\Orchestrator.sysj line: 68, column: 4
+  private BottleTwin b3_thread_4;//sysj\Orchestrator.sysj line: 69, column: 4
+  private BottleTwin b4_thread_4;//sysj\Orchestrator.sysj line: 70, column: 4
+  private BottleTwin b5_thread_4;//sysj\Orchestrator.sysj line: 71, column: 4
+  private BottleTwin b6_thread_4;//sysj\Orchestrator.sysj line: 72, column: 4
+  private BottleTwin b_thread_5;//sysj\Orchestrator.sysj line: 103, column: 4
+  private BottleTwin b_thread_6;//sysj\Orchestrator.sysj line: 119, column: 4
+  private BottleTwin b_thread_7;//sysj\Orchestrator.sysj line: 132, column: 4
+  private int S737 = 1;
+  private int S652 = 1;
+  private int S577 = 1;
+  private int S578 = 1;
+  private int S685 = 1;
+  private int S684 = 1;
+  private int S654 = 1;
+  private int S705 = 1;
+  private int S689 = 1;
+  private int S713 = 1;
+  private int S721 = 1;
+  private int S735 = 1;
+  private int S723 = 1;
   
-  private int[] ends = new int[7];
-  private int[] tdone = new int[7];
+  private int[] ends = new int[8];
+  private int[] tdone = new int[8];
   
-  public void thread631(int [] tdone, int [] ends){
-        switch(S617){
+  public void thread751(int [] tdone, int [] ends){
+        switch(S735){
+      case 0 : 
+        active[7]=0;
+        ends[7]=0;
+        tdone[7]=1;
+        break;
+      
+      case 1 : 
+        switch(S723){
+          case 0 : 
+            if(posTwo_1.getprestatus()){//sysj\Orchestrator.sysj line: 131, column: 10
+              b_thread_7 = (BottleTwin)(posTwo_1.getpreval() == null ? null : ((BottleTwin)posTwo_1.getpreval()));//sysj\Orchestrator.sysj line: 132, column: 4
+              bottlePos2.setPresent();//sysj\Orchestrator.sysj line: 138, column: 4
+              currsigs.addElement(bottlePos2);
+              bottlePos2.setValue(b_thread_7);//sysj\Orchestrator.sysj line: 138, column: 4
+              System.out.println("Emitted bottlePos2");
+              S723=1;
+              active[7]=1;
+              ends[7]=1;
+              tdone[7]=1;
+            }
+            else {
+              active[7]=1;
+              ends[7]=1;
+              tdone[7]=1;
+            }
+            break;
+          
+          case 1 : 
+            if(posTwoLeft_1.getprestatus()){//sysj\Orchestrator.sysj line: 139, column: 10
+              S723=0;
+              active[7]=1;
+              ends[7]=1;
+              tdone[7]=1;
+            }
+            else {
+              active[7]=1;
+              ends[7]=1;
+              tdone[7]=1;
+            }
+            break;
+          
+        }
+        break;
+      
+    }
+  }
+
+  public void thread750(int [] tdone, int [] ends){
+        switch(S721){
       case 0 : 
         active[6]=0;
         ends[6]=0;
@@ -77,48 +134,28 @@ public class Orchestrator extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S605){
-          case 0 : 
-            if(posTwo_1.getprestatus()){//sysj\Orchestrator.sysj line: 103, column: 10
-              b_thread_6 = (BottleTwin)(posTwo_1.getpreval() == null ? null : ((BottleTwin)posTwo_1.getpreval()));//sysj\Orchestrator.sysj line: 104, column: 4
-              bottlePos2.setPresent();//sysj\Orchestrator.sysj line: 110, column: 4
-              currsigs.addElement(bottlePos2);
-              bottlePos2.setValue(b_thread_6);//sysj\Orchestrator.sysj line: 110, column: 4
-              System.out.println("Emitted bottlePos2");
-              S605=1;
-              active[6]=1;
-              ends[6]=1;
-              tdone[6]=1;
-            }
-            else {
-              active[6]=1;
-              ends[6]=1;
-              tdone[6]=1;
-            }
-            break;
-          
-          case 1 : 
-            if(posTwoLeft_1.getprestatus()){//sysj\Orchestrator.sysj line: 111, column: 10
-              S605=0;
-              active[6]=1;
-              ends[6]=1;
-              tdone[6]=1;
-            }
-            else {
-              active[6]=1;
-              ends[6]=1;
-              tdone[6]=1;
-            }
-            break;
-          
+        if(posOne_1.getprestatus()){//sysj\Orchestrator.sysj line: 118, column: 10
+          b_thread_6 = (BottleTwin)(posOne_1.getpreval() == null ? null : ((BottleTwin)posOne_1.getpreval()));//sysj\Orchestrator.sysj line: 119, column: 4
+          bottlePos1.setPresent();//sysj\Orchestrator.sysj line: 123, column: 4
+          currsigs.addElement(bottlePos1);
+          bottlePos1.setValue(b_thread_6);//sysj\Orchestrator.sysj line: 123, column: 4
+          System.out.println("Emitted bottlePos1");
+          active[6]=1;
+          ends[6]=1;
+          tdone[6]=1;
+        }
+        else {
+          active[6]=1;
+          ends[6]=1;
+          tdone[6]=1;
         }
         break;
       
     }
   }
 
-  public void thread630(int [] tdone, int [] ends){
-        switch(S603){
+  public void thread749(int [] tdone, int [] ends){
+        switch(S713){
       case 0 : 
         active[5]=0;
         ends[5]=0;
@@ -126,56 +163,28 @@ public class Orchestrator extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S573){
-          case 0 : 
-            if(posOne_1.getprestatus()){//sysj\Orchestrator.sysj line: 90, column: 10
-              b_thread_5 = (BottleTwin)(posOne_1.getpreval() == null ? null : ((BottleTwin)posOne_1.getpreval()));//sysj\Orchestrator.sysj line: 91, column: 4
-              S573=1;
-              bottlePos1.setPresent();//sysj\Orchestrator.sysj line: 93, column: 5
-              currsigs.addElement(bottlePos1);
-              bottlePos1.setValue(b_thread_5);//sysj\Orchestrator.sysj line: 93, column: 5
-              System.out.println("Emitted bottlePos1");
-              active[5]=1;
-              ends[5]=1;
-              tdone[5]=1;
-            }
-            else {
-              active[5]=1;
-              ends[5]=1;
-              tdone[5]=1;
-            }
-            break;
-          
-          case 1 : 
-            if(posOneLeft_1.getprestatus()){//sysj\Orchestrator.sysj line: 92, column: 10
-              bottlePos1.setPresent();//sysj\Orchestrator.sysj line: 95, column: 4
-              currsigs.addElement(bottlePos1);
-              bottlePos1.setValue(null);//sysj\Orchestrator.sysj line: 95, column: 4
-              System.out.println("Emitted bottlePos1");
-              S573=0;
-              active[5]=1;
-              ends[5]=1;
-              tdone[5]=1;
-            }
-            else {
-              bottlePos1.setPresent();//sysj\Orchestrator.sysj line: 93, column: 5
-              currsigs.addElement(bottlePos1);
-              bottlePos1.setValue(b_thread_5);//sysj\Orchestrator.sysj line: 93, column: 5
-              System.out.println("Emitted bottlePos1");
-              active[5]=1;
-              ends[5]=1;
-              tdone[5]=1;
-            }
-            break;
-          
+        if(posZero_1.getprestatus()){//sysj\Orchestrator.sysj line: 102, column: 10
+          b_thread_5 = (BottleTwin)(posZero_1.getpreval() == null ? null : ((BottleTwin)posZero_1.getpreval()));//sysj\Orchestrator.sysj line: 103, column: 4
+          bottlePos0.setPresent();//sysj\Orchestrator.sysj line: 107, column: 4
+          currsigs.addElement(bottlePos0);
+          bottlePos0.setValue(b_thread_5);//sysj\Orchestrator.sysj line: 107, column: 4
+          System.out.println("Emitted bottlePos0");
+          active[5]=1;
+          ends[5]=1;
+          tdone[5]=1;
+        }
+        else {
+          active[5]=1;
+          ends[5]=1;
+          tdone[5]=1;
         }
         break;
       
     }
   }
 
-  public void thread629(int [] tdone, int [] ends){
-        switch(S571){
+  public void thread748(int [] tdone, int [] ends){
+        switch(S705){
       case 0 : 
         active[4]=0;
         ends[4]=0;
@@ -183,15 +192,10 @@ public class Orchestrator extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S559){
+        switch(S689){
           case 0 : 
-            if(posZero_1.getprestatus()){//sysj\Orchestrator.sysj line: 74, column: 10
-              b_thread_4 = (BottleTwin)(posZero_1.getpreval() == null ? null : ((BottleTwin)posZero_1.getpreval()));//sysj\Orchestrator.sysj line: 75, column: 4
-              bottlePos0.setPresent();//sysj\Orchestrator.sysj line: 79, column: 4
-              currsigs.addElement(bottlePos0);
-              bottlePos0.setValue(b_thread_4);//sysj\Orchestrator.sysj line: 79, column: 4
-              System.out.println("Emitted bottlePos0");
-              S559=1;
+            if(posOne_1.getprestatus()){//sysj\Orchestrator.sysj line: 61, column: 10
+              S689=1;
               active[4]=1;
               ends[4]=1;
               tdone[4]=1;
@@ -204,8 +208,11 @@ public class Orchestrator extends ClockDomain{
             break;
           
           case 1 : 
-            if(posZeroLeft_1.getprestatus()){//sysj\Orchestrator.sysj line: 80, column: 10
-              S559=0;
+            if(request.getprestatus()){//sysj\Orchestrator.sysj line: 62, column: 10
+              turnRotTable.setPresent();//sysj\Orchestrator.sysj line: 64, column: 4
+              currsigs.addElement(turnRotTable);
+              System.out.println("Emitted turnRotTable");
+              S689=2;
               active[4]=1;
               ends[4]=1;
               tdone[4]=1;
@@ -215,6 +222,58 @@ public class Orchestrator extends ClockDomain{
               ends[4]=1;
               tdone[4]=1;
             }
+            break;
+          
+          case 2 : 
+            if(rotTableTurned.getprestatus()){//sysj\Orchestrator.sysj line: 65, column: 10
+              b1_thread_4 = (BottleTwin)(posOne_1.getpreval() == null ? null : ((BottleTwin)posOne_1.getpreval()));//sysj\Orchestrator.sysj line: 67, column: 4
+              b2_thread_4 = (BottleTwin)(posTwo_1.getpreval() == null ? null : ((BottleTwin)posTwo_1.getpreval()));//sysj\Orchestrator.sysj line: 68, column: 4
+              b3_thread_4 = (BottleTwin)(posThree_1.getpreval() == null ? null : ((BottleTwin)posThree_1.getpreval()));//sysj\Orchestrator.sysj line: 69, column: 4
+              b4_thread_4 = (BottleTwin)(posFour_1.getpreval() == null ? null : ((BottleTwin)posFour_1.getpreval()));//sysj\Orchestrator.sysj line: 70, column: 4
+              b5_thread_4 = (BottleTwin)(posFive_1.getpreval() == null ? null : ((BottleTwin)posFive_1.getpreval()));//sysj\Orchestrator.sysj line: 71, column: 4
+              b6_thread_4 = (BottleTwin)(posSix_1.getpreval() == null ? null : ((BottleTwin)posSix_1.getpreval()));//sysj\Orchestrator.sysj line: 72, column: 4
+              posOne_1.setPresent();//sysj\Orchestrator.sysj line: 74, column: 4
+              currsigs.addElement(posOne_1);
+              posOne_1.setValue(b6_thread_4);//sysj\Orchestrator.sysj line: 74, column: 4
+              System.out.println("Emitted posOne_1");
+              posTwo_1.setPresent();//sysj\Orchestrator.sysj line: 75, column: 4
+              currsigs.addElement(posTwo_1);
+              posTwo_1.setValue(b1_thread_4);//sysj\Orchestrator.sysj line: 75, column: 4
+              System.out.println("Emitted posTwo_1");
+              posThree_1.setPresent();//sysj\Orchestrator.sysj line: 76, column: 4
+              currsigs.addElement(posThree_1);
+              posThree_1.setValue(b2_thread_4);//sysj\Orchestrator.sysj line: 76, column: 4
+              System.out.println("Emitted posThree_1");
+              posFour_1.setPresent();//sysj\Orchestrator.sysj line: 77, column: 4
+              currsigs.addElement(posFour_1);
+              posFour_1.setValue(b3_thread_4);//sysj\Orchestrator.sysj line: 77, column: 4
+              System.out.println("Emitted posFour_1");
+              posFive_1.setPresent();//sysj\Orchestrator.sysj line: 78, column: 4
+              currsigs.addElement(posFive_1);
+              posFive_1.setValue(b4_thread_4);//sysj\Orchestrator.sysj line: 78, column: 4
+              System.out.println("Emitted posFive_1");
+              posSix_1.setPresent();//sysj\Orchestrator.sysj line: 79, column: 4
+              currsigs.addElement(posSix_1);
+              posSix_1.setValue(b5_thread_4);//sysj\Orchestrator.sysj line: 79, column: 4
+              System.out.println("Emitted posSix_1");
+              S689=3;
+              active[4]=1;
+              ends[4]=1;
+              tdone[4]=1;
+            }
+            else {
+              active[4]=1;
+              ends[4]=1;
+              tdone[4]=1;
+            }
+            break;
+          
+          case 3 : 
+            S689=3;
+            S689=0;
+            active[4]=1;
+            ends[4]=1;
+            tdone[4]=1;
             break;
           
         }
@@ -223,8 +282,8 @@ public class Orchestrator extends ClockDomain{
     }
   }
 
-  public void thread628(int [] tdone, int [] ends){
-        switch(S557){
+  public void thread747(int [] tdone, int [] ends){
+        switch(S685){
       case 0 : 
         active[3]=0;
         ends[3]=0;
@@ -232,15 +291,15 @@ public class Orchestrator extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S556){
+        switch(S684){
           case 0 : 
             if(posZero_1.getprestatus()){//sysj\Orchestrator.sysj line: 45, column: 9
-              S556=1;
+              S684=1;
               b_thread_3 = (BottleTwin)(posZero_1.getpreval() == null ? null : ((BottleTwin)posZero_1.getpreval()));//sysj\Orchestrator.sysj line: 47, column: 4
               moveConveyor.setPresent();//sysj\Orchestrator.sysj line: 48, column: 4
               currsigs.addElement(moveConveyor);
               System.out.println("Emitted moveConveyor");
-              S526=0;
+              S654=0;
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -253,17 +312,17 @@ public class Orchestrator extends ClockDomain{
             break;
           
           case 1 : 
-            switch(S526){
+            switch(S654){
               case 0 : 
                 if(conveyorMoved.getprestatus()){//sysj\Orchestrator.sysj line: 49, column: 10
-                  posTwo_1.setPresent();//sysj\Orchestrator.sysj line: 50, column: 4
-                  currsigs.addElement(posTwo_1);
-                  posTwo_1.setValue(b_thread_3);//sysj\Orchestrator.sysj line: 50, column: 4
-                  System.out.println("Emitted posTwo_1");
+                  posOne_1.setPresent();//sysj\Orchestrator.sysj line: 50, column: 4
+                  currsigs.addElement(posOne_1);
+                  posOne_1.setValue(b_thread_3);//sysj\Orchestrator.sysj line: 50, column: 4
+                  System.out.println("Emitted posOne_1");
                   posZeroLeft_1.setPresent();//sysj\Orchestrator.sysj line: 51, column: 4
                   currsigs.addElement(posZeroLeft_1);
                   System.out.println("Emitted posZeroLeft_1");
-                  S526=1;
+                  S654=1;
                   active[3]=1;
                   ends[3]=1;
                   tdone[3]=1;
@@ -276,12 +335,12 @@ public class Orchestrator extends ClockDomain{
                 break;
               
               case 1 : 
-                if(posOneLeft_1.getprestatus() && posZero_1.getprestatus()){//sysj\Orchestrator.sysj line: 52, column: 10
+                if(rotTableTurned.getprestatus() || posZero_1.getprestatus()){//sysj\Orchestrator.sysj line: 52, column: 10
                   b_thread_3 = (BottleTwin)(posZero_1.getpreval() == null ? null : ((BottleTwin)posZero_1.getpreval()));//sysj\Orchestrator.sysj line: 47, column: 4
                   moveConveyor.setPresent();//sysj\Orchestrator.sysj line: 48, column: 4
                   currsigs.addElement(moveConveyor);
                   System.out.println("Emitted moveConveyor");
-                  S526=0;
+                  S654=0;
                   active[3]=1;
                   ends[3]=1;
                   tdone[3]=1;
@@ -302,8 +361,8 @@ public class Orchestrator extends ClockDomain{
     }
   }
 
-  public void thread627(int [] tdone, int [] ends){
-        switch(S524){
+  public void thread746(int [] tdone, int [] ends){
+        switch(S652){
       case 0 : 
         active[2]=0;
         ends[2]=0;
@@ -311,26 +370,26 @@ public class Orchestrator extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S449){
+        switch(S577){
           case 0 : 
             if(newBottleTwin.getprestatus()){//sysj\Orchestrator.sysj line: 18, column: 10
               System.err.println("newBottleTwin ");//sysj\Orchestrator.sysj line: 19, column: 7
               b_thread_2 = (BottleTwin)(newBottleTwin.getpreval() == null ? null : ((BottleTwin)newBottleTwin.getpreval()));//sysj\Orchestrator.sysj line: 21, column: 4
-              S449=1;
+              S577=1;
               if(b_thread_2 != null){//sysj\Orchestrator.sysj line: 22, column: 7
                 ID_thread_2 = b_thread_2.ID;//sysj\Orchestrator.sysj line: 23, column: 5
                 name_thread_2 = b_thread_2.name;//sysj\Orchestrator.sysj line: 24, column: 5
                 System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOo " + b_thread_2);//sysj\Orchestrator.sysj line: 25, column: 8
                 System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOo " + ID_thread_2);//sysj\Orchestrator.sysj line: 26, column: 8
                 System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOo " + name_thread_2);//sysj\Orchestrator.sysj line: 27, column: 8
-                S450=0;
+                S578=0;
                 active[2]=1;
                 ends[2]=1;
                 tdone[2]=1;
               }
               else {
                 System.err.println("new Orchestrator Cycle");//sysj\Orchestrator.sysj line: 16, column: 7
-                S449=0;
+                S577=0;
                 active[2]=1;
                 ends[2]=1;
                 tdone[2]=1;
@@ -344,14 +403,14 @@ public class Orchestrator extends ClockDomain{
             break;
           
           case 1 : 
-            switch(S450){
+            switch(S578){
               case 0 : 
                 if(!newBottleTwin.getprestatus()){//sysj\Orchestrator.sysj line: 28, column: 14
                   posZero_1.setPresent();//sysj\Orchestrator.sysj line: 32, column: 5
                   currsigs.addElement(posZero_1);
                   posZero_1.setValue(b_thread_2);//sysj\Orchestrator.sysj line: 32, column: 5
                   System.out.println("Emitted posZero_1");
-                  S450=1;
+                  S578=1;
                   active[2]=1;
                   ends[2]=1;
                   tdone[2]=1;
@@ -365,7 +424,7 @@ public class Orchestrator extends ClockDomain{
               
               case 1 : 
                 if(posZeroLeft_1.getprestatus()){//sysj\Orchestrator.sysj line: 33, column: 11
-                  S450=2;
+                  S578=2;
                   active[2]=1;
                   ends[2]=1;
                   tdone[2]=1;
@@ -383,7 +442,7 @@ public class Orchestrator extends ClockDomain{
                   currsigs.addElement(recieveTwin);
                   System.out.println("Emitted recieveTwin");
                   System.err.println("new Orchestrator Cycle");//sysj\Orchestrator.sysj line: 16, column: 7
-                  S449=0;
+                  S577=0;
                   active[2]=1;
                   ends[2]=1;
                   tdone[2]=1;
@@ -404,42 +463,48 @@ public class Orchestrator extends ClockDomain{
     }
   }
 
-  public void thread625(int [] tdone, int [] ends){
-        S617=1;
-    S605=0;
+  public void thread744(int [] tdone, int [] ends){
+        S735=1;
+    S723=0;
+    active[7]=1;
+    ends[7]=1;
+    tdone[7]=1;
+  }
+
+  public void thread743(int [] tdone, int [] ends){
+        S721=1;
     active[6]=1;
     ends[6]=1;
     tdone[6]=1;
   }
 
-  public void thread624(int [] tdone, int [] ends){
-        S603=1;
-    S573=0;
+  public void thread742(int [] tdone, int [] ends){
+        S713=1;
     active[5]=1;
     ends[5]=1;
     tdone[5]=1;
   }
 
-  public void thread623(int [] tdone, int [] ends){
-        S571=1;
-    S559=0;
+  public void thread741(int [] tdone, int [] ends){
+        S705=1;
+    S689=0;
     active[4]=1;
     ends[4]=1;
     tdone[4]=1;
   }
 
-  public void thread622(int [] tdone, int [] ends){
-        S557=1;
-    S556=0;
+  public void thread740(int [] tdone, int [] ends){
+        S685=1;
+    S684=0;
     active[3]=1;
     ends[3]=1;
     tdone[3]=1;
   }
 
-  public void thread621(int [] tdone, int [] ends){
-        S524=1;
+  public void thread739(int [] tdone, int [] ends){
+        S652=1;
     System.err.println("new Orchestrator Cycle");//sysj\Orchestrator.sysj line: 16, column: 7
-    S449=0;
+    S577=0;
     active[2]=1;
     ends[2]=1;
     tdone[2]=1;
@@ -452,14 +517,14 @@ public class Orchestrator extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S619){
+      switch(S737){
         case 0 : 
-          S619=0;
+          S737=0;
           break RUN;
         
         case 1 : 
-          S619=2;
-          S619=2;
+          S737=2;
+          S737=2;
           posZero_1.setClear();//sysj\Orchestrator.sysj line: 11, column: 2
           posOne_1.setClear();//sysj\Orchestrator.sysj line: 11, column: 2
           posTwo_1.setClear();//sysj\Orchestrator.sysj line: 11, column: 2
@@ -478,28 +543,32 @@ public class Orchestrator extends ClockDomain{
           posSixLeft_1.setClear();//sysj\Orchestrator.sysj line: 12, column: 2
           posSevenLeft_1.setClear();//sysj\Orchestrator.sysj line: 12, column: 2
           posEightLeft_1.setClear();//sysj\Orchestrator.sysj line: 12, column: 2
-          thread621(tdone,ends);
-          thread622(tdone,ends);
-          thread623(tdone,ends);
-          thread624(tdone,ends);
-          thread625(tdone,ends);
-          int biggest626 = 0;
-          if(ends[2]>=biggest626){
-            biggest626=ends[2];
+          thread739(tdone,ends);
+          thread740(tdone,ends);
+          thread741(tdone,ends);
+          thread742(tdone,ends);
+          thread743(tdone,ends);
+          thread744(tdone,ends);
+          int biggest745 = 0;
+          if(ends[2]>=biggest745){
+            biggest745=ends[2];
           }
-          if(ends[3]>=biggest626){
-            biggest626=ends[3];
+          if(ends[3]>=biggest745){
+            biggest745=ends[3];
           }
-          if(ends[4]>=biggest626){
-            biggest626=ends[4];
+          if(ends[4]>=biggest745){
+            biggest745=ends[4];
           }
-          if(ends[5]>=biggest626){
-            biggest626=ends[5];
+          if(ends[5]>=biggest745){
+            biggest745=ends[5];
           }
-          if(ends[6]>=biggest626){
-            biggest626=ends[6];
+          if(ends[6]>=biggest745){
+            biggest745=ends[6];
           }
-          if(biggest626 == 1){
+          if(ends[7]>=biggest745){
+            biggest745=ends[7];
+          }
+          if(biggest745 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
@@ -524,38 +593,42 @@ public class Orchestrator extends ClockDomain{
           posSixLeft_1.setClear();//sysj\Orchestrator.sysj line: 12, column: 2
           posSevenLeft_1.setClear();//sysj\Orchestrator.sysj line: 12, column: 2
           posEightLeft_1.setClear();//sysj\Orchestrator.sysj line: 12, column: 2
-          thread627(tdone,ends);
-          thread628(tdone,ends);
-          thread629(tdone,ends);
-          thread630(tdone,ends);
-          thread631(tdone,ends);
-          int biggest632 = 0;
-          if(ends[2]>=biggest632){
-            biggest632=ends[2];
+          thread746(tdone,ends);
+          thread747(tdone,ends);
+          thread748(tdone,ends);
+          thread749(tdone,ends);
+          thread750(tdone,ends);
+          thread751(tdone,ends);
+          int biggest752 = 0;
+          if(ends[2]>=biggest752){
+            biggest752=ends[2];
           }
-          if(ends[3]>=biggest632){
-            biggest632=ends[3];
+          if(ends[3]>=biggest752){
+            biggest752=ends[3];
           }
-          if(ends[4]>=biggest632){
-            biggest632=ends[4];
+          if(ends[4]>=biggest752){
+            biggest752=ends[4];
           }
-          if(ends[5]>=biggest632){
-            biggest632=ends[5];
+          if(ends[5]>=biggest752){
+            biggest752=ends[5];
           }
-          if(ends[6]>=biggest632){
-            biggest632=ends[6];
+          if(ends[6]>=biggest752){
+            biggest752=ends[6];
           }
-          if(biggest632 == 1){
+          if(ends[7]>=biggest752){
+            biggest752=ends[7];
+          }
+          if(biggest752 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest632 == 0){
-            S619=0;
+          if(biggest752 == 0){
+            S737=0;
             active[1]=0;
             ends[1]=0;
-            S619=0;
+            S737=0;
             break RUN;
           }
         
@@ -564,9 +637,9 @@ public class Orchestrator extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;
@@ -606,6 +679,7 @@ public class Orchestrator extends ClockDomain{
           newBottleTwin.gethook();
           request.gethook();
           conveyorMoved.gethook();
+          rotTableTurned.gethook();
           df = true;
         }
         runClockDomain();
@@ -613,8 +687,10 @@ public class Orchestrator extends ClockDomain{
       newBottleTwin.setpreclear();
       request.setpreclear();
       conveyorMoved.setpreclear();
+      rotTableTurned.setpreclear();
       recieveTwin.setpreclear();
       moveConveyor.setpreclear();
+      turnRotTable.setpreclear();
       bottlePos0.setpreclear();
       bottlePos1.setpreclear();
       bottlePos2.setpreclear();
@@ -657,10 +733,15 @@ public class Orchestrator extends ClockDomain{
       dummyint = conveyorMoved.getStatus() ? conveyorMoved.setprepresent() : conveyorMoved.setpreclear();
       conveyorMoved.setpreval(conveyorMoved.getValue());
       conveyorMoved.setClear();
+      dummyint = rotTableTurned.getStatus() ? rotTableTurned.setprepresent() : rotTableTurned.setpreclear();
+      rotTableTurned.setpreval(rotTableTurned.getValue());
+      rotTableTurned.setClear();
       recieveTwin.sethook();
       recieveTwin.setClear();
       moveConveyor.sethook();
       moveConveyor.setClear();
+      turnRotTable.sethook();
+      turnRotTable.setClear();
       bottlePos0.sethook();
       bottlePos0.setClear();
       bottlePos1.sethook();
@@ -702,6 +783,7 @@ public class Orchestrator extends ClockDomain{
         newBottleTwin.gethook();
         request.gethook();
         conveyorMoved.gethook();
+        rotTableTurned.gethook();
       }
       runFinisher();
       if(active[1] == 0){

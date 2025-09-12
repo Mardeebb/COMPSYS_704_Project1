@@ -242,50 +242,29 @@ public class Canvas extends JPanel {
 		int y_5 = rotTable_Y + 260;
 		
 		for (int i = 0; i < 6; i++) {
-
-			if(TurnTable.RT[i] == 1) {
-				switch(i){
-					case 0:
-						g.drawImage(empty_bottle,x_0, y_0, null);
-				        break;
-					case 1:
-						g.drawImage(empty_bottle,x_1, y_1, null);
-				        break;
-					case 2:
-						g.drawImage(empty_bottle,x_2, y_2, null);
-				        break;
-					case 3:
-						g.drawImage(empty_bottle,x_3, y_3, null);
-				        break;
-					case 4:
-						g.drawImage(empty_bottle,x_4, y_4, null);
-				        break;
-					case 5:
-						g.drawImage(empty_bottle,x_5, y_5, null);
-				}
+			int id = TurnTable.RT[i];
+			switch(i){
+				case 0:
+			    	drawBottle(id, x_0, y_0, g);
+			        break;
+				case 1:
+			    	drawBottle(id, x_1, y_1, g);
+			        break;
+				case 2:
+			    	drawBottle(id, x_2, y_2, g);
+			        break;
+				case 3:
+			    	drawBottle(id, x_3, y_3, g);
+			        break;
+				case 4:
+			    	drawBottle(id, x_4, y_4, g);
+			        break;
+				case 5:
+			    	drawBottle(id, x_5, y_5, g);
 			}
-			if(TurnTable.RT[i] == 5) {
-				switch(i){
-					case 0:
-						g.drawImage(finished_bottle,x_0, y_0, null);
-				        break;
-					case 1:
-						g.drawImage(finished_bottle,x_1, y_1, null);
-				        break;
-					case 2:
-						g.drawImage(finished_bottle,x_2, y_2, null);
-				        break;
-					case 3:
-						g.drawImage(finished_bottle,x_3, y_3, null);
-				        break;
-					case 4:
-						g.drawImage(finished_bottle,x_4, y_4, null);
-				        break;
-					case 5:
-						g.drawImage(finished_bottle,x_5, y_5, null);
-				}
-			}
+			
 		}
+		
 		g.drawImage(loader, cap_X + 0, cap_Y + 100, null);
 		
 		if(States.ARM_AT_DEST)

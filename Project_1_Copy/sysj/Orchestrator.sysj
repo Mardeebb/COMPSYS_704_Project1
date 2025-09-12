@@ -3,8 +3,8 @@ import run.BottleTwin;
 
 Orchestrator(
 		input BottleTwin signal newBottleTwin;
-		input signal request, conveyorMoved;
-		output signal recieveTwin, moveConveyor;
+		input signal request, conveyorMoved, rotTableTurned;
+		output signal recieveTwin, moveConveyor, turnRotTable;
 		output BottleTwin signal bottlePos0, bottlePos1, bottlePos2, bottlePos3, bottlePos4, bottlePos5, bottlePos6, bottlePos7, bottlePos8;
 		)
 ->{	
@@ -47,15 +47,43 @@ Orchestrator(
 			BottleTwin b = (BottleTwin)#posZero;
 			emit moveConveyor;
 			await(conveyorMoved);
-			emit posTwo(b);
+			emit posOne(b);
 			emit posZeroLeft;
-			await(posOneLeft && posZero);
+			await(rotTableTurned || posZero);
 			}
 	}
 	
 	||
 	
+	//rotable control
+	{
+		while(true){
+			await(posOne);
+			await(request);
+
+			emit turnRotTable;
+			await(rotTableTurned);
+			
+			BottleTwin b1 = (BottleTwin)#posOne;
+			BottleTwin b2 = (BottleTwin)#posTwo;
+			BottleTwin b3 = (BottleTwin)#posThree;
+			BottleTwin b4 = (BottleTwin)#posFour;
+			BottleTwin b5 = (BottleTwin)#posFive;
+			BottleTwin b6 = (BottleTwin)#posSix;
+			
+			emit posOne(b6);
+			emit posTwo(b1);
+			emit posThree(b2);
+			emit posFour(b3);
+			emit posFive(b4);
+			emit posSix(b5);
+			pause;
+			
+		}
+	}
 	
+	||
+
 	
 	
 	
@@ -77,7 +105,7 @@ Orchestrator(
 //				sustain bottlePos0(b);
 //			}
 			emit bottlePos0(b);
-			await(posZeroLeft);
+//			await(posZeroLeft);
 
 //			emit bottlePos0(null);
 		}
@@ -89,10 +117,10 @@ Orchestrator(
 		while(true){
 			await(posOne);
 			BottleTwin b = (BottleTwin)#posOne;
-			abort(posOneLeft){
-				sustain bottlePos1(b);
-			}
-			emit bottlePos1(null);
+//			abort(posOneLeft){
+//				sustain bottlePos1(b);
+//			}
+			emit bottlePos1(b);
 		}
 	}
 	
@@ -108,10 +136,27 @@ Orchestrator(
 //			}
 //			emit bottlePos2(null);
 			emit bottlePos2(b);
-			await(posTwoLeft);
 
 		}
 			
 	}
+	
+	||
+
+	{
+		while(true){
+			await(posTwo);
+			BottleTwin b = (BottleTwin)#posTwo;
+//			abort(posOneLeft){
+//				sustain bottlePos2(b);
+//				
+//			}
+//			emit bottlePos2(null);
+			emit bottlePos2(b);
+
+		}
+			
+	}
+
 
 }
