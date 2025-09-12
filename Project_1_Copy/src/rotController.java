@@ -3,7 +3,7 @@ import com.systemj.ClockDomain;
 import com.systemj.Signal;
 import com.systemj.input_Channel;
 import com.systemj.output_Channel;
-import run.BottleTwin;//sysj\controller.sysj line: 1, column: 1
+import run.BottleTwin;//sysj\rotController.sysj line: 1, column: 1
 
 public class rotController extends ClockDomain{
   public rotController(String name){super(name);}
@@ -15,11 +15,11 @@ public class rotController extends ClockDomain{
   public Signal turn = new Signal("turn", Signal.INPUT);
   public Signal tableAlignedWithSensorC = new Signal("tableAlignedWithSensorC", Signal.INPUT);
   public Signal rotaryTableTrigger = new Signal("rotaryTableTrigger", Signal.OUTPUT);
-  private int S198 = 1;
-  private int S134 = 1;
+  private int S851 = 1;
+  private int S787 = 1;
   
-  private int[] ends = new int[8];
-  private int[] tdone = new int[8];
+  private int[] ends = new int[2];
+  private int[] tdone = new int[2];
   
   public void runClockDomain(){
     for(int i=0;i<ends.length;i++){
@@ -28,64 +28,64 @@ public class rotController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S198){
+      switch(S851){
         case 0 : 
-          S198=0;
+          S851=0;
           break RUN;
         
         case 1 : 
-          S198=2;
-          S198=2;
-          System.out.println("Controller startedh");//sysj\controller.sysj line: 187, column: 5
-          S134=0;
-          active[4]=1;
-          ends[4]=1;
+          S851=2;
+          S851=2;
+          System.out.println("Controller startedh");//sysj\rotController.sysj line: 10, column: 5
+          S787=0;
+          active[1]=1;
+          ends[1]=1;
           break RUN;
         
         case 2 : 
-          switch(S134){
+          switch(S787){
             case 0 : 
-              if(turn.getprestatus()){//sysj\controller.sysj line: 191, column: 10
-                S134=1;
-                rotaryTableTrigger.setPresent();//sysj\controller.sysj line: 194, column: 5
+              if(turn.getprestatus()){//sysj\rotController.sysj line: 14, column: 10
+                S787=1;
+                rotaryTableTrigger.setPresent();//sysj\rotController.sysj line: 17, column: 5
                 currsigs.addElement(rotaryTableTrigger);
                 System.out.println("Emitted rotaryTableTrigger");
-                active[4]=1;
-                ends[4]=1;
+                active[1]=1;
+                ends[1]=1;
                 break RUN;
               }
               else {
-                active[4]=1;
-                ends[4]=1;
+                active[1]=1;
+                ends[1]=1;
                 break RUN;
               }
             
             case 1 : 
-              if(tableAlignedWithSensorC.getprestatus()){//sysj\controller.sysj line: 193, column: 10
-                S134=2;
-                active[4]=1;
-                ends[4]=1;
+              if(tableAlignedWithSensorC.getprestatus()){//sysj\rotController.sysj line: 16, column: 10
+                S787=2;
+                active[1]=1;
+                ends[1]=1;
                 break RUN;
               }
               else {
-                rotaryTableTrigger.setPresent();//sysj\controller.sysj line: 194, column: 5
+                rotaryTableTrigger.setPresent();//sysj\rotController.sysj line: 17, column: 5
                 currsigs.addElement(rotaryTableTrigger);
                 System.out.println("Emitted rotaryTableTrigger");
-                active[4]=1;
-                ends[4]=1;
+                active[1]=1;
+                ends[1]=1;
                 break RUN;
               }
             
             case 2 : 
-              if(!turn.getprestatus()){//sysj\controller.sysj line: 196, column: 10
-                S134=0;
-                active[4]=1;
-                ends[4]=1;
+              if(!turn.getprestatus()){//sysj\rotController.sysj line: 19, column: 10
+                S787=0;
+                active[1]=1;
+                ends[1]=1;
                 break RUN;
               }
               else {
-                active[4]=1;
-                ends[4]=1;
+                active[1]=1;
+                ends[1]=1;
                 break RUN;
               }
             
@@ -96,9 +96,9 @@ public class rotController extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0};
+    char [] active1 = {1, 1};
+    char [] paused1 = {0, 0};
+    char [] suspended1 = {0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;
@@ -107,14 +107,14 @@ public class rotController extends ClockDomain{
   }
   
   public void run(){
-    while(active[4] != 0){
-      int index = 4;
+    while(active[1] != 0){
+      int index = 1;
       if(paused[index]==1 || suspended[index]==1 || active[index] == 0){
         for(int h=1;h<paused.length;++h){
           paused[h]=0;
         }
       }
-      if(paused[4]!=0 || suspended[4]!=0 || active[4]!=1);
+      if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
         if(!df){
           turn.gethook();
@@ -140,13 +140,13 @@ public class rotController extends ClockDomain{
       tableAlignedWithSensorC.setClear();
       rotaryTableTrigger.sethook();
       rotaryTableTrigger.setClear();
-      if(paused[4]!=0 || suspended[4]!=0 || active[4]!=1);
+      if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
         turn.gethook();
         tableAlignedWithSensorC.gethook();
       }
       runFinisher();
-      if(active[4] == 0){
+      if(active[1] == 0){
       	this.terminated = true;
       }
       if(!threaded) break;

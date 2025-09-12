@@ -3,7 +3,7 @@ import com.systemj.ClockDomain;
 import com.systemj.Signal;
 import com.systemj.input_Channel;
 import com.systemj.output_Channel;
-import run.BottleTwin;//sysj\controller.sysj line: 1, column: 1
+import run.BottleTwin;//sysj\conveyorController.sysj line: 1, column: 1
 
 public class conveyorController extends ClockDomain{
   public conveyorController(String name){super(name);}
@@ -18,11 +18,11 @@ public class conveyorController extends ClockDomain{
   public Signal motConveyorOnOff = new Signal("motConveyorOnOff", Signal.OUTPUT);
   public Signal conveyorMoving = new Signal("conveyorMoving", Signal.OUTPUT);
   public Signal conveyorStop = new Signal("conveyorStop", Signal.OUTPUT);
-  private int S123 = 1;
-  private int S65 = 1;
+  private int S63 = 1;
+  private int S5 = 1;
   
-  private int[] ends = new int[8];
-  private int[] tdone = new int[8];
+  private int[] ends = new int[2];
+  private int[] tdone = new int[2];
   
   public void runClockDomain(){
     for(int i=0;i<ends.length;i++){
@@ -31,69 +31,69 @@ public class conveyorController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S123){
+      switch(S63){
         case 0 : 
-          S123=0;
+          S63=0;
           break RUN;
         
         case 1 : 
-          S123=2;
-          S123=2;
-          S65=0;
-          active[2]=1;
-          ends[2]=1;
+          S63=2;
+          S63=2;
+          S5=0;
+          active[1]=1;
+          ends[1]=1;
           break RUN;
         
         case 2 : 
-          switch(S65){
+          switch(S5){
             case 0 : 
-              if(move.getprestatus()){//sysj\controller.sysj line: 46, column: 10
-                S65=1;
-                active[2]=1;
-                ends[2]=1;
+              if(move.getprestatus()){//sysj\conveyorController.sysj line: 13, column: 10
+                S5=1;
+                active[1]=1;
+                ends[1]=1;
                 break RUN;
               }
               else {
-                active[2]=1;
-                ends[2]=1;
+                active[1]=1;
+                ends[1]=1;
                 break RUN;
               }
             
             case 1 : 
-              if(!bottleAtPos1.getprestatus()){//sysj\controller.sysj line: 47, column: 10
-                S65=2;
-                conveyorMoving.setPresent();//sysj\controller.sysj line: 49, column: 5
+              if(!bottleAtPos1.getprestatus()){//sysj\conveyorController.sysj line: 14, column: 10
+                S5=2;
+                conveyorMoving.setPresent();//sysj\conveyorController.sysj line: 16, column: 5
                 currsigs.addElement(conveyorMoving);
                 System.out.println("Emitted conveyorMoving");
-                motConveyorOnOff.setPresent();//sysj\controller.sysj line: 50, column: 5
+                motConveyorOnOff.setPresent();//sysj\conveyorController.sysj line: 17, column: 5
                 currsigs.addElement(motConveyorOnOff);
                 System.out.println("Emitted motConveyorOnOff");
-                active[2]=1;
-                ends[2]=1;
+                active[1]=1;
+                ends[1]=1;
                 break RUN;
               }
               else {
-                active[2]=1;
-                ends[2]=1;
+                active[1]=1;
+                ends[1]=1;
                 break RUN;
               }
             
             case 2 : 
-              if(bottleAtPos1.getprestatus()){//sysj\controller.sysj line: 48, column: 10
-                conveyorStop.setPresent();//sysj\controller.sysj line: 52, column: 4
+              if(bottleAtPos1.getprestatus()){//sysj\conveyorController.sysj line: 15, column: 10
+                conveyorStop.setPresent();//sysj\conveyorController.sysj line: 19, column: 4
                 currsigs.addElement(conveyorStop);
                 System.out.println("Emitted conveyorStop");
-                S65=0;
-                active[2]=1;
-                ends[2]=1;
+                S5=0;
+                active[1]=1;
+                ends[1]=1;
                 break RUN;
               }
               else {
-                motConveyorOnOff.setPresent();//sysj\controller.sysj line: 50, column: 5
+                motConveyorOnOff.setPresent();//sysj\conveyorController.sysj line: 17, column: 5
                 currsigs.addElement(motConveyorOnOff);
                 System.out.println("Emitted motConveyorOnOff");
-                active[2]=1;
-                ends[2]=1;
+                active[1]=1;
+                ends[1]=1;
                 break RUN;
               }
             
@@ -104,9 +104,9 @@ public class conveyorController extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0};
+    char [] active1 = {1, 1};
+    char [] paused1 = {0, 0};
+    char [] suspended1 = {0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;
@@ -115,14 +115,14 @@ public class conveyorController extends ClockDomain{
   }
   
   public void run(){
-    while(active[2] != 0){
-      int index = 2;
+    while(active[1] != 0){
+      int index = 1;
       if(paused[index]==1 || suspended[index]==1 || active[index] == 0){
         for(int h=1;h<paused.length;++h){
           paused[h]=0;
         }
       }
-      if(paused[2]!=0 || suspended[2]!=0 || active[2]!=1);
+      if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
         if(!df){
           move.gethook();
@@ -159,14 +159,14 @@ public class conveyorController extends ClockDomain{
       conveyorMoving.setClear();
       conveyorStop.sethook();
       conveyorStop.setClear();
-      if(paused[2]!=0 || suspended[2]!=0 || active[2]!=1);
+      if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
         move.gethook();
         bottleAtPos1.gethook();
         bottleLeftPos5.gethook();
       }
       runFinisher();
-      if(active[2] == 0){
+      if(active[1] == 0){
       	this.terminated = true;
       }
       if(!threaded) break;

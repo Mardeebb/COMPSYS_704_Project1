@@ -1,0 +1,34 @@
+import run.BottleTwin;
+
+
+Orchestrator(
+		input BottleTwin signal newBottleTwin;
+		input signal request;
+		output signal recieveTwin, moveConveyor;
+		output BottleTwin signal bottleToConveyor;
+		)
+->{
+	{
+		while(true){
+		    System.err.println("new Orchestrator Cycle");
+
+			await(newBottleTwin);
+		    System.err.println("newBottleTwin ");
+
+			BottleTwin b = (BottleTwin)#newBottleTwin;
+			if(b != null) {
+				int ID = b.ID;
+				String name = b.name;
+			    System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOo " + b);
+			    System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOo " + ID);
+			    System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOo " + name);
+			    await(!newBottleTwin);
+				await(request);
+				emit bottleToConveyor(b);
+				emit moveConveyor;
+				
+				emit recieveTwin;
+			}
+		}
+	}
+}

@@ -1,0 +1,97 @@
+import run.BottleTwin;
+
+conveyorPlant(
+		input signal motConveyorOnOff, enable;
+		
+		// real world sim signal a bottle has been placed
+		input BottleTwin signal bottleArriveToZero, bottleArriveToFive, roturn;
+		
+		output signal bottleAtPos1, bottleLeftPos5;
+		
+		// backend update
+		output signal pos0, pos1, pos5, pos7;
+
+)
+->
+{
+	signal conveyorMove;
+	BottleTwin signal posZero, posOne, posFive, posSeven;
+	{
+		while(true) {
+			await(motConveyorOnOff);
+			await(enable);
+			abort(!motConveyorOnOff){
+				BottleTwin bZero = (BottleTwin)#posZero;
+				BottleTwin bFive = (BottleTwin)#posFive;
+
+				if(bZero != null) {
+					emit posOne(bZero);
+					emit posZero(null);
+					emit pos0(-1);
+
+				}
+				if(bFive != null) {
+					emit posSeven(bFive);
+					emit posFive(null);
+					emit pos5(-1);
+				}
+
+			}
+		}
+	}
+	
+	||
+	
+	{
+		while(true) {
+			await(bottleArriveToZero);
+			BottleTwin b = (BottleTwin)#bottleArriveToZero;
+//			abort(conveyorMove){
+//				sustain posZero(b)
+//			}
+			int id = b.ID;
+			emit pos0(id);
+			emit posZero(b);
+		}
+		
+	}
+	
+	||
+	
+	{
+		while(true) {
+			await(bottleArriveToFive);
+			BottleTwin b = (BottleTwin)#bottleArriveToFive;
+//			abort(conveyorMove){
+//				sustain posFive(b)
+//			}
+			int id = b.ID;
+			emit pos5(id);
+			emit posFive(b);
+		}
+	}
+	
+	||
+	
+	{
+		while(true) {
+			await(roturn);
+			emit posOne(null);
+		}
+	}
+	
+	||
+	
+	{
+		while(true) {
+			await(posOne);
+			BottleTwin b = (BottleTwin)#posOne;
+			int id = b.ID;
+			abort(roturn){
+				emit pos1(id);
+				sustain bottleAtPos1;
+			}
+		}
+	}
+
+}

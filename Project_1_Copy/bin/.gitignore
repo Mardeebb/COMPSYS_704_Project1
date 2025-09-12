@@ -1,3 +1,10 @@
 /org/
 /fController.class
 /fPlant.class
+/Controller.class
+/Orchestrator.class
+/Plant.class
+/conveyorController.class
+/conveyorPlant.class
+/rotController.class
+/rotPlant.class

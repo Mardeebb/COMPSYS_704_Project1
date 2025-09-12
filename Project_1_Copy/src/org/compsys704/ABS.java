@@ -132,7 +132,7 @@ public class ABS extends JFrame {
 		c.gridx = 1;
 		c.gridy = 0;
 		c.weightx = 0.1;
-		c.weighty = 0.8;
+		c.weighty = 1;
 		c.fill = GridBagConstraints.VERTICAL;
 		this.add(posPanel, c);
 

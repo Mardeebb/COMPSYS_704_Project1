@@ -1,0 +1,22 @@
+import run.BottleTwin;
+
+rotController(
+		input signal turn;
+
+		input signal tableAlignedWithSensorC ;
+		output signal rotaryTableTrigger;
+		)
+->{
+    System.out.println("Controller startedh");
+	{
+		// pusher control
+		while(true){
+			await(turn);
+
+			abort(tableAlignedWithSensorC){
+				sustain rotaryTableTrigger;
+			}
+			await(!turn);
+		}
+	}
+}
