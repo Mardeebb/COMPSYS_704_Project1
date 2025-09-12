@@ -14,31 +14,60 @@ public class rotPlant extends ClockDomain{
   private char [] suspended;
   public Signal rotaryTableTrigger = new Signal("rotaryTableTrigger", Signal.INPUT);
   public Signal enable = new Signal("enable", Signal.INPUT);
-  public Signal bottleIn = new Signal("bottleIn", Signal.INPUT);
+  public Signal posOne = new Signal("posOne", Signal.INPUT);
+  public Signal posTwo = new Signal("posTwo", Signal.INPUT);
+  public Signal posThree = new Signal("posThree", Signal.INPUT);
+  public Signal posFour = new Signal("posFour", Signal.INPUT);
+  public Signal posFive = new Signal("posFive", Signal.INPUT);
+  public Signal posSix = new Signal("posSix", Signal.INPUT);
   public Signal bottleAtPos5 = new Signal("bottleAtPos5", Signal.OUTPUT);
   public Signal tableAlignedWithSensor = new Signal("tableAlignedWithSensor", Signal.OUTPUT);
   public Signal capOnBottleAtPos1 = new Signal("capOnBottleAtPos1", Signal.OUTPUT);
   public Signal tableAlignedWithSensorC = new Signal("tableAlignedWithSensorC", Signal.OUTPUT);
+  public Signal rotTurned = new Signal("rotTurned", Signal.OUTPUT);
   public Signal rotTurn = new Signal("rotTurn", Signal.OUTPUT);
-  public Signal rotContent = new Signal("rotContent", Signal.OUTPUT);
-  private Signal posOne_1;
-  private Signal posFive_1;
   private Signal turn_1;
-  private int[] packedArray_thread_2;//sysj\rotPlant.sysj line: 17, column: 3
-  private int pos_thread_2;//sysj\rotPlant.sysj line: 18, column: 3
-  private int pos1_thread_2;//sysj\rotPlant.sysj line: 30, column: 5
-  private int pos5_thread_2;//sysj\rotPlant.sysj line: 31, column: 5
-  private int[] newPackedArray_thread_2;//sysj\rotPlant.sysj line: 35, column: 5
-  private int S930 = 1;
-  private int S923 = 1;
-  private int S860 = 1;
-  private int S928 = 1;
+  private Signal pos1_1;
+  private Signal pos2_1;
+  private Signal pos3_1;
+  private Signal pos4_1;
+  private Signal pos5_1;
+  private Signal pos6_1;
+  private int S778 = 1;
+  private int S752 = 1;
+  private int S721 = 1;
+  private int S754 = 1;
+  private int S776 = 1;
   
-  private int[] ends = new int[4];
-  private int[] tdone = new int[4];
+  private int[] ends = new int[5];
+  private int[] tdone = new int[5];
   
-  public void thread936(int [] tdone, int [] ends){
-        switch(S928){
+  public void thread786(int [] tdone, int [] ends){
+        switch(S776){
+      case 0 : 
+        active[4]=0;
+        ends[4]=0;
+        tdone[4]=1;
+        break;
+      
+      case 1 : 
+        if(posOne.getprestatus()){//sysj\rotPlant.sysj line: 50, column: 10
+          active[4]=1;
+          ends[4]=1;
+          tdone[4]=1;
+        }
+        else {
+          active[4]=1;
+          ends[4]=1;
+          tdone[4]=1;
+        }
+        break;
+      
+    }
+  }
+
+  public void thread785(int [] tdone, int [] ends){
+        switch(S754){
       case 0 : 
         active[3]=0;
         ends[3]=0;
@@ -46,10 +75,6 @@ public class rotPlant extends ClockDomain{
         break;
       
       case 1 : 
-        if((Integer)(posOne_1.getpreval() == null ? 0 : ((Integer)posOne_1.getpreval()).intValue()) == 5) {//sysj\rotPlant.sysj line: 51, column: 29
-        }
-        if((Integer)(posFive_1.getpreval() == null ? 0 : ((Integer)posFive_1.getpreval()).intValue()) != 0) {//sysj\rotPlant.sysj line: 54, column: 30
-        }
         active[3]=1;
         ends[3]=1;
         tdone[3]=1;
@@ -58,8 +83,8 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread935(int [] tdone, int [] ends){
-        switch(S923){
+  public void thread784(int [] tdone, int [] ends){
+        switch(S752){
       case 0 : 
         active[2]=0;
         ends[2]=0;
@@ -67,17 +92,17 @@ public class rotPlant extends ClockDomain{
         break;
       
       case 1 : 
-        if(!rotaryTableTrigger.getprestatus()){//sysj\rotPlant.sysj line: 27, column: 10
-          S860=0;
+        if(!rotaryTableTrigger.getprestatus()){//sysj\rotPlant.sysj line: 22, column: 10
+          S721=0;
           active[2]=1;
           ends[2]=1;
           tdone[2]=1;
         }
         else {
-          switch(S860){
+          switch(S721){
             case 0 : 
-              if(rotaryTableTrigger.getprestatus()){//sysj\rotPlant.sysj line: 28, column: 11
-                S860=1;
+              if(rotaryTableTrigger.getprestatus()){//sysj\rotPlant.sysj line: 23, column: 11
+                S721=1;
                 active[2]=1;
                 ends[2]=1;
                 tdone[2]=1;
@@ -90,29 +115,18 @@ public class rotPlant extends ClockDomain{
               break;
             
             case 1 : 
-              if(enable.getprestatus()){//sysj\rotPlant.sysj line: 29, column: 11
-                pos1_thread_2 = packedArray_thread_2[0];//sysj\rotPlant.sysj line: 30, column: 5
-                pos5_thread_2 = packedArray_thread_2[4];//sysj\rotPlant.sysj line: 31, column: 5
-                rotTurn.setPresent();//sysj\rotPlant.sysj line: 32, column: 5
+              if(enable.getprestatus()){//sysj\rotPlant.sysj line: 24, column: 11
+                rotTurned.setPresent();//sysj\rotPlant.sysj line: 25, column: 5
+                currsigs.addElement(rotTurned);
+                System.out.println("Emitted rotTurned");
+                rotTurn.setPresent();//sysj\rotPlant.sysj line: 26, column: 5
                 currsigs.addElement(rotTurn);
-                rotTurn.setValue(packedArray_thread_2);//sysj\rotPlant.sysj line: 32, column: 5
                 System.out.println("Emitted rotTurn");
-                posOne_1.setPresent();//sysj\rotPlant.sysj line: 33, column: 5
-                currsigs.addElement(posOne_1);
-                posOne_1.setValue(pos1_thread_2);//sysj\rotPlant.sysj line: 33, column: 5
-                System.out.println("Emitted posOne_1");
-                posFive_1.setPresent();//sysj\rotPlant.sysj line: 34, column: 5
-                currsigs.addElement(posFive_1);
-                posFive_1.setValue(pos5_thread_2);//sysj\rotPlant.sysj line: 34, column: 5
-                System.out.println("Emitted posFive_1");
-                newPackedArray_thread_2 = new int[6];//sysj\rotPlant.sysj line: 35, column: 5
-                newPackedArray_thread_2[0] = packedArray_thread_2[5];//sysj\rotPlant.sysj line: 36, column: 5
-                for(int i_thread_2 = 1; i_thread_2 < 6; i_thread_2 = i_thread_2 + 1) {//sysj\rotPlant.sysj line: 38, column: 31
-                  newPackedArray_thread_2[i_thread_2] = packedArray_thread_2[i_thread_2 - 1];//sysj\rotPlant.sysj line: 39, column: 6
-                }
-                packedArray_thread_2 = newPackedArray_thread_2;//sysj\rotPlant.sysj line: 41, column: 5
-                S860=2;
-                tableAlignedWithSensorC.setPresent();//sysj\rotPlant.sysj line: 42, column: 5
+                turn_1.setPresent();//sysj\rotPlant.sysj line: 27, column: 5
+                currsigs.addElement(turn_1);
+                System.out.println("Emitted turn_1");
+                S721=2;
+                tableAlignedWithSensorC.setPresent();//sysj\rotPlant.sysj line: 28, column: 5
                 currsigs.addElement(tableAlignedWithSensorC);
                 System.out.println("Emitted tableAlignedWithSensorC");
                 active[2]=1;
@@ -127,7 +141,7 @@ public class rotPlant extends ClockDomain{
               break;
             
             case 2 : 
-              tableAlignedWithSensorC.setPresent();//sysj\rotPlant.sysj line: 42, column: 5
+              tableAlignedWithSensorC.setPresent();//sysj\rotPlant.sysj line: 28, column: 5
               currsigs.addElement(tableAlignedWithSensorC);
               System.out.println("Emitted tableAlignedWithSensorC");
               active[2]=1;
@@ -142,27 +156,23 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread933(int [] tdone, int [] ends){
-        S928=1;
-    if((Integer)(posOne_1.getpreval() == null ? 0 : ((Integer)posOne_1.getpreval()).intValue()) == 5) {//sysj\rotPlant.sysj line: 51, column: 29
-    }
-    if((Integer)(posFive_1.getpreval() == null ? 0 : ((Integer)posFive_1.getpreval()).intValue()) != 0) {//sysj\rotPlant.sysj line: 54, column: 30
-    }
+  public void thread782(int [] tdone, int [] ends){
+        S776=1;
+    active[4]=1;
+    ends[4]=1;
+    tdone[4]=1;
+  }
+
+  public void thread781(int [] tdone, int [] ends){
+        S754=1;
     active[3]=1;
     ends[3]=1;
     tdone[3]=1;
   }
 
-  public void thread932(int [] tdone, int [] ends){
-        S923=1;
-    packedArray_thread_2 = new int[6];//sysj\rotPlant.sysj line: 17, column: 3
-    pos_thread_2 = 0;//sysj\rotPlant.sysj line: 18, column: 3
-    for(int i_thread_2 = 0; i_thread_2 < 6; i_thread_2 = i_thread_2 + 1) {//sysj\rotPlant.sysj line: 19, column: 29
-      packedArray_thread_2[i_thread_2] = 0;//sysj\rotPlant.sysj line: 20, column: 7
-    }
-    packedArray_thread_2[0] = 5;//sysj\rotPlant.sysj line: 23, column: 6
-    packedArray_thread_2[3] = 1;//sysj\rotPlant.sysj line: 24, column: 6
-    S860=0;
+  public void thread780(int [] tdone, int [] ends){
+        S752=1;
+    S721=0;
     active[2]=1;
     ends[2]=1;
     tdone[2]=1;
@@ -175,56 +185,72 @@ public class rotPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S930){
+      switch(S778){
         case 0 : 
-          S930=0;
+          S778=0;
           break RUN;
         
         case 1 : 
-          S930=2;
-          S930=2;
-          posOne_1.setClear();//sysj\rotPlant.sysj line: 15, column: 2
-          posFive_1.setClear();//sysj\rotPlant.sysj line: 15, column: 2
-          turn_1.setClear();//sysj\rotPlant.sysj line: 15, column: 2
-          thread932(tdone,ends);
-          thread933(tdone,ends);
-          int biggest934 = 0;
-          if(ends[2]>=biggest934){
-            biggest934=ends[2];
+          S778=2;
+          S778=2;
+          turn_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
+          pos1_1.setClear();//sysj\rotPlant.sysj line: 18, column: 2
+          pos2_1.setClear();//sysj\rotPlant.sysj line: 18, column: 2
+          pos3_1.setClear();//sysj\rotPlant.sysj line: 18, column: 2
+          pos4_1.setClear();//sysj\rotPlant.sysj line: 18, column: 2
+          pos5_1.setClear();//sysj\rotPlant.sysj line: 18, column: 2
+          pos6_1.setClear();//sysj\rotPlant.sysj line: 18, column: 2
+          thread780(tdone,ends);
+          thread781(tdone,ends);
+          thread782(tdone,ends);
+          int biggest783 = 0;
+          if(ends[2]>=biggest783){
+            biggest783=ends[2];
           }
-          if(ends[3]>=biggest934){
-            biggest934=ends[3];
+          if(ends[3]>=biggest783){
+            biggest783=ends[3];
           }
-          if(biggest934 == 1){
+          if(ends[4]>=biggest783){
+            biggest783=ends[4];
+          }
+          if(biggest783 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
         
         case 2 : 
-          posOne_1.setClear();//sysj\rotPlant.sysj line: 15, column: 2
-          posFive_1.setClear();//sysj\rotPlant.sysj line: 15, column: 2
-          turn_1.setClear();//sysj\rotPlant.sysj line: 15, column: 2
-          thread935(tdone,ends);
-          thread936(tdone,ends);
-          int biggest937 = 0;
-          if(ends[2]>=biggest937){
-            biggest937=ends[2];
+          turn_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
+          pos1_1.setClear();//sysj\rotPlant.sysj line: 18, column: 2
+          pos2_1.setClear();//sysj\rotPlant.sysj line: 18, column: 2
+          pos3_1.setClear();//sysj\rotPlant.sysj line: 18, column: 2
+          pos4_1.setClear();//sysj\rotPlant.sysj line: 18, column: 2
+          pos5_1.setClear();//sysj\rotPlant.sysj line: 18, column: 2
+          pos6_1.setClear();//sysj\rotPlant.sysj line: 18, column: 2
+          thread784(tdone,ends);
+          thread785(tdone,ends);
+          thread786(tdone,ends);
+          int biggest787 = 0;
+          if(ends[2]>=biggest787){
+            biggest787=ends[2];
           }
-          if(ends[3]>=biggest937){
-            biggest937=ends[3];
+          if(ends[3]>=biggest787){
+            biggest787=ends[3];
           }
-          if(biggest937 == 1){
+          if(ends[4]>=biggest787){
+            biggest787=ends[4];
+          }
+          if(biggest787 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest937 == 0){
-            S930=0;
+          if(biggest787 == 0){
+            S778=0;
             active[1]=0;
             ends[1]=0;
-            S930=0;
+            S778=0;
             break RUN;
           }
         
@@ -233,16 +259,20 @@ public class rotPlant extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;
     // Now instantiate all the local signals ONLY
-    posOne_1 = new Signal();
-    posFive_1 = new Signal();
     turn_1 = new Signal();
+    pos1_1 = new Signal();
+    pos2_1 = new Signal();
+    pos3_1 = new Signal();
+    pos4_1 = new Signal();
+    pos5_1 = new Signal();
+    pos6_1 = new Signal();
     // --------------------------------------------------
   }
   
@@ -259,23 +289,37 @@ public class rotPlant extends ClockDomain{
         if(!df){
           rotaryTableTrigger.gethook();
           enable.gethook();
-          bottleIn.gethook();
+          posOne.gethook();
+          posTwo.gethook();
+          posThree.gethook();
+          posFour.gethook();
+          posFive.gethook();
+          posSix.gethook();
           df = true;
         }
         runClockDomain();
       }
       rotaryTableTrigger.setpreclear();
       enable.setpreclear();
-      bottleIn.setpreclear();
+      posOne.setpreclear();
+      posTwo.setpreclear();
+      posThree.setpreclear();
+      posFour.setpreclear();
+      posFive.setpreclear();
+      posSix.setpreclear();
       bottleAtPos5.setpreclear();
       tableAlignedWithSensor.setpreclear();
       capOnBottleAtPos1.setpreclear();
       tableAlignedWithSensorC.setpreclear();
+      rotTurned.setpreclear();
       rotTurn.setpreclear();
-      rotContent.setpreclear();
-      posOne_1.setpreclear();
-      posFive_1.setpreclear();
       turn_1.setpreclear();
+      pos1_1.setpreclear();
+      pos2_1.setpreclear();
+      pos3_1.setpreclear();
+      pos4_1.setpreclear();
+      pos5_1.setpreclear();
+      pos6_1.setpreclear();
       int dummyint = 0;
       for(int qw=0;qw<currsigs.size();++qw){
         dummyint = ((Signal)currsigs.elementAt(qw)).getStatus() ? ((Signal)currsigs.elementAt(qw)).setprepresent() : ((Signal)currsigs.elementAt(qw)).setpreclear();
@@ -288,9 +332,24 @@ public class rotPlant extends ClockDomain{
       dummyint = enable.getStatus() ? enable.setprepresent() : enable.setpreclear();
       enable.setpreval(enable.getValue());
       enable.setClear();
-      dummyint = bottleIn.getStatus() ? bottleIn.setprepresent() : bottleIn.setpreclear();
-      bottleIn.setpreval(bottleIn.getValue());
-      bottleIn.setClear();
+      dummyint = posOne.getStatus() ? posOne.setprepresent() : posOne.setpreclear();
+      posOne.setpreval(posOne.getValue());
+      posOne.setClear();
+      dummyint = posTwo.getStatus() ? posTwo.setprepresent() : posTwo.setpreclear();
+      posTwo.setpreval(posTwo.getValue());
+      posTwo.setClear();
+      dummyint = posThree.getStatus() ? posThree.setprepresent() : posThree.setpreclear();
+      posThree.setpreval(posThree.getValue());
+      posThree.setClear();
+      dummyint = posFour.getStatus() ? posFour.setprepresent() : posFour.setpreclear();
+      posFour.setpreval(posFour.getValue());
+      posFour.setClear();
+      dummyint = posFive.getStatus() ? posFive.setprepresent() : posFive.setpreclear();
+      posFive.setpreval(posFive.getValue());
+      posFive.setClear();
+      dummyint = posSix.getStatus() ? posSix.setprepresent() : posSix.setpreclear();
+      posSix.setpreval(posSix.getValue());
+      posSix.setClear();
       bottleAtPos5.sethook();
       bottleAtPos5.setClear();
       tableAlignedWithSensor.sethook();
@@ -299,18 +358,27 @@ public class rotPlant extends ClockDomain{
       capOnBottleAtPos1.setClear();
       tableAlignedWithSensorC.sethook();
       tableAlignedWithSensorC.setClear();
+      rotTurned.sethook();
+      rotTurned.setClear();
       rotTurn.sethook();
       rotTurn.setClear();
-      rotContent.sethook();
-      rotContent.setClear();
-      posOne_1.setClear();
-      posFive_1.setClear();
       turn_1.setClear();
+      pos1_1.setClear();
+      pos2_1.setClear();
+      pos3_1.setClear();
+      pos4_1.setClear();
+      pos5_1.setClear();
+      pos6_1.setClear();
       if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
         rotaryTableTrigger.gethook();
         enable.gethook();
-        bottleIn.gethook();
+        posOne.gethook();
+        posTwo.gethook();
+        posThree.gethook();
+        posFour.gethook();
+        posFive.gethook();
+        posSix.gethook();
       }
       runFinisher();
       if(active[1] == 0){

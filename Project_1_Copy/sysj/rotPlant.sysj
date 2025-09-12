@@ -3,42 +3,28 @@ import run.BottleTwin;
 rotPlant(
 		input signal rotaryTableTrigger, enable;
 		
-		input BottleTwin signal bottleIn;
+		input BottleTwin signal posOne, posTwo, posThree, posFour, posFive, posSix;
 		
 		output signal bottleAtPos5, tableAlignedWithSensor, capOnBottleAtPos1, tableAlignedWithSensorC;
 		
+		output signal rotTurned;
+		
 		// backend signal
-		output signal rotTurn, rotContent;
+		output signal rotTurn;
 )
 ->
 {
-	int signal posOne, posFive, turn;
-	{
-		int[] packedArray = new int[6]; 
-		int pos = 0;
-		for(int i = 0; i < 6; i++){
-		    packedArray[i] = 0;
-		}
-		
-	    packedArray[0] = 5;
-	    packedArray[3] = 1;
-	    
+	signal turn;
+	BottleTwin signal pos1, pos2, pos3, pos4, pos5, pos6;
+	
+	{	    
 		while(true){
 			abort(!rotaryTableTrigger){
 				await(rotaryTableTrigger);
 				await(enable);
-				int pos1 = packedArray[0];
-				int pos5 = packedArray[4];
-				emit rotTurn(packedArray);
-				emit posOne(pos1);
-				emit posFive(pos5);
-				int[] newPackedArray = new int[6]; 
-				newPackedArray[0] = packedArray[5];
-	
-				for(int i = 1; i < 6; i++){
-					newPackedArray[i] = packedArray[i - 1];
-				}
-				packedArray = newPackedArray;
+				emit rotTurned;
+				emit rotTurn;
+				emit turn;
 				sustain tableAlignedWithSensorC;
 			}
 		}
@@ -48,13 +34,22 @@ rotPlant(
 	
 	{
 		while(true) {
-			if((Integer)#posOne == 5){
-//				emit capOnBottleAtPos1;
-			}
-			if((Integer)#posFive != 0){
-//				emit bottleAtPos5;
-			}
+//			if((Integer)#posOne == 5){
+////				emit capOnBottleAtPos1;
+//			}
+//			if((Integer)#posFive != 0){
+////				emit bottleAtPos5;
+//			}
 			pause;
+		}
+	}
+	||
+	
+	{
+		while(true) {
+			await(posOne);
+			abort(turn){
+			}
 		}
 	}
 }

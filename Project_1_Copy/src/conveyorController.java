@@ -18,6 +18,7 @@ public class conveyorController extends ClockDomain{
   public Signal motConveyorOnOff = new Signal("motConveyorOnOff", Signal.OUTPUT);
   public Signal conveyorMoving = new Signal("conveyorMoving", Signal.OUTPUT);
   public Signal conveyorStop = new Signal("conveyorStop", Signal.OUTPUT);
+  public Signal conveyorMoved = new Signal("conveyorMoved", Signal.OUTPUT);
   private int S63 = 1;
   private int S5 = 1;
   
@@ -80,7 +81,10 @@ public class conveyorController extends ClockDomain{
             
             case 2 : 
               if(bottleAtPos1.getprestatus()){//sysj\conveyorController.sysj line: 15, column: 10
-                conveyorStop.setPresent();//sysj\conveyorController.sysj line: 19, column: 4
+                conveyorMoved.setPresent();//sysj\conveyorController.sysj line: 19, column: 4
+                currsigs.addElement(conveyorMoved);
+                System.out.println("Emitted conveyorMoved");
+                conveyorStop.setPresent();//sysj\conveyorController.sysj line: 20, column: 4
                 currsigs.addElement(conveyorStop);
                 System.out.println("Emitted conveyorStop");
                 S5=0;
@@ -138,6 +142,7 @@ public class conveyorController extends ClockDomain{
       motConveyorOnOff.setpreclear();
       conveyorMoving.setpreclear();
       conveyorStop.setpreclear();
+      conveyorMoved.setpreclear();
       int dummyint = 0;
       for(int qw=0;qw<currsigs.size();++qw){
         dummyint = ((Signal)currsigs.elementAt(qw)).getStatus() ? ((Signal)currsigs.elementAt(qw)).setprepresent() : ((Signal)currsigs.elementAt(qw)).setpreclear();
@@ -159,6 +164,8 @@ public class conveyorController extends ClockDomain{
       conveyorMoving.setClear();
       conveyorStop.sethook();
       conveyorStop.setClear();
+      conveyorMoved.sethook();
+      conveyorMoved.setClear();
       if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
         move.gethook();

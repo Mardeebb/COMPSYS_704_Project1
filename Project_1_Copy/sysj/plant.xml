@@ -48,7 +48,6 @@
 			<oSignal Name="tableAlignedWithSensorC" To="rotaryTableControllerCD.tableAlignedWithSensorC" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10003" />
 			
 			<oSignal Name="rotTurn" To="UI.rotTurn" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="rotContent" To="UI.rotContent" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="bottleAtPos5" To="UI.bottleAtPos5" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="tableAlignedWithSensor" To="UI.tableAlignedWithSensor" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="capOnBottleAtPos1" To="UI.capOnBottleAtPos1" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />

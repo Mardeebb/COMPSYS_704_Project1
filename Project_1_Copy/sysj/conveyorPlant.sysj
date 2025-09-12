@@ -26,7 +26,7 @@ conveyorPlant(
 
 				if(bZero != null) {
 					emit posOne(bZero);
-					emit posZero(null);
+					emit posZero;
 					emit pos0(-1);
 
 				}
@@ -46,9 +46,6 @@ conveyorPlant(
 		while(true) {
 			await(bottleArriveToZero);
 			BottleTwin b = (BottleTwin)#bottleArriveToZero;
-//			abort(conveyorMove){
-//				sustain posZero(b)
-//			}
 			int id = b.ID;
 			emit pos0(id);
 			emit posZero(b);
@@ -62,9 +59,6 @@ conveyorPlant(
 		while(true) {
 			await(bottleArriveToFive);
 			BottleTwin b = (BottleTwin)#bottleArriveToFive;
-//			abort(conveyorMove){
-//				sustain posFive(b)
-//			}
 			int id = b.ID;
 			emit pos5(id);
 			emit posFive(b);
@@ -73,6 +67,7 @@ conveyorPlant(
 	
 	||
 	
+	// real world sim
 	{
 		while(true) {
 			await(roturn);
@@ -91,6 +86,7 @@ conveyorPlant(
 				emit pos1(id);
 				sustain bottleAtPos1;
 			}
+			emit pos1(-1);
 		}
 	}
 

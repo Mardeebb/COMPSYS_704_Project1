@@ -4,12 +4,22 @@
 		<ClockDomain Name="OrchestratorCD" Class="Orchestrator">
 			<iSignal Name="newBottleTwin" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
 			<iSignal Name="request" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
-			
+			<iSignal Name="conveyorMoved" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
+
 			<oSignal Name="recieveTwin" To="UI.recieveTwin" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			
 			<oSignal Name="moveConveyor" To="conveyorControllerCD.move" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10006" />
-			<oSignal Name="bottleToConveyor" To="conveyorPlantCD.bottleArriveToZero" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10005" />
 			
+			<oSignal Name="bottlePos0" To="conveyorPlantCD.bottleArriveToZero" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10005" />
+			<oSignal Name="bottlePos1" To="UI.bottlePos1" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos2" To="UI.bottlePos2" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos3" To="UI.bottlePos3" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos4" To="UI.bottlePos4" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos5" To="UI.bottlePos5" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos6" To="UI.bottlePos6" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos7" To="UI.bottlePos7" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos8" To="UI.bottlePos8" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+
 			
 		</ClockDomain>
 
@@ -22,6 +32,7 @@
 			<oSignal Name="conveyorMoving" To="UI.conveyorMoving" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="conveyorStop" To="UI.conveyorStop" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 
+			<oSignal Name="conveyorMoved" To="OrchestratorCD.conveyorMoved" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10004" />
 			<oSignal Name="motConveyorOnOff" To="conveyorPlantCD.motConveyorOnOff" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10005" />
 		</ClockDomain>
 		

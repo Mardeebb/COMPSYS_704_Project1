@@ -15,8 +15,8 @@ public class rotController extends ClockDomain{
   public Signal turn = new Signal("turn", Signal.INPUT);
   public Signal tableAlignedWithSensorC = new Signal("tableAlignedWithSensorC", Signal.INPUT);
   public Signal rotaryTableTrigger = new Signal("rotaryTableTrigger", Signal.OUTPUT);
-  private int S851 = 1;
-  private int S787 = 1;
+  private int S709 = 1;
+  private int S645 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -28,25 +28,25 @@ public class rotController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S851){
+      switch(S709){
         case 0 : 
-          S851=0;
+          S709=0;
           break RUN;
         
         case 1 : 
-          S851=2;
-          S851=2;
+          S709=2;
+          S709=2;
           System.out.println("Controller startedh");//sysj\rotController.sysj line: 10, column: 5
-          S787=0;
+          S645=0;
           active[1]=1;
           ends[1]=1;
           break RUN;
         
         case 2 : 
-          switch(S787){
+          switch(S645){
             case 0 : 
               if(turn.getprestatus()){//sysj\rotController.sysj line: 14, column: 10
-                S787=1;
+                S645=1;
                 rotaryTableTrigger.setPresent();//sysj\rotController.sysj line: 17, column: 5
                 currsigs.addElement(rotaryTableTrigger);
                 System.out.println("Emitted rotaryTableTrigger");
@@ -62,7 +62,7 @@ public class rotController extends ClockDomain{
             
             case 1 : 
               if(tableAlignedWithSensorC.getprestatus()){//sysj\rotController.sysj line: 16, column: 10
-                S787=2;
+                S645=2;
                 active[1]=1;
                 ends[1]=1;
                 break RUN;
@@ -78,7 +78,7 @@ public class rotController extends ClockDomain{
             
             case 2 : 
               if(!turn.getprestatus()){//sysj\rotController.sysj line: 19, column: 10
-                S787=0;
+                S645=0;
                 active[1]=1;
                 ends[1]=1;
                 break RUN;
