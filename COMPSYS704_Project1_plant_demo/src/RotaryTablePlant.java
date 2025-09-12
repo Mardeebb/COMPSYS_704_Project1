@@ -19,59 +19,61 @@ public class RotaryTablePlant extends ClockDomain{
   public Signal tableAlignedWithSensorC = new Signal("tableAlignedWithSensorC", Signal.OUTPUT);
   public Signal rotTurn = new Signal("rotTurn", Signal.OUTPUT);
   public Signal rotContent = new Signal("rotContent", Signal.OUTPUT);
-  private Signal posOne_2;
-  private Signal posFive_2;
-  private Signal turn_2;
-  private int[] packedArray_thread_3;//sysj\plant.sysj line: 125, column: 3
-  private int pos_thread_3;//sysj\plant.sysj line: 126, column: 3
-  private int pos1_thread_3;//sysj\plant.sysj line: 137, column: 4
-  private int pos5_thread_3;//sysj\plant.sysj line: 138, column: 4
-  private int[] newPackedArray_thread_3;//sysj\plant.sysj line: 142, column: 4
-  private int S405 = 1;
-  private int S386 = 1;
-  private int S363 = 1;
-  private int S403 = 1;
+  public output_Channel atPos4_o = new output_Channel();
+  private Signal posOne_10;
+  private Signal posFive_10;
+  private Signal turn_10;
+  private int[] packedArray_thread_11;//sysj\plant.sysj line: 182, column: 3
+  private int pos_thread_11;//sysj\plant.sysj line: 183, column: 3
+  private int pos1_thread_11;//sysj\plant.sysj line: 195, column: 4
+  private int pos5_thread_11;//sysj\plant.sysj line: 196, column: 4
+  private int pos4_thread_11;//sysj\plant.sysj line: 197, column: 4
+  private int[] newPackedArray_thread_11;//sysj\plant.sysj line: 202, column: 4
+  private int S600 = 1;
+  private int S581 = 1;
+  private int S558 = 1;
+  private int S598 = 1;
   
-  private int[] ends = new int[5];
-  private int[] tdone = new int[5];
+  private int[] ends = new int[13];
+  private int[] tdone = new int[13];
   
-  public void thread411(int [] tdone, int [] ends){
-        switch(S403){
+  public void thread624(int [] tdone, int [] ends){
+        switch(S598){
       case 0 : 
-        active[4]=0;
-        ends[4]=0;
-        tdone[4]=1;
+        active[12]=0;
+        ends[12]=0;
+        tdone[12]=1;
         break;
       
       case 1 : 
-        if((Integer)(posOne_2.getpreval() == null ? 0 : ((Integer)posOne_2.getpreval()).intValue()) == 5){//sysj\plant.sysj line: 159, column: 7
-          capOnBottleAtPos1.setPresent();//sysj\plant.sysj line: 160, column: 5
+        if((Integer)(posOne_10.getpreval() == null ? 0 : ((Integer)posOne_10.getpreval()).intValue()) == 5){//sysj\plant.sysj line: 219, column: 7
+          capOnBottleAtPos1.setPresent();//sysj\plant.sysj line: 220, column: 5
           currsigs.addElement(capOnBottleAtPos1);
-          if((Integer)(posFive_2.getpreval() == null ? 0 : ((Integer)posFive_2.getpreval()).intValue()) != 0){//sysj\plant.sysj line: 162, column: 7
-            bottleAtPos5.setPresent();//sysj\plant.sysj line: 163, column: 5
+          if((Integer)(posFive_10.getpreval() == null ? 0 : ((Integer)posFive_10.getpreval()).intValue()) != 0){//sysj\plant.sysj line: 222, column: 7
+            bottleAtPos5.setPresent();//sysj\plant.sysj line: 223, column: 5
             currsigs.addElement(bottleAtPos5);
-            active[4]=1;
-            ends[4]=1;
-            tdone[4]=1;
+            active[12]=1;
+            ends[12]=1;
+            tdone[12]=1;
           }
           else {
-            active[4]=1;
-            ends[4]=1;
-            tdone[4]=1;
+            active[12]=1;
+            ends[12]=1;
+            tdone[12]=1;
           }
         }
         else {
-          if((Integer)(posFive_2.getpreval() == null ? 0 : ((Integer)posFive_2.getpreval()).intValue()) != 0){//sysj\plant.sysj line: 162, column: 7
-            bottleAtPos5.setPresent();//sysj\plant.sysj line: 163, column: 5
+          if((Integer)(posFive_10.getpreval() == null ? 0 : ((Integer)posFive_10.getpreval()).intValue()) != 0){//sysj\plant.sysj line: 222, column: 7
+            bottleAtPos5.setPresent();//sysj\plant.sysj line: 223, column: 5
             currsigs.addElement(bottleAtPos5);
-            active[4]=1;
-            ends[4]=1;
-            tdone[4]=1;
+            active[12]=1;
+            ends[12]=1;
+            tdone[12]=1;
           }
           else {
-            active[4]=1;
-            ends[4]=1;
-            tdone[4]=1;
+            active[12]=1;
+            ends[12]=1;
+            tdone[12]=1;
           }
         }
         break;
@@ -79,61 +81,62 @@ public class RotaryTablePlant extends ClockDomain{
     }
   }
 
-  public void thread410(int [] tdone, int [] ends){
-        switch(S386){
+  public void thread623(int [] tdone, int [] ends){
+        switch(S581){
       case 0 : 
-        active[3]=0;
-        ends[3]=0;
-        tdone[3]=1;
+        active[11]=0;
+        ends[11]=0;
+        tdone[11]=1;
         break;
       
       case 1 : 
-        switch(S363){
+        switch(S558){
           case 0 : 
-            if(rotaryTableTrigger.getprestatus()){//sysj\plant.sysj line: 135, column: 10
-              pos1_thread_3 = packedArray_thread_3[0];//sysj\plant.sysj line: 137, column: 4
-              pos5_thread_3 = packedArray_thread_3[4];//sysj\plant.sysj line: 138, column: 4
-              rotTurn.setPresent();//sysj\plant.sysj line: 139, column: 4
+            if(rotaryTableTrigger.getprestatus()){//sysj\plant.sysj line: 193, column: 10
+              pos1_thread_11 = packedArray_thread_11[0];//sysj\plant.sysj line: 195, column: 4
+              pos5_thread_11 = packedArray_thread_11[4];//sysj\plant.sysj line: 196, column: 4
+              pos4_thread_11 = packedArray_thread_11[3];//sysj\plant.sysj line: 197, column: 4
+              rotTurn.setPresent();//sysj\plant.sysj line: 199, column: 4
               currsigs.addElement(rotTurn);
-              rotTurn.setValue(packedArray_thread_3);//sysj\plant.sysj line: 139, column: 4
-              posOne_2.setPresent();//sysj\plant.sysj line: 140, column: 4
-              currsigs.addElement(posOne_2);
-              posOne_2.setValue(pos1_thread_3);//sysj\plant.sysj line: 140, column: 4
-              posFive_2.setPresent();//sysj\plant.sysj line: 141, column: 4
-              currsigs.addElement(posFive_2);
-              posFive_2.setValue(pos5_thread_3);//sysj\plant.sysj line: 141, column: 4
-              newPackedArray_thread_3 = new int[6];//sysj\plant.sysj line: 142, column: 4
-              newPackedArray_thread_3[0] = packedArray_thread_3[5];//sysj\plant.sysj line: 143, column: 4
-              for(int i_thread_3 = 1; i_thread_3 < 6; i_thread_3 = i_thread_3 + 1) {//sysj\plant.sysj line: 145, column: 30
-                newPackedArray_thread_3[i_thread_3] = packedArray_thread_3[i_thread_3 - 1];//sysj\plant.sysj line: 146, column: 5
+              rotTurn.setValue(packedArray_thread_11);//sysj\plant.sysj line: 199, column: 4
+              posOne_10.setPresent();//sysj\plant.sysj line: 200, column: 4
+              currsigs.addElement(posOne_10);
+              posOne_10.setValue(pos1_thread_11);//sysj\plant.sysj line: 200, column: 4
+              posFive_10.setPresent();//sysj\plant.sysj line: 201, column: 4
+              currsigs.addElement(posFive_10);
+              posFive_10.setValue(pos5_thread_11);//sysj\plant.sysj line: 201, column: 4
+              newPackedArray_thread_11 = new int[6];//sysj\plant.sysj line: 202, column: 4
+              newPackedArray_thread_11[0] = packedArray_thread_11[5];//sysj\plant.sysj line: 203, column: 4
+              for(int i_thread_11 = 1; i_thread_11 < 6; i_thread_11 = i_thread_11 + 1) {//sysj\plant.sysj line: 205, column: 30
+                newPackedArray_thread_11[i_thread_11] = packedArray_thread_11[i_thread_11 - 1];//sysj\plant.sysj line: 206, column: 5
               }
-              packedArray_thread_3 = newPackedArray_thread_3;//sysj\plant.sysj line: 148, column: 4
-              tableAlignedWithSensorC.setPresent();//sysj\plant.sysj line: 149, column: 4
+              packedArray_thread_11 = newPackedArray_thread_11;//sysj\plant.sysj line: 208, column: 4
+              tableAlignedWithSensorC.setPresent();//sysj\plant.sysj line: 209, column: 4
               currsigs.addElement(tableAlignedWithSensorC);
-              System.out.println("table aligned");//sysj\plant.sysj line: 150, column: 4
-              S363=1;
-              active[3]=1;
-              ends[3]=1;
-              tdone[3]=1;
+              System.out.println("table aligned");//sysj\plant.sysj line: 210, column: 4
+              S558=1;
+              active[11]=1;
+              ends[11]=1;
+              tdone[11]=1;
             }
             else {
-              active[3]=1;
-              ends[3]=1;
-              tdone[3]=1;
+              active[11]=1;
+              ends[11]=1;
+              tdone[11]=1;
             }
             break;
           
           case 1 : 
-            if(!rotaryTableTrigger.getprestatus()){//sysj\plant.sysj line: 151, column: 10
-              S363=0;
-              active[3]=1;
-              ends[3]=1;
-              tdone[3]=1;
+            if(!rotaryTableTrigger.getprestatus()){//sysj\plant.sysj line: 211, column: 10
+              S558=0;
+              active[11]=1;
+              ends[11]=1;
+              tdone[11]=1;
             }
             else {
-              active[3]=1;
-              ends[3]=1;
-              tdone[3]=1;
+              active[11]=1;
+              ends[11]=1;
+              tdone[11]=1;
             }
             break;
           
@@ -143,53 +146,53 @@ public class RotaryTablePlant extends ClockDomain{
     }
   }
 
-  public void thread408(int [] tdone, int [] ends){
-        S403=1;
-    if((Integer)(posOne_2.getpreval() == null ? 0 : ((Integer)posOne_2.getpreval()).intValue()) == 5){//sysj\plant.sysj line: 159, column: 7
-      capOnBottleAtPos1.setPresent();//sysj\plant.sysj line: 160, column: 5
+  public void thread621(int [] tdone, int [] ends){
+        S598=1;
+    if((Integer)(posOne_10.getpreval() == null ? 0 : ((Integer)posOne_10.getpreval()).intValue()) == 5){//sysj\plant.sysj line: 219, column: 7
+      capOnBottleAtPos1.setPresent();//sysj\plant.sysj line: 220, column: 5
       currsigs.addElement(capOnBottleAtPos1);
-      if((Integer)(posFive_2.getpreval() == null ? 0 : ((Integer)posFive_2.getpreval()).intValue()) != 0){//sysj\plant.sysj line: 162, column: 7
-        bottleAtPos5.setPresent();//sysj\plant.sysj line: 163, column: 5
+      if((Integer)(posFive_10.getpreval() == null ? 0 : ((Integer)posFive_10.getpreval()).intValue()) != 0){//sysj\plant.sysj line: 222, column: 7
+        bottleAtPos5.setPresent();//sysj\plant.sysj line: 223, column: 5
         currsigs.addElement(bottleAtPos5);
-        active[4]=1;
-        ends[4]=1;
-        tdone[4]=1;
+        active[12]=1;
+        ends[12]=1;
+        tdone[12]=1;
       }
       else {
-        active[4]=1;
-        ends[4]=1;
-        tdone[4]=1;
+        active[12]=1;
+        ends[12]=1;
+        tdone[12]=1;
       }
     }
     else {
-      if((Integer)(posFive_2.getpreval() == null ? 0 : ((Integer)posFive_2.getpreval()).intValue()) != 0){//sysj\plant.sysj line: 162, column: 7
-        bottleAtPos5.setPresent();//sysj\plant.sysj line: 163, column: 5
+      if((Integer)(posFive_10.getpreval() == null ? 0 : ((Integer)posFive_10.getpreval()).intValue()) != 0){//sysj\plant.sysj line: 222, column: 7
+        bottleAtPos5.setPresent();//sysj\plant.sysj line: 223, column: 5
         currsigs.addElement(bottleAtPos5);
-        active[4]=1;
-        ends[4]=1;
-        tdone[4]=1;
+        active[12]=1;
+        ends[12]=1;
+        tdone[12]=1;
       }
       else {
-        active[4]=1;
-        ends[4]=1;
-        tdone[4]=1;
+        active[12]=1;
+        ends[12]=1;
+        tdone[12]=1;
       }
     }
   }
 
-  public void thread407(int [] tdone, int [] ends){
-        S386=1;
-    packedArray_thread_3 = new int[6];//sysj\plant.sysj line: 125, column: 3
-    pos_thread_3 = 0;//sysj\plant.sysj line: 126, column: 3
-    for(int i_thread_3 = 0; i_thread_3 < 6; i_thread_3 = i_thread_3 + 1) {//sysj\plant.sysj line: 127, column: 29
-      packedArray_thread_3[i_thread_3] = 0;//sysj\plant.sysj line: 128, column: 7
+  public void thread620(int [] tdone, int [] ends){
+        S581=1;
+    packedArray_thread_11 = new int[6];//sysj\plant.sysj line: 182, column: 3
+    pos_thread_11 = 0;//sysj\plant.sysj line: 183, column: 3
+    for(int i_thread_11 = 0; i_thread_11 < 6; i_thread_11 = i_thread_11 + 1) {//sysj\plant.sysj line: 185, column: 29
+      packedArray_thread_11[i_thread_11] = 0;//sysj\plant.sysj line: 186, column: 7
     }
-    packedArray_thread_3[0] = 5;//sysj\plant.sysj line: 131, column: 6
-    packedArray_thread_3[3] = 1;//sysj\plant.sysj line: 132, column: 6
-    S363=0;
-    active[3]=1;
-    ends[3]=1;
-    tdone[3]=1;
+    packedArray_thread_11[0] = 5;//sysj\plant.sysj line: 189, column: 6
+    packedArray_thread_11[3] = 1;//sysj\plant.sysj line: 190, column: 6
+    S558=0;
+    active[11]=1;
+    ends[11]=1;
+    tdone[11]=1;
   }
 
   public void runClockDomain(){
@@ -199,56 +202,56 @@ public class RotaryTablePlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S405){
+      switch(S600){
         case 0 : 
-          S405=0;
+          S600=0;
           break RUN;
         
         case 1 : 
-          S405=2;
-          S405=2;
-          posOne_2.setClear();//sysj\plant.sysj line: 123, column: 2
-          posFive_2.setClear();//sysj\plant.sysj line: 123, column: 2
-          turn_2.setClear();//sysj\plant.sysj line: 123, column: 2
-          thread407(tdone,ends);
-          thread408(tdone,ends);
-          int biggest409 = 0;
-          if(ends[3]>=biggest409){
-            biggest409=ends[3];
+          S600=2;
+          S600=2;
+          posOne_10.setClear();//sysj\plant.sysj line: 180, column: 2
+          posFive_10.setClear();//sysj\plant.sysj line: 180, column: 2
+          turn_10.setClear();//sysj\plant.sysj line: 180, column: 2
+          thread620(tdone,ends);
+          thread621(tdone,ends);
+          int biggest622 = 0;
+          if(ends[11]>=biggest622){
+            biggest622=ends[11];
           }
-          if(ends[4]>=biggest409){
-            biggest409=ends[4];
+          if(ends[12]>=biggest622){
+            biggest622=ends[12];
           }
-          if(biggest409 == 1){
-            active[2]=1;
-            ends[2]=1;
+          if(biggest622 == 1){
+            active[10]=1;
+            ends[10]=1;
             break RUN;
           }
         
         case 2 : 
-          posOne_2.setClear();//sysj\plant.sysj line: 123, column: 2
-          posFive_2.setClear();//sysj\plant.sysj line: 123, column: 2
-          turn_2.setClear();//sysj\plant.sysj line: 123, column: 2
-          thread410(tdone,ends);
-          thread411(tdone,ends);
-          int biggest412 = 0;
-          if(ends[3]>=biggest412){
-            biggest412=ends[3];
+          posOne_10.setClear();//sysj\plant.sysj line: 180, column: 2
+          posFive_10.setClear();//sysj\plant.sysj line: 180, column: 2
+          turn_10.setClear();//sysj\plant.sysj line: 180, column: 2
+          thread623(tdone,ends);
+          thread624(tdone,ends);
+          int biggest625 = 0;
+          if(ends[11]>=biggest625){
+            biggest625=ends[11];
           }
-          if(ends[4]>=biggest412){
-            biggest412=ends[4];
+          if(ends[12]>=biggest625){
+            biggest625=ends[12];
           }
-          if(biggest412 == 1){
-            active[2]=1;
-            ends[2]=1;
+          if(biggest625 == 1){
+            active[10]=1;
+            ends[10]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest412 == 0){
-            S405=0;
-            active[2]=0;
-            ends[2]=0;
-            S405=0;
+          if(biggest625 == 0){
+            S600=0;
+            active[10]=0;
+            ends[10]=0;
+            S600=0;
             break RUN;
           }
         
@@ -257,30 +260,31 @@ public class RotaryTablePlant extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;
     // Now instantiate all the local signals ONLY
-    posOne_2 = new Signal();
-    posFive_2 = new Signal();
-    turn_2 = new Signal();
+    posOne_10 = new Signal();
+    posFive_10 = new Signal();
+    turn_10 = new Signal();
     // --------------------------------------------------
   }
   
   public void run(){
-    while(active[2] != 0){
-      int index = 2;
+    while(active[10] != 0){
+      int index = 10;
       if(paused[index]==1 || suspended[index]==1 || active[index] == 0){
         for(int h=1;h<paused.length;++h){
           paused[h]=0;
         }
       }
-      if(paused[2]!=0 || suspended[2]!=0 || active[2]!=1);
+      if(paused[10]!=0 || suspended[10]!=0 || active[10]!=1);
       else{
         if(!df){
+          atPos4_o.gethook();
           rotaryTableTrigger.gethook();
           df = true;
         }
@@ -293,9 +297,9 @@ public class RotaryTablePlant extends ClockDomain{
       tableAlignedWithSensorC.setpreclear();
       rotTurn.setpreclear();
       rotContent.setpreclear();
-      posOne_2.setpreclear();
-      posFive_2.setpreclear();
-      turn_2.setpreclear();
+      posOne_10.setpreclear();
+      posFive_10.setpreclear();
+      turn_10.setpreclear();
       int dummyint = 0;
       for(int qw=0;qw<currsigs.size();++qw){
         dummyint = ((Signal)currsigs.elementAt(qw)).getStatus() ? ((Signal)currsigs.elementAt(qw)).setprepresent() : ((Signal)currsigs.elementAt(qw)).setpreclear();
@@ -317,15 +321,17 @@ public class RotaryTablePlant extends ClockDomain{
       rotTurn.setClear();
       rotContent.sethook();
       rotContent.setClear();
-      posOne_2.setClear();
-      posFive_2.setClear();
-      turn_2.setClear();
-      if(paused[2]!=0 || suspended[2]!=0 || active[2]!=1);
+      posOne_10.setClear();
+      posFive_10.setClear();
+      turn_10.setClear();
+      atPos4_o.sethook();
+      if(paused[10]!=0 || suspended[10]!=0 || active[10]!=1);
       else{
+        atPos4_o.gethook();
         rotaryTableTrigger.gethook();
       }
       runFinisher();
-      if(active[2] == 0){
+      if(active[10] == 0){
       	this.terminated = true;
       }
       if(!threaded) break;

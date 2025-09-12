@@ -111,12 +111,69 @@ CapLoaderPlant(
 //	}
 }
 
+CapperPlant (
+		input signal cylPos5ZaxisExtend, gripperTurnRetracted, gripperTurnExtend, capGripperPos5Extend;
+		input signal cylClampBottleExtend;
+		input signal enable;
+		
+		output signal bottleAtPos4, gripperZAxisLowered, gripperZAxisLifted;
+		output signal gripperTurnHomePos, gripperTurnFinalPos;
+		
+		output signal gripperZAxisLoweredE, gripperZAxisLiftedE;
+		output signal gripperTurnHomePosE, gripperTurnFinalPosE;
+		)
+-> {
+	{
+		while(true) {
+			await(enable);
+			abort(!enable) {
+				sustain bottleAtPos4;
+			}
+			pause;
+		}
+	}
+	||
+	{
+		while(true) {
+			abort(!cylPos5ZaxisExtend && enable) {
+				sustain gripperZAxisLowered; // when the gripper/capper is lowered
+			}
+				
+			await(!enable);
+			abort(cylPos5ZaxisExtend && enable) {
+				sustain gripperZAxisLifted; // when the gripper/capper is lifted
+			}
+			await(!enable);
+			abort(capGripperPos5Extend && cylClampBottleExtend && gripperTurnExtend && enable) {
+				sustain gripperTurnHomePos; // gripper initial position
+			}
+		
+			await(!enable);
+			abort (!capGripperPos5Extend && !cylClampBottleExtend && gripperTurnRetracted && enable) {
+				sustain gripperTurnFinalPos; // gripper final position 
+			}
+			await(!enable);
+		}
+	}
+	||
+	{
+		{while(true) {present(gripperZAxisLowered){emit gripperZAxisLoweredE;} pause;}}
+		||
+		{while(true) {present(gripperZAxisLifted){emit gripperZAxisLiftedE;} pause;}}
+		||
+		{while(true) {present(gripperTurnHomePos){emit gripperTurnHomePosE;} pause;}}
+		||
+		{while(true) {present(gripperTurnFinalPos){emit gripperTurnFinalPosE;} pause;}}
+	}
+}
+
 
 RotaryTablePlant(
 		input signal rotaryTableTrigger;
 		output signal bottleAtPos5, tableAlignedWithSensor, capOnBottleAtPos1, tableAlignedWithSensorC;
 		// GUI signal
 		output signal rotTurn, rotContent;
+		output Boolean channel atPos4;
 )
 ->
 {
@@ -124,6 +181,7 @@ RotaryTablePlant(
 	{
 		int[] packedArray = new int[6]; 
 		int pos = 0;
+		
 		for(int i = 0; i < 6; i++){
 		    packedArray[i] = 0;
 		}
@@ -136,6 +194,8 @@ RotaryTablePlant(
 
 			int pos1 = packedArray[0];
 			int pos5 = packedArray[4];
+			int pos4 = packedArray[3];
+			
 			emit rotTurn(packedArray);
 			emit posOne(pos1);
 			emit posFive(pos5);

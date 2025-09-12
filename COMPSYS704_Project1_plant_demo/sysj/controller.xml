@@ -2,8 +2,10 @@
 	<SubSystem Name="SS1" Local="true">
 			<ClockDomain Name="OrchestratorCD" Class="Orchestrator">
 			<iChannel Name="rotaryTableStatus" From="RotaryTableControllerCD.rotaryTableStatus" />
-
+			<iChannel Name="capperStatus" From="CapperControllerCD.Status" />
+			
 			<oChannel Name="rotaryTableRequest" To="RotaryTableControllerCD.rotaryTableRequest" />
+			<oChannel Name="capperRequest" To="CapperControllerCD.capperRequest" />
 		</ClockDomain>
 		
 		<ClockDomain Name="CapLoaderControllerCD" Class="CapLoaderController">
@@ -25,6 +27,16 @@
 			<iSignal Name="vacOnM"        Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 			<iSignal Name="armSourceM"    Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 			<iSignal Name="armDestM"      Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
+		</ClockDomain>
+		
+		<ClockDomain Name="CapperControllerCD" Class="CapperController">
+			<iSignal Name="bottleAtPos4" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
+			<iSignal Name="gripperZAxisLowered" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
+			<iSignal Name="gripperZAxisLifted" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
+			<iSignal Name="gripperTurnHomePos" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
+			<iSignal Name="gripperTurnFinalPos" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
+			
+			<iChannel Name="capperRequest" From="OrchestratorCD.capperRequest" />
 		</ClockDomain>
 		
 		<ClockDomain Name="RotaryTableControllerCD" Class="RotaryTableController">

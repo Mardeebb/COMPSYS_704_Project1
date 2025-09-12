@@ -13,6 +13,21 @@ CapLoaderController(
 	}
 }
 
+CapperController (
+		input signal bottleAtPos4, gripperZAxisLowered, gripperZAxisLifted;
+		input signal gripperTurnHomePos, girpperTurnFinalPos;
+		input Boolean channel capperRequest;
+		
+		output String channel capperStatus;
+		)
+-> {
+	System.out.println("Capper CD");
+	{
+		
+	}
+}
+
+
 RotaryTableController(
 		input signal enable, tableAlignedWithSensorC ;
 		output signal rotaryTableTrigger;
@@ -26,7 +41,7 @@ RotaryTableController(
 		// pusher control
 		while(true){
 			receive rotaryTableRequest;
-			
+			System.out.println("Request received");
 			await(enable);
 			abort(tableAlignedWithSensorC){
 				sustain rotaryTableTrigger;

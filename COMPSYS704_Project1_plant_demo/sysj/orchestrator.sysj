@@ -1,6 +1,6 @@
 Orchestrator(
-		input String channel rotaryTableStatus;
-		output Boolean channel rotaryTableRequest;
+		input String channel rotaryTableStatus, capperStatus;
+		output Boolean channel rotaryTableRequest, capperRequest;
 		)
 ->{
 	System.out.println("Hello Machine");
