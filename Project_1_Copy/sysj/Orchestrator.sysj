@@ -3,15 +3,15 @@ import run.BottleTwin;
 
 Orchestrator(
 		input BottleTwin signal newBottleTwin;
-		input signal request, conveyorMoved, rotTableTurned, filled;
+		input signal request, conveyorMoved, rotTableTurned, filled, capOn;
 		
-		output signal recieveTwin, moveConveyor, turnRotTable, fillerBottleOut, startFilling;
+		output signal recieveTwin, moveConveyor, turnRotTable, fillerBottleOut, startFilling, startCapOn;
 		output BottleTwin signal bottlePos0, bottlePos1, bottlePos2, bottlePos3, bottlePos4, bottlePos5, bottlePos6, bottlePos7, bottlePos8;
 		)
 ->{	
 	BottleTwin signal posZero, posOne, posTwo, posThree, posFour, posFive, posSix, posSeven, posEight;
 	signal posZeroLeft, posOneLeft, posTwoLeft, posThreeLeft, posFourLeft, posFiveLeft, posSixLeft, posSevenLeft, posEightLeft;
-
+	signal rotTurn;
 	{
 		while(true){
 		    System.err.println("new Orchestrator Cycle");
@@ -88,7 +88,8 @@ Orchestrator(
 			emit posFive(b4);
 			emit posSix(b5);
 			pause;
-			
+			emit rotTurn;
+
 		}
 	}
 	
@@ -103,7 +104,18 @@ Orchestrator(
 		}
 	}
 
-	
+	||
+
+	// filler control
+	{
+		while(true){
+			await(request);
+			await(rotTurn);
+			emit startCapOn;
+			await(capOn);
+		}
+	}
+
 	
 	
 	||
@@ -157,10 +169,10 @@ Orchestrator(
 
 	{
 		while(true){
-			await(posTwo);
-			BottleTwin b = (BottleTwin)#posTwo;
+			await(posThree);
+			BottleTwin b = (BottleTwin)#posThree;
 			if (b != null) {
-			emit bottlePos2(b);
+			emit bottlePos3(b);
 			}
 			pause;
 		}

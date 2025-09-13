@@ -1,48 +1,52 @@
 <System xmlns="http://systemjtechnology.com">
 	<SubSystem Name="SS1" Local="true">
 
+
 		<ClockDomain Name="OrchestratorCD" Class="Orchestrator">
 			<iSignal Name="newBottleTwin" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
 			<iSignal Name="request" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
 			<iSignal Name="conveyorMoved" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
 			<iSignal Name="rotTableTurned" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
 			<iSignal Name="filled" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
+			<iSignal Name="capOn" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
+
 
 			<oSignal Name="recieveTwin" To="UI.recieveTwin" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			
 			<oSignal Name="moveConveyor" To="conveyorControllerCD.move" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10006" />
 			<oSignal Name="turnRotTable" To="rotaryTableControllerCD.turn" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10003" />
 			<oSignal Name="fillerBottleOut" To="fillerPlantCD.bottleOut" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10008" />
 			<oSignal Name="startFilling" To="fillerControllerCD.startFilling" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10007" />
+			<oSignal Name="startCapOn" To="ControllerCD.request" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10000" />
 
 
 			<oSignal Name="bottlePos0" To="conveyorPlantCD.bottleArriveToZero" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10005" />
 			<oSignal Name="bottlePos1" To="rotaryTablePlantCD.posOne" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10002" />
 			<oSignal Name="bottlePos2" To="fillerPlantCD.bottleIn" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10008" />
-			<oSignal Name="bottlePos3" To="UI.bottlePos3" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos3" To="ControllerCD.bottleIn" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10000" />
 			<oSignal Name="bottlePos4" To="UI.bottlePos4" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="bottlePos5" To="UI.bottlePos5" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="bottlePos6" To="UI.bottlePos6" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="bottlePos7" To="UI.bottlePos7" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="bottlePos8" To="UI.bottlePos8" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-
-			
 		</ClockDomain>
+
 
 		<ClockDomain Name="conveyorControllerCD" Class="conveyorController">
 			<iSignal Name="move" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10006" />
-			
 			<iSignal Name="bottleAtPos1" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10006" />
 			<iSignal Name="bottleLeftPos5" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10006" />
+
 
 			<oSignal Name="conveyorMoving" To="UI.conveyorMoving" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="conveyorStop" To="UI.conveyorStop" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 
+
 			<oSignal Name="conveyorMoved" To="OrchestratorCD.conveyorMoved" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10004" />
 			<oSignal Name="motConveyorOnOff" To="conveyorPlantCD.motConveyorOnOff" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10005" />
 		</ClockDomain>
-		
-		<ClockDomain Name="ControllerCD" Class="Controller">
+
+
+		<ClockDomain Name="ControllerCD" Class="capLoaderController">
 			<iSignal Name="pusherRetracted" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 			<iSignal Name="pusherExtended"  Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 			<iSignal Name="WPgripped"       Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
@@ -50,33 +54,34 @@
 			<iSignal Name="armAtDest"       Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 			<iSignal Name="empty"           Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 			<iSignal Name="request"         Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
+			<iSignal Name="bottleIn"         Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 
+
+			<oSignal Name="capOn"        To="OrchestratorCD.capOn"        Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10004" />
+			<oSignal Name="capOnID"      To="UI.capOnID"        Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="pusherExtend" To="PlantCD.pusherExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10001" />
 			<oSignal Name="vacOn"        To="PlantCD.vacOn"        Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10001" />
 			<oSignal Name="armSource"    To="PlantCD.armSource"    Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10001" />
 			<oSignal Name="armDest"      To="PlantCD.armDest"      Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10001" />
-
-			<iSignal Name="mode"          Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
-			<iSignal Name="pusherExtendM" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
-			<iSignal Name="vacOnM"        Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
-			<iSignal Name="armSourceM"    Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
-			<iSignal Name="armDestM"      Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 		</ClockDomain>
+		
 		
 		<ClockDomain Name="rotaryTableControllerCD" Class="rotController">
 			<iSignal Name="turn" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
 			<iSignal Name="tableAlignedWithSensorC" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10003" />
 			
+			
 			<oSignal Name="rotTableTurned" To="OrchestratorCD.rotTableTurned" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10004" />
 			<oSignal Name="rotaryTableTrigger" To="rotaryTablePlantCD.rotaryTableTrigger" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10002" />
 		</ClockDomain>
 		
+		
 		<ClockDomain Name="fillerControllerCD" Class="fController">
-		 
 			<iSignal Name="bottleAtPos2" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10007" />
 			<iSignal Name="dosUnitEvac" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10007" />
 			<iSignal Name="dosUnitFilled" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10007" />
 			<iSignal Name="startFilling" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10007" />
+
 
 			<oSignal Name="Filled" To="OrchestratorCD.filled" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10004" />
 			<oSignal Name="valveInjectorOnOff" To="fillerPlantCD.valveInjectorOnOff" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10008" />
@@ -85,5 +90,7 @@
 			<oSignal Name="dosUnitValveExtend" To="fillerPlantCD.dosUnitValveExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10008" />
 		</ClockDomain>
 
+
 	</SubSystem>
 </System>
+

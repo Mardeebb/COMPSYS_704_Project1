@@ -1,0 +1,79 @@
+
+import run.BottleTwin;
+
+capLoaderController(
+		input signal pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,empty,request;
+		input BottleTwin signal bottleIn;
+
+		output signal pusherExtend,vacOn,armSource,armDest, capOn;
+		output int signal capOnID;
+		)
+->{
+	int signal bottleID;
+	
+    System.out.println("caploader Controller started");
+	{
+		// pusher control
+		while(true){
+			
+			await(request);
+			
+			int currnetID = (int)#bottleID;
+			if(currnetID == -1) {
+				break;
+			}
+		    System.err.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+
+
+			abort(armAtDest){
+				sustain armDest;
+			}; 
+			pause;
+			abort(pusherExtended){
+				sustain pusherExtend;
+			}
+			pause;
+			await(pusherRetracted);
+			abort(armAtSource){
+				sustain armSource;
+			};
+			pause;
+			abort(WPgripped){
+				sustain vacOn;
+				await(WPgripped);
+			};
+			pause;
+			abort(armAtDest){
+				while(true){
+					emit vacOn;
+					emit armDest;
+					pause;
+				}
+			}
+			await(!WPgripped);
+			abort(armAtSource){
+				sustain armSource;
+			};
+			int id = (int)#bottleID;
+			emit capOnID(id);
+			emit capOn;
+			emit bottleID(-1);
+			pause;
+		}
+	}
+	||
+	{
+		emit bottleID(-1);
+		while(true) {
+			await(bottleIn);
+			BottleTwin b = (BottleTwin)#bottleIn;
+			int id = b.ID;
+			emit bottleID(id);
+		}
+	}
+
+}
+
+	
+
+

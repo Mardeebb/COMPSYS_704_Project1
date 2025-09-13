@@ -18,13 +18,13 @@ class OrderDispatcher implements Runnable {
 	    		    System.err.println("newBottle from backend" + currentBottle.ID);
     		    }
         	}
-        	if(!States.recieveTwin) {
+        	if(!Caploader.recieveTwin) {
     		    if (currentBottle != null) {
-	    		    System.err.println(    		    	States.recieveTwin);
+	    		    System.err.println(    		    	Caploader.recieveTwin);
 
             		SignalClient sc = new SignalClient(10004, "OrchestratorCD.newBottleTwin", currentBottle);
             		sc.send();
-            		States.recieveTwin = true;
+            		Caploader.recieveTwin = true;
             		currentBottle = null;
     		    }
         	}

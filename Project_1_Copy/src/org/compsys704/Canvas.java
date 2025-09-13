@@ -31,7 +31,6 @@ public class Canvas extends JPanel {
 	BufferedImage empty_bottle;
 	BufferedImage full_bottle;
 	BufferedImage cap_bottle;
-	BufferedImage finish_bottle;
 	BufferedImage rotary_table;
 	BufferedImage finished_bottle;
 	BufferedImage conveyor_moving;
@@ -46,7 +45,7 @@ public class Canvas extends JPanel {
         // A small popup, you can use JDialog if you want more custom UI
         JOptionPane.showMessageDialog(
             this,
-            "Bottle ID: " + bottle.ID +"\nOrder: " + bottle.order + "\nName: " + bottle.name + "\nStatus: " + bottle.status+ "\nFilled: " + bottle.isFilled,
+            "Bottle ID: " + bottle.ID +"\nOrder: " + bottle.order + "\nName: " + bottle.name + "\nStatus: " + bottle.status+ "\nFilled: " + bottle.isFilled+ "\nCapOn: " + bottle.isCapOn,
             "Bottle Info",
             JOptionPane.INFORMATION_MESSAGE
         );
@@ -89,6 +88,10 @@ public class Canvas extends JPanel {
 			full_bottle = scaleImage(full_bottle, 80, 80);
 			finished_bottle = bi.getSubimage(529, 296, 200, 200);
 			finished_bottle = scaleImage(finished_bottle, 80,80);
+			cap_bottle = bi.getSubimage(735, 296, 200, 200);
+			cap_bottle = scaleImage(cap_bottle, 80,80);
+
+			
 			bi = ImageIO.read(new File("res/gui.png"));
 			conveyor_static = bi.getSubimage(38, 37, 1247, 107);
 			conveyor_moving = bi.getSubimage(38, 177, 1247, 107);
@@ -151,7 +154,7 @@ public class Canvas extends JPanel {
 				g.drawImage(full_bottle,x, y, null);
 		        break;
 			case 2:
-				g.drawImage(empty_bottle,x, y, null);
+				g.drawImage(cap_bottle,x, y, null);
 		        break;
 			case 3:
 				g.drawImage(finished_bottle,x, y, null);
@@ -270,14 +273,14 @@ public class Canvas extends JPanel {
 		
 		g.drawImage(loader, cap_X + 0, cap_Y + 100, null);
 		
-		if(States.ARM_AT_DEST)
+		if(Caploader.ARM_AT_DEST)
 			g.drawImage(arm2, cap_X + 25, cap_Y + 220, null);
 		else
 			g.drawImage(arm1, cap_X + 25, cap_Y + 220, null);
 
 		
-		if(States.GRIPPED){
-			if(States.ARM_AT_DEST){
+		if(Caploader.GRIPPED){
+			if(Caploader.ARM_AT_DEST){
 				g.setColor(Color.black);
 				g.fillOval(cap_X + 10, cap_Y + 11, 30, 30);
 				g.setColor(Color.red);
@@ -292,15 +295,15 @@ public class Canvas extends JPanel {
 			g.setColor(Color.black);
 		}
 //		else{
-			if(States.CAP_READY){ // A cap is pushed to the source pos
+			if(Caploader.CAP_READY){ // A cap is pushed to the source pos
 				g.setColor(Color.black);
 				g.fillOval(cap_X + 40, cap_Y + 243, 30, 30);
 			}
 //		}
 		
-		if(States.PUSHER_RETRACTED){
+		if(Caploader.PUSHER_RETRACTED){
 			g.drawImage(p1, cap_X + 90, cap_Y + 225, null);
-			if(!States.MAG_EMPTY){
+			if(!Caploader.MAG_EMPTY){
 				g.setColor(Color.black);
 				g.fillOval(cap_X + 154, cap_Y + 243, 30, 30);
 			}
@@ -309,7 +312,7 @@ public class Canvas extends JPanel {
 			g.drawImage(p2, cap_X + 90, cap_Y + 225, null);
 		}
 		
-		if(!States.MAG_EMPTY){
+		if(!Caploader.MAG_EMPTY){
 			g.drawImage(cap, cap_X + 152, cap_Y + 155, null);
 		}
 
