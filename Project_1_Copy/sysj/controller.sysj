@@ -181,7 +181,7 @@ CapperController (
 		input signal bottleAtPos4, gripperZAxisLowered, gripperZAxisLifted;
 		input signal gripperTurnHomePos, gripperTurnFinalPos;
 		
-		output signal cylPos5ZaxisExtend, gripperTurnRetracted, gripperTurnExtend, capGripperPos5Extend;
+		output signal cylPos5ZaxisExtend, gripperTurnRetract, gripperTurnExtend, capGripperPos5Extend;
 		output signal cylClampBottleExtend;
 		)
 -> {
@@ -190,7 +190,7 @@ CapperController (
 		{
 			while(true) {
 				// wait until bottle is at position 4
-				await(bottleAtPos4);
+				//await(bottleAtPos4);
 				
 				pause;
 				// clamp bottle and lower gripper

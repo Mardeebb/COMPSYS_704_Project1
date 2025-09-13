@@ -42,7 +42,7 @@
 		
 		<ClockDomain Name="CapperPlantCD" Class="CapperPlant">
 			<iSignal Name="cylPos5ZaxisExtend" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10041" />
-			<iSignal Name="gripperTurnRetracted"        Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10041" />
+			<iSignal Name="gripperTurnRetract"        Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10041" />
 			<iSignal Name="gripperTurnExtend"    Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10041" />
 			<iSignal Name="capGripperPos5Extend"      Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10041" />
 			<iSignal Name="cylClampBottleExtend"       Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10041" />
@@ -92,23 +92,6 @@
 		</ClockDomain>
 		
 
-		
-		
-		<ClockDomain Name="baxtorRobotPlantCD" Class="bPlant">
-			 <iSignal Name="CMD_L" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10031" />
-			 <iSignal Name="CMD_L2" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10031" />
-			 <iSignal Name="CMD_R" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10031" />
-			 <iSignal Name="enable" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10031" />
-			 
-			 <oSignal Name="CMDfb_L" To="baxtorRobotControllerCD.CMDfb_L" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10030" />
-			 <oSignal Name="CMDfb_L2" To="baxtorRobotControllerCD.CMDfb_L2" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10030" />
-			 <oSignal Name="CMDfb_R" To="baxtorRobotControllerCD.CMDfb_R" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10030" />
-			 <oSignal Name="bottleLoad" To="baxtorRobotControllerCD.bottleLoad"  Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10030"/>
-			 <oSignal Name="bottleUnload"  To="baxtorRobotControllerCD.bottleUnload"  Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10030" />
-			 
-			 <oSignal Name="CMD_LE" To="baxtorRobotControllerCD.CMD_LE" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			 <oSignal Name="CMD_L2E" To="baxtorRobotControllerCD.CMD_L2E" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-		</ClockDomain>
 
 	</SubSystem>
 </System>

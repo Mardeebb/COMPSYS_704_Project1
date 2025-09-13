@@ -33,14 +33,14 @@ public class SysJWorker extends Worker{
 			break;
 		case "CMD_LE":
 			if(status) {
-				System.err.println("CMD_LE is here ...........................................");
+				//System.err.println("CMD_LE is here ...........................................");
 				robot.cmdL = (String) value;
 
 			}
 
 		case "CMD_L2E":
 			if(status) {
-				System.err.println("CMD_L2E is here ............................................");
+				//System.err.println("CMD_L2E is here ............................................");
 				robot.cmdL = (String) value;
 			}
 
@@ -126,6 +126,7 @@ public class SysJWorker extends Worker{
 			
 		case "dosUnitEvacE":
 			Filler.filler_on = status;
+			System.err.println(Filler.filler_on);
 			break;			
 			
 		case "dosUnitFilledE":
@@ -134,6 +135,7 @@ public class SysJWorker extends Worker{
 		
 		case "gripperZAxisLoweredE":
 			Capper.capper_lowered = status;
+			System.err.println(Capper.capper_lowered);
 			break;
 		
 		case "gripperZAxisLiftedE":
@@ -154,7 +156,7 @@ public class SysJWorker extends Worker{
 		}
 	}
 	
-	static final List<String> signames = Arrays.asList("CMD_L2E", "CMD_LE", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","pos0","pos1","pos5","pos7","conveyorMoving","conveyorStop");
+	static final List<String> signames = Arrays.asList("CMD_L2E", "CMD_LE",  "gripperTurnFinalPosE", "gripperTurnHomePosE", "gripperZAxisLiftedE", "gripperZAxisLoweredE", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","pos0","pos1","pos5","pos7","conveyorMoving","conveyorStop");
 	
 	@Override
 	public boolean hasSignal(String sn) {

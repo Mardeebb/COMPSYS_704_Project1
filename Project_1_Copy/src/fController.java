@@ -19,17 +19,17 @@ public class fController extends ClockDomain{
   public Signal valveInletOnOff = new Signal("valveInletOnOff", Signal.OUTPUT);
   public Signal dosUnitValveRetract = new Signal("dosUnitValveRetract", Signal.OUTPUT);
   public Signal dosUnitValveExtend = new Signal("dosUnitValveExtend", Signal.OUTPUT);
-  private int S845 = 1;
-  private int S720 = 1;
-  private int S684 = 1;
-  private int S761 = 1;
-  private int S725 = 1;
+  private int S835 = 1;
+  private int S710 = 1;
+  private int S674 = 1;
+  private int S751 = 1;
+  private int S715 = 1;
   
   private int[] ends = new int[15];
   private int[] tdone = new int[15];
   
-  public void thread1413(int [] tdone, int [] ends){
-        switch(S761){
+  public void thread1403(int [] tdone, int [] ends){
+        switch(S751){
       case 0 : 
         active[11]=0;
         ends[11]=0;
@@ -37,10 +37,10 @@ public class fController extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S725){
+        switch(S715){
           case 0 : 
             if(dosUnitFilled.getprestatus()){//sysj\controller.sysj line: 266, column: 12
-              S725=1;
+              S715=1;
               active[11]=1;
               ends[11]=1;
               tdone[11]=1;
@@ -55,8 +55,8 @@ public class fController extends ClockDomain{
             break;
           
           case 1 : 
-            S725=1;
-            S725=2;
+            S715=1;
+            S715=2;
             valveInletOnOff.setPresent();//sysj\controller.sysj line: 273, column: 8
             currsigs.addElement(valveInletOnOff);
             active[11]=1;
@@ -66,7 +66,7 @@ public class fController extends ClockDomain{
           
           case 2 : 
             if(dosUnitEvac.getprestatus()){//sysj\controller.sysj line: 272, column: 12
-              S725=0;
+              S715=0;
               valveInjectorOnOff.setPresent();//sysj\controller.sysj line: 267, column: 8
               currsigs.addElement(valveInjectorOnOff);
               active[11]=1;
@@ -88,8 +88,8 @@ public class fController extends ClockDomain{
     }
   }
 
-  public void thread1412(int [] tdone, int [] ends){
-        switch(S720){
+  public void thread1402(int [] tdone, int [] ends){
+        switch(S710){
       case 0 : 
         active[10]=0;
         ends[10]=0;
@@ -97,10 +97,10 @@ public class fController extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S684){
+        switch(S674){
           case 0 : 
             if(dosUnitFilled.getprestatus()){//sysj\controller.sysj line: 250, column: 12
-              S684=1;
+              S674=1;
               active[10]=1;
               ends[10]=1;
               tdone[10]=1;
@@ -115,8 +115,8 @@ public class fController extends ClockDomain{
             break;
           
           case 1 : 
-            S684=1;
-            S684=2;
+            S674=1;
+            S674=2;
             dosUnitValveExtend.setPresent();//sysj\controller.sysj line: 257, column: 8
             currsigs.addElement(dosUnitValveExtend);
             active[10]=1;
@@ -126,7 +126,7 @@ public class fController extends ClockDomain{
           
           case 2 : 
             if(dosUnitEvac.getprestatus()){//sysj\controller.sysj line: 256, column: 12
-              S684=0;
+              S674=0;
               dosUnitValveRetract.setPresent();//sysj\controller.sysj line: 251, column: 8
               currsigs.addElement(dosUnitValveRetract);
               active[10]=1;
@@ -148,9 +148,9 @@ public class fController extends ClockDomain{
     }
   }
 
-  public void thread1410(int [] tdone, int [] ends){
-        S761=1;
-    S725=0;
+  public void thread1400(int [] tdone, int [] ends){
+        S751=1;
+    S715=0;
     valveInjectorOnOff.setPresent();//sysj\controller.sysj line: 267, column: 8
     currsigs.addElement(valveInjectorOnOff);
     active[11]=1;
@@ -158,9 +158,9 @@ public class fController extends ClockDomain{
     tdone[11]=1;
   }
 
-  public void thread1409(int [] tdone, int [] ends){
-        S720=1;
-    S684=0;
+  public void thread1399(int [] tdone, int [] ends){
+        S710=1;
+    S674=0;
     dosUnitValveRetract.setPresent();//sysj\controller.sysj line: 251, column: 8
     currsigs.addElement(dosUnitValveRetract);
     active[10]=1;
@@ -175,51 +175,51 @@ public class fController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S845){
+      switch(S835){
         case 0 : 
-          S845=0;
+          S835=0;
           break RUN;
         
         case 1 : 
-          S845=2;
-          S845=2;
+          S835=2;
+          S835=2;
           System.out.println("filler Controller started");//sysj\controller.sysj line: 244, column: 2
-          thread1409(tdone,ends);
-          thread1410(tdone,ends);
-          int biggest1411 = 0;
-          if(ends[10]>=biggest1411){
-            biggest1411=ends[10];
+          thread1399(tdone,ends);
+          thread1400(tdone,ends);
+          int biggest1401 = 0;
+          if(ends[10]>=biggest1401){
+            biggest1401=ends[10];
           }
-          if(ends[11]>=biggest1411){
-            biggest1411=ends[11];
+          if(ends[11]>=biggest1401){
+            biggest1401=ends[11];
           }
-          if(biggest1411 == 1){
+          if(biggest1401 == 1){
             active[9]=1;
             ends[9]=1;
             break RUN;
           }
         
         case 2 : 
-          thread1412(tdone,ends);
-          thread1413(tdone,ends);
-          int biggest1414 = 0;
-          if(ends[10]>=biggest1414){
-            biggest1414=ends[10];
+          thread1402(tdone,ends);
+          thread1403(tdone,ends);
+          int biggest1404 = 0;
+          if(ends[10]>=biggest1404){
+            biggest1404=ends[10];
           }
-          if(ends[11]>=biggest1414){
-            biggest1414=ends[11];
+          if(ends[11]>=biggest1404){
+            biggest1404=ends[11];
           }
-          if(biggest1414 == 1){
+          if(biggest1404 == 1){
             active[9]=1;
             ends[9]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest1414 == 0){
-            S845=0;
+          if(biggest1404 == 0){
+            S835=0;
             active[9]=0;
             ends[9]=0;
-            S845=0;
+            S835=0;
             break RUN;
           }
         

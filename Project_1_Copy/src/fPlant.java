@@ -23,20 +23,46 @@ public class fPlant extends ClockDomain{
   public Signal dosUnitFilled = new Signal("dosUnitFilled", Signal.OUTPUT);
   public Signal dosUnitEvacE = new Signal("dosUnitEvacE", Signal.OUTPUT);
   public Signal dosUnitFilledE = new Signal("dosUnitFilledE", Signal.OUTPUT);
-  private int S2127 = 1;
-  private int S2054 = 1;
-  private int S2032 = 1;
-  private int S2107 = 1;
-  private int S2061 = 1;
-  private int S2125 = 1;
-  private int S2115 = 1;
-  private int S2123 = 1;
+  private int S2080 = 1;
+  private int S2007 = 1;
+  private int S1985 = 1;
+  private int S2060 = 1;
+  private int S2014 = 1;
+  private int S2078 = 1;
+  private int S2068 = 1;
+  private int S2076 = 1;
   
-  private int[] ends = new int[30];
-  private int[] tdone = new int[30];
+  private int[] ends = new int[26];
+  private int[] tdone = new int[26];
   
-  public void thread2410(int [] tdone, int [] ends){
-        switch(S2123){
+  public void thread2131(int [] tdone, int [] ends){
+        switch(S2076){
+      case 0 : 
+        active[25]=0;
+        ends[25]=0;
+        tdone[25]=1;
+        break;
+      
+      case 1 : 
+        if(dosUnitFilled.getprestatus()){//sysj\plant.sysj line: 378, column: 30
+          dosUnitFilledE.setPresent();//sysj\plant.sysj line: 378, column: 45
+          currsigs.addElement(dosUnitFilledE);
+          active[25]=1;
+          ends[25]=1;
+          tdone[25]=1;
+        }
+        else {
+          active[25]=1;
+          ends[25]=1;
+          tdone[25]=1;
+        }
+        break;
+      
+    }
+  }
+
+  public void thread2130(int [] tdone, int [] ends){
+        switch(S2068){
       case 0 : 
         active[24]=0;
         ends[24]=0;
@@ -44,9 +70,9 @@ public class fPlant extends ClockDomain{
         break;
       
       case 1 : 
-        if(dosUnitFilled.getprestatus()){//sysj\plant.sysj line: 370, column: 30
-          dosUnitFilledE.setPresent();//sysj\plant.sysj line: 370, column: 45
-          currsigs.addElement(dosUnitFilledE);
+        if(dosUnitEvac.getprestatus()){//sysj\plant.sysj line: 376, column: 30
+          dosUnitEvacE.setPresent();//sysj\plant.sysj line: 376, column: 43
+          currsigs.addElement(dosUnitEvacE);
           active[24]=1;
           ends[24]=1;
           tdone[24]=1;
@@ -61,8 +87,8 @@ public class fPlant extends ClockDomain{
     }
   }
 
-  public void thread2409(int [] tdone, int [] ends){
-        switch(S2115){
+  public void thread2129(int [] tdone, int [] ends){
+        switch(S2078){
       case 0 : 
         active[23]=0;
         ends[23]=0;
@@ -70,16 +96,25 @@ public class fPlant extends ClockDomain{
         break;
       
       case 1 : 
-        if(dosUnitEvac.getprestatus()){//sysj\plant.sysj line: 368, column: 30
-          dosUnitEvacE.setPresent();//sysj\plant.sysj line: 368, column: 43
-          currsigs.addElement(dosUnitEvacE);
+        thread2130(tdone,ends);
+        thread2131(tdone,ends);
+        int biggest2132 = 0;
+        if(ends[24]>=biggest2132){
+          biggest2132=ends[24];
+        }
+        if(ends[25]>=biggest2132){
+          biggest2132=ends[25];
+        }
+        if(biggest2132 == 1){
           active[23]=1;
           ends[23]=1;
           tdone[23]=1;
         }
-        else {
-          active[23]=1;
-          ends[23]=1;
+        //FINXME code
+        if(biggest2132 == 0){
+          S2078=0;
+          active[23]=0;
+          ends[23]=0;
           tdone[23]=1;
         }
         break;
@@ -87,8 +122,8 @@ public class fPlant extends ClockDomain{
     }
   }
 
-  public void thread2408(int [] tdone, int [] ends){
-        switch(S2125){
+  public void thread2128(int [] tdone, int [] ends){
+        switch(S2060){
       case 0 : 
         active[22]=0;
         ends[22]=0;
@@ -96,34 +131,79 @@ public class fPlant extends ClockDomain{
         break;
       
       case 1 : 
-        thread2409(tdone,ends);
-        thread2410(tdone,ends);
-        int biggest2411 = 0;
-        if(ends[23]>=biggest2411){
-          biggest2411=ends[23];
-        }
-        if(ends[24]>=biggest2411){
-          biggest2411=ends[24];
-        }
-        if(biggest2411 == 1){
-          active[22]=1;
-          ends[22]=1;
-          tdone[22]=1;
-        }
-        //FINXME code
-        if(biggest2411 == 0){
-          S2125=0;
-          active[22]=0;
-          ends[22]=0;
-          tdone[22]=1;
+        switch(S2014){
+          case 0 : 
+            if(dosUnitValveRetract.getprestatus() && enable.getprestatus()){//sysj\plant.sysj line: 360, column: 19
+              S2014=1;
+              active[22]=1;
+              ends[22]=1;
+              tdone[22]=1;
+            }
+            else {
+              dosUnitEvac.setPresent();//sysj\plant.sysj line: 361, column: 17
+              currsigs.addElement(dosUnitEvac);
+              active[22]=1;
+              ends[22]=1;
+              tdone[22]=1;
+            }
+            break;
+          
+          case 1 : 
+            if(!enable.getprestatus()){//sysj\plant.sysj line: 363, column: 19
+              S2014=2;
+              dosUnitFilled.setPresent();//sysj\plant.sysj line: 367, column: 17
+              currsigs.addElement(dosUnitFilled);
+              active[22]=1;
+              ends[22]=1;
+              tdone[22]=1;
+            }
+            else {
+              active[22]=1;
+              ends[22]=1;
+              tdone[22]=1;
+            }
+            break;
+          
+          case 2 : 
+            if(dosUnitValveExtend.getprestatus() && enable.getprestatus()){//sysj\plant.sysj line: 366, column: 19
+              S2014=3;
+              active[22]=1;
+              ends[22]=1;
+              tdone[22]=1;
+            }
+            else {
+              dosUnitFilled.setPresent();//sysj\plant.sysj line: 367, column: 17
+              currsigs.addElement(dosUnitFilled);
+              active[22]=1;
+              ends[22]=1;
+              tdone[22]=1;
+            }
+            break;
+          
+          case 3 : 
+            if(!enable.getprestatus()){//sysj\plant.sysj line: 369, column: 19
+              S2014=0;
+              dosUnitEvac.setPresent();//sysj\plant.sysj line: 361, column: 17
+              currsigs.addElement(dosUnitEvac);
+              active[22]=1;
+              ends[22]=1;
+              tdone[22]=1;
+            }
+            else {
+              active[22]=1;
+              ends[22]=1;
+              tdone[22]=1;
+            }
+            break;
+          
         }
         break;
       
     }
   }
 
-  public void thread2407(int [] tdone, int [] ends){
-        switch(S2107){
+  public void thread2127(int [] tdone, int [] ends){
+        switch(S2007){
       case 0 : 
         active[21]=0;
         ends[21]=0;
@@ -131,17 +211,17 @@ public class fPlant extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S2061){
+        switch(S1985){
           case 0 : 
-            if(dosUnitValveRetract.getprestatus() && enable.getprestatus()){//sysj\plant.sysj line: 352, column: 19
-              S2061=1;
+            if(enable.getprestatus()){//sysj\plant.sysj line: 347, column: 19
+              S1985=1;
+              bottleAtPos2.setPresent();//sysj\plant.sysj line: 349, column: 17
+              currsigs.addElement(bottleAtPos2);
               active[21]=1;
               ends[21]=1;
               tdone[21]=1;
             }
             else {
-              dosUnitEvac.setPresent();//sysj\plant.sysj line: 353, column: 17
-              currsigs.addElement(dosUnitEvac);
               active[21]=1;
               ends[21]=1;
               tdone[21]=1;
@@ -149,47 +229,15 @@ public class fPlant extends ClockDomain{
             break;
           
           case 1 : 
-            if(!enable.getprestatus()){//sysj\plant.sysj line: 355, column: 19
-              S2061=2;
-              dosUnitFilled.setPresent();//sysj\plant.sysj line: 359, column: 17
-              currsigs.addElement(dosUnitFilled);
+            if(!enable.getprestatus()){//sysj\plant.sysj line: 348, column: 19
+              S1985=0;
               active[21]=1;
               ends[21]=1;
               tdone[21]=1;
             }
             else {
-              active[21]=1;
-              ends[21]=1;
-              tdone[21]=1;
-            }
-            break;
-          
-          case 2 : 
-            if(dosUnitValveExtend.getprestatus() && enable.getprestatus()){//sysj\plant.sysj line: 358, column: 19
-              S2061=3;
-              active[21]=1;
-              ends[21]=1;
-              tdone[21]=1;
-            }
-            else {
-              dosUnitFilled.setPresent();//sysj\plant.sysj line: 359, column: 17
-              currsigs.addElement(dosUnitFilled);
-              active[21]=1;
-              ends[21]=1;
-              tdone[21]=1;
-            }
-            break;
-          
-          case 3 : 
-            if(!enable.getprestatus()){//sysj\plant.sysj line: 361, column: 19
-              S2061=0;
-              dosUnitEvac.setPresent();//sysj\plant.sysj line: 353, column: 17
-              currsigs.addElement(dosUnitEvac);
-              active[21]=1;
-              ends[21]=1;
-              tdone[21]=1;
-            }
-            else {
+              bottleAtPos2.setPresent();//sysj\plant.sysj line: 349, column: 17
+              currsigs.addElement(bottleAtPos2);
               active[21]=1;
               ends[21]=1;
               tdone[21]=1;
@@ -202,120 +250,72 @@ public class fPlant extends ClockDomain{
     }
   }
 
-  public void thread2406(int [] tdone, int [] ends){
-        switch(S2054){
-      case 0 : 
-        active[20]=0;
-        ends[20]=0;
-        tdone[20]=1;
-        break;
-      
-      case 1 : 
-        switch(S2032){
-          case 0 : 
-            if(enable.getprestatus()){//sysj\plant.sysj line: 339, column: 19
-              S2032=1;
-              bottleAtPos2.setPresent();//sysj\plant.sysj line: 341, column: 17
-              currsigs.addElement(bottleAtPos2);
-              active[20]=1;
-              ends[20]=1;
-              tdone[20]=1;
-            }
-            else {
-              active[20]=1;
-              ends[20]=1;
-              tdone[20]=1;
-            }
-            break;
-          
-          case 1 : 
-            if(!enable.getprestatus()){//sysj\plant.sysj line: 340, column: 19
-              S2032=0;
-              active[20]=1;
-              ends[20]=1;
-              tdone[20]=1;
-            }
-            else {
-              bottleAtPos2.setPresent();//sysj\plant.sysj line: 341, column: 17
-              currsigs.addElement(bottleAtPos2);
-              active[20]=1;
-              ends[20]=1;
-              tdone[20]=1;
-            }
-            break;
-          
-        }
-        break;
-      
-    }
-  }
-
-  public void thread2403(int [] tdone, int [] ends){
-        S2123=1;
-    if(dosUnitFilled.getprestatus()){//sysj\plant.sysj line: 370, column: 30
-      dosUnitFilledE.setPresent();//sysj\plant.sysj line: 370, column: 45
+  public void thread2124(int [] tdone, int [] ends){
+        S2076=1;
+    if(dosUnitFilled.getprestatus()){//sysj\plant.sysj line: 378, column: 30
+      dosUnitFilledE.setPresent();//sysj\plant.sysj line: 378, column: 45
       currsigs.addElement(dosUnitFilledE);
-      active[24]=1;
-      ends[24]=1;
-      tdone[24]=1;
+      active[25]=1;
+      ends[25]=1;
+      tdone[25]=1;
     }
     else {
-      active[24]=1;
-      ends[24]=1;
-      tdone[24]=1;
+      active[25]=1;
+      ends[25]=1;
+      tdone[25]=1;
     }
   }
 
-  public void thread2402(int [] tdone, int [] ends){
-        S2115=1;
-    if(dosUnitEvac.getprestatus()){//sysj\plant.sysj line: 368, column: 30
-      dosUnitEvacE.setPresent();//sysj\plant.sysj line: 368, column: 43
+  public void thread2123(int [] tdone, int [] ends){
+        S2068=1;
+    if(dosUnitEvac.getprestatus()){//sysj\plant.sysj line: 376, column: 30
+      dosUnitEvacE.setPresent();//sysj\plant.sysj line: 376, column: 43
       currsigs.addElement(dosUnitEvacE);
-      active[23]=1;
-      ends[23]=1;
-      tdone[23]=1;
+      active[24]=1;
+      ends[24]=1;
+      tdone[24]=1;
     }
     else {
+      active[24]=1;
+      ends[24]=1;
+      tdone[24]=1;
+    }
+  }
+
+  public void thread2122(int [] tdone, int [] ends){
+        S2078=1;
+    thread2123(tdone,ends);
+    thread2124(tdone,ends);
+    int biggest2125 = 0;
+    if(ends[24]>=biggest2125){
+      biggest2125=ends[24];
+    }
+    if(ends[25]>=biggest2125){
+      biggest2125=ends[25];
+    }
+    if(biggest2125 == 1){
       active[23]=1;
       ends[23]=1;
       tdone[23]=1;
     }
   }
 
-  public void thread2401(int [] tdone, int [] ends){
-        S2125=1;
-    thread2402(tdone,ends);
-    thread2403(tdone,ends);
-    int biggest2404 = 0;
-    if(ends[23]>=biggest2404){
-      biggest2404=ends[23];
-    }
-    if(ends[24]>=biggest2404){
-      biggest2404=ends[24];
-    }
-    if(biggest2404 == 1){
-      active[22]=1;
-      ends[22]=1;
-      tdone[22]=1;
-    }
+  public void thread2121(int [] tdone, int [] ends){
+        S2060=1;
+    S2014=0;
+    dosUnitEvac.setPresent();//sysj\plant.sysj line: 361, column: 17
+    currsigs.addElement(dosUnitEvac);
+    active[22]=1;
+    ends[22]=1;
+    tdone[22]=1;
   }
 
-  public void thread2400(int [] tdone, int [] ends){
-        S2107=1;
-    S2061=0;
-    dosUnitEvac.setPresent();//sysj\plant.sysj line: 353, column: 17
-    currsigs.addElement(dosUnitEvac);
+  public void thread2120(int [] tdone, int [] ends){
+        S2007=1;
+    S1985=0;
     active[21]=1;
     ends[21]=1;
     tdone[21]=1;
-  }
-
-  public void thread2399(int [] tdone, int [] ends){
-        S2054=1;
-    S2032=0;
-    active[20]=1;
-    ends[20]=1;
-    tdone[20]=1;
   }
 
   public void runClockDomain(){
@@ -325,58 +325,58 @@ public class fPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S2127){
+      switch(S2080){
         case 0 : 
-          S2127=0;
+          S2080=0;
           break RUN;
         
         case 1 : 
-          S2127=2;
-          S2127=2;
-          thread2399(tdone,ends);
-          thread2400(tdone,ends);
-          thread2401(tdone,ends);
-          int biggest2405 = 0;
-          if(ends[20]>=biggest2405){
-            biggest2405=ends[20];
+          S2080=2;
+          S2080=2;
+          thread2120(tdone,ends);
+          thread2121(tdone,ends);
+          thread2122(tdone,ends);
+          int biggest2126 = 0;
+          if(ends[21]>=biggest2126){
+            biggest2126=ends[21];
           }
-          if(ends[21]>=biggest2405){
-            biggest2405=ends[21];
+          if(ends[22]>=biggest2126){
+            biggest2126=ends[22];
           }
-          if(ends[22]>=biggest2405){
-            biggest2405=ends[22];
+          if(ends[23]>=biggest2126){
+            biggest2126=ends[23];
           }
-          if(biggest2405 == 1){
-            active[19]=1;
-            ends[19]=1;
+          if(biggest2126 == 1){
+            active[20]=1;
+            ends[20]=1;
             break RUN;
           }
         
         case 2 : 
-          thread2406(tdone,ends);
-          thread2407(tdone,ends);
-          thread2408(tdone,ends);
-          int biggest2412 = 0;
-          if(ends[20]>=biggest2412){
-            biggest2412=ends[20];
+          thread2127(tdone,ends);
+          thread2128(tdone,ends);
+          thread2129(tdone,ends);
+          int biggest2133 = 0;
+          if(ends[21]>=biggest2133){
+            biggest2133=ends[21];
           }
-          if(ends[21]>=biggest2412){
-            biggest2412=ends[21];
+          if(ends[22]>=biggest2133){
+            biggest2133=ends[22];
           }
-          if(ends[22]>=biggest2412){
-            biggest2412=ends[22];
+          if(ends[23]>=biggest2133){
+            biggest2133=ends[23];
           }
-          if(biggest2412 == 1){
-            active[19]=1;
-            ends[19]=1;
+          if(biggest2133 == 1){
+            active[20]=1;
+            ends[20]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest2412 == 0){
-            S2127=0;
-            active[19]=0;
-            ends[19]=0;
-            S2127=0;
+          if(biggest2133 == 0){
+            S2080=0;
+            active[20]=0;
+            ends[20]=0;
+            S2080=0;
             break RUN;
           }
         
@@ -385,9 +385,9 @@ public class fPlant extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;
@@ -396,14 +396,14 @@ public class fPlant extends ClockDomain{
   }
   
   public void run(){
-    while(active[19] != 0){
-      int index = 19;
+    while(active[20] != 0){
+      int index = 20;
       if(paused[index]==1 || suspended[index]==1 || active[index] == 0){
         for(int h=1;h<paused.length;++h){
           paused[h]=0;
         }
       }
-      if(paused[19]!=0 || suspended[19]!=0 || active[19]!=1);
+      if(paused[20]!=0 || suspended[20]!=0 || active[20]!=1);
       else{
         if(!df){
           valveInjectorOnOff.gethook();
@@ -456,7 +456,7 @@ public class fPlant extends ClockDomain{
       dosUnitEvacE.setClear();
       dosUnitFilledE.sethook();
       dosUnitFilledE.setClear();
-      if(paused[19]!=0 || suspended[19]!=0 || active[19]!=1);
+      if(paused[20]!=0 || suspended[20]!=0 || active[20]!=1);
       else{
         valveInjectorOnOff.gethook();
         valveInletOnOff.gethook();
@@ -465,7 +465,7 @@ public class fPlant extends ClockDomain{
         enable.gethook();
       }
       runFinisher();
-      if(active[19] == 0){
+      if(active[20] == 0){
       	this.terminated = true;
       }
       if(!threaded) break;
