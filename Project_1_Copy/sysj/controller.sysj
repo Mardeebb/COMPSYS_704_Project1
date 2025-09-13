@@ -266,7 +266,7 @@ bController(
 				sustain CMD_L("limb_gripper left_limb open"); 
 			}
 			abort(CMDfb_L2){
-				sustain CMD_L2("limb_moveto left_limb A"); //Move the arm back to the pickup location (Position A
+				sustain CMD_L2("limb_moveto left_limb A"); //Move the arm back to the ready location (Position A
 			}
 		}
 	}
@@ -274,7 +274,7 @@ bController(
 	{
 		while(true){
 			abort(CMDfb_R){
-				sustain CMD_R("limb_moveto right_limb B"); // Moves the arm to the position B
+				sustain CMD_R("limb_moveto right_limb C"); // Moves the arm to the position C for pickup
 			}
 			abort(CMDfb_R2 ){
 				sustain CMD_R2("limb_gripper right_limb open"); 
@@ -283,13 +283,13 @@ bController(
 				sustain CMD_R("limb_gripper right_limb close"); 
 			}
 			abort(CMDfb_R2){
-				sustain CMD_R2("limb_moveto right_limb C"); 
+				sustain CMD_R2("limb_moveto right_limb B");  // lower horizontal place
 			}
 			abort(CMDfb_R){
 				sustain CMD_R("limb_gripper right_limb open"); 
 			}
 			abort(CMDfb_R2){
-				sustain CMD_R2("limb_moveto right_limb A"); //Move the arm back to the pickup location (Position A
+				sustain CMD_R2("limb_moveto right_limb A"); //Move the arm back to the ready location (Position A
 			}
 		}
 	}

@@ -35,10 +35,10 @@ public class rotPlant extends ClockDomain{
   private int S936 = 1;
   private int S1004 = 1;
   
-  private int[] ends = new int[22];
-  private int[] tdone = new int[22];
+  private int[] ends = new int[25];
+  private int[] tdone = new int[25];
   
-  public void thread1692(int [] tdone, int [] ends){
+  public void thread1896(int [] tdone, int [] ends){
         switch(S1004){
       case 0 : 
         active[4]=0;
@@ -59,7 +59,7 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread1691(int [] tdone, int [] ends){
+  public void thread1895(int [] tdone, int [] ends){
         switch(S999){
       case 0 : 
         active[3]=0;
@@ -143,7 +143,7 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread1689(int [] tdone, int [] ends){
+  public void thread1893(int [] tdone, int [] ends){
         S1004=1;
     if((Integer)(posOne_2.getpreval() == null ? 0 : ((Integer)posOne_2.getpreval()).intValue()) == 5) {//sysj\plant.sysj line: 162, column: 29
     }
@@ -154,7 +154,7 @@ public class rotPlant extends ClockDomain{
     tdone[4]=1;
   }
 
-  public void thread1688(int [] tdone, int [] ends){
+  public void thread1892(int [] tdone, int [] ends){
         S999=1;
     packedArray_thread_3 = new int[6];//sysj\plant.sysj line: 128, column: 3
     pos_thread_3 = 0;//sysj\plant.sysj line: 129, column: 3
@@ -187,16 +187,16 @@ public class rotPlant extends ClockDomain{
           posOne_2.setClear();//sysj\plant.sysj line: 126, column: 2
           posFive_2.setClear();//sysj\plant.sysj line: 126, column: 2
           turn_2.setClear();//sysj\plant.sysj line: 126, column: 2
-          thread1688(tdone,ends);
-          thread1689(tdone,ends);
-          int biggest1690 = 0;
-          if(ends[3]>=biggest1690){
-            biggest1690=ends[3];
+          thread1892(tdone,ends);
+          thread1893(tdone,ends);
+          int biggest1894 = 0;
+          if(ends[3]>=biggest1894){
+            biggest1894=ends[3];
           }
-          if(ends[4]>=biggest1690){
-            biggest1690=ends[4];
+          if(ends[4]>=biggest1894){
+            biggest1894=ends[4];
           }
-          if(biggest1690 == 1){
+          if(biggest1894 == 1){
             active[2]=1;
             ends[2]=1;
             break RUN;
@@ -206,22 +206,22 @@ public class rotPlant extends ClockDomain{
           posOne_2.setClear();//sysj\plant.sysj line: 126, column: 2
           posFive_2.setClear();//sysj\plant.sysj line: 126, column: 2
           turn_2.setClear();//sysj\plant.sysj line: 126, column: 2
-          thread1691(tdone,ends);
-          thread1692(tdone,ends);
-          int biggest1693 = 0;
-          if(ends[3]>=biggest1693){
-            biggest1693=ends[3];
+          thread1895(tdone,ends);
+          thread1896(tdone,ends);
+          int biggest1897 = 0;
+          if(ends[3]>=biggest1897){
+            biggest1897=ends[3];
           }
-          if(ends[4]>=biggest1693){
-            biggest1693=ends[4];
+          if(ends[4]>=biggest1897){
+            biggest1897=ends[4];
           }
-          if(biggest1693 == 1){
+          if(biggest1897 == 1){
             active[2]=1;
             ends[2]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest1693 == 0){
+          if(biggest1897 == 0){
             S1006=0;
             active[2]=0;
             ends[2]=0;
@@ -234,9 +234,9 @@ public class rotPlant extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;

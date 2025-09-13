@@ -32,10 +32,10 @@ public class fPlant extends ClockDomain{
   private int S1440 = 1;
   private int S1448 = 1;
   
-  private int[] ends = new int[22];
-  private int[] tdone = new int[22];
+  private int[] ends = new int[25];
+  private int[] tdone = new int[25];
   
-  public void thread1717(int [] tdone, int [] ends){
+  public void thread1921(int [] tdone, int [] ends){
         switch(S1448){
       case 0 : 
         active[16]=0;
@@ -62,7 +62,7 @@ public class fPlant extends ClockDomain{
     }
   }
 
-  public void thread1716(int [] tdone, int [] ends){
+  public void thread1920(int [] tdone, int [] ends){
         switch(S1440){
       case 0 : 
         active[15]=0;
@@ -89,7 +89,7 @@ public class fPlant extends ClockDomain{
     }
   }
 
-  public void thread1715(int [] tdone, int [] ends){
+  public void thread1919(int [] tdone, int [] ends){
         switch(S1450){
       case 0 : 
         active[14]=0;
@@ -98,22 +98,22 @@ public class fPlant extends ClockDomain{
         break;
       
       case 1 : 
-        thread1716(tdone,ends);
-        thread1717(tdone,ends);
-        int biggest1718 = 0;
-        if(ends[15]>=biggest1718){
-          biggest1718=ends[15];
+        thread1920(tdone,ends);
+        thread1921(tdone,ends);
+        int biggest1922 = 0;
+        if(ends[15]>=biggest1922){
+          biggest1922=ends[15];
         }
-        if(ends[16]>=biggest1718){
-          biggest1718=ends[16];
+        if(ends[16]>=biggest1922){
+          biggest1922=ends[16];
         }
-        if(biggest1718 == 1){
+        if(biggest1922 == 1){
           active[14]=1;
           ends[14]=1;
           tdone[14]=1;
         }
         //FINXME code
-        if(biggest1718 == 0){
+        if(biggest1922 == 0){
           S1450=0;
           active[14]=0;
           ends[14]=0;
@@ -124,7 +124,7 @@ public class fPlant extends ClockDomain{
     }
   }
 
-  public void thread1714(int [] tdone, int [] ends){
+  public void thread1918(int [] tdone, int [] ends){
         switch(S1432){
       case 0 : 
         active[13]=0;
@@ -208,7 +208,7 @@ public class fPlant extends ClockDomain{
     }
   }
 
-  public void thread1713(int [] tdone, int [] ends){
+  public void thread1917(int [] tdone, int [] ends){
         switch(S1379){
       case 0 : 
         active[12]=0;
@@ -258,7 +258,7 @@ public class fPlant extends ClockDomain{
     }
   }
 
-  public void thread1710(int [] tdone, int [] ends){
+  public void thread1914(int [] tdone, int [] ends){
         S1448=1;
     if(dosUnitFilled.getprestatus()){//sysj\plant.sysj line: 314, column: 30
       dosUnitFilledE.setPresent();//sysj\plant.sysj line: 314, column: 45
@@ -275,7 +275,7 @@ public class fPlant extends ClockDomain{
     }
   }
 
-  public void thread1709(int [] tdone, int [] ends){
+  public void thread1913(int [] tdone, int [] ends){
         S1440=1;
     if(dosUnitEvac.getprestatus()){//sysj\plant.sysj line: 312, column: 30
       dosUnitEvacE.setPresent();//sysj\plant.sysj line: 312, column: 43
@@ -292,25 +292,25 @@ public class fPlant extends ClockDomain{
     }
   }
 
-  public void thread1708(int [] tdone, int [] ends){
+  public void thread1912(int [] tdone, int [] ends){
         S1450=1;
-    thread1709(tdone,ends);
-    thread1710(tdone,ends);
-    int biggest1711 = 0;
-    if(ends[15]>=biggest1711){
-      biggest1711=ends[15];
+    thread1913(tdone,ends);
+    thread1914(tdone,ends);
+    int biggest1915 = 0;
+    if(ends[15]>=biggest1915){
+      biggest1915=ends[15];
     }
-    if(ends[16]>=biggest1711){
-      biggest1711=ends[16];
+    if(ends[16]>=biggest1915){
+      biggest1915=ends[16];
     }
-    if(biggest1711 == 1){
+    if(biggest1915 == 1){
       active[14]=1;
       ends[14]=1;
       tdone[14]=1;
     }
   }
 
-  public void thread1707(int [] tdone, int [] ends){
+  public void thread1911(int [] tdone, int [] ends){
         S1432=1;
     S1386=0;
     dosUnitEvac.setPresent();//sysj\plant.sysj line: 297, column: 17
@@ -321,7 +321,7 @@ public class fPlant extends ClockDomain{
     tdone[13]=1;
   }
 
-  public void thread1706(int [] tdone, int [] ends){
+  public void thread1910(int [] tdone, int [] ends){
         S1379=1;
     S1357=0;
     active[12]=1;
@@ -344,46 +344,46 @@ public class fPlant extends ClockDomain{
         case 1 : 
           S1452=2;
           S1452=2;
-          thread1706(tdone,ends);
-          thread1707(tdone,ends);
-          thread1708(tdone,ends);
-          int biggest1712 = 0;
-          if(ends[12]>=biggest1712){
-            biggest1712=ends[12];
+          thread1910(tdone,ends);
+          thread1911(tdone,ends);
+          thread1912(tdone,ends);
+          int biggest1916 = 0;
+          if(ends[12]>=biggest1916){
+            biggest1916=ends[12];
           }
-          if(ends[13]>=biggest1712){
-            biggest1712=ends[13];
+          if(ends[13]>=biggest1916){
+            biggest1916=ends[13];
           }
-          if(ends[14]>=biggest1712){
-            biggest1712=ends[14];
+          if(ends[14]>=biggest1916){
+            biggest1916=ends[14];
           }
-          if(biggest1712 == 1){
+          if(biggest1916 == 1){
             active[11]=1;
             ends[11]=1;
             break RUN;
           }
         
         case 2 : 
-          thread1713(tdone,ends);
-          thread1714(tdone,ends);
-          thread1715(tdone,ends);
-          int biggest1719 = 0;
-          if(ends[12]>=biggest1719){
-            biggest1719=ends[12];
+          thread1917(tdone,ends);
+          thread1918(tdone,ends);
+          thread1919(tdone,ends);
+          int biggest1923 = 0;
+          if(ends[12]>=biggest1923){
+            biggest1923=ends[12];
           }
-          if(ends[13]>=biggest1719){
-            biggest1719=ends[13];
+          if(ends[13]>=biggest1923){
+            biggest1923=ends[13];
           }
-          if(ends[14]>=biggest1719){
-            biggest1719=ends[14];
+          if(ends[14]>=biggest1923){
+            biggest1923=ends[14];
           }
-          if(biggest1719 == 1){
+          if(biggest1923 == 1){
             active[11]=1;
             ends[11]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest1719 == 0){
+          if(biggest1923 == 0){
             S1452=0;
             active[11]=0;
             ends[11]=0;
@@ -396,9 +396,9 @@ public class fPlant extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;

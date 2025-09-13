@@ -55,7 +55,7 @@ public class bController extends ClockDomain{
             else {
               CMD_R.setPresent();//sysj\controller.sysj line: 277, column: 5
               currsigs.addElement(CMD_R);
-              CMD_R.setValue("limb_moveto right_limb B");//sysj\controller.sysj line: 277, column: 5
+              CMD_R.setValue("limb_moveto right_limb C");//sysj\controller.sysj line: 277, column: 5
               System.out.println("Emitted CMD_R");
               active[9]=1;
               ends[9]=1;
@@ -90,7 +90,7 @@ public class bController extends ClockDomain{
               S513=3;
               CMD_R2.setPresent();//sysj\controller.sysj line: 286, column: 5
               currsigs.addElement(CMD_R2);
-              CMD_R2.setValue("limb_moveto right_limb C");//sysj\controller.sysj line: 286, column: 5
+              CMD_R2.setValue("limb_moveto right_limb B");//sysj\controller.sysj line: 286, column: 5
               System.out.println("Emitted CMD_R2");
               active[9]=1;
               ends[9]=1;
@@ -121,7 +121,7 @@ public class bController extends ClockDomain{
             else {
               CMD_R2.setPresent();//sysj\controller.sysj line: 286, column: 5
               currsigs.addElement(CMD_R2);
-              CMD_R2.setValue("limb_moveto right_limb C");//sysj\controller.sysj line: 286, column: 5
+              CMD_R2.setValue("limb_moveto right_limb B");//sysj\controller.sysj line: 286, column: 5
               System.out.println("Emitted CMD_R2");
               active[9]=1;
               ends[9]=1;
@@ -156,7 +156,7 @@ public class bController extends ClockDomain{
               S513=0;
               CMD_R.setPresent();//sysj\controller.sysj line: 277, column: 5
               currsigs.addElement(CMD_R);
-              CMD_R.setValue("limb_moveto right_limb B");//sysj\controller.sysj line: 277, column: 5
+              CMD_R.setValue("limb_moveto right_limb C");//sysj\controller.sysj line: 277, column: 5
               System.out.println("Emitted CMD_R");
               active[9]=1;
               ends[9]=1;
@@ -332,7 +332,7 @@ public class bController extends ClockDomain{
     S513=0;
     CMD_R.setPresent();//sysj\controller.sysj line: 277, column: 5
     currsigs.addElement(CMD_R);
-    CMD_R.setValue("limb_moveto right_limb B");//sysj\controller.sysj line: 277, column: 5
+    CMD_R.setValue("limb_moveto right_limb C");//sysj\controller.sysj line: 277, column: 5
     System.out.println("Emitted CMD_R");
     active[9]=1;
     ends[9]=1;

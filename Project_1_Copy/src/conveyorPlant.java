@@ -46,10 +46,10 @@ public class conveyorPlant extends ClockDomain{
   private int S1345 = 1;
   private int S1291 = 1;
   
-  private int[] ends = new int[22];
-  private int[] tdone = new int[22];
+  private int[] ends = new int[25];
+  private int[] tdone = new int[25];
   
-  public void thread1704(int [] tdone, int [] ends){
+  public void thread1908(int [] tdone, int [] ends){
         switch(S1345){
       case 0 : 
         active[10]=0;
@@ -105,7 +105,7 @@ public class conveyorPlant extends ClockDomain{
     }
   }
 
-  public void thread1703(int [] tdone, int [] ends){
+  public void thread1907(int [] tdone, int [] ends){
         switch(S1289){
       case 0 : 
         active[9]=0;
@@ -133,7 +133,7 @@ public class conveyorPlant extends ClockDomain{
     }
   }
 
-  public void thread1702(int [] tdone, int [] ends){
+  public void thread1906(int [] tdone, int [] ends){
         switch(S1281){
       case 0 : 
         active[8]=0;
@@ -167,7 +167,7 @@ public class conveyorPlant extends ClockDomain{
     }
   }
 
-  public void thread1701(int [] tdone, int [] ends){
+  public void thread1905(int [] tdone, int [] ends){
         switch(S1273){
       case 0 : 
         active[7]=0;
@@ -201,7 +201,7 @@ public class conveyorPlant extends ClockDomain{
     }
   }
 
-  public void thread1700(int [] tdone, int [] ends){
+  public void thread1904(int [] tdone, int [] ends){
         switch(S1265){
       case 0 : 
         active[6]=0;
@@ -307,7 +307,7 @@ public class conveyorPlant extends ClockDomain{
     }
   }
 
-  public void thread1698(int [] tdone, int [] ends){
+  public void thread1902(int [] tdone, int [] ends){
         S1345=1;
     S1291=0;
     active[10]=1;
@@ -315,28 +315,28 @@ public class conveyorPlant extends ClockDomain{
     tdone[10]=1;
   }
 
-  public void thread1697(int [] tdone, int [] ends){
+  public void thread1901(int [] tdone, int [] ends){
         S1289=1;
     active[9]=1;
     ends[9]=1;
     tdone[9]=1;
   }
 
-  public void thread1696(int [] tdone, int [] ends){
+  public void thread1900(int [] tdone, int [] ends){
         S1281=1;
     active[8]=1;
     ends[8]=1;
     tdone[8]=1;
   }
 
-  public void thread1695(int [] tdone, int [] ends){
+  public void thread1899(int [] tdone, int [] ends){
         S1273=1;
     active[7]=1;
     ends[7]=1;
     tdone[7]=1;
   }
 
-  public void thread1694(int [] tdone, int [] ends){
+  public void thread1898(int [] tdone, int [] ends){
         S1265=1;
     S1015=0;
     active[6]=1;
@@ -364,28 +364,28 @@ public class conveyorPlant extends ClockDomain{
           posOne_5.setClear();//sysj\plant.sysj line: 189, column: 2
           posFive_5.setClear();//sysj\plant.sysj line: 189, column: 2
           posSeven_5.setClear();//sysj\plant.sysj line: 189, column: 2
-          thread1694(tdone,ends);
-          thread1695(tdone,ends);
-          thread1696(tdone,ends);
-          thread1697(tdone,ends);
-          thread1698(tdone,ends);
-          int biggest1699 = 0;
-          if(ends[6]>=biggest1699){
-            biggest1699=ends[6];
+          thread1898(tdone,ends);
+          thread1899(tdone,ends);
+          thread1900(tdone,ends);
+          thread1901(tdone,ends);
+          thread1902(tdone,ends);
+          int biggest1903 = 0;
+          if(ends[6]>=biggest1903){
+            biggest1903=ends[6];
           }
-          if(ends[7]>=biggest1699){
-            biggest1699=ends[7];
+          if(ends[7]>=biggest1903){
+            biggest1903=ends[7];
           }
-          if(ends[8]>=biggest1699){
-            biggest1699=ends[8];
+          if(ends[8]>=biggest1903){
+            biggest1903=ends[8];
           }
-          if(ends[9]>=biggest1699){
-            biggest1699=ends[9];
+          if(ends[9]>=biggest1903){
+            biggest1903=ends[9];
           }
-          if(ends[10]>=biggest1699){
-            biggest1699=ends[10];
+          if(ends[10]>=biggest1903){
+            biggest1903=ends[10];
           }
-          if(biggest1699 == 1){
+          if(biggest1903 == 1){
             active[5]=1;
             ends[5]=1;
             break RUN;
@@ -397,34 +397,34 @@ public class conveyorPlant extends ClockDomain{
           posOne_5.setClear();//sysj\plant.sysj line: 189, column: 2
           posFive_5.setClear();//sysj\plant.sysj line: 189, column: 2
           posSeven_5.setClear();//sysj\plant.sysj line: 189, column: 2
-          thread1700(tdone,ends);
-          thread1701(tdone,ends);
-          thread1702(tdone,ends);
-          thread1703(tdone,ends);
-          thread1704(tdone,ends);
-          int biggest1705 = 0;
-          if(ends[6]>=biggest1705){
-            biggest1705=ends[6];
+          thread1904(tdone,ends);
+          thread1905(tdone,ends);
+          thread1906(tdone,ends);
+          thread1907(tdone,ends);
+          thread1908(tdone,ends);
+          int biggest1909 = 0;
+          if(ends[6]>=biggest1909){
+            biggest1909=ends[6];
           }
-          if(ends[7]>=biggest1705){
-            biggest1705=ends[7];
+          if(ends[7]>=biggest1909){
+            biggest1909=ends[7];
           }
-          if(ends[8]>=biggest1705){
-            biggest1705=ends[8];
+          if(ends[8]>=biggest1909){
+            biggest1909=ends[8];
           }
-          if(ends[9]>=biggest1705){
-            biggest1705=ends[9];
+          if(ends[9]>=biggest1909){
+            biggest1909=ends[9];
           }
-          if(ends[10]>=biggest1705){
-            biggest1705=ends[10];
+          if(ends[10]>=biggest1909){
+            biggest1909=ends[10];
           }
-          if(biggest1705 == 1){
+          if(biggest1909 == 1){
             active[5]=1;
             ends[5]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest1705 == 0){
+          if(biggest1909 == 0){
             S1347=0;
             active[5]=0;
             ends[5]=0;
@@ -437,9 +437,9 @@ public class conveyorPlant extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;

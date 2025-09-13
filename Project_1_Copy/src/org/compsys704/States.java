@@ -17,5 +17,6 @@ public class States {
 	public static volatile boolean tableAlignedWithSensor;
 	public static volatile boolean capOnBottleAtPos1;
 	
+	public static volatile String s = "";
 	
 }

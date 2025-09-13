@@ -78,7 +78,7 @@
 			<oSignal Name="CMD_L" To="baxtorRobotPlantCD.CMD_L" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10031" />
 			<oSignal Name="CMD_L2" To="baxtorRobotPlantCD.CMD_L2" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10031" />
 			<oSignal Name="CMD_R" To="baxtorRobotPlantCD.CMD_R" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10031" />
-			<oSignal Name="CMD_R2" To="baxtorRobotPlantCD.CMD_2" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10031" />
+			<oSignal Name="CMD_R2" To="baxtorRobotPlantCD.CMD_R2" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10031" />
 		</ClockDomain>
 
 	</SubSystem>

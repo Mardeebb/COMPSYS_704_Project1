@@ -39,7 +39,6 @@ public class Canvas extends JPanel {
 	BufferedImage filler_off;
 	BufferedImage filler_on;
 	BufferedImage LARM, LARM0, LARM1, LARM2, LARM3, LARM4;
-	BufferedImage RARM0, RARM1, RARM2, RARM3, RARM4;
     private EABSBackend backend;
 
     private Map<Integer, Rectangle> clickableAreas = new HashMap<>();
@@ -190,9 +189,13 @@ public class Canvas extends JPanel {
 		
 		super.paintComponent(g);
 	    Graphics2D g2d = (Graphics2D) g;
+	    
+	    //g2d.drawString(States.s, 300, 70); // (x, y) position on panel
+
 	    boolean signal1 = TurnTable.capOnBottleAtPos1;  // replace with your actual signal
 	    boolean signal2 = TurnTable.bottleAtPos5;
 	    int leftImage = robot.leftImage(robot.cmdL);
+	    System.err.println(leftImage);
 	    // draw left arm
 	    switch(leftImage) {
 	    case 0:
@@ -211,7 +214,26 @@ public class Canvas extends JPanel {
 	    	g.drawImage(LARM4, 0, 350, null);
 	    	break;
 	    }
-	   
+	    
+	    int rightImage = robot.rightImage(robot.cmdR);
+	    
+	    switch(rightImage) {
+	    case 0:
+	    	g.drawImage(LARM0, 700, 350, null);
+	    	break;
+	    case 1:
+	    	g.drawImage(LARM1, 700, 350, null);
+	    	break;
+	    case 2:
+	    	g.drawImage(LARM2, 700, 350, null);
+	    	break;
+	    case 3:
+	    	g.drawImage(LARM3, 700, 350, null);
+	    	break;
+	    case 4:
+	    	g.drawImage(LARM4, 700, 350, null);
+	    	break;
+	    }
 	    	
 	    	
 
