@@ -33,14 +33,12 @@ public class SysJWorker extends Worker{
 			break;
 		case "CMD_LE":
 			if(status) {
-				System.err.println("CMD_LE is here ...........................................");
 				robot.cmdL = (String) value;
 
 			}
 
 		case "CMD_L2E":
 			if(status) {
-				System.err.println("CMD_L2E is here ............................................");
 				robot.cmdL = (String) value;
 			}
 

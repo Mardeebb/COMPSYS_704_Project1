@@ -101,8 +101,14 @@ public class Canvas extends JPanel {
 			filler_on = scaleImage(filler_on, 170, 170);
 			bi = ImageIO.read(new File("res/robot.png"));
 			LARM = bi.getSubimage(30,100, 600,250);
-			LARM0 = scaleImage(LARM, 200, 100);
-			LARM1 = scaleImage(LARM, 140, 70);
+			LARM0 = scaleImage(LARM, 250, 100);
+			LARM1 = scaleImage(LARM, 210, 70);
+			LARM2 =bi.getSubimage(40,370, 600,250);
+			LARM2= scaleImage(LARM2, 210, 70);
+			LARM3 =bi.getSubimage(1350,30, 230,650);
+			LARM3= scaleImage(LARM3, 70, 210);
+			LARM4 =bi.getSubimage(1600,30, 230,650);
+			LARM4= scaleImage(LARM4, 70, 210);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -195,9 +201,17 @@ public class Canvas extends JPanel {
 	    case 1:
 	    	g.drawImage(LARM1, 0, 350, null);
 	    	break;
-	    	
+	    case 2:
+	    	g.drawImage(LARM2, 0, 350, null);
+	    	break;
+	    case 3:
+	    	g.drawImage(LARM3, 0, 350, null);
+	    	break;
+	    case 4:
+	    	g.drawImage(LARM4, 0, 350, null);
+	    	break;
 	    }
-	    
+	   
 	    	
 	    	
 
