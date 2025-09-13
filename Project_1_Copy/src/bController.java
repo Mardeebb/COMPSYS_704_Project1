@@ -22,154 +22,142 @@ public class bController extends ClockDomain{
   public Signal CMD_L2 = new Signal("CMD_L2", Signal.OUTPUT);
   public Signal CMD_R = new Signal("CMD_R", Signal.OUTPUT);
   public Signal CMD_R2 = new Signal("CMD_R2", Signal.OUTPUT);
-  private int S913 = 1;
-  private int S500 = 1;
-  private int S376 = 1;
-  private int S637 = 1;
-  private int S513 = 1;
+  private int S1395 = 1;
+  private int S982 = 1;
+  private int S858 = 1;
+  private int S1119 = 1;
+  private int S995 = 1;
   
-  private int[] ends = new int[10];
-  private int[] tdone = new int[10];
+  private int[] ends = new int[15];
+  private int[] tdone = new int[15];
   
-  public void thread925(int [] tdone, int [] ends){
-        switch(S637){
+  public void thread1419(int [] tdone, int [] ends){
+        switch(S1119){
       case 0 : 
-        active[9]=0;
-        ends[9]=0;
-        tdone[9]=1;
+        active[14]=0;
+        ends[14]=0;
+        tdone[14]=1;
         break;
       
       case 1 : 
-        switch(S513){
+        switch(S995){
           case 0 : 
-            if(CMDfb_R.getprestatus()){//sysj\controller.sysj line: 276, column: 10
-              S513=1;
-              CMD_R2.setPresent();//sysj\controller.sysj line: 280, column: 5
+            if(CMDfb_R.getprestatus()){//sysj\controller.sysj line: 312, column: 10
+              S995=1;
+              CMD_R2.setPresent();//sysj\controller.sysj line: 316, column: 5
               currsigs.addElement(CMD_R2);
-              CMD_R2.setValue("limb_gripper right_limb open");//sysj\controller.sysj line: 280, column: 5
-              System.out.println("Emitted CMD_R2");
-              active[9]=1;
-              ends[9]=1;
-              tdone[9]=1;
+              CMD_R2.setValue("limb_gripper right_limb open");//sysj\controller.sysj line: 316, column: 5
+              active[14]=1;
+              ends[14]=1;
+              tdone[14]=1;
             }
             else {
-              CMD_R.setPresent();//sysj\controller.sysj line: 277, column: 5
+              CMD_R.setPresent();//sysj\controller.sysj line: 313, column: 5
               currsigs.addElement(CMD_R);
-              CMD_R.setValue("limb_moveto right_limb B");//sysj\controller.sysj line: 277, column: 5
-              System.out.println("Emitted CMD_R");
-              active[9]=1;
-              ends[9]=1;
-              tdone[9]=1;
+              CMD_R.setValue("limb_moveto right_limb B");//sysj\controller.sysj line: 313, column: 5
+              active[14]=1;
+              ends[14]=1;
+              tdone[14]=1;
             }
             break;
           
           case 1 : 
-            if(CMDfb_R2.getprestatus()){//sysj\controller.sysj line: 279, column: 10
-              S513=2;
-              CMD_R.setPresent();//sysj\controller.sysj line: 283, column: 5
+            if(CMDfb_R2.getprestatus()){//sysj\controller.sysj line: 315, column: 10
+              S995=2;
+              CMD_R.setPresent();//sysj\controller.sysj line: 319, column: 5
               currsigs.addElement(CMD_R);
-              CMD_R.setValue("limb_gripper right_limb close");//sysj\controller.sysj line: 283, column: 5
-              System.out.println("Emitted CMD_R");
-              active[9]=1;
-              ends[9]=1;
-              tdone[9]=1;
+              CMD_R.setValue("limb_gripper right_limb close");//sysj\controller.sysj line: 319, column: 5
+              active[14]=1;
+              ends[14]=1;
+              tdone[14]=1;
             }
             else {
-              CMD_R2.setPresent();//sysj\controller.sysj line: 280, column: 5
+              CMD_R2.setPresent();//sysj\controller.sysj line: 316, column: 5
               currsigs.addElement(CMD_R2);
-              CMD_R2.setValue("limb_gripper right_limb open");//sysj\controller.sysj line: 280, column: 5
-              System.out.println("Emitted CMD_R2");
-              active[9]=1;
-              ends[9]=1;
-              tdone[9]=1;
+              CMD_R2.setValue("limb_gripper right_limb open");//sysj\controller.sysj line: 316, column: 5
+              active[14]=1;
+              ends[14]=1;
+              tdone[14]=1;
             }
             break;
           
           case 2 : 
-            if(CMDfb_R.getprestatus()){//sysj\controller.sysj line: 282, column: 10
-              S513=3;
-              CMD_R2.setPresent();//sysj\controller.sysj line: 286, column: 5
+            if(CMDfb_R.getprestatus()){//sysj\controller.sysj line: 318, column: 10
+              S995=3;
+              CMD_R2.setPresent();//sysj\controller.sysj line: 322, column: 5
               currsigs.addElement(CMD_R2);
-              CMD_R2.setValue("limb_moveto right_limb C");//sysj\controller.sysj line: 286, column: 5
-              System.out.println("Emitted CMD_R2");
-              active[9]=1;
-              ends[9]=1;
-              tdone[9]=1;
+              CMD_R2.setValue("limb_moveto right_limb C");//sysj\controller.sysj line: 322, column: 5
+              active[14]=1;
+              ends[14]=1;
+              tdone[14]=1;
             }
             else {
-              CMD_R.setPresent();//sysj\controller.sysj line: 283, column: 5
+              CMD_R.setPresent();//sysj\controller.sysj line: 319, column: 5
               currsigs.addElement(CMD_R);
-              CMD_R.setValue("limb_gripper right_limb close");//sysj\controller.sysj line: 283, column: 5
-              System.out.println("Emitted CMD_R");
-              active[9]=1;
-              ends[9]=1;
-              tdone[9]=1;
+              CMD_R.setValue("limb_gripper right_limb close");//sysj\controller.sysj line: 319, column: 5
+              active[14]=1;
+              ends[14]=1;
+              tdone[14]=1;
             }
             break;
           
           case 3 : 
-            if(CMDfb_R2.getprestatus()){//sysj\controller.sysj line: 285, column: 10
-              S513=4;
-              CMD_R.setPresent();//sysj\controller.sysj line: 289, column: 5
+            if(CMDfb_R2.getprestatus()){//sysj\controller.sysj line: 321, column: 10
+              S995=4;
+              CMD_R.setPresent();//sysj\controller.sysj line: 325, column: 5
               currsigs.addElement(CMD_R);
-              CMD_R.setValue("limb_gripper right_limb open");//sysj\controller.sysj line: 289, column: 5
-              System.out.println("Emitted CMD_R");
-              active[9]=1;
-              ends[9]=1;
-              tdone[9]=1;
+              CMD_R.setValue("limb_gripper right_limb open");//sysj\controller.sysj line: 325, column: 5
+              active[14]=1;
+              ends[14]=1;
+              tdone[14]=1;
             }
             else {
-              CMD_R2.setPresent();//sysj\controller.sysj line: 286, column: 5
+              CMD_R2.setPresent();//sysj\controller.sysj line: 322, column: 5
               currsigs.addElement(CMD_R2);
-              CMD_R2.setValue("limb_moveto right_limb C");//sysj\controller.sysj line: 286, column: 5
-              System.out.println("Emitted CMD_R2");
-              active[9]=1;
-              ends[9]=1;
-              tdone[9]=1;
+              CMD_R2.setValue("limb_moveto right_limb C");//sysj\controller.sysj line: 322, column: 5
+              active[14]=1;
+              ends[14]=1;
+              tdone[14]=1;
             }
             break;
           
           case 4 : 
-            if(CMDfb_R.getprestatus()){//sysj\controller.sysj line: 288, column: 10
-              S513=5;
-              CMD_R2.setPresent();//sysj\controller.sysj line: 292, column: 5
+            if(CMDfb_R.getprestatus()){//sysj\controller.sysj line: 324, column: 10
+              S995=5;
+              CMD_R2.setPresent();//sysj\controller.sysj line: 328, column: 5
               currsigs.addElement(CMD_R2);
-              CMD_R2.setValue("limb_moveto right_limb A");//sysj\controller.sysj line: 292, column: 5
-              System.out.println("Emitted CMD_R2");
-              active[9]=1;
-              ends[9]=1;
-              tdone[9]=1;
+              CMD_R2.setValue("limb_moveto right_limb A");//sysj\controller.sysj line: 328, column: 5
+              active[14]=1;
+              ends[14]=1;
+              tdone[14]=1;
             }
             else {
-              CMD_R.setPresent();//sysj\controller.sysj line: 289, column: 5
+              CMD_R.setPresent();//sysj\controller.sysj line: 325, column: 5
               currsigs.addElement(CMD_R);
-              CMD_R.setValue("limb_gripper right_limb open");//sysj\controller.sysj line: 289, column: 5
-              System.out.println("Emitted CMD_R");
-              active[9]=1;
-              ends[9]=1;
-              tdone[9]=1;
+              CMD_R.setValue("limb_gripper right_limb open");//sysj\controller.sysj line: 325, column: 5
+              active[14]=1;
+              ends[14]=1;
+              tdone[14]=1;
             }
             break;
           
           case 5 : 
-            if(CMDfb_R2.getprestatus()){//sysj\controller.sysj line: 291, column: 10
-              S513=0;
-              CMD_R.setPresent();//sysj\controller.sysj line: 277, column: 5
+            if(CMDfb_R2.getprestatus()){//sysj\controller.sysj line: 327, column: 10
+              S995=0;
+              CMD_R.setPresent();//sysj\controller.sysj line: 313, column: 5
               currsigs.addElement(CMD_R);
-              CMD_R.setValue("limb_moveto right_limb B");//sysj\controller.sysj line: 277, column: 5
-              System.out.println("Emitted CMD_R");
-              active[9]=1;
-              ends[9]=1;
-              tdone[9]=1;
+              CMD_R.setValue("limb_moveto right_limb B");//sysj\controller.sysj line: 313, column: 5
+              active[14]=1;
+              ends[14]=1;
+              tdone[14]=1;
             }
             else {
-              CMD_R2.setPresent();//sysj\controller.sysj line: 292, column: 5
+              CMD_R2.setPresent();//sysj\controller.sysj line: 328, column: 5
               currsigs.addElement(CMD_R2);
-              CMD_R2.setValue("limb_moveto right_limb A");//sysj\controller.sysj line: 292, column: 5
-              System.out.println("Emitted CMD_R2");
-              active[9]=1;
-              ends[9]=1;
-              tdone[9]=1;
+              CMD_R2.setValue("limb_moveto right_limb A");//sysj\controller.sysj line: 328, column: 5
+              active[14]=1;
+              ends[14]=1;
+              tdone[14]=1;
             }
             break;
           
@@ -179,145 +167,133 @@ public class bController extends ClockDomain{
     }
   }
 
-  public void thread924(int [] tdone, int [] ends){
-        switch(S500){
+  public void thread1418(int [] tdone, int [] ends){
+        switch(S982){
       case 0 : 
-        active[8]=0;
-        ends[8]=0;
-        tdone[8]=1;
+        active[13]=0;
+        ends[13]=0;
+        tdone[13]=1;
         break;
       
       case 1 : 
-        switch(S376){
+        switch(S858){
           case 0 : 
-            if(CMDfb_L.getprestatus()){//sysj\controller.sysj line: 253, column: 10
-              S376=1;
-              CMD_L2.setPresent();//sysj\controller.sysj line: 257, column: 5
+            if(CMDfb_L.getprestatus()){//sysj\controller.sysj line: 289, column: 10
+              S858=1;
+              CMD_L2.setPresent();//sysj\controller.sysj line: 293, column: 5
               currsigs.addElement(CMD_L2);
-              CMD_L2.setValue("limb_gripper left_limb open");//sysj\controller.sysj line: 257, column: 5
-              System.out.println("Emitted CMD_L2");
-              active[8]=1;
-              ends[8]=1;
-              tdone[8]=1;
+              CMD_L2.setValue("limb_gripper left_limb open");//sysj\controller.sysj line: 293, column: 5
+              active[13]=1;
+              ends[13]=1;
+              tdone[13]=1;
             }
             else {
-              CMD_L.setPresent();//sysj\controller.sysj line: 254, column: 5
+              CMD_L.setPresent();//sysj\controller.sysj line: 290, column: 5
               currsigs.addElement(CMD_L);
-              CMD_L.setValue("limb_moveto left_limb B");//sysj\controller.sysj line: 254, column: 5
-              System.out.println("Emitted CMD_L");
-              active[8]=1;
-              ends[8]=1;
-              tdone[8]=1;
+              CMD_L.setValue("limb_moveto left_limb B");//sysj\controller.sysj line: 290, column: 5
+              active[13]=1;
+              ends[13]=1;
+              tdone[13]=1;
             }
             break;
           
           case 1 : 
-            if(CMDfb_L2.getprestatus()){//sysj\controller.sysj line: 256, column: 10
-              S376=2;
-              CMD_L.setPresent();//sysj\controller.sysj line: 260, column: 5
+            if(CMDfb_L2.getprestatus()){//sysj\controller.sysj line: 292, column: 10
+              S858=2;
+              CMD_L.setPresent();//sysj\controller.sysj line: 296, column: 5
               currsigs.addElement(CMD_L);
-              CMD_L.setValue("limb_gripper left_limb close");//sysj\controller.sysj line: 260, column: 5
-              System.out.println("Emitted CMD_L");
-              active[8]=1;
-              ends[8]=1;
-              tdone[8]=1;
+              CMD_L.setValue("limb_gripper left_limb close");//sysj\controller.sysj line: 296, column: 5
+              active[13]=1;
+              ends[13]=1;
+              tdone[13]=1;
             }
             else {
-              CMD_L2.setPresent();//sysj\controller.sysj line: 257, column: 5
+              CMD_L2.setPresent();//sysj\controller.sysj line: 293, column: 5
               currsigs.addElement(CMD_L2);
-              CMD_L2.setValue("limb_gripper left_limb open");//sysj\controller.sysj line: 257, column: 5
-              System.out.println("Emitted CMD_L2");
-              active[8]=1;
-              ends[8]=1;
-              tdone[8]=1;
+              CMD_L2.setValue("limb_gripper left_limb open");//sysj\controller.sysj line: 293, column: 5
+              active[13]=1;
+              ends[13]=1;
+              tdone[13]=1;
             }
             break;
           
           case 2 : 
-            if(CMDfb_L.getprestatus()){//sysj\controller.sysj line: 259, column: 10
-              S376=3;
-              CMD_L2.setPresent();//sysj\controller.sysj line: 263, column: 5
+            if(CMDfb_L.getprestatus()){//sysj\controller.sysj line: 295, column: 10
+              S858=3;
+              CMD_L2.setPresent();//sysj\controller.sysj line: 299, column: 5
               currsigs.addElement(CMD_L2);
-              CMD_L2.setValue("limb_moveto left_limb C");//sysj\controller.sysj line: 263, column: 5
-              System.out.println("Emitted CMD_L2");
-              active[8]=1;
-              ends[8]=1;
-              tdone[8]=1;
+              CMD_L2.setValue("limb_moveto left_limb C");//sysj\controller.sysj line: 299, column: 5
+              active[13]=1;
+              ends[13]=1;
+              tdone[13]=1;
             }
             else {
-              CMD_L.setPresent();//sysj\controller.sysj line: 260, column: 5
+              CMD_L.setPresent();//sysj\controller.sysj line: 296, column: 5
               currsigs.addElement(CMD_L);
-              CMD_L.setValue("limb_gripper left_limb close");//sysj\controller.sysj line: 260, column: 5
-              System.out.println("Emitted CMD_L");
-              active[8]=1;
-              ends[8]=1;
-              tdone[8]=1;
+              CMD_L.setValue("limb_gripper left_limb close");//sysj\controller.sysj line: 296, column: 5
+              active[13]=1;
+              ends[13]=1;
+              tdone[13]=1;
             }
             break;
           
           case 3 : 
-            if(CMDfb_L2.getprestatus()){//sysj\controller.sysj line: 262, column: 10
-              S376=4;
-              CMD_L.setPresent();//sysj\controller.sysj line: 266, column: 5
+            if(CMDfb_L2.getprestatus()){//sysj\controller.sysj line: 298, column: 10
+              S858=4;
+              CMD_L.setPresent();//sysj\controller.sysj line: 302, column: 5
               currsigs.addElement(CMD_L);
-              CMD_L.setValue("limb_gripper left_limb open");//sysj\controller.sysj line: 266, column: 5
-              System.out.println("Emitted CMD_L");
-              active[8]=1;
-              ends[8]=1;
-              tdone[8]=1;
+              CMD_L.setValue("limb_gripper left_limb open");//sysj\controller.sysj line: 302, column: 5
+              active[13]=1;
+              ends[13]=1;
+              tdone[13]=1;
             }
             else {
-              CMD_L2.setPresent();//sysj\controller.sysj line: 263, column: 5
+              CMD_L2.setPresent();//sysj\controller.sysj line: 299, column: 5
               currsigs.addElement(CMD_L2);
-              CMD_L2.setValue("limb_moveto left_limb C");//sysj\controller.sysj line: 263, column: 5
-              System.out.println("Emitted CMD_L2");
-              active[8]=1;
-              ends[8]=1;
-              tdone[8]=1;
+              CMD_L2.setValue("limb_moveto left_limb C");//sysj\controller.sysj line: 299, column: 5
+              active[13]=1;
+              ends[13]=1;
+              tdone[13]=1;
             }
             break;
           
           case 4 : 
-            if(CMDfb_L.getprestatus()){//sysj\controller.sysj line: 265, column: 10
-              S376=5;
-              CMD_L2.setPresent();//sysj\controller.sysj line: 269, column: 5
+            if(CMDfb_L.getprestatus()){//sysj\controller.sysj line: 301, column: 10
+              S858=5;
+              CMD_L2.setPresent();//sysj\controller.sysj line: 305, column: 5
               currsigs.addElement(CMD_L2);
-              CMD_L2.setValue("limb_moveto left_limb A");//sysj\controller.sysj line: 269, column: 5
-              System.out.println("Emitted CMD_L2");
-              active[8]=1;
-              ends[8]=1;
-              tdone[8]=1;
+              CMD_L2.setValue("limb_moveto left_limb A");//sysj\controller.sysj line: 305, column: 5
+              active[13]=1;
+              ends[13]=1;
+              tdone[13]=1;
             }
             else {
-              CMD_L.setPresent();//sysj\controller.sysj line: 266, column: 5
+              CMD_L.setPresent();//sysj\controller.sysj line: 302, column: 5
               currsigs.addElement(CMD_L);
-              CMD_L.setValue("limb_gripper left_limb open");//sysj\controller.sysj line: 266, column: 5
-              System.out.println("Emitted CMD_L");
-              active[8]=1;
-              ends[8]=1;
-              tdone[8]=1;
+              CMD_L.setValue("limb_gripper left_limb open");//sysj\controller.sysj line: 302, column: 5
+              active[13]=1;
+              ends[13]=1;
+              tdone[13]=1;
             }
             break;
           
           case 5 : 
-            if(CMDfb_L2.getprestatus()){//sysj\controller.sysj line: 268, column: 10
-              S376=0;
-              CMD_L.setPresent();//sysj\controller.sysj line: 254, column: 5
+            if(CMDfb_L2.getprestatus()){//sysj\controller.sysj line: 304, column: 10
+              S858=0;
+              CMD_L.setPresent();//sysj\controller.sysj line: 290, column: 5
               currsigs.addElement(CMD_L);
-              CMD_L.setValue("limb_moveto left_limb B");//sysj\controller.sysj line: 254, column: 5
-              System.out.println("Emitted CMD_L");
-              active[8]=1;
-              ends[8]=1;
-              tdone[8]=1;
+              CMD_L.setValue("limb_moveto left_limb B");//sysj\controller.sysj line: 290, column: 5
+              active[13]=1;
+              ends[13]=1;
+              tdone[13]=1;
             }
             else {
-              CMD_L2.setPresent();//sysj\controller.sysj line: 269, column: 5
+              CMD_L2.setPresent();//sysj\controller.sysj line: 305, column: 5
               currsigs.addElement(CMD_L2);
-              CMD_L2.setValue("limb_moveto left_limb A");//sysj\controller.sysj line: 269, column: 5
-              System.out.println("Emitted CMD_L2");
-              active[8]=1;
-              ends[8]=1;
-              tdone[8]=1;
+              CMD_L2.setValue("limb_moveto left_limb A");//sysj\controller.sysj line: 305, column: 5
+              active[13]=1;
+              ends[13]=1;
+              tdone[13]=1;
             }
             break;
           
@@ -327,28 +303,26 @@ public class bController extends ClockDomain{
     }
   }
 
-  public void thread922(int [] tdone, int [] ends){
-        S637=1;
-    S513=0;
-    CMD_R.setPresent();//sysj\controller.sysj line: 277, column: 5
+  public void thread1416(int [] tdone, int [] ends){
+        S1119=1;
+    S995=0;
+    CMD_R.setPresent();//sysj\controller.sysj line: 313, column: 5
     currsigs.addElement(CMD_R);
-    CMD_R.setValue("limb_moveto right_limb B");//sysj\controller.sysj line: 277, column: 5
-    System.out.println("Emitted CMD_R");
-    active[9]=1;
-    ends[9]=1;
-    tdone[9]=1;
+    CMD_R.setValue("limb_moveto right_limb B");//sysj\controller.sysj line: 313, column: 5
+    active[14]=1;
+    ends[14]=1;
+    tdone[14]=1;
   }
 
-  public void thread921(int [] tdone, int [] ends){
-        S500=1;
-    S376=0;
-    CMD_L.setPresent();//sysj\controller.sysj line: 254, column: 5
+  public void thread1415(int [] tdone, int [] ends){
+        S982=1;
+    S858=0;
+    CMD_L.setPresent();//sysj\controller.sysj line: 290, column: 5
     currsigs.addElement(CMD_L);
-    CMD_L.setValue("limb_moveto left_limb B");//sysj\controller.sysj line: 254, column: 5
-    System.out.println("Emitted CMD_L");
-    active[8]=1;
-    ends[8]=1;
-    tdone[8]=1;
+    CMD_L.setValue("limb_moveto left_limb B");//sysj\controller.sysj line: 290, column: 5
+    active[13]=1;
+    ends[13]=1;
+    tdone[13]=1;
   }
 
   public void runClockDomain(){
@@ -358,51 +332,51 @@ public class bController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S913){
+      switch(S1395){
         case 0 : 
-          S913=0;
+          S1395=0;
           break RUN;
         
         case 1 : 
-          S913=2;
-          S913=2;
-          System.out.println("Baxtor robot Controller started");//sysj\controller.sysj line: 250, column: 2
-          thread921(tdone,ends);
-          thread922(tdone,ends);
-          int biggest923 = 0;
-          if(ends[8]>=biggest923){
-            biggest923=ends[8];
+          S1395=2;
+          S1395=2;
+          System.out.println("Baxtor robot Controller started");//sysj\controller.sysj line: 286, column: 2
+          thread1415(tdone,ends);
+          thread1416(tdone,ends);
+          int biggest1417 = 0;
+          if(ends[13]>=biggest1417){
+            biggest1417=ends[13];
           }
-          if(ends[9]>=biggest923){
-            biggest923=ends[9];
+          if(ends[14]>=biggest1417){
+            biggest1417=ends[14];
           }
-          if(biggest923 == 1){
-            active[7]=1;
-            ends[7]=1;
+          if(biggest1417 == 1){
+            active[12]=1;
+            ends[12]=1;
             break RUN;
           }
         
         case 2 : 
-          thread924(tdone,ends);
-          thread925(tdone,ends);
-          int biggest926 = 0;
-          if(ends[8]>=biggest926){
-            biggest926=ends[8];
+          thread1418(tdone,ends);
+          thread1419(tdone,ends);
+          int biggest1420 = 0;
+          if(ends[13]>=biggest1420){
+            biggest1420=ends[13];
           }
-          if(ends[9]>=biggest926){
-            biggest926=ends[9];
+          if(ends[14]>=biggest1420){
+            biggest1420=ends[14];
           }
-          if(biggest926 == 1){
-            active[7]=1;
-            ends[7]=1;
+          if(biggest1420 == 1){
+            active[12]=1;
+            ends[12]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest926 == 0){
-            S913=0;
-            active[7]=0;
-            ends[7]=0;
-            S913=0;
+          if(biggest1420 == 0){
+            S1395=0;
+            active[12]=0;
+            ends[12]=0;
+            S1395=0;
             break RUN;
           }
         
@@ -411,9 +385,9 @@ public class bController extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;
@@ -422,14 +396,14 @@ public class bController extends ClockDomain{
   }
   
   public void run(){
-    while(active[7] != 0){
-      int index = 7;
+    while(active[12] != 0){
+      int index = 12;
       if(paused[index]==1 || suspended[index]==1 || active[index] == 0){
         for(int h=1;h<paused.length;++h){
           paused[h]=0;
         }
       }
-      if(paused[7]!=0 || suspended[7]!=0 || active[7]!=1);
+      if(paused[12]!=0 || suspended[12]!=0 || active[12]!=1);
       else{
         if(!df){
           bottleLoad.gethook();
@@ -484,7 +458,7 @@ public class bController extends ClockDomain{
       CMD_R.setClear();
       CMD_R2.sethook();
       CMD_R2.setClear();
-      if(paused[7]!=0 || suspended[7]!=0 || active[7]!=1);
+      if(paused[12]!=0 || suspended[12]!=0 || active[12]!=1);
       else{
         bottleLoad.gethook();
         bottleUnload.gethook();
@@ -494,7 +468,7 @@ public class bController extends ClockDomain{
         CMDfb_R2.gethook();
       }
       runFinisher();
-      if(active[7] == 0){
+      if(active[12] == 0){
       	this.terminated = true;
       }
       if(!threaded) break;

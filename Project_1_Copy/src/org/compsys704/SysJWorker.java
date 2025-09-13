@@ -131,7 +131,22 @@ public class SysJWorker extends Worker{
 		case "dosUnitFilledE":
 			Filler.filler_off = status;
 			break;
-
+		
+		case "gripperZAxisLoweredE":
+			Capper.capper_lowered = status;
+			break;
+		
+		case "gripperZAxisLiftedE":
+			Capper.capper_lifted = status;
+			break;
+		
+		case "gripperTurnHomePosE":
+			Capper.gripper_initialpos = status;
+			break;
+		
+		case "gripperTurnFinalPosE":
+			Capper.gripper_fullyturned = status;
+			break;
 			
 		default: 
 			System.err.println("Wrong sig name : "+signame);

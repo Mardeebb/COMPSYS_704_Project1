@@ -24,8 +24,8 @@ public class Orchestrator extends ClockDomain{
   private int S2 = 1;
   private int S3 = 1;
   
-  private int[] ends = new int[10];
-  private int[] tdone = new int[10];
+  private int[] ends = new int[15];
+  private int[] tdone = new int[15];
   
   public void runClockDomain(){
     for(int i=0;i<ends.length;i++){
@@ -100,13 +100,10 @@ public class Orchestrator extends ClockDomain{
                     bottleToConveyor.setPresent();//sysj\controller.sysj line: 27, column: 5
                     currsigs.addElement(bottleToConveyor);
                     bottleToConveyor.setValue(b_thread_1);//sysj\controller.sysj line: 27, column: 5
-                    System.out.println("Emitted bottleToConveyor");
                     moveConveyor.setPresent();//sysj\controller.sysj line: 28, column: 5
                     currsigs.addElement(moveConveyor);
-                    System.out.println("Emitted moveConveyor");
                     recieveTwin.setPresent();//sysj\controller.sysj line: 30, column: 5
                     currsigs.addElement(recieveTwin);
-                    System.out.println("Emitted recieveTwin");
                     System.err.println("new Orchestrator Cycle");//sysj\controller.sysj line: 13, column: 7
                     S2=0;
                     active[1]=1;
@@ -129,9 +126,9 @@ public class Orchestrator extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;

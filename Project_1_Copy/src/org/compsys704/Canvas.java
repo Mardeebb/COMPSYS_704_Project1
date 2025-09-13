@@ -40,6 +40,7 @@ public class Canvas extends JPanel {
 	BufferedImage filler_on;
 	BufferedImage LARM, LARM0, LARM1, LARM2, LARM3, LARM4;
 	BufferedImage RARM0, RARM1, RARM2, RARM3, RARM4;
+	BufferedImage capper, capper1;
     private EABSBackend backend;
 
     private Map<Integer, Rectangle> clickableAreas = new HashMap<>();
@@ -103,6 +104,9 @@ public class Canvas extends JPanel {
 			LARM = bi.getSubimage(30,100, 600,250);
 			LARM0 = scaleImage(LARM, 200, 100);
 			LARM1 = scaleImage(LARM, 140, 70);
+			bi = ImageIO.read(new File("res/Capper.png"));
+			capper = bi.getSubimage(1,7, 111,71);
+			capper1 = scaleImage(capper, 200, 100);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -198,7 +202,8 @@ public class Canvas extends JPanel {
 	    	
 	    }
 	    
-	    	
+	    // capper image
+	    g.drawImage(capper, 555, 435, null);	
 	    	
 
 	    // Draw Signal 1

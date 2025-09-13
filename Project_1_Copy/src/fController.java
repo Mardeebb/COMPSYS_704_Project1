@@ -19,70 +19,66 @@ public class fController extends ClockDomain{
   public Signal valveInletOnOff = new Signal("valveInletOnOff", Signal.OUTPUT);
   public Signal dosUnitValveRetract = new Signal("dosUnitValveRetract", Signal.OUTPUT);
   public Signal dosUnitValveExtend = new Signal("dosUnitValveExtend", Signal.OUTPUT);
-  private int S363 = 1;
-  private int S238 = 1;
-  private int S202 = 1;
-  private int S279 = 1;
-  private int S243 = 1;
+  private int S845 = 1;
+  private int S720 = 1;
+  private int S684 = 1;
+  private int S761 = 1;
+  private int S725 = 1;
   
-  private int[] ends = new int[10];
-  private int[] tdone = new int[10];
+  private int[] ends = new int[15];
+  private int[] tdone = new int[15];
   
-  public void thread919(int [] tdone, int [] ends){
-        switch(S279){
+  public void thread1413(int [] tdone, int [] ends){
+        switch(S761){
       case 0 : 
-        active[6]=0;
-        ends[6]=0;
-        tdone[6]=1;
+        active[11]=0;
+        ends[11]=0;
+        tdone[11]=1;
         break;
       
       case 1 : 
-        switch(S243){
+        switch(S725){
           case 0 : 
-            if(dosUnitFilled.getprestatus()){//sysj\controller.sysj line: 230, column: 12
-              S243=1;
-              active[6]=1;
-              ends[6]=1;
-              tdone[6]=1;
+            if(dosUnitFilled.getprestatus()){//sysj\controller.sysj line: 266, column: 12
+              S725=1;
+              active[11]=1;
+              ends[11]=1;
+              tdone[11]=1;
             }
             else {
-              valveInjectorOnOff.setPresent();//sysj\controller.sysj line: 231, column: 8
+              valveInjectorOnOff.setPresent();//sysj\controller.sysj line: 267, column: 8
               currsigs.addElement(valveInjectorOnOff);
-              System.out.println("Emitted valveInjectorOnOff");
-              active[6]=1;
-              ends[6]=1;
-              tdone[6]=1;
+              active[11]=1;
+              ends[11]=1;
+              tdone[11]=1;
             }
             break;
           
           case 1 : 
-            S243=1;
-            S243=2;
-            valveInletOnOff.setPresent();//sysj\controller.sysj line: 237, column: 8
+            S725=1;
+            S725=2;
+            valveInletOnOff.setPresent();//sysj\controller.sysj line: 273, column: 8
             currsigs.addElement(valveInletOnOff);
-            System.out.println("Emitted valveInletOnOff");
-            active[6]=1;
-            ends[6]=1;
-            tdone[6]=1;
+            active[11]=1;
+            ends[11]=1;
+            tdone[11]=1;
             break;
           
           case 2 : 
-            if(dosUnitEvac.getprestatus()){//sysj\controller.sysj line: 236, column: 12
-              S243=0;
-              valveInjectorOnOff.setPresent();//sysj\controller.sysj line: 231, column: 8
+            if(dosUnitEvac.getprestatus()){//sysj\controller.sysj line: 272, column: 12
+              S725=0;
+              valveInjectorOnOff.setPresent();//sysj\controller.sysj line: 267, column: 8
               currsigs.addElement(valveInjectorOnOff);
-              System.out.println("Emitted valveInjectorOnOff");
-              active[6]=1;
-              ends[6]=1;
-              tdone[6]=1;
+              active[11]=1;
+              ends[11]=1;
+              tdone[11]=1;
             }
             else {
-              valveInletOnOff.setPresent();//sysj\controller.sysj line: 237, column: 8
+              valveInletOnOff.setPresent();//sysj\controller.sysj line: 273, column: 8
               currsigs.addElement(valveInletOnOff);
-              System.out.println("Emitted valveInletOnOff");
-              active[6]=1;
-              ends[6]=1;
-              tdone[6]=1;
+              active[11]=1;
+              ends[11]=1;
+              tdone[11]=1;
             }
             break;
           
@@ -92,61 +88,57 @@ public class fController extends ClockDomain{
     }
   }
 
-  public void thread918(int [] tdone, int [] ends){
-        switch(S238){
+  public void thread1412(int [] tdone, int [] ends){
+        switch(S720){
       case 0 : 
-        active[5]=0;
-        ends[5]=0;
-        tdone[5]=1;
+        active[10]=0;
+        ends[10]=0;
+        tdone[10]=1;
         break;
       
       case 1 : 
-        switch(S202){
+        switch(S684){
           case 0 : 
-            if(dosUnitFilled.getprestatus()){//sysj\controller.sysj line: 214, column: 12
-              S202=1;
-              active[5]=1;
-              ends[5]=1;
-              tdone[5]=1;
+            if(dosUnitFilled.getprestatus()){//sysj\controller.sysj line: 250, column: 12
+              S684=1;
+              active[10]=1;
+              ends[10]=1;
+              tdone[10]=1;
             }
             else {
-              dosUnitValveRetract.setPresent();//sysj\controller.sysj line: 215, column: 8
+              dosUnitValveRetract.setPresent();//sysj\controller.sysj line: 251, column: 8
               currsigs.addElement(dosUnitValveRetract);
-              System.out.println("Emitted dosUnitValveRetract");
-              active[5]=1;
-              ends[5]=1;
-              tdone[5]=1;
+              active[10]=1;
+              ends[10]=1;
+              tdone[10]=1;
             }
             break;
           
           case 1 : 
-            S202=1;
-            S202=2;
-            dosUnitValveExtend.setPresent();//sysj\controller.sysj line: 221, column: 8
+            S684=1;
+            S684=2;
+            dosUnitValveExtend.setPresent();//sysj\controller.sysj line: 257, column: 8
             currsigs.addElement(dosUnitValveExtend);
-            System.out.println("Emitted dosUnitValveExtend");
-            active[5]=1;
-            ends[5]=1;
-            tdone[5]=1;
+            active[10]=1;
+            ends[10]=1;
+            tdone[10]=1;
             break;
           
           case 2 : 
-            if(dosUnitEvac.getprestatus()){//sysj\controller.sysj line: 220, column: 12
-              S202=0;
-              dosUnitValveRetract.setPresent();//sysj\controller.sysj line: 215, column: 8
+            if(dosUnitEvac.getprestatus()){//sysj\controller.sysj line: 256, column: 12
+              S684=0;
+              dosUnitValveRetract.setPresent();//sysj\controller.sysj line: 251, column: 8
               currsigs.addElement(dosUnitValveRetract);
-              System.out.println("Emitted dosUnitValveRetract");
-              active[5]=1;
-              ends[5]=1;
-              tdone[5]=1;
+              active[10]=1;
+              ends[10]=1;
+              tdone[10]=1;
             }
             else {
-              dosUnitValveExtend.setPresent();//sysj\controller.sysj line: 221, column: 8
+              dosUnitValveExtend.setPresent();//sysj\controller.sysj line: 257, column: 8
               currsigs.addElement(dosUnitValveExtend);
-              System.out.println("Emitted dosUnitValveExtend");
-              active[5]=1;
-              ends[5]=1;
-              tdone[5]=1;
+              active[10]=1;
+              ends[10]=1;
+              tdone[10]=1;
             }
             break;
           
@@ -156,26 +148,24 @@ public class fController extends ClockDomain{
     }
   }
 
-  public void thread916(int [] tdone, int [] ends){
-        S279=1;
-    S243=0;
-    valveInjectorOnOff.setPresent();//sysj\controller.sysj line: 231, column: 8
+  public void thread1410(int [] tdone, int [] ends){
+        S761=1;
+    S725=0;
+    valveInjectorOnOff.setPresent();//sysj\controller.sysj line: 267, column: 8
     currsigs.addElement(valveInjectorOnOff);
-    System.out.println("Emitted valveInjectorOnOff");
-    active[6]=1;
-    ends[6]=1;
-    tdone[6]=1;
+    active[11]=1;
+    ends[11]=1;
+    tdone[11]=1;
   }
 
-  public void thread915(int [] tdone, int [] ends){
-        S238=1;
-    S202=0;
-    dosUnitValveRetract.setPresent();//sysj\controller.sysj line: 215, column: 8
+  public void thread1409(int [] tdone, int [] ends){
+        S720=1;
+    S684=0;
+    dosUnitValveRetract.setPresent();//sysj\controller.sysj line: 251, column: 8
     currsigs.addElement(dosUnitValveRetract);
-    System.out.println("Emitted dosUnitValveRetract");
-    active[5]=1;
-    ends[5]=1;
-    tdone[5]=1;
+    active[10]=1;
+    ends[10]=1;
+    tdone[10]=1;
   }
 
   public void runClockDomain(){
@@ -185,51 +175,51 @@ public class fController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S363){
+      switch(S845){
         case 0 : 
-          S363=0;
+          S845=0;
           break RUN;
         
         case 1 : 
-          S363=2;
-          S363=2;
-          System.out.println("filler Controller started");//sysj\controller.sysj line: 208, column: 2
-          thread915(tdone,ends);
-          thread916(tdone,ends);
-          int biggest917 = 0;
-          if(ends[5]>=biggest917){
-            biggest917=ends[5];
+          S845=2;
+          S845=2;
+          System.out.println("filler Controller started");//sysj\controller.sysj line: 244, column: 2
+          thread1409(tdone,ends);
+          thread1410(tdone,ends);
+          int biggest1411 = 0;
+          if(ends[10]>=biggest1411){
+            biggest1411=ends[10];
           }
-          if(ends[6]>=biggest917){
-            biggest917=ends[6];
+          if(ends[11]>=biggest1411){
+            biggest1411=ends[11];
           }
-          if(biggest917 == 1){
-            active[4]=1;
-            ends[4]=1;
+          if(biggest1411 == 1){
+            active[9]=1;
+            ends[9]=1;
             break RUN;
           }
         
         case 2 : 
-          thread918(tdone,ends);
-          thread919(tdone,ends);
-          int biggest920 = 0;
-          if(ends[5]>=biggest920){
-            biggest920=ends[5];
+          thread1412(tdone,ends);
+          thread1413(tdone,ends);
+          int biggest1414 = 0;
+          if(ends[10]>=biggest1414){
+            biggest1414=ends[10];
           }
-          if(ends[6]>=biggest920){
-            biggest920=ends[6];
+          if(ends[11]>=biggest1414){
+            biggest1414=ends[11];
           }
-          if(biggest920 == 1){
-            active[4]=1;
-            ends[4]=1;
+          if(biggest1414 == 1){
+            active[9]=1;
+            ends[9]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest920 == 0){
-            S363=0;
-            active[4]=0;
-            ends[4]=0;
-            S363=0;
+          if(biggest1414 == 0){
+            S845=0;
+            active[9]=0;
+            ends[9]=0;
+            S845=0;
             break RUN;
           }
         
@@ -238,9 +228,9 @@ public class fController extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;
@@ -249,14 +239,14 @@ public class fController extends ClockDomain{
   }
   
   public void run(){
-    while(active[4] != 0){
-      int index = 4;
+    while(active[9] != 0){
+      int index = 9;
       if(paused[index]==1 || suspended[index]==1 || active[index] == 0){
         for(int h=1;h<paused.length;++h){
           paused[h]=0;
         }
       }
-      if(paused[4]!=0 || suspended[4]!=0 || active[4]!=1);
+      if(paused[9]!=0 || suspended[9]!=0 || active[9]!=1);
       else{
         if(!df){
           bottleAtPos2.gethook();
@@ -296,14 +286,14 @@ public class fController extends ClockDomain{
       dosUnitValveRetract.setClear();
       dosUnitValveExtend.sethook();
       dosUnitValveExtend.setClear();
-      if(paused[4]!=0 || suspended[4]!=0 || active[4]!=1);
+      if(paused[9]!=0 || suspended[9]!=0 || active[9]!=1);
       else{
         bottleAtPos2.gethook();
         dosUnitEvac.gethook();
         dosUnitFilled.gethook();
       }
       runFinisher();
-      if(active[4] == 0){
+      if(active[9] == 0){
       	this.terminated = true;
       }
       if(!threaded) break;
