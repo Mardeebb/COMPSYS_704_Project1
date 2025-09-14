@@ -131,6 +131,7 @@ CapperPlant (
 		while(true) {
 			await(enable);
 			abort(!enable) {
+				System.err.println("Bottle at pos 4");
 				sustain bottleAtPos4;
 			}
 			pause;

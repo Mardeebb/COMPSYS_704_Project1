@@ -31,8 +31,8 @@ public class Plant extends ClockDomain{
   public Signal armAtSourceE = new Signal("armAtSourceE", Signal.OUTPUT);
   public Signal armAtDestE = new Signal("armAtDestE", Signal.OUTPUT);
   public Signal emptyE = new Signal("emptyE", Signal.OUTPUT);
-  private int S1597 = 1;
-  private int S1596 = 1;
+  private int S7847 = 1;
+  private int S7846 = 1;
   
   private int[] ends = new int[28];
   private int[] tdone = new int[28];
@@ -44,23 +44,23 @@ public class Plant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S1597){
+      switch(S7847){
         case 0 : 
-          S1597=0;
+          S7847=0;
           break RUN;
         
         case 1 : 
-          S1597=2;
-          S1597=2;
+          S7847=2;
+          S7847=2;
           new Thread(new GUI()).start();//sysj\plant.sysj line: 14, column: 2
-          S1597=0;
+          S7847=0;
           active[1]=0;
           ends[1]=0;
-          S1597=0;
+          S7847=0;
           break RUN;
         
         case 2 : 
-          switch(S1596){
+          switch(S7846){
           }
         
       }
