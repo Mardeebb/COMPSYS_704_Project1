@@ -40,7 +40,8 @@ public class Canvas extends JPanel {
 	BufferedImage filler_on;
 	BufferedImage LARM, LARM0, LARM1, LARM2, LARM3, LARM4;
 	BufferedImage RARM0, RARM1, RARM2, RARM3, RARM4;
-	BufferedImage capper_on, capper1, capper_off, capper2;
+	BufferedImage capper_on, capper_off;
+	BufferedImage faultToleranceIDLE, faultToleranceON;
     private EABSBackend backend;
 
     private Map<Integer, Rectangle> clickableAreas = new HashMap<>();
@@ -107,6 +108,11 @@ public class Canvas extends JPanel {
 			bi = ImageIO.read(new File("res/CapperStates.png"));
 			capper_off = bi.getSubimage(195,35, 130,110);
 			capper_on = bi.getSubimage(21,35, 183,110);
+			bi = ImageIO.read(new File("res/FaultTolerance.png"));
+			faultToleranceIDLE = bi.getSubimage(11,20, 270,370);
+			faultToleranceIDLE = scaleImage(faultToleranceIDLE, 200, 300);
+			faultToleranceON = bi.getSubimage(325,10, 250,370);
+			faultToleranceON = scaleImage(faultToleranceON, 200, 300);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -213,6 +219,10 @@ public class Canvas extends JPanel {
 	    	
 	    }
 	    
+	    // fault tolerance image
+	    
+	    g.drawImage(faultToleranceIDLE, 750, 50, null);
+	    g.drawImage(faultToleranceON, 750, 40, null);
 	    	
 
 	    // Draw Signal 1
