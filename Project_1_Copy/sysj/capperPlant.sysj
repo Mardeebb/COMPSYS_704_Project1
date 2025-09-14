@@ -1,0 +1,63 @@
+CapperPlant (
+		input signal cylPos5ZaxisExtend, gripperTurnRetract, gripperTurnExtend, capGripperPos5Extend;
+		input signal cylClampBottleExtend;
+		input signal enable;
+		
+		output signal bottleAtPos4, gripperZAxisLowered, gripperZAxisLifted;
+		output signal gripperTurnHomePos, gripperTurnFinalPos;
+		
+		output signal gripperZAxisLoweredE, gripperZAxisLiftedE;
+		output signal gripperTurnHomePosE, gripperTurnFinalPosE;
+		)
+-> {
+	{
+		while(true) {
+			await(enable);
+			abort(!enable) {
+				sustain bottleAtPos4;
+			}
+			pause;
+		}
+	}
+	||
+	{ // gripper lowered or lifted
+		while(true) {
+			abort(!cylPos5ZaxisExtend && enable) {
+				System.err.println("Emitting");
+				sustain gripperZAxisLowered; // when the gripper/capper is lowered
+				System.out.println(#gripperZAxisLowered);
+			}
+				
+			
+			abort(cylPos5ZaxisExtend && enable) {
+				sustain gripperZAxisLifted; // when the gripper/capper is lifted
+			}
+			pause;
+		}
+	}
+	||
+	{ // gripper gripping
+		present (gripperTurnRetract && !gripperTurnExtend) {
+			abort(gripperTurnExtend && enable) {
+				sustain gripperTurnHomePos; // gripper initial position
+			}
+		}
+		await(!enable);
+		present (gripperTurnExtend && !gripperTurnRetract) {
+			abort (gripperTurnRetract && enable) {
+				sustain gripperTurnFinalPos; // gripper final position 
+			}
+		}
+		await(!enable);
+	}
+	||
+	{
+		{while(true) {present(gripperZAxisLowered){emit gripperZAxisLoweredE;} pause;}}
+		||
+		{while(true) {present(gripperZAxisLifted){emit gripperZAxisLiftedE;} pause;}}
+		||
+		{while(true) {present(gripperTurnHomePos){emit gripperTurnHomePosE;} pause;}}
+		||
+		{while(true) {present(gripperTurnFinalPos){emit gripperTurnFinalPosE;} pause;}}
+	}
+}

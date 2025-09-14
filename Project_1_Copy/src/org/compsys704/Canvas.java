@@ -37,6 +37,8 @@ public class Canvas extends JPanel {
 	BufferedImage conveyor_static;
 	BufferedImage filler_off;
 	BufferedImage filler_on;
+	BufferedImage capper_on, capper1, capper_off, capper2;
+
     private EABSBackend backend;
 
     private Map<Integer, Rectangle> clickableAreas = new HashMap<>();
@@ -102,6 +104,9 @@ public class Canvas extends JPanel {
 			filler_off = scaleImage(filler_off, 170, 170);
 			filler_on = bi.getSubimage(1935, 0, 2050, 1685);
 			filler_on = scaleImage(filler_on, 170, 170);
+			bi = ImageIO.read(new File("res/CapperStates.png"));
+			capper_off = bi.getSubimage(195,35, 130,100);
+			capper_on = bi.getSubimage(21,35, 183,100);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -205,13 +210,19 @@ public class Canvas extends JPanel {
 			g.drawImage(conveyor_static, rotTable_X + -250, rotTable_Y + 190, null);
 	    }
 //		System.err.println(Conveyor.posZeroID);
+	    
+	    // capper image
+	    if (Capper.capper_lowered) {
+	    	g.drawImage(capper_on, 536, 400, null);	
+	    } else {
+	    	g.drawImage(capper_off, 550, 400, null);	
+	    }
 
-    	
+    	// draw filler
 		if(Filler.filler_on) {
 			g.drawImage(filler_on, 75, 75, null);
 		}else {		
 			g.drawImage(filler_off, 75, 75, null);
-
 		}
 
 	    	

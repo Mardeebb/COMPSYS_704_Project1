@@ -1,7 +1,6 @@
 <System xmlns="http://systemjtechnology.com">
 	<SubSystem Name="SS1" Local="true">
 
-
 		<ClockDomain Name="OrchestratorCD" Class="Orchestrator">
 			<iSignal Name="newBottleTwin" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
 			<iSignal Name="request" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
@@ -88,6 +87,20 @@
 			<oSignal Name="valveInletOnOff" To="fillerPlantCD.valveInletOnOff" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10008" />
 			<oSignal Name="dosUnitValveRetract" To="fillerPlantCD.dosUnitValveRetract" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10008" />
 			<oSignal Name="dosUnitValveExtend" To="fillerPlantCD.dosUnitValveExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10008" />
+		</ClockDomain>
+
+		<ClockDomain Name="CapperControllerCD" Class="CapperController">
+			<iSignal Name="bottleAtPos4" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10042"/>
+			<iSignal Name="gripperZAxisLowered" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10042"/>
+			<iSignal Name="gripperZAxisLifted" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10042"/>
+			<iSignal Name="gripperTurnHomePos" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10042"/>
+			<iSignal Name="gripperTurnFinalPos" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10042"/>
+			
+			<oSignal Name="cylPos5ZaxisExtend" To="CapperPlantCD.cylPos5ZaxisExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10041"/>
+			<oSignal Name="gripperTurnRetract" To="CapperPlantCD.gripperTurnRetract" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10041"/>
+			<oSignal Name="gripperTurnExtend" To="CapperPlantCD.gripperTurnExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10041"/>
+			<oSignal Name="capGripperPos5Extend" To="CapperPlantCD.capGripperPos5Extend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10041"/>
+			<oSignal Name="cylClampBottleExtend" To="CapperPlantCD.cylClampBottleExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10041"/>
 		</ClockDomain>
 
 

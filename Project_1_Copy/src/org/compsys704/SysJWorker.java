@@ -136,13 +136,31 @@ public class SysJWorker extends Worker{
 	            bottle.status = "Filled";
 	        }
 			break;
+			
+		case "gripperZAxisLoweredE":
+			Capper.capper_lowered = status;
+			System.err.println(Capper.capper_lowered);
+			break;
+		
+		case "gripperZAxisLiftedE":
+			Capper.capper_lifted = status;
+			break;
+		
+		case "gripperTurnHomePosE":
+			Capper.gripper_initialpos = status;
+			break;
+		
+		case "gripperTurnFinalPosE":
+			Capper.gripper_fullyturned = status;
+			break;
+
 		default: 
 			System.err.println("Wrong sig name : "+signame);
 			System.exit(1);
 		}
 	}
 	
-	static final List<String> signames = Arrays.asList("capOnID", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","pos0","pos1","pos5","pos7","conveyorMoving","conveyorStop","fillID");
+	static final List<String> signames = Arrays.asList("gripperTurnFinalPosE", "gripperTurnHomePosE", "gripperZAxisLiftedE", "gripperZAxisLoweredE", "capOnID", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","pos0","pos1","pos5","pos7","conveyorMoving","conveyorStop","fillID");
 	
 	@Override
 	public boolean hasSignal(String sn) {
