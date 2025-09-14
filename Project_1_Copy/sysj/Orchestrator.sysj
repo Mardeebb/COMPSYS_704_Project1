@@ -5,7 +5,7 @@ Orchestrator(
 		input BottleTwin signal newBottleTwin;
 		input signal request, conveyorMoved, rotTableTurned, filled, capOn;
 		
-		output signal recieveTwin, moveConveyor, turnRotTable, fillerBottleOut, startFilling, startCapOn;
+		output signal recieveTwin, moveConveyor, turnRotTable, fillerBottleOut, startFilling, startCapOn, capperBottleOut;
 		output BottleTwin signal bottlePos0, bottlePos1, bottlePos2, bottlePos3, bottlePos4, bottlePos5, bottlePos6, bottlePos7, bottlePos8;
 		)
 ->{	
@@ -74,6 +74,8 @@ Orchestrator(
 			emit turnRotTable;
 			await(rotTableTurned);
 			emit fillerBottleOut;
+			emit capperBottleOut;
+//			pause;
 			BottleTwin b1 = (BottleTwin)#posOne;
 			BottleTwin b2 = (BottleTwin)#posTwo;
 			BottleTwin b3 = (BottleTwin)#posThree;

@@ -16,13 +16,14 @@
 			<oSignal Name="fillerBottleOut" To="fillerPlantCD.bottleOut" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10008" />
 			<oSignal Name="startFilling" To="fillerControllerCD.startFilling" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10007" />
 			<oSignal Name="startCapOn" To="ControllerCD.request" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10000" />
+			<oSignal Name="capperBottleOut" To="CapperPlantCD.bottleOut" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10041" />
 
 
 			<oSignal Name="bottlePos0" To="conveyorPlantCD.bottleArriveToZero" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10005" />
 			<oSignal Name="bottlePos1" To="rotaryTablePlantCD.posOne" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10002" />
 			<oSignal Name="bottlePos2" To="fillerPlantCD.bottleIn" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10008" />
 			<oSignal Name="bottlePos3" To="ControllerCD.bottleIn" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10000" />
-			<oSignal Name="bottlePos4" To="UI.bottlePos4" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos4" To="CapperPlantCD.bottleIn" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10041" />
 			<oSignal Name="bottlePos5" To="UI.bottlePos5" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="bottlePos6" To="UI.bottlePos6" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="bottlePos7" To="UI.bottlePos7" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />

@@ -1,7 +1,12 @@
+import run.BottleTwin;
+
+
 CapperPlant (
 		input signal cylPos5ZaxisExtend, gripperTurnRetract, gripperTurnExtend, capGripperPos5Extend;
 		input signal cylClampBottleExtend;
 		input signal enable;
+		input BottleTwin signal bottleIn;
+		input signal bottleOut;
 		
 		output signal bottleAtPos4, gripperZAxisLowered, gripperZAxisLifted;
 		output signal gripperTurnHomePos, gripperTurnFinalPos;
@@ -10,16 +15,23 @@ CapperPlant (
 		output signal gripperTurnHomePosE, gripperTurnFinalPosE;
 		)
 -> {
-	{
-		while(true) {
-			await(enable);
-			abort(!enable) {
-				sustain bottleAtPos4;
-			}
-			pause;
-		}
-	}
-	||
+	
+	BottleTwin signal bottle;
+    // Bottle at position 4 
+    {
+        while(true){
+            // For now simulate bottle always available when enabled
+            await(bottleIn);
+            
+			BottleTwin b = (BottleTwin)#bottleIn;
+			emit bottle(b);
+            abort(bottleOut){
+                sustain bottleAtPos4;
+            }
+            
+        }
+    }
+    ||
 	{ // gripper lowered or lifted
 		while(true) {
 			abort(!cylPos5ZaxisExtend && enable) {
@@ -27,7 +39,7 @@ CapperPlant (
 				sustain gripperZAxisLowered; // when the gripper/capper is lowered
 				System.out.println(#gripperZAxisLowered);
 			}
-				
+			
 			
 			abort(cylPos5ZaxisExtend && enable) {
 				sustain gripperZAxisLifted; // when the gripper/capper is lifted
