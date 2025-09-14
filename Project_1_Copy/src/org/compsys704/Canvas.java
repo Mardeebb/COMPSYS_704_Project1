@@ -38,6 +38,8 @@ public class Canvas extends JPanel {
 	BufferedImage filler_off;
 	BufferedImage filler_on;
 	BufferedImage capper_on, capper1, capper_off, capper2;
+	BufferedImage LARM, LARM0, LARM1, LARM2, LARM3, LARM4;
+	BufferedImage SARM, SARM0, SARM1, SARM2, SARM3, SARM4;
 
     private EABSBackend backend;
 
@@ -107,6 +109,26 @@ public class Canvas extends JPanel {
 			bi = ImageIO.read(new File("res/CapperStates.png"));
 			capper_off = bi.getSubimage(195,35, 130,100);
 			capper_on = bi.getSubimage(21,35, 183,100);
+			bi = ImageIO.read(new File("res/robot.png"));
+			LARM = bi.getSubimage(30,100, 600,250);
+			LARM0 = scaleImage(LARM, 250, 100);
+			LARM1 = scaleImage(LARM, 210, 70);
+			LARM2 =bi.getSubimage(40,370, 600,250);
+			LARM2= scaleImage(LARM2, 210, 70);
+			LARM3 =bi.getSubimage(1350,30, 230,650);
+			LARM3= scaleImage(LARM3, 70, 210);
+			LARM4 =bi.getSubimage(1600,30, 230,650);
+			LARM4= scaleImage(LARM4, 70, 210);
+			bi = ImageIO.read(new File("res/robot_smallerBottle.png"));
+			SARM=bi.getSubimage(90, 130, 1370, 710);
+			SARM0=scaleImage(SARM, 250,100);
+			SARM1=scaleImage(SARM, 210,70);
+			SARM2=bi.getSubimage(100, 400, 1370, 710);
+			SARM2=scaleImage(SARM2, 210,70);
+			SARM3=bi.getSubimage(820, 45, 240, 610);
+			SARM3=scaleImage(SARM3, 70,210);
+			SARM4=bi.getSubimage(1120, 45, 240, 610);
+			SARM4=scaleImage(SARM4, 70,210);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -174,7 +196,82 @@ public class Canvas extends JPanel {
 	
 	@Override
 	protected void paintComponent(Graphics g){
-		
+	    int rightImage = robot.rightImage(robot.cmdR);
+	    int leftImage = robot.leftImage(robot.cmdL);
+	    if(robot.bottleSize) {
+	//	    System.err.println(leftImage);
+		    // draw left arm
+		    switch(leftImage) {
+		    case 0:
+		    	g.drawImage(LARM0, 0, 350, null);
+		    	break;
+		    case 1:
+		    	g.drawImage(LARM1, 0, 350, null);
+		    	break;
+		    case 2:
+		    	g.drawImage(LARM2, 0, 350, null);
+		    	break;
+		    case 3:
+		    	g.drawImage(LARM3, 0, 350, null);
+		    	break;
+		    case 4:
+		    	g.drawImage(LARM4, 0, 350, null);
+		    	break;
+		    }		    		    
+		    switch(rightImage) {
+		    case 0:
+		    	g.drawImage(LARM0, 700, 350, null);
+		    	break;
+		    case 1:
+		    	g.drawImage(LARM1, 700, 350, null);
+		    	break;
+		    case 2:
+		    	g.drawImage(LARM2, 700, 350, null);
+		    	break;
+		    case 3:
+		    	g.drawImage(LARM3, 700, 350, null);
+		    	break;
+		    case 4:
+		    	g.drawImage(LARM4, 700, 350, null);
+		    	break;
+		    }
+	    }else {
+		    switch(leftImage) {
+		    case 0:
+		    	g.drawImage(SARM0, 0, 350, null);
+		    	break;
+		    case 1:
+		    	g.drawImage(SARM1, 0, 350, null);
+		    	break;
+		    case 2:
+		    	g.drawImage(SARM2, 0, 350, null);
+		    	break;
+		    case 3:
+		    	g.drawImage(SARM3, 0, 350, null);
+		    	break;
+		    case 4:
+		    	g.drawImage(SARM4, 0, 350, null);
+		    	break;
+		    }		    		    
+		    switch(rightImage) {
+		    case 0:
+		    	g.drawImage(SARM0, 700, 350, null);
+		    	break;
+		    case 1:
+		    	g.drawImage(SARM1, 700, 350, null);
+		    	break;
+		    case 2:
+		    	g.drawImage(SARM2, 700, 350, null);
+		    	break;
+		    case 3:
+		    	g.drawImage(SARM3, 700, 350, null);
+		    	break;
+		    case 4:
+		    	g.drawImage(SARM4, 700, 350, null);
+		    	break;
+		    }
+	    }
+
 	    int rotTable_X = 300;
 	    int rotTable_Y = 400;
 	    int cap_X = 400;

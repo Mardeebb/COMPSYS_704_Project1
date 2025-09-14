@@ -153,6 +153,29 @@ public class SysJWorker extends Worker{
 		case "gripperTurnFinalPosE":
 			Capper.gripper_fullyturned = status;
 			break;
+			
+		case "CMD_LE":
+			if(status) {
+				robot.cmdL = (String) value;
+
+			}
+
+		case "CMD_L2E":
+			if(status) {
+				robot.cmdL = (String) value;
+			}
+
+			
+		case "CMD_RE":
+			if(status) {
+				robot.cmdR = (String) value;
+
+			}
+
+		case "CMD_R2E":
+			if(status) {
+				robot.cmdR = (String) value;
+			}
 
 		default: 
 			System.err.println("Wrong sig name : "+signame);
@@ -160,7 +183,7 @@ public class SysJWorker extends Worker{
 		}
 	}
 	
-	static final List<String> signames = Arrays.asList("gripperTurnFinalPosE", "gripperTurnHomePosE", "gripperZAxisLiftedE", "gripperZAxisLoweredE", "capOnID", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","pos0","pos1","pos5","pos7","conveyorMoving","conveyorStop","fillID");
+	static final List<String> signames = Arrays.asList("CMD_RE", "CMD_R2E", "CMD_L2E", "CMD_LE","gripperTurnFinalPosE", "gripperTurnHomePosE", "gripperZAxisLiftedE", "gripperZAxisLoweredE", "capOnID", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","pos0","pos1","pos5","pos7","conveyorMoving","conveyorStop","fillID");
 	
 	@Override
 	public boolean hasSignal(String sn) {
