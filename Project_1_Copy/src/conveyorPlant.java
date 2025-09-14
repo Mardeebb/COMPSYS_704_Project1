@@ -30,12 +30,12 @@ public class conveyorPlant extends ClockDomain{
   private Signal posSeven_1;
   private BottleTwin bZero_thread_2;//sysj\conveyorPlant.sysj line: 24, column: 5
   private BottleTwin bFive_thread_2;//sysj\conveyorPlant.sysj line: 25, column: 5
-  private BottleTwin b_thread_3;//sysj\conveyorPlant.sysj line: 48, column: 4
-  private int id_thread_3;//sysj\conveyorPlant.sysj line: 50, column: 5
-  private BottleTwin b_thread_4;//sysj\conveyorPlant.sysj line: 64, column: 4
-  private int id_thread_4;//sysj\conveyorPlant.sysj line: 66, column: 5
-  private BottleTwin b_thread_6;//sysj\conveyorPlant.sysj line: 88, column: 4
-  private int id_thread_6;//sysj\conveyorPlant.sysj line: 91, column: 5
+  private BottleTwin b_thread_3;//sysj\conveyorPlant.sysj line: 46, column: 4
+  private int id_thread_3;//sysj\conveyorPlant.sysj line: 48, column: 5
+  private BottleTwin b_thread_4;//sysj\conveyorPlant.sysj line: 60, column: 4
+  private int id_thread_4;//sysj\conveyorPlant.sysj line: 62, column: 5
+  private BottleTwin b_thread_6;//sysj\conveyorPlant.sysj line: 84, column: 4
+  private int id_thread_6;//sysj\conveyorPlant.sysj line: 87, column: 5
   private int S2008 = 1;
   private int S1792 = 1;
   private int S1698 = 1;
@@ -59,16 +59,16 @@ public class conveyorPlant extends ClockDomain{
       case 1 : 
         switch(S1854){
           case 0 : 
-            if(posOne_1.getprestatus()){//sysj\conveyorPlant.sysj line: 87, column: 10
-              b_thread_6 = (BottleTwin)(posOne_1.getpreval() == null ? null : ((BottleTwin)posOne_1.getpreval()));//sysj\conveyorPlant.sysj line: 88, column: 4
+            if(posOne_1.getprestatus()){//sysj\conveyorPlant.sysj line: 83, column: 10
+              b_thread_6 = (BottleTwin)(posOne_1.getpreval() == null ? null : ((BottleTwin)posOne_1.getpreval()));//sysj\conveyorPlant.sysj line: 84, column: 4
               S1854=1;
-              if(b_thread_6 != null){//sysj\conveyorPlant.sysj line: 89, column: 7
-                id_thread_6 = b_thread_6.ID;//sysj\conveyorPlant.sysj line: 91, column: 5
-                pos1.setPresent();//sysj\conveyorPlant.sysj line: 93, column: 6
+              if(b_thread_6 != null){//sysj\conveyorPlant.sysj line: 85, column: 7
+                id_thread_6 = b_thread_6.ID;//sysj\conveyorPlant.sysj line: 87, column: 5
+                pos1.setPresent();//sysj\conveyorPlant.sysj line: 89, column: 6
                 currsigs.addElement(pos1);
-                pos1.setValue(id_thread_6);//sysj\conveyorPlant.sysj line: 93, column: 6
+                pos1.setValue(id_thread_6);//sysj\conveyorPlant.sysj line: 89, column: 6
                 System.out.println("Emitted pos1");
-                bottleAtPos1.setPresent();//sysj\conveyorPlant.sysj line: 94, column: 6
+                bottleAtPos1.setPresent();//sysj\conveyorPlant.sysj line: 90, column: 6
                 currsigs.addElement(bottleAtPos1);
                 System.out.println("Emitted bottleAtPos1");
                 active[6]=1;
@@ -90,10 +90,10 @@ public class conveyorPlant extends ClockDomain{
             break;
           
           case 1 : 
-            if(roturn.getprestatus()){//sysj\conveyorPlant.sysj line: 92, column: 11
-              pos1.setPresent();//sysj\conveyorPlant.sysj line: 96, column: 5
+            if(roturn.getprestatus()){//sysj\conveyorPlant.sysj line: 88, column: 11
+              pos1.setPresent();//sysj\conveyorPlant.sysj line: 92, column: 5
               currsigs.addElement(pos1);
-              pos1.setValue(-1);//sysj\conveyorPlant.sysj line: 96, column: 5
+              pos1.setValue(-1);//sysj\conveyorPlant.sysj line: 92, column: 5
               System.out.println("Emitted pos1");
               S1854=0;
               active[6]=1;
@@ -101,7 +101,7 @@ public class conveyorPlant extends ClockDomain{
               tdone[6]=1;
             }
             else {
-              bottleAtPos1.setPresent();//sysj\conveyorPlant.sysj line: 94, column: 6
+              bottleAtPos1.setPresent();//sysj\conveyorPlant.sysj line: 90, column: 6
               currsigs.addElement(bottleAtPos1);
               System.out.println("Emitted bottleAtPos1");
               active[6]=1;
@@ -125,10 +125,10 @@ public class conveyorPlant extends ClockDomain{
         break;
       
       case 1 : 
-        if(roturn.getprestatus()){//sysj\conveyorPlant.sysj line: 78, column: 10
-          posOne_1.setPresent();//sysj\conveyorPlant.sysj line: 79, column: 4
+        if(roturn.getprestatus()){//sysj\conveyorPlant.sysj line: 74, column: 10
+          posOne_1.setPresent();//sysj\conveyorPlant.sysj line: 75, column: 4
           currsigs.addElement(posOne_1);
-          posOne_1.setValue(null);//sysj\conveyorPlant.sysj line: 79, column: 4
+          posOne_1.setValue(null);//sysj\conveyorPlant.sysj line: 75, column: 4
           System.out.println("Emitted posOne_1");
           active[5]=1;
           ends[5]=1;
@@ -153,17 +153,17 @@ public class conveyorPlant extends ClockDomain{
         break;
       
       case 1 : 
-        if(bottleArriveToFive.getprestatus()){//sysj\conveyorPlant.sysj line: 63, column: 10
-          b_thread_4 = (BottleTwin)(bottleArriveToFive.getpreval() == null ? null : ((BottleTwin)bottleArriveToFive.getpreval()));//sysj\conveyorPlant.sysj line: 64, column: 4
-          if(b_thread_4 != null){//sysj\conveyorPlant.sysj line: 65, column: 7
-            id_thread_4 = b_thread_4.ID;//sysj\conveyorPlant.sysj line: 66, column: 5
-            pos5.setPresent();//sysj\conveyorPlant.sysj line: 67, column: 5
+        if(bottleArriveToFive.getprestatus()){//sysj\conveyorPlant.sysj line: 59, column: 10
+          b_thread_4 = (BottleTwin)(bottleArriveToFive.getpreval() == null ? null : ((BottleTwin)bottleArriveToFive.getpreval()));//sysj\conveyorPlant.sysj line: 60, column: 4
+          if(b_thread_4 != null){//sysj\conveyorPlant.sysj line: 61, column: 7
+            id_thread_4 = b_thread_4.ID;//sysj\conveyorPlant.sysj line: 62, column: 5
+            pos5.setPresent();//sysj\conveyorPlant.sysj line: 63, column: 5
             currsigs.addElement(pos5);
-            pos5.setValue(id_thread_4);//sysj\conveyorPlant.sysj line: 67, column: 5
+            pos5.setValue(id_thread_4);//sysj\conveyorPlant.sysj line: 63, column: 5
             System.out.println("Emitted pos5");
-            posFive_1.setPresent();//sysj\conveyorPlant.sysj line: 68, column: 5
+            posFive_1.setPresent();//sysj\conveyorPlant.sysj line: 64, column: 5
             currsigs.addElement(posFive_1);
-            posFive_1.setValue(b_thread_4);//sysj\conveyorPlant.sysj line: 68, column: 5
+            posFive_1.setValue(b_thread_4);//sysj\conveyorPlant.sysj line: 64, column: 5
             System.out.println("Emitted posFive_1");
             active[4]=1;
             ends[4]=1;
@@ -194,17 +194,17 @@ public class conveyorPlant extends ClockDomain{
         break;
       
       case 1 : 
-        if(bottleArriveToZero.getprestatus()){//sysj\conveyorPlant.sysj line: 47, column: 10
-          b_thread_3 = (BottleTwin)(bottleArriveToZero.getpreval() == null ? null : ((BottleTwin)bottleArriveToZero.getpreval()));//sysj\conveyorPlant.sysj line: 48, column: 4
-          if(b_thread_3 != null){//sysj\conveyorPlant.sysj line: 49, column: 7
-            id_thread_3 = b_thread_3.ID;//sysj\conveyorPlant.sysj line: 50, column: 5
-            pos0.setPresent();//sysj\conveyorPlant.sysj line: 51, column: 5
+        if(bottleArriveToZero.getprestatus()){//sysj\conveyorPlant.sysj line: 45, column: 10
+          b_thread_3 = (BottleTwin)(bottleArriveToZero.getpreval() == null ? null : ((BottleTwin)bottleArriveToZero.getpreval()));//sysj\conveyorPlant.sysj line: 46, column: 4
+          if(b_thread_3 != null){//sysj\conveyorPlant.sysj line: 47, column: 7
+            id_thread_3 = b_thread_3.ID;//sysj\conveyorPlant.sysj line: 48, column: 5
+            pos0.setPresent();//sysj\conveyorPlant.sysj line: 49, column: 5
             currsigs.addElement(pos0);
-            pos0.setValue(id_thread_3);//sysj\conveyorPlant.sysj line: 51, column: 5
+            pos0.setValue(id_thread_3);//sysj\conveyorPlant.sysj line: 49, column: 5
             System.out.println("Emitted pos0");
-            posZero_1.setPresent();//sysj\conveyorPlant.sysj line: 52, column: 5
+            posZero_1.setPresent();//sysj\conveyorPlant.sysj line: 50, column: 5
             currsigs.addElement(posZero_1);
-            posZero_1.setValue(b_thread_3);//sysj\conveyorPlant.sysj line: 52, column: 5
+            posZero_1.setValue(b_thread_3);//sysj\conveyorPlant.sysj line: 50, column: 5
             System.out.println("Emitted posZero_1");
             active[3]=1;
             ends[3]=1;

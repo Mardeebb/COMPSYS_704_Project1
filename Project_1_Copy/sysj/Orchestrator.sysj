@@ -177,7 +177,7 @@ Orchestrator(
 			pause;
 		}
 	}
-		
+	
 		||
 
 	{
@@ -188,10 +188,61 @@ Orchestrator(
 			emit bottlePos4(b);
 			}
 			pause;
-		}
-
-			
+		}		
 	}
+		
+		||
+
+	{
+		while(true){
+			await(posFive);
+			BottleTwin b = (BottleTwin)#posFive;
+			if (b != null) {
+			emit bottlePos5(b);
+			}
+			pause;
+		}	
+	}
+		
+		||
+
+	{
+		while(true){
+			await(posSix);
+			BottleTwin b = (BottleTwin)#posSix;
+			if (b != null) {
+			emit bottlePos6(b);
+			}
+			pause;
+		}	
+	}
+		
+		||
+
+	{
+		while(true){
+			await(posSeven);
+			BottleTwin b = (BottleTwin)#posSeven;
+			if (b != null) {
+			emit bottlePos7(b);
+			}
+			pause;
+		}	
+	}
+		
+		||
+
+	{
+		while(true){
+			await(posEight);
+			BottleTwin b = (BottleTwin)#posEight;
+			if (b != null) {
+			emit bottlePos8(b);
+			}
+			pause;
+		}	
+	}
+		
 
 
 }
