@@ -186,11 +186,12 @@ CapperController (
 		output signal cylClampBottleExtend;
 		)
 -> {
-	System.out.println("Capper CD");
+	//System.out.println("Capper CD");
 	{
 		signal releaseCap, raiseGripper, unclampBottle; 
 		while(true) {
-			present(bottleAtPos4) {
+			System.out.println("waiting");
+			await(bottleAtPos4);
 				System.out.println("Capper doing work");
 				{
 					while(true) {
@@ -211,7 +212,7 @@ CapperController (
 							sustain cylPos5ZAxisExtend; // keep gripper lowered
 						}
 						System.err.println("lifted");
-						waitl(3 s);
+						pause;
 					}
 				}
 				||
@@ -240,7 +241,7 @@ CapperController (
 								System.out.println("retract");
 								sustain gripperTurnRetract; // retract
 							}
-							waitl(3 s);
+							pause;
 							emit raiseGripper ;
 							System.err.println("raise the gripper");
 							emit unclampBottle;
@@ -248,7 +249,6 @@ CapperController (
 
 					}
 				}
-			}
 			pause;
 		}
 	}

@@ -15,8 +15,8 @@ public class rotController extends ClockDomain{
   public Signal turn = new Signal("turn", Signal.INPUT);
   public Signal tableAlignedWithSensorC = new Signal("tableAlignedWithSensorC", Signal.INPUT);
   public Signal rotaryTableTrigger = new Signal("rotaryTableTrigger", Signal.OUTPUT);
-  private int S7089 = 1;
-  private int S7025 = 1;
+  private int S1447 = 1;
+  private int S1383 = 1;
   
   private int[] ends = new int[17];
   private int[] tdone = new int[17];
@@ -28,25 +28,25 @@ public class rotController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S7089){
+      switch(S1447){
         case 0 : 
-          S7089=0;
+          S1447=0;
           break RUN;
         
         case 1 : 
-          S7089=2;
-          S7089=2;
+          S1447=2;
+          S1447=2;
           System.out.println("Controller startedh");//sysj\controller.sysj line: 264, column: 5
-          S7025=0;
+          S1383=0;
           active[10]=1;
           ends[10]=1;
           break RUN;
         
         case 2 : 
-          switch(S7025){
+          switch(S1383){
             case 0 : 
               if(turn.getprestatus()){//sysj\controller.sysj line: 268, column: 10
-                S7025=1;
+                S1383=1;
                 rotaryTableTrigger.setPresent();//sysj\controller.sysj line: 271, column: 5
                 currsigs.addElement(rotaryTableTrigger);
                 active[10]=1;
@@ -61,7 +61,7 @@ public class rotController extends ClockDomain{
             
             case 1 : 
               if(tableAlignedWithSensorC.getprestatus()){//sysj\controller.sysj line: 270, column: 10
-                S7025=2;
+                S1383=2;
                 active[10]=1;
                 ends[10]=1;
                 break RUN;
@@ -76,7 +76,7 @@ public class rotController extends ClockDomain{
             
             case 2 : 
               if(!turn.getprestatus()){//sysj\controller.sysj line: 273, column: 10
-                S7025=0;
+                S1383=0;
                 active[10]=1;
                 ends[10]=1;
                 break RUN;

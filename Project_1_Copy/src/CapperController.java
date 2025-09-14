@@ -27,88 +27,23 @@ public class CapperController extends ClockDomain{
   private Signal releaseCap_3;
   private Signal raiseGripper_3;
   private Signal unclampBottle_3;
-  private long __start_thread_5;//sysj\controller.sysj line: 208, column: 6
-  private long __start_thread_9;//sysj\controller.sysj line: 230, column: 7
-  private int S7015 = 1;
-  private int S1273 = 1;
-  private int S152 = 1;
-  private int S339 = 1;
-  private int S161 = 1;
-  private int S163 = 1;
-  private int S386 = 1;
-  private int S346 = 1;
-  private int S342 = 1;
-  private int S345 = 1;
-  private int S698 = 1;
-  private int S404 = 1;
+  private int S1373 = 1;
+  private int S129 = 1;
+  private int S155 = 1;
+  private int S184 = 1;
+  private int S164 = 1;
+  private int S231 = 1;
+  private int S191 = 1;
+  private int S187 = 1;
+  private int S190 = 1;
+  private int S335 = 1;
+  private int S249 = 1;
   
   private int[] ends = new int[17];
   private int[] tdone = new int[17];
   
-  public void thread7832(int [] tdone, int [] ends){
-        S698=1;
-    S404=0;
-    active[9]=1;
-    ends[9]=1;
-    tdone[9]=1;
-  }
-
-  public void thread7830(int [] tdone, int [] ends){
-        S345=1;
-    active[8]=1;
-    ends[8]=1;
-    tdone[8]=1;
-  }
-
-  public void thread7829(int [] tdone, int [] ends){
-        S342=1;
-    active[7]=1;
-    ends[7]=1;
-    tdone[7]=1;
-  }
-
-  public void thread7828(int [] tdone, int [] ends){
-        S386=1;
-    S346=0;
-    thread7829(tdone,ends);
-    thread7830(tdone,ends);
-    int biggest7831 = 0;
-    if(ends[7]>=biggest7831){
-      biggest7831=ends[7];
-    }
-    if(ends[8]>=biggest7831){
-      biggest7831=ends[8];
-    }
-    if(biggest7831 == 1){
-      active[6]=1;
-      ends[6]=1;
-      tdone[6]=1;
-    }
-  }
-
-  public void thread7827(int [] tdone, int [] ends){
-        S339=1;
-    S161=0;
-    System.err.println("gripper lowered");//sysj\controller.sysj line: 210, column: 8
-    cylPos5ZAxisExtend.setPresent();//sysj\controller.sysj line: 211, column: 8
-    currsigs.addElement(cylPos5ZAxisExtend);
-    active[5]=1;
-    ends[5]=1;
-    tdone[5]=1;
-  }
-
-  public void thread7826(int [] tdone, int [] ends){
-        S152=1;
-    System.out.println("Bottle clamped");//sysj\controller.sysj line: 200, column: 8
-    cylClampBottleExtend.setPresent();//sysj\controller.sysj line: 201, column: 8
-    currsigs.addElement(cylClampBottleExtend);
-    active[4]=1;
-    ends[4]=1;
-    tdone[4]=1;
-  }
-
-  public void thread7824(int [] tdone, int [] ends){
-        switch(S698){
+  public void thread2182(int [] tdone, int [] ends){
+        switch(S335){
       case 0 : 
         active[9]=0;
         ends[9]=0;
@@ -116,12 +51,12 @@ public class CapperController extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S404){
+        switch(S249){
           case 0 : 
-            if(gripperGripped.getprestatus()){//sysj\controller.sysj line: 231, column: 14
-              S404=1;
-              System.out.println("Twist");//sysj\controller.sysj line: 234, column: 9
-              gripperTurnExtend.setPresent();//sysj\controller.sysj line: 235, column: 9
+            if(gripperGripped.getprestatus()){//sysj\controller.sysj line: 232, column: 14
+              S249=1;
+              System.out.println("Twist");//sysj\controller.sysj line: 235, column: 9
+              gripperTurnExtend.setPresent();//sysj\controller.sysj line: 236, column: 9
               currsigs.addElement(gripperTurnExtend);
               active[9]=1;
               ends[9]=1;
@@ -135,19 +70,19 @@ public class CapperController extends ClockDomain{
             break;
           
           case 1 : 
-            if(gripperTurnFinalPos.getprestatus()){//sysj\controller.sysj line: 233, column: 14
-              releaseCap_3.setPresent();//sysj\controller.sysj line: 238, column: 8
+            if(gripperTurnFinalPos.getprestatus()){//sysj\controller.sysj line: 234, column: 14
+              releaseCap_3.setPresent();//sysj\controller.sysj line: 239, column: 8
               currsigs.addElement(releaseCap_3);
-              S404=2;
-              System.out.println("retract");//sysj\controller.sysj line: 240, column: 9
-              gripperTurnRetract.setPresent();//sysj\controller.sysj line: 241, column: 9
+              S249=2;
+              System.out.println("retract");//sysj\controller.sysj line: 241, column: 9
+              gripperTurnRetract.setPresent();//sysj\controller.sysj line: 242, column: 9
               currsigs.addElement(gripperTurnRetract);
               active[9]=1;
               ends[9]=1;
               tdone[9]=1;
             }
             else {
-              gripperTurnExtend.setPresent();//sysj\controller.sysj line: 235, column: 9
+              gripperTurnExtend.setPresent();//sysj\controller.sysj line: 236, column: 9
               currsigs.addElement(gripperTurnExtend);
               active[9]=1;
               ends[9]=1;
@@ -156,30 +91,14 @@ public class CapperController extends ClockDomain{
             break;
           
           case 2 : 
-            if(gripperTurnHomePos.getprestatus()){//sysj\controller.sysj line: 239, column: 15
-              S404=3;
-              __start_thread_9 = com.systemj.Timer.getMs();//sysj\controller.sysj line: 230, column: 7
-              if(com.systemj.Timer.getMs() - __start_thread_9 >= (3) * 1000){//sysj\controller.sysj line: 230, column: 7
-                ends[9]=2;
-                ;//sysj\controller.sysj line: 230, column: 7
-                raiseGripper_3.setPresent();//sysj\controller.sysj line: 244, column: 8
-                currsigs.addElement(raiseGripper_3);
-                System.err.println("raise the gripper");//sysj\controller.sysj line: 245, column: 8
-                unclampBottle_3.setPresent();//sysj\controller.sysj line: 246, column: 8
-                currsigs.addElement(unclampBottle_3);
-                S404=0;
-                active[9]=1;
-                ends[9]=1;
-                tdone[9]=1;
-              }
-              else {
-                active[9]=1;
-                ends[9]=1;
-                tdone[9]=1;
-              }
+            if(gripperTurnHomePos.getprestatus()){//sysj\controller.sysj line: 240, column: 15
+              S249=3;
+              active[9]=1;
+              ends[9]=1;
+              tdone[9]=1;
             }
             else {
-              gripperTurnRetract.setPresent();//sysj\controller.sysj line: 241, column: 9
+              gripperTurnRetract.setPresent();//sysj\controller.sysj line: 242, column: 9
               currsigs.addElement(gripperTurnRetract);
               active[9]=1;
               ends[9]=1;
@@ -188,24 +107,16 @@ public class CapperController extends ClockDomain{
             break;
           
           case 3 : 
-            if(com.systemj.Timer.getMs() - __start_thread_9 >= (3) * 1000){//sysj\controller.sysj line: 230, column: 7
-              ends[9]=2;
-              ;//sysj\controller.sysj line: 230, column: 7
-              raiseGripper_3.setPresent();//sysj\controller.sysj line: 244, column: 8
-              currsigs.addElement(raiseGripper_3);
-              System.err.println("raise the gripper");//sysj\controller.sysj line: 245, column: 8
-              unclampBottle_3.setPresent();//sysj\controller.sysj line: 246, column: 8
-              currsigs.addElement(unclampBottle_3);
-              S404=0;
-              active[9]=1;
-              ends[9]=1;
-              tdone[9]=1;
-            }
-            else {
-              active[9]=1;
-              ends[9]=1;
-              tdone[9]=1;
-            }
+            S249=3;
+            raiseGripper_3.setPresent();//sysj\controller.sysj line: 245, column: 8
+            currsigs.addElement(raiseGripper_3);
+            System.err.println("raise the gripper");//sysj\controller.sysj line: 246, column: 8
+            unclampBottle_3.setPresent();//sysj\controller.sysj line: 247, column: 8
+            currsigs.addElement(unclampBottle_3);
+            S249=0;
+            active[9]=1;
+            ends[9]=1;
+            tdone[9]=1;
             break;
           
         }
@@ -214,22 +125,22 @@ public class CapperController extends ClockDomain{
     }
   }
 
-  public void thread7822(int [] tdone, int [] ends){
-        S345=1;
+  public void thread2180(int [] tdone, int [] ends){
+        S190=1;
     active[8]=1;
     ends[8]=1;
     tdone[8]=1;
   }
 
-  public void thread7821(int [] tdone, int [] ends){
-        S342=1;
+  public void thread2179(int [] tdone, int [] ends){
+        S187=1;
     active[7]=1;
     ends[7]=1;
     tdone[7]=1;
   }
 
-  public void thread7819(int [] tdone, int [] ends){
-        switch(S345){
+  public void thread2177(int [] tdone, int [] ends){
+        switch(S190){
       case 0 : 
         active[8]=0;
         ends[8]=0;
@@ -237,8 +148,8 @@ public class CapperController extends ClockDomain{
         break;
       
       case 1 : 
-        if(cylClamped.getprestatus()){//sysj\controller.sysj line: 220, column: 47
-          S345=0;
+        if(cylClamped.getprestatus()){//sysj\controller.sysj line: 221, column: 47
+          S190=0;
           active[8]=0;
           ends[8]=0;
           tdone[8]=1;
@@ -253,8 +164,8 @@ public class CapperController extends ClockDomain{
     }
   }
 
-  public void thread7818(int [] tdone, int [] ends){
-        switch(S342){
+  public void thread2176(int [] tdone, int [] ends){
+        switch(S187){
       case 0 : 
         active[7]=0;
         ends[7]=0;
@@ -262,8 +173,8 @@ public class CapperController extends ClockDomain{
         break;
       
       case 1 : 
-        if(gripperZAxisLowered.getprestatus()){//sysj\controller.sysj line: 220, column: 14
-          S342=0;
+        if(gripperZAxisLowered.getprestatus()){//sysj\controller.sysj line: 221, column: 14
+          S187=0;
           active[7]=0;
           ends[7]=0;
           tdone[7]=1;
@@ -278,8 +189,8 @@ public class CapperController extends ClockDomain{
     }
   }
 
-  public void thread7817(int [] tdone, int [] ends){
-        switch(S386){
+  public void thread2175(int [] tdone, int [] ends){
+        switch(S231){
       case 0 : 
         active[6]=0;
         ends[6]=0;
@@ -287,27 +198,27 @@ public class CapperController extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S346){
+        switch(S191){
           case 0 : 
-            thread7818(tdone,ends);
-            thread7819(tdone,ends);
-            int biggest7820 = 0;
-            if(ends[7]>=biggest7820){
-              biggest7820=ends[7];
+            thread2176(tdone,ends);
+            thread2177(tdone,ends);
+            int biggest2178 = 0;
+            if(ends[7]>=biggest2178){
+              biggest2178=ends[7];
             }
-            if(ends[8]>=biggest7820){
-              biggest7820=ends[8];
+            if(ends[8]>=biggest2178){
+              biggest2178=ends[8];
             }
-            if(biggest7820 == 1){
+            if(biggest2178 == 1){
               active[6]=1;
               ends[6]=1;
               tdone[6]=1;
             }
             //FINXME code
-            if(biggest7820 == 0){
-              System.out.println("gripped the cap");//sysj\controller.sysj line: 221, column: 7
-              S346=1;
-              capGripperPos5Extend.setPresent();//sysj\controller.sysj line: 223, column: 8
+            if(biggest2178 == 0){
+              System.out.println("gripped the cap");//sysj\controller.sysj line: 222, column: 7
+              S191=1;
+              capGripperPos5Extend.setPresent();//sysj\controller.sysj line: 224, column: 8
               currsigs.addElement(capGripperPos5Extend);
               active[6]=1;
               ends[6]=1;
@@ -316,25 +227,25 @@ public class CapperController extends ClockDomain{
             break;
           
           case 1 : 
-            if(releaseCap_3.getprestatus()){//sysj\controller.sysj line: 222, column: 13
-              S346=0;
-              thread7821(tdone,ends);
-              thread7822(tdone,ends);
-              int biggest7823 = 0;
-              if(ends[7]>=biggest7823){
-                biggest7823=ends[7];
+            if(releaseCap_3.getprestatus()){//sysj\controller.sysj line: 223, column: 13
+              S191=0;
+              thread2179(tdone,ends);
+              thread2180(tdone,ends);
+              int biggest2181 = 0;
+              if(ends[7]>=biggest2181){
+                biggest2181=ends[7];
               }
-              if(ends[8]>=biggest7823){
-                biggest7823=ends[8];
+              if(ends[8]>=biggest2181){
+                biggest2181=ends[8];
               }
-              if(biggest7823 == 1){
+              if(biggest2181 == 1){
                 active[6]=1;
                 ends[6]=1;
                 tdone[6]=1;
               }
             }
             else {
-              capGripperPos5Extend.setPresent();//sysj\controller.sysj line: 223, column: 8
+              capGripperPos5Extend.setPresent();//sysj\controller.sysj line: 224, column: 8
               currsigs.addElement(capGripperPos5Extend);
               active[6]=1;
               ends[6]=1;
@@ -348,8 +259,8 @@ public class CapperController extends ClockDomain{
     }
   }
 
-  public void thread7816(int [] tdone, int [] ends){
-        switch(S339){
+  public void thread2174(int [] tdone, int [] ends){
+        switch(S184){
       case 0 : 
         active[5]=0;
         ends[5]=0;
@@ -357,33 +268,17 @@ public class CapperController extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S161){
+        switch(S164){
           case 0 : 
-            if(raiseGripper_3.getprestatus()){//sysj\controller.sysj line: 209, column: 13
-              System.err.println("lifted");//sysj\controller.sysj line: 213, column: 7
-              S161=1;
-              __start_thread_5 = com.systemj.Timer.getMs();//sysj\controller.sysj line: 208, column: 6
-              S163=0;
-              if(com.systemj.Timer.getMs() - __start_thread_5 >= (3) * 1000){//sysj\controller.sysj line: 208, column: 6
-                ends[5]=2;
-                ;//sysj\controller.sysj line: 208, column: 6
-                S161=0;
-                System.err.println("gripper lowered");//sysj\controller.sysj line: 210, column: 8
-                cylPos5ZAxisExtend.setPresent();//sysj\controller.sysj line: 211, column: 8
-                currsigs.addElement(cylPos5ZAxisExtend);
-                active[5]=1;
-                ends[5]=1;
-                tdone[5]=1;
-              }
-              else {
-                S163=1;
-                active[5]=1;
-                ends[5]=1;
-                tdone[5]=1;
-              }
+            if(raiseGripper_3.getprestatus()){//sysj\controller.sysj line: 210, column: 13
+              System.err.println("lifted");//sysj\controller.sysj line: 214, column: 7
+              S164=1;
+              active[5]=1;
+              ends[5]=1;
+              tdone[5]=1;
             }
             else {
-              cylPos5ZAxisExtend.setPresent();//sysj\controller.sysj line: 211, column: 8
+              cylPos5ZAxisExtend.setPresent();//sysj\controller.sysj line: 212, column: 8
               currsigs.addElement(cylPos5ZAxisExtend);
               active[5]=1;
               ends[5]=1;
@@ -392,51 +287,14 @@ public class CapperController extends ClockDomain{
             break;
           
           case 1 : 
-            switch(S163){
-              case 0 : 
-                S163=0;
-                if(com.systemj.Timer.getMs() - __start_thread_5 >= (3) * 1000){//sysj\controller.sysj line: 208, column: 6
-                  ends[5]=2;
-                  ;//sysj\controller.sysj line: 208, column: 6
-                  S161=0;
-                  System.err.println("gripper lowered");//sysj\controller.sysj line: 210, column: 8
-                  cylPos5ZAxisExtend.setPresent();//sysj\controller.sysj line: 211, column: 8
-                  currsigs.addElement(cylPos5ZAxisExtend);
-                  active[5]=1;
-                  ends[5]=1;
-                  tdone[5]=1;
-                }
-                else {
-                  S163=1;
-                  active[5]=1;
-                  ends[5]=1;
-                  tdone[5]=1;
-                }
-                break;
-              
-              case 1 : 
-                S163=1;
-                S163=0;
-                if(com.systemj.Timer.getMs() - __start_thread_5 >= (3) * 1000){//sysj\controller.sysj line: 208, column: 6
-                  ends[5]=2;
-                  ;//sysj\controller.sysj line: 208, column: 6
-                  S161=0;
-                  System.err.println("gripper lowered");//sysj\controller.sysj line: 210, column: 8
-                  cylPos5ZAxisExtend.setPresent();//sysj\controller.sysj line: 211, column: 8
-                  currsigs.addElement(cylPos5ZAxisExtend);
-                  active[5]=1;
-                  ends[5]=1;
-                  tdone[5]=1;
-                }
-                else {
-                  S163=1;
-                  active[5]=1;
-                  ends[5]=1;
-                  tdone[5]=1;
-                }
-                break;
-              
-            }
+            S164=1;
+            S164=0;
+            System.err.println("gripper lowered");//sysj\controller.sysj line: 211, column: 8
+            cylPos5ZAxisExtend.setPresent();//sysj\controller.sysj line: 212, column: 8
+            currsigs.addElement(cylPos5ZAxisExtend);
+            active[5]=1;
+            ends[5]=1;
+            tdone[5]=1;
             break;
           
         }
@@ -445,8 +303,8 @@ public class CapperController extends ClockDomain{
     }
   }
 
-  public void thread7815(int [] tdone, int [] ends){
-        switch(S152){
+  public void thread2173(int [] tdone, int [] ends){
+        switch(S155){
       case 0 : 
         active[4]=0;
         ends[4]=0;
@@ -454,16 +312,16 @@ public class CapperController extends ClockDomain{
         break;
       
       case 1 : 
-        if(unclampBottle_3.getprestatus()){//sysj\controller.sysj line: 199, column: 13
-          System.out.println("Bottle clamped");//sysj\controller.sysj line: 200, column: 8
-          cylClampBottleExtend.setPresent();//sysj\controller.sysj line: 201, column: 8
+        if(unclampBottle_3.getprestatus()){//sysj\controller.sysj line: 200, column: 13
+          System.out.println("Bottle clamped");//sysj\controller.sysj line: 201, column: 8
+          cylClampBottleExtend.setPresent();//sysj\controller.sysj line: 202, column: 8
           currsigs.addElement(cylClampBottleExtend);
           active[4]=1;
           ends[4]=1;
           tdone[4]=1;
         }
         else {
-          cylClampBottleExtend.setPresent();//sysj\controller.sysj line: 201, column: 8
+          cylClampBottleExtend.setPresent();//sysj\controller.sysj line: 202, column: 8
           currsigs.addElement(cylClampBottleExtend);
           active[4]=1;
           ends[4]=1;
@@ -474,62 +332,62 @@ public class CapperController extends ClockDomain{
     }
   }
 
-  public void thread7813(int [] tdone, int [] ends){
-        S698=1;
-    S404=0;
+  public void thread2171(int [] tdone, int [] ends){
+        S335=1;
+    S249=0;
     active[9]=1;
     ends[9]=1;
     tdone[9]=1;
   }
 
-  public void thread7811(int [] tdone, int [] ends){
-        S345=1;
+  public void thread2169(int [] tdone, int [] ends){
+        S190=1;
     active[8]=1;
     ends[8]=1;
     tdone[8]=1;
   }
 
-  public void thread7810(int [] tdone, int [] ends){
-        S342=1;
+  public void thread2168(int [] tdone, int [] ends){
+        S187=1;
     active[7]=1;
     ends[7]=1;
     tdone[7]=1;
   }
 
-  public void thread7809(int [] tdone, int [] ends){
-        S386=1;
-    S346=0;
-    thread7810(tdone,ends);
-    thread7811(tdone,ends);
-    int biggest7812 = 0;
-    if(ends[7]>=biggest7812){
-      biggest7812=ends[7];
+  public void thread2167(int [] tdone, int [] ends){
+        S231=1;
+    S191=0;
+    thread2168(tdone,ends);
+    thread2169(tdone,ends);
+    int biggest2170 = 0;
+    if(ends[7]>=biggest2170){
+      biggest2170=ends[7];
     }
-    if(ends[8]>=biggest7812){
-      biggest7812=ends[8];
+    if(ends[8]>=biggest2170){
+      biggest2170=ends[8];
     }
-    if(biggest7812 == 1){
+    if(biggest2170 == 1){
       active[6]=1;
       ends[6]=1;
       tdone[6]=1;
     }
   }
 
-  public void thread7808(int [] tdone, int [] ends){
-        S339=1;
-    S161=0;
-    System.err.println("gripper lowered");//sysj\controller.sysj line: 210, column: 8
-    cylPos5ZAxisExtend.setPresent();//sysj\controller.sysj line: 211, column: 8
+  public void thread2166(int [] tdone, int [] ends){
+        S184=1;
+    S164=0;
+    System.err.println("gripper lowered");//sysj\controller.sysj line: 211, column: 8
+    cylPos5ZAxisExtend.setPresent();//sysj\controller.sysj line: 212, column: 8
     currsigs.addElement(cylPos5ZAxisExtend);
     active[5]=1;
     ends[5]=1;
     tdone[5]=1;
   }
 
-  public void thread7807(int [] tdone, int [] ends){
-        S152=1;
-    System.out.println("Bottle clamped");//sysj\controller.sysj line: 200, column: 8
-    cylClampBottleExtend.setPresent();//sysj\controller.sysj line: 201, column: 8
+  public void thread2165(int [] tdone, int [] ends){
+        S155=1;
+    System.out.println("Bottle clamped");//sysj\controller.sysj line: 201, column: 8
+    cylClampBottleExtend.setPresent();//sysj\controller.sysj line: 202, column: 8
     currsigs.addElement(cylClampBottleExtend);
     active[4]=1;
     ends[4]=1;
@@ -543,121 +401,99 @@ public class CapperController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S7015){
+      switch(S1373){
         case 0 : 
-          S7015=0;
+          S1373=0;
           break RUN;
         
         case 1 : 
-          S7015=2;
-          S7015=2;
-          System.out.println("Capper CD");//sysj\controller.sysj line: 189, column: 2
+          S1373=2;
+          S1373=2;
           releaseCap_3.setClear();//sysj\controller.sysj line: 191, column: 3
           raiseGripper_3.setClear();//sysj\controller.sysj line: 191, column: 3
           unclampBottle_3.setClear();//sysj\controller.sysj line: 191, column: 3
-          S1273=0;
-          if(bottleAtPos4.getprestatus()){//sysj\controller.sysj line: 193, column: 12
-            System.out.println("Capper doing work");//sysj\controller.sysj line: 194, column: 5
-            thread7807(tdone,ends);
-            thread7808(tdone,ends);
-            thread7809(tdone,ends);
-            thread7813(tdone,ends);
-            int biggest7814 = 0;
-            if(ends[4]>=biggest7814){
-              biggest7814=ends[4];
-            }
-            if(ends[5]>=biggest7814){
-              biggest7814=ends[5];
-            }
-            if(ends[6]>=biggest7814){
-              biggest7814=ends[6];
-            }
-            if(ends[9]>=biggest7814){
-              biggest7814=ends[9];
-            }
-            if(biggest7814 == 1){
-              active[3]=1;
-              ends[3]=1;
-              break RUN;
-            }
-          }
-          else {
-            S1273=1;
-            active[3]=1;
-            ends[3]=1;
-            break RUN;
-          }
+          System.out.println("waiting");//sysj\controller.sysj line: 193, column: 4
+          S129=0;
+          active[3]=1;
+          ends[3]=1;
+          break RUN;
         
         case 2 : 
           releaseCap_3.setClear();//sysj\controller.sysj line: 191, column: 3
           raiseGripper_3.setClear();//sysj\controller.sysj line: 191, column: 3
           unclampBottle_3.setClear();//sysj\controller.sysj line: 191, column: 3
-          switch(S1273){
+          switch(S129){
             case 0 : 
-              thread7815(tdone,ends);
-              thread7816(tdone,ends);
-              thread7817(tdone,ends);
-              thread7824(tdone,ends);
-              int biggest7825 = 0;
-              if(ends[4]>=biggest7825){
-                biggest7825=ends[4];
-              }
-              if(ends[5]>=biggest7825){
-                biggest7825=ends[5];
-              }
-              if(ends[6]>=biggest7825){
-                biggest7825=ends[6];
-              }
-              if(ends[9]>=biggest7825){
-                biggest7825=ends[9];
-              }
-              if(biggest7825 == 1){
-                active[3]=1;
-                ends[3]=1;
-                break RUN;
-              }
-              //FINXME code
-              if(biggest7825 == 0){
-                S1273=1;
-                active[3]=1;
-                ends[3]=1;
-                break RUN;
-              }
-            
-            case 1 : 
-              S1273=1;
-              S1273=0;
-              if(bottleAtPos4.getprestatus()){//sysj\controller.sysj line: 193, column: 12
-                System.out.println("Capper doing work");//sysj\controller.sysj line: 194, column: 5
-                thread7826(tdone,ends);
-                thread7827(tdone,ends);
-                thread7828(tdone,ends);
-                thread7832(tdone,ends);
-                int biggest7833 = 0;
-                if(ends[4]>=biggest7833){
-                  biggest7833=ends[4];
+              if(bottleAtPos4.getprestatus()){//sysj\controller.sysj line: 194, column: 10
+                System.out.println("Capper doing work");//sysj\controller.sysj line: 195, column: 5
+                S129=1;
+                thread2165(tdone,ends);
+                thread2166(tdone,ends);
+                thread2167(tdone,ends);
+                thread2171(tdone,ends);
+                int biggest2172 = 0;
+                if(ends[4]>=biggest2172){
+                  biggest2172=ends[4];
                 }
-                if(ends[5]>=biggest7833){
-                  biggest7833=ends[5];
+                if(ends[5]>=biggest2172){
+                  biggest2172=ends[5];
                 }
-                if(ends[6]>=biggest7833){
-                  biggest7833=ends[6];
+                if(ends[6]>=biggest2172){
+                  biggest2172=ends[6];
                 }
-                if(ends[9]>=biggest7833){
-                  biggest7833=ends[9];
+                if(ends[9]>=biggest2172){
+                  biggest2172=ends[9];
                 }
-                if(biggest7833 == 1){
+                if(biggest2172 == 1){
                   active[3]=1;
                   ends[3]=1;
                   break RUN;
                 }
               }
               else {
-                S1273=1;
                 active[3]=1;
                 ends[3]=1;
                 break RUN;
               }
+            
+            case 1 : 
+              thread2173(tdone,ends);
+              thread2174(tdone,ends);
+              thread2175(tdone,ends);
+              thread2182(tdone,ends);
+              int biggest2183 = 0;
+              if(ends[4]>=biggest2183){
+                biggest2183=ends[4];
+              }
+              if(ends[5]>=biggest2183){
+                biggest2183=ends[5];
+              }
+              if(ends[6]>=biggest2183){
+                biggest2183=ends[6];
+              }
+              if(ends[9]>=biggest2183){
+                biggest2183=ends[9];
+              }
+              if(biggest2183 == 1){
+                active[3]=1;
+                ends[3]=1;
+                break RUN;
+              }
+              //FINXME code
+              if(biggest2183 == 0){
+                S129=2;
+                active[3]=1;
+                ends[3]=1;
+                break RUN;
+              }
+            
+            case 2 : 
+              S129=2;
+              System.out.println("waiting");//sysj\controller.sysj line: 193, column: 4
+              S129=0;
+              active[3]=1;
+              ends[3]=1;
+              break RUN;
             
           }
         

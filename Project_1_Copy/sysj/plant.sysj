@@ -145,7 +145,6 @@ CapperPlant (
 				sustain gripperZAxisLifted; // when the gripper/capper is lifted
 			}
 				
-			await(!enable);
 		
 			
 			abort(!cylPos5ZAxisExtend && enable) {

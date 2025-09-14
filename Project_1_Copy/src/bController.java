@@ -22,17 +22,17 @@ public class bController extends ClockDomain{
   public Signal CMD_L2 = new Signal("CMD_L2", Signal.OUTPUT);
   public Signal CMD_R = new Signal("CMD_R", Signal.OUTPUT);
   public Signal CMD_R2 = new Signal("CMD_R2", Signal.OUTPUT);
-  private int S7805 = 1;
-  private int S7392 = 1;
-  private int S7268 = 1;
-  private int S7529 = 1;
-  private int S7405 = 1;
+  private int S2163 = 1;
+  private int S1750 = 1;
+  private int S1626 = 1;
+  private int S1887 = 1;
+  private int S1763 = 1;
   
   private int[] ends = new int[17];
   private int[] tdone = new int[17];
   
-  public void thread7844(int [] tdone, int [] ends){
-        switch(S7529){
+  public void thread2194(int [] tdone, int [] ends){
+        switch(S1887){
       case 0 : 
         active[16]=0;
         ends[16]=0;
@@ -40,10 +40,10 @@ public class bController extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S7405){
+        switch(S1763){
           case 0 : 
             if(CMDfb_R.getprestatus()){//sysj\controller.sysj line: 353, column: 10
-              S7405=1;
+              S1763=1;
               CMD_R2.setPresent();//sysj\controller.sysj line: 357, column: 5
               currsigs.addElement(CMD_R2);
               CMD_R2.setValue("limb_gripper right_limb open");//sysj\controller.sysj line: 357, column: 5
@@ -63,7 +63,7 @@ public class bController extends ClockDomain{
           
           case 1 : 
             if(CMDfb_R2.getprestatus()){//sysj\controller.sysj line: 356, column: 10
-              S7405=2;
+              S1763=2;
               CMD_R.setPresent();//sysj\controller.sysj line: 360, column: 5
               currsigs.addElement(CMD_R);
               CMD_R.setValue("limb_gripper right_limb close");//sysj\controller.sysj line: 360, column: 5
@@ -83,7 +83,7 @@ public class bController extends ClockDomain{
           
           case 2 : 
             if(CMDfb_R.getprestatus()){//sysj\controller.sysj line: 359, column: 10
-              S7405=3;
+              S1763=3;
               CMD_R2.setPresent();//sysj\controller.sysj line: 363, column: 5
               currsigs.addElement(CMD_R2);
               CMD_R2.setValue("limb_moveto right_limb C");//sysj\controller.sysj line: 363, column: 5
@@ -103,7 +103,7 @@ public class bController extends ClockDomain{
           
           case 3 : 
             if(CMDfb_R2.getprestatus()){//sysj\controller.sysj line: 362, column: 10
-              S7405=4;
+              S1763=4;
               CMD_R.setPresent();//sysj\controller.sysj line: 366, column: 5
               currsigs.addElement(CMD_R);
               CMD_R.setValue("limb_gripper right_limb open");//sysj\controller.sysj line: 366, column: 5
@@ -123,7 +123,7 @@ public class bController extends ClockDomain{
           
           case 4 : 
             if(CMDfb_R.getprestatus()){//sysj\controller.sysj line: 365, column: 10
-              S7405=5;
+              S1763=5;
               CMD_R2.setPresent();//sysj\controller.sysj line: 369, column: 5
               currsigs.addElement(CMD_R2);
               CMD_R2.setValue("limb_moveto right_limb A");//sysj\controller.sysj line: 369, column: 5
@@ -143,7 +143,7 @@ public class bController extends ClockDomain{
           
           case 5 : 
             if(CMDfb_R2.getprestatus()){//sysj\controller.sysj line: 368, column: 10
-              S7405=0;
+              S1763=0;
               CMD_R.setPresent();//sysj\controller.sysj line: 354, column: 5
               currsigs.addElement(CMD_R);
               CMD_R.setValue("limb_moveto right_limb B");//sysj\controller.sysj line: 354, column: 5
@@ -167,8 +167,8 @@ public class bController extends ClockDomain{
     }
   }
 
-  public void thread7843(int [] tdone, int [] ends){
-        switch(S7392){
+  public void thread2193(int [] tdone, int [] ends){
+        switch(S1750){
       case 0 : 
         active[15]=0;
         ends[15]=0;
@@ -176,10 +176,10 @@ public class bController extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S7268){
+        switch(S1626){
           case 0 : 
             if(CMDfb_L.getprestatus()){//sysj\controller.sysj line: 330, column: 10
-              S7268=1;
+              S1626=1;
               CMD_L2.setPresent();//sysj\controller.sysj line: 334, column: 5
               currsigs.addElement(CMD_L2);
               CMD_L2.setValue("limb_gripper left_limb open");//sysj\controller.sysj line: 334, column: 5
@@ -199,7 +199,7 @@ public class bController extends ClockDomain{
           
           case 1 : 
             if(CMDfb_L2.getprestatus()){//sysj\controller.sysj line: 333, column: 10
-              S7268=2;
+              S1626=2;
               CMD_L.setPresent();//sysj\controller.sysj line: 337, column: 5
               currsigs.addElement(CMD_L);
               CMD_L.setValue("limb_gripper left_limb close");//sysj\controller.sysj line: 337, column: 5
@@ -219,7 +219,7 @@ public class bController extends ClockDomain{
           
           case 2 : 
             if(CMDfb_L.getprestatus()){//sysj\controller.sysj line: 336, column: 10
-              S7268=3;
+              S1626=3;
               CMD_L2.setPresent();//sysj\controller.sysj line: 340, column: 5
               currsigs.addElement(CMD_L2);
               CMD_L2.setValue("limb_moveto left_limb C");//sysj\controller.sysj line: 340, column: 5
@@ -239,7 +239,7 @@ public class bController extends ClockDomain{
           
           case 3 : 
             if(CMDfb_L2.getprestatus()){//sysj\controller.sysj line: 339, column: 10
-              S7268=4;
+              S1626=4;
               CMD_L.setPresent();//sysj\controller.sysj line: 343, column: 5
               currsigs.addElement(CMD_L);
               CMD_L.setValue("limb_gripper left_limb open");//sysj\controller.sysj line: 343, column: 5
@@ -259,7 +259,7 @@ public class bController extends ClockDomain{
           
           case 4 : 
             if(CMDfb_L.getprestatus()){//sysj\controller.sysj line: 342, column: 10
-              S7268=5;
+              S1626=5;
               CMD_L2.setPresent();//sysj\controller.sysj line: 346, column: 5
               currsigs.addElement(CMD_L2);
               CMD_L2.setValue("limb_moveto left_limb A");//sysj\controller.sysj line: 346, column: 5
@@ -279,7 +279,7 @@ public class bController extends ClockDomain{
           
           case 5 : 
             if(CMDfb_L2.getprestatus()){//sysj\controller.sysj line: 345, column: 10
-              S7268=0;
+              S1626=0;
               CMD_L.setPresent();//sysj\controller.sysj line: 331, column: 5
               currsigs.addElement(CMD_L);
               CMD_L.setValue("limb_moveto left_limb B");//sysj\controller.sysj line: 331, column: 5
@@ -303,9 +303,9 @@ public class bController extends ClockDomain{
     }
   }
 
-  public void thread7841(int [] tdone, int [] ends){
-        S7529=1;
-    S7405=0;
+  public void thread2191(int [] tdone, int [] ends){
+        S1887=1;
+    S1763=0;
     CMD_R.setPresent();//sysj\controller.sysj line: 354, column: 5
     currsigs.addElement(CMD_R);
     CMD_R.setValue("limb_moveto right_limb B");//sysj\controller.sysj line: 354, column: 5
@@ -314,9 +314,9 @@ public class bController extends ClockDomain{
     tdone[16]=1;
   }
 
-  public void thread7840(int [] tdone, int [] ends){
-        S7392=1;
-    S7268=0;
+  public void thread2190(int [] tdone, int [] ends){
+        S1750=1;
+    S1626=0;
     CMD_L.setPresent();//sysj\controller.sysj line: 331, column: 5
     currsigs.addElement(CMD_L);
     CMD_L.setValue("limb_moveto left_limb B");//sysj\controller.sysj line: 331, column: 5
@@ -332,51 +332,51 @@ public class bController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S7805){
+      switch(S2163){
         case 0 : 
-          S7805=0;
+          S2163=0;
           break RUN;
         
         case 1 : 
-          S7805=2;
-          S7805=2;
+          S2163=2;
+          S2163=2;
           System.out.println("Baxtor robot Controller started");//sysj\controller.sysj line: 327, column: 2
-          thread7840(tdone,ends);
-          thread7841(tdone,ends);
-          int biggest7842 = 0;
-          if(ends[15]>=biggest7842){
-            biggest7842=ends[15];
+          thread2190(tdone,ends);
+          thread2191(tdone,ends);
+          int biggest2192 = 0;
+          if(ends[15]>=biggest2192){
+            biggest2192=ends[15];
           }
-          if(ends[16]>=biggest7842){
-            biggest7842=ends[16];
+          if(ends[16]>=biggest2192){
+            biggest2192=ends[16];
           }
-          if(biggest7842 == 1){
+          if(biggest2192 == 1){
             active[14]=1;
             ends[14]=1;
             break RUN;
           }
         
         case 2 : 
-          thread7843(tdone,ends);
-          thread7844(tdone,ends);
-          int biggest7845 = 0;
-          if(ends[15]>=biggest7845){
-            biggest7845=ends[15];
+          thread2193(tdone,ends);
+          thread2194(tdone,ends);
+          int biggest2195 = 0;
+          if(ends[15]>=biggest2195){
+            biggest2195=ends[15];
           }
-          if(ends[16]>=biggest7845){
-            biggest7845=ends[16];
+          if(ends[16]>=biggest2195){
+            biggest2195=ends[16];
           }
-          if(biggest7845 == 1){
+          if(biggest2195 == 1){
             active[14]=1;
             ends[14]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest7845 == 0){
-            S7805=0;
+          if(biggest2195 == 0){
+            S2163=0;
             active[14]=0;
             ends[14]=0;
-            S7805=0;
+            S2163=0;
             break RUN;
           }
         
