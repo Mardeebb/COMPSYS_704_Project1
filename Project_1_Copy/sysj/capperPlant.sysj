@@ -13,6 +13,8 @@ CapperPlant (
 		
 		output signal gripperZAxisLoweredE, gripperZAxisLiftedE;
 		output signal gripperTurnHomePosE, gripperTurnFinalPosE;
+		output signal gripperGripped, cylClamped;
+
 		)
 -> {
 	

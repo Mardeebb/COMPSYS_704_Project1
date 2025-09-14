@@ -195,6 +195,19 @@ public class Canvas extends JPanel {
 	
 	@Override
 	protected void paintComponent(Graphics g){
+	    
+
+	    int rotTable_X = 300;
+	    int rotTable_Y = 400;
+	    int cap_X = 400;
+	    int cap_Y = -60;
+        clickableAreas.clear(); // reset each repaint
+
+		
+		super.paintComponent(g);
+	    Graphics2D g2d = (Graphics2D) g;
+	    boolean signal1 = TurnTable.capOnBottleAtPos1;  // replace with your actual signal
+	    boolean signal2 = TurnTable.bottleAtPos5;
 	    int rightImage = robot.rightImage(robot.cmdR);
 	    int leftImage = robot.leftImage(robot.cmdL);
 	    if(robot.bottleSize) {
@@ -270,19 +283,6 @@ public class Canvas extends JPanel {
 		    	break;
 		    }
 	    }
-
-	    int rotTable_X = 300;
-	    int rotTable_Y = 400;
-	    int cap_X = 400;
-	    int cap_Y = -60;
-        clickableAreas.clear(); // reset each repaint
-
-		
-		super.paintComponent(g);
-	    Graphics2D g2d = (Graphics2D) g;
-	    boolean signal1 = TurnTable.capOnBottleAtPos1;  // replace with your actual signal
-	    boolean signal2 = TurnTable.bottleAtPos5;
-
 	    // Draw Signal 1
 	    if(signal1) {
 	        g2d.setColor(Color.green);
