@@ -237,12 +237,12 @@ CapperController (
 				}
 				
 				emit releaseCap;
-				emit raiseGripper ;
-				System.err.println("raise the gripper");
 				abort (gripperTurnHomePos) {
 					System.out.println("retract");
 					sustain gripperTurnRetract; // retract
 				}
+				emit raiseGripper ;
+				System.err.println("raise the gripper");
 				emit unclampBottle;
 			}
 		}
