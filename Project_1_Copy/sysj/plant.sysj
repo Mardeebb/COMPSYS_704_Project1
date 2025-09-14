@@ -140,14 +140,15 @@ CapperPlant (
 	||
 	{ // gripper lowered or lifted
 		while(true) {
+			System.err.println("Check lift");
 			abort(cylPos5ZAxisExtend && enable) {
 				System.err.println("Gripper Lifted");
 				sustain gripperZAxisLifted; // when the gripper/capper is lifted
 			}
-				
-		
+			await(!enable);
 			
-			abort(!cylPos5ZAxisExtend && enable) {
+			System.err.println("Check lower");
+			abort(!cylPos5ZAxisExtend) {
 				System.err.println("Gripper lowered");
 				sustain gripperZAxisLowered; // when the gripper/capper is lowered
 			}
@@ -187,7 +188,7 @@ CapperPlant (
 			await(cylClampBottleExtend);
 			
 			abort(!cylClampBottleExtend) {
-				sustain cylClamped;
+				sustain cylClamped; // indicate that it is clamped, abort if it is not 
 			}
 			pause;
 		}
