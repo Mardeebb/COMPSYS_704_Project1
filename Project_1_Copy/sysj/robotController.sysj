@@ -4,49 +4,49 @@ bController(
 	)
 ->{
 	System.out.println("Baxtor robot Controller started");
-	{
-		while(true){
-			abort(CMDfb_L){
-				sustain CMD_L("limb_moveto left_limb B"); // Moves the arm to the position B
-			}
-			abort(CMDfb_L2 ){
-				sustain CMD_L2("limb_gripper left_limb close"); 
-			}
-			abort(CMDfb_L){
-				sustain CMD_L("limb_moveto left_limb C"); 
-			}
-			abort(CMDfb_L2){
-				sustain CMD_L2("limb_gripper left_limb open");
-			}
-			abort(CMDfb_L){
-				 sustain CMD_L("limb_moveto left_limb A"); //Move the arm back to the ready location (Position A
-			}
-			abort(CMDfb_L2){
-				
-			}
-		}
-	}
-	||
-	{
-		while(true){
-			abort(CMDfb_R){
-				sustain CMD_R("limb_moveto right_limb C"); // Moves the arm to the position C for pickup
-			}
-			abort(CMDfb_R2 ){
-				sustain CMD_R2("limb_gripper right_limb open"); 
-			}
-			abort(CMDfb_R){
-				sustain CMD_R("limb_gripper right_limb close"); 
-			}
-			abort(CMDfb_R2){
-				sustain CMD_R2("limb_moveto right_limb B");  // lower horizontal place
-			}
-			abort(CMDfb_R){
-				sustain CMD_R("limb_gripper right_limb open"); 
-			}
-			abort(CMDfb_R2){
-				sustain CMD_R2("limb_moveto right_limb A"); //Move the arm back to the ready location (Position A
-			}
-		}
-	}
+//	{
+//		while(true){
+//			abort(CMDfb_L){
+//				sustain CMD_L("limb_moveto left_limb B"); // Moves the arm to the position B
+//			}
+//			abort(CMDfb_L2 ){
+//				sustain CMD_L2("limb_gripper left_limb close"); 
+//			}
+//			abort(CMDfb_L){
+//				sustain CMD_L("limb_moveto left_limb C"); 
+//			}
+//			abort(CMDfb_L2){
+//				sustain CMD_L2("limb_gripper left_limb open");
+//			}
+//			abort(CMDfb_L){
+//				 sustain CMD_L("limb_moveto left_limb A"); //Move the arm back to the ready location (Position A
+//			}
+//			abort(CMDfb_L2){
+//				
+//			}
+//		}
+//	}
+//	||
+//	{
+//		while(true){
+//			abort(CMDfb_R){
+//				sustain CMD_R("limb_moveto right_limb C"); // Moves the arm to the position C for pickup
+//			}
+//			abort(CMDfb_R2 ){
+//				sustain CMD_R2("limb_gripper right_limb open"); 
+//			}
+//			abort(CMDfb_R){
+//				sustain CMD_R("limb_gripper right_limb close"); 
+//			}
+//			abort(CMDfb_R2){
+//				sustain CMD_R2("limb_moveto right_limb B");  // lower horizontal place
+//			}
+//			abort(CMDfb_R){
+//				sustain CMD_R("limb_gripper right_limb open"); 
+//			}
+//			abort(CMDfb_R2){
+//				sustain CMD_R2("limb_moveto right_limb A"); //Move the arm back to the ready location (Position A
+//			}
+//		}
+//	}
 }

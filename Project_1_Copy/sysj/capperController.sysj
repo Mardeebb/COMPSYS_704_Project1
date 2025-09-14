@@ -1,6 +1,7 @@
 CapperController (
 		input signal bottleAtPos4, gripperZAxisLowered, gripperZAxisLifted;
 		input signal gripperTurnHomePos, gripperTurnFinalPos;
+		input signal capperStart;
 		
 		output signal cylPos5ZaxisExtend, gripperTurnRetract, gripperTurnExtend, capGripperPos5Extend;
 		output signal cylClampBottleExtend;
@@ -11,24 +12,45 @@ CapperController (
 		{
 			while(true) {
 				// wait until bottle is at position 4
-				//await(bottleAtPos4);
-				
-				pause;
-				// clamp bottle and lower gripper
-				abort(gripperZAxisLowered) {
-					{sustain cylClampBottleExtend;} || {sustain cylPos5ZaxisExtend;}
-				}
-				
-				
-				pause;
-				// grip the cap when gripper lowered
-				present(gripperZAxisLowered) {
-					abort(gripperTurnFinalPos) {
-						{sustain capGripperPos5Extend;} || {sustain gripperTurnExtend;}
+				abort(!bottleAtPos4){
+					await(capperStart)
+					// clamp bottle and lower gripper
+					abort(gripperZAxisLowered) {
+						{sustain cylClampBottleExtend;} 
+						|| 
+						{sustain cylPos5ZaxisExtend;}
 					}
 					
+					gripperTurnExtendo 
+					
+					bottleAtPos4 – Present when a bottle is at position 4 
+					o gripperZAxisLowered – Present when the gripper/capper unit is fully lowered 
+					o gripperZAxisLifted – Present when the gripper/capper unit is fully lifted 
+					o gripperTurnHomePos – Present when the gripper is at the initial position 
+					o gripperTurnFinalPos – Present when the gripper is fully turned
+					o cylPos5ZaxisExtend – brings the gripper down (absence of this signal will bring the gripper up) 
+					o gripperTurnRetract – untwists the gripper 
+					o gripperTurnExtend – twists the gripper 
+					o capGripperPos5Extend – Grips the cap (absence of this signal will release the cap) 
+					o cylClampBottleExtend – Clamps the bottle (absence of this signal will unclamp the bottle)
+					
+					{sustain capGripperPos5Extend;}
+					||
+					{sustain cylClampBottleExtend;} 
+					||
+					{
+						
+					}
+					
+					pause;
+					// grip the cap when gripper lowered
+					present(gripperZAxisLowered) {
+						abort(gripperTurnFinalPos) {
+							{sustain capGripperPos5Extend;} || {sustain gripperTurnExtend;}
+						}
+						
+					}
 				}
-				
 			}
 		}
 	}

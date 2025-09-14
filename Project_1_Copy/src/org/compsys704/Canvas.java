@@ -120,10 +120,10 @@ public class Canvas extends JPanel {
 			LARM4 =bi.getSubimage(1600,30, 230,650);
 			LARM4= scaleImage(LARM4, 70, 210);
 			bi = ImageIO.read(new File("res/robot_smallerBottle.png"));
-			SARM=bi.getSubimage(90, 130, 1370, 710);
+			SARM=bi.getSubimage(90, 130, 700, 200);
 			SARM0=scaleImage(SARM, 250,100);
 			SARM1=scaleImage(SARM, 210,70);
-			SARM2=bi.getSubimage(100, 400, 1370, 710);
+			SARM2=bi.getSubimage(100, 400, 700, 200);
 			SARM2=scaleImage(SARM2, 210,70);
 			SARM3=bi.getSubimage(820, 45, 240, 610);
 			SARM3=scaleImage(SARM3, 70,210);
@@ -190,7 +190,6 @@ public class Canvas extends JPanel {
 	    g.setColor(Color.BLACK);
 	    g.drawString(String.valueOf(id), x + 20, y + 30); 
         clickableAreas.put(id, new Rectangle(x, y, 80, 80));
-
 
 	}
 	

@@ -16,8 +16,8 @@ public class rotController extends ClockDomain{
   public Signal tableAlignedWithSensorC = new Signal("tableAlignedWithSensorC", Signal.INPUT);
   public Signal rotaryTableTrigger = new Signal("rotaryTableTrigger", Signal.OUTPUT);
   public Signal rotTableTurned = new Signal("rotTableTurned", Signal.OUTPUT);
-  private int S4917 = 1;
-  private int S4853 = 1;
+  private int S3789 = 1;
+  private int S3725 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -29,25 +29,25 @@ public class rotController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S4917){
+      switch(S3789){
         case 0 : 
-          S4917=0;
+          S3789=0;
           break RUN;
         
         case 1 : 
-          S4917=2;
-          S4917=2;
+          S3789=2;
+          S3789=2;
           System.out.println("Controller startedh");//sysj\rotController.sysj line: 10, column: 5
-          S4853=0;
+          S3725=0;
           active[1]=1;
           ends[1]=1;
           break RUN;
         
         case 2 : 
-          switch(S4853){
+          switch(S3725){
             case 0 : 
               if(turn.getprestatus()){//sysj\rotController.sysj line: 14, column: 10
-                S4853=1;
+                S3725=1;
                 rotaryTableTrigger.setPresent();//sysj\rotController.sysj line: 17, column: 5
                 currsigs.addElement(rotaryTableTrigger);
                 System.out.println("Emitted rotaryTableTrigger");
@@ -66,7 +66,7 @@ public class rotController extends ClockDomain{
                 rotTableTurned.setPresent();//sysj\rotController.sysj line: 19, column: 4
                 currsigs.addElement(rotTableTurned);
                 System.out.println("Emitted rotTableTurned");
-                S4853=2;
+                S3725=2;
                 active[1]=1;
                 ends[1]=1;
                 break RUN;
@@ -82,7 +82,7 @@ public class rotController extends ClockDomain{
             
             case 2 : 
               if(!turn.getprestatus()){//sysj\rotController.sysj line: 20, column: 10
-                S4853=0;
+                S3725=0;
                 active[1]=1;
                 ends[1]=1;
                 break RUN;

@@ -38,17 +38,17 @@ public class rotPlant extends ClockDomain{
   private int ID_thread_2;//sysj\rotPlant.sysj line: 33, column: 6
   private int[] packedArray_thread_2;//sysj\rotPlant.sysj line: 22, column: 5
   private BottleTwin b_thread_4;//sysj\rotPlant.sysj line: 106, column: 4
-  private int S4975 = 1;
-  private int S4963 = 1;
-  private int S4928 = 1;
-  private int S4965 = 1;
-  private int S4973 = 1;
+  private int S3847 = 1;
+  private int S3835 = 1;
+  private int S3800 = 1;
+  private int S3837 = 1;
+  private int S3845 = 1;
   
   private int[] ends = new int[5];
   private int[] tdone = new int[5];
   
-  public void thread4983(int [] tdone, int [] ends){
-        switch(S4973){
+  public void thread3855(int [] tdone, int [] ends){
+        switch(S3845){
       case 0 : 
         active[4]=0;
         ends[4]=0;
@@ -77,8 +77,8 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread4982(int [] tdone, int [] ends){
-        switch(S4965){
+  public void thread3854(int [] tdone, int [] ends){
+        switch(S3837){
       case 0 : 
         active[3]=0;
         ends[3]=0;
@@ -94,8 +94,8 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread4981(int [] tdone, int [] ends){
-        switch(S4963){
+  public void thread3853(int [] tdone, int [] ends){
+        switch(S3835){
       case 0 : 
         active[2]=0;
         ends[2]=0;
@@ -105,16 +105,16 @@ public class rotPlant extends ClockDomain{
       case 1 : 
         if(!rotaryTableTrigger.getprestatus()){//sysj\rotPlant.sysj line: 21, column: 10
           packedArray_thread_2 = new int[6];//sysj\rotPlant.sysj line: 22, column: 5
-          S4928=0;
+          S3800=0;
           active[2]=1;
           ends[2]=1;
           tdone[2]=1;
         }
         else {
-          switch(S4928){
+          switch(S3800){
             case 0 : 
               if(rotaryTableTrigger.getprestatus()){//sysj\rotPlant.sysj line: 23, column: 11
-                S4928=1;
+                S3800=1;
                 active[2]=1;
                 ends[2]=1;
                 tdone[2]=1;
@@ -211,7 +211,7 @@ public class rotPlant extends ClockDomain{
                 turn_1.setPresent();//sysj\rotPlant.sysj line: 79, column: 5
                 currsigs.addElement(turn_1);
                 System.out.println("Emitted turn_1");
-                S4928=2;
+                S3800=2;
                 tableAlignedWithSensorC.setPresent();//sysj\rotPlant.sysj line: 80, column: 5
                 currsigs.addElement(tableAlignedWithSensorC);
                 System.out.println("Emitted tableAlignedWithSensorC");
@@ -242,24 +242,24 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread4979(int [] tdone, int [] ends){
-        S4973=1;
+  public void thread3851(int [] tdone, int [] ends){
+        S3845=1;
     active[4]=1;
     ends[4]=1;
     tdone[4]=1;
   }
 
-  public void thread4978(int [] tdone, int [] ends){
-        S4965=1;
+  public void thread3850(int [] tdone, int [] ends){
+        S3837=1;
     active[3]=1;
     ends[3]=1;
     tdone[3]=1;
   }
 
-  public void thread4977(int [] tdone, int [] ends){
-        S4963=1;
+  public void thread3849(int [] tdone, int [] ends){
+        S3835=1;
     packedArray_thread_2 = new int[6];//sysj\rotPlant.sysj line: 22, column: 5
-    S4928=0;
+    S3800=0;
     active[2]=1;
     ends[2]=1;
     tdone[2]=1;
@@ -272,14 +272,14 @@ public class rotPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S4975){
+      switch(S3847){
         case 0 : 
-          S4975=0;
+          S3847=0;
           break RUN;
         
         case 1 : 
-          S4975=2;
-          S4975=2;
+          S3847=2;
+          S3847=2;
           turn_1.setClear();//sysj\rotPlant.sysj line: 16, column: 2
           pos1_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
           pos2_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
@@ -287,20 +287,20 @@ public class rotPlant extends ClockDomain{
           pos4_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
           pos5_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
           pos6_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
-          thread4977(tdone,ends);
-          thread4978(tdone,ends);
-          thread4979(tdone,ends);
-          int biggest4980 = 0;
-          if(ends[2]>=biggest4980){
-            biggest4980=ends[2];
+          thread3849(tdone,ends);
+          thread3850(tdone,ends);
+          thread3851(tdone,ends);
+          int biggest3852 = 0;
+          if(ends[2]>=biggest3852){
+            biggest3852=ends[2];
           }
-          if(ends[3]>=biggest4980){
-            biggest4980=ends[3];
+          if(ends[3]>=biggest3852){
+            biggest3852=ends[3];
           }
-          if(ends[4]>=biggest4980){
-            biggest4980=ends[4];
+          if(ends[4]>=biggest3852){
+            biggest3852=ends[4];
           }
-          if(biggest4980 == 1){
+          if(biggest3852 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
@@ -314,30 +314,30 @@ public class rotPlant extends ClockDomain{
           pos4_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
           pos5_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
           pos6_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
-          thread4981(tdone,ends);
-          thread4982(tdone,ends);
-          thread4983(tdone,ends);
-          int biggest4984 = 0;
-          if(ends[2]>=biggest4984){
-            biggest4984=ends[2];
+          thread3853(tdone,ends);
+          thread3854(tdone,ends);
+          thread3855(tdone,ends);
+          int biggest3856 = 0;
+          if(ends[2]>=biggest3856){
+            biggest3856=ends[2];
           }
-          if(ends[3]>=biggest4984){
-            biggest4984=ends[3];
+          if(ends[3]>=biggest3856){
+            biggest3856=ends[3];
           }
-          if(ends[4]>=biggest4984){
-            biggest4984=ends[4];
+          if(ends[4]>=biggest3856){
+            biggest3856=ends[4];
           }
-          if(biggest4984 == 1){
+          if(biggest3856 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest4984 == 0){
-            S4975=0;
+          if(biggest3856 == 0){
+            S3847=0;
             active[1]=0;
             ends[1]=0;
-            S4975=0;
+            S3847=0;
             break RUN;
           }
         
