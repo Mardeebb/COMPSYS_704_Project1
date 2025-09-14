@@ -105,8 +105,8 @@ public class Canvas extends JPanel {
 			LARM0 = scaleImage(LARM, 200, 100);
 			LARM1 = scaleImage(LARM, 140, 70);
 			bi = ImageIO.read(new File("res/CapperStates.png"));
-			capper_off = bi.getSubimage(195,35, 130,100);
-			capper_on = bi.getSubimage(21,35, 183,100);
+			capper_off = bi.getSubimage(195,35, 130,110);
+			capper_on = bi.getSubimage(21,35, 183,110);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -205,8 +205,12 @@ public class Canvas extends JPanel {
 	    // capper image
 	    if (Capper.capper_lowered) {
 	    	g.drawImage(capper_on, 536, 400, null);	
+			//System.err.println("Lowered " + Capper.capper_lowered);
+
 	    } else {
-	    	g.drawImage(capper_off, 550, 400, null);	
+			//System.err.println("Lowered " + Capper.capper_lowered);
+	    	g.drawImage(capper_off, 550, 400, null);
+	    	
 	    }
 	    
 	    	

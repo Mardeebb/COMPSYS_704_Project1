@@ -115,7 +115,7 @@ Plant(
 }
 
 CapperPlant (
-		input signal cylPos5ZaxisExtend, gripperTurnRetract, gripperTurnExtend, capGripperPos5Extend;
+		input signal cylPos5ZAxisExtend, gripperTurnRetract, gripperTurnExtend, capGripperPos5Extend;
 		input signal cylClampBottleExtend;
 		input signal enable;
 		
@@ -124,6 +124,7 @@ CapperPlant (
 		
 		output signal gripperZAxisLoweredE, gripperZAxisLiftedE;
 		output signal gripperTurnHomePosE, gripperTurnFinalPosE;
+		output signal gripperGripped, cylClamped;
 		)
 -> {
 	{
@@ -138,33 +139,58 @@ CapperPlant (
 	||
 	{ // gripper lowered or lifted
 		while(true) {
-			abort(!cylPos5ZaxisExtend && enable) {
-				System.err.println("Emitting");
-				sustain gripperZAxisLowered; // when the gripper/capper is lowered
-				System.out.println(#gripperZAxisLowered);
+			abort(cylPos5ZAxisExtend && enable) {
+				System.err.println("Gripper Lifted");
+				sustain gripperZAxisLifted; // when the gripper/capper is lifted
 			}
 				
+			await(!enable);
+		
 			
-			abort(cylPos5ZaxisExtend && enable) {
-				sustain gripperZAxisLifted; // when the gripper/capper is lifted
+			abort(!cylPos5ZAxisExtend && enable) {
+				System.err.println("Gripper lowered");
+				sustain gripperZAxisLowered; // when the gripper/capper is lowered
+			}
+			await(!enable);
+		}
+	}
+	||
+	{
+		while(true) {
+			await(capGripperPos5Extend);
+			abort(!capGripperPos5Extend) {
+				sustain gripperGripped;
 			}
 			pause;
 		}
 	}
 	||
 	{ // gripper gripping
-		present (gripperTurnRetract && !gripperTurnExtend) {
-			abort(gripperTurnExtend && enable) {
-				sustain gripperTurnHomePos; // gripper initial position
+		while(true) {
+			present (gripperTurnExtend && !gripperTurnRetract) {
+				abort (gripperTurnRetract && enable) {
+					sustain gripperTurnFinalPos; // gripper final position 
+				}
 			}
-		}
-		await(!enable);
-		present (gripperTurnExtend && !gripperTurnRetract) {
-			abort (gripperTurnRetract && enable) {
-				sustain gripperTurnFinalPos; // gripper final position 
+			await(!enable);
+			present (gripperTurnRetract && !gripperTurnExtend) {
+				abort(gripperTurnExtend && enable) {
+					sustain gripperTurnHomePos; // gripper initial position
+				}
 			}
+			await(!enable);
 		}
-		await(!enable);
+	}
+	||
+	{
+		while(true) {
+			await(cylClampBottleExtend);
+			
+			abort(!cylClampBottleExtend) {
+				sustain cylClamped;
+			}
+			pause;
+		}
 	}
 	||
 	{

@@ -126,7 +126,6 @@ public class SysJWorker extends Worker{
 			
 		case "dosUnitEvacE":
 			Filler.filler_on = status;
-			System.err.println(Filler.filler_on);
 			break;			
 			
 		case "dosUnitFilledE":
@@ -135,11 +134,12 @@ public class SysJWorker extends Worker{
 		
 		case "gripperZAxisLoweredE":
 			Capper.capper_lowered = status;
-			System.err.println(Capper.capper_lowered);
+			System.err.println("Lowered " + Capper.capper_lowered);
 			break;
 		
 		case "gripperZAxisLiftedE":
 			Capper.capper_lifted = status;
+			System.err.println("Lifted (Lifted signal) " + Capper.capper_lifted);
 			break;
 		
 		case "gripperTurnHomePosE":

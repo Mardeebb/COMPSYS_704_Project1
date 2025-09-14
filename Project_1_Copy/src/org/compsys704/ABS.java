@@ -101,10 +101,10 @@ public class ABS extends JFrame {
 		panel.setBackground(Color.WHITE);
 		JButton enable = new JButton("Enable");
 		enable.addActionListener(new SignalClient(Ports.PORT_LOADER_PLANT, Ports.ENABLE_SIGNAL, null));
-		enable.addActionListener(new SignalClient(10002, "rotaryTablePlantCD.enable", null));
-		enable.addActionListener(new SignalClient(10005, "conveyorPlantCD.enable", null));
-		enable.addActionListener(new SignalClient(10033, "fillerPlantCD.enable", null));
-		enable.addActionListener(new SignalClient(10031, "baxtorRobotPlantCD.enable", null));
+//		enable.addActionListener(new SignalClient(10002, "rotaryTablePlantCD.enable", null));
+//		enable.addActionListener(new SignalClient(10005, "conveyorPlantCD.enable", null));
+//		enable.addActionListener(new SignalClient(10033, "fillerPlantCD.enable", null));
+//		enable.addActionListener(new SignalClient(10031, "baxtorRobotPlantCD.enable", null));
 		enable.addActionListener(new SignalClient(10041, "CapperPlantCD.enable", null));
 
 		JButton request = new JButton("request");
