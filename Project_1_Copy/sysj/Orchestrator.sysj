@@ -106,7 +106,7 @@ Orchestrator(
 
 	||
 
-	// filler control
+	// caploader control
 	{
 		while(true){
 			await(request);
@@ -176,6 +176,20 @@ Orchestrator(
 			}
 			pause;
 		}
+	}
+		
+		||
+
+	{
+		while(true){
+			await(posFour);
+			BottleTwin b = (BottleTwin)#posFour;
+			if (b != null) {
+			emit bottlePos4(b);
+			}
+			pause;
+		}
+
 			
 	}
 

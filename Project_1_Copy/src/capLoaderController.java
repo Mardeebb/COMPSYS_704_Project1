@@ -27,10 +27,10 @@ public class capLoaderController extends ClockDomain{
   public Signal capOn = new Signal("capOn", Signal.OUTPUT);
   public Signal capOnID = new Signal("capOnID", Signal.OUTPUT);
   private Signal bottleID_1;
-  private int currnetID_thread_2;//sysj\capLoaderController.sysj line: 21, column: 4
-  private int id_thread_2;//sysj\capLoaderController.sysj line: 57, column: 4
-  private BottleTwin b_thread_3;//sysj\capLoaderController.sysj line: 69, column: 4
-  private int id_thread_3;//sysj\capLoaderController.sysj line: 70, column: 4
+  private int currnetID_thread_2;//sysj\capLoaderController.sysj line: 23, column: 4
+  private int id_thread_2;//sysj\capLoaderController.sysj line: 55, column: 4
+  private BottleTwin b_thread_3;//sysj\capLoaderController.sysj line: 70, column: 4
+  private int id_thread_3;//sysj\capLoaderController.sysj line: 71, column: 4
   private int S382 = 1;
   private int S176 = 1;
   private int S2 = 1;
@@ -49,12 +49,12 @@ public class capLoaderController extends ClockDomain{
         break;
       
       case 1 : 
-        if(bottleIn.getprestatus()){//sysj\capLoaderController.sysj line: 68, column: 10
-          b_thread_3 = (BottleTwin)(bottleIn.getpreval() == null ? null : ((BottleTwin)bottleIn.getpreval()));//sysj\capLoaderController.sysj line: 69, column: 4
-          id_thread_3 = b_thread_3.ID;//sysj\capLoaderController.sysj line: 70, column: 4
-          bottleID_1.setPresent();//sysj\capLoaderController.sysj line: 71, column: 4
+        if(bottleIn.getprestatus()){//sysj\capLoaderController.sysj line: 69, column: 10
+          b_thread_3 = (BottleTwin)(bottleIn.getpreval() == null ? null : ((BottleTwin)bottleIn.getpreval()));//sysj\capLoaderController.sysj line: 70, column: 4
+          id_thread_3 = b_thread_3.ID;//sysj\capLoaderController.sysj line: 71, column: 4
+          bottleID_1.setPresent();//sysj\capLoaderController.sysj line: 72, column: 4
           currsigs.addElement(bottleID_1);
-          bottleID_1.setValue(id_thread_3);//sysj\capLoaderController.sysj line: 71, column: 4
+          bottleID_1.setValue(id_thread_3);//sysj\capLoaderController.sysj line: 72, column: 4
           System.out.println("Emitted bottleID_1");
           active[3]=1;
           ends[3]=1;
@@ -82,15 +82,7 @@ public class capLoaderController extends ClockDomain{
         switch(S2){
           case 0 : 
             if(request.getprestatus()){//sysj\capLoaderController.sysj line: 19, column: 10
-              currnetID_thread_2 = (int)(bottleID_1.getpreval() == null ? 0 : ((Integer)bottleID_1.getpreval()).intValue());//sysj\capLoaderController.sysj line: 21, column: 4
-              if(currnetID_thread_2 == -1) {//sysj\capLoaderController.sysj line: 22, column: 24
-                break ;//sysj\capLoaderController.sysj line: 23, column: 5
-              }
-              System.err.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");//sysj\capLoaderController.sysj line: 25, column: 7
               S2=1;
-              armDest.setPresent();//sysj\capLoaderController.sysj line: 29, column: 5
-              currsigs.addElement(armDest);
-              System.out.println("Emitted armDest");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -103,45 +95,40 @@ public class capLoaderController extends ClockDomain{
             break;
           
           case 1 : 
-            if(armAtDest.getprestatus()){//sysj\capLoaderController.sysj line: 28, column: 10
-              ;//sysj\capLoaderController.sysj line: 30, column: 5
-              S2=2;
-              active[2]=1;
-              ends[2]=1;
-              tdone[2]=1;
-            }
-            else {
-              armDest.setPresent();//sysj\capLoaderController.sysj line: 29, column: 5
-              currsigs.addElement(armDest);
-              System.out.println("Emitted armDest");
-              active[2]=1;
-              ends[2]=1;
-              tdone[2]=1;
-            }
+            S2=1;
+            S2=2;
+            active[2]=1;
+            ends[2]=1;
+            tdone[2]=1;
             break;
           
           case 2 : 
             S2=2;
+            currnetID_thread_2 = (int)(bottleID_1.getpreval() == null ? 0 : ((Integer)bottleID_1.getpreval()).intValue());//sysj\capLoaderController.sysj line: 23, column: 4
+            if(currnetID_thread_2 == -1) {//sysj\capLoaderController.sysj line: 24, column: 24
+              break ;//sysj\capLoaderController.sysj line: 25, column: 5
+            }
             S2=3;
-            pusherExtend.setPresent();//sysj\capLoaderController.sysj line: 33, column: 5
-            currsigs.addElement(pusherExtend);
-            System.out.println("Emitted pusherExtend");
+            armDest.setPresent();//sysj\capLoaderController.sysj line: 30, column: 5
+            currsigs.addElement(armDest);
+            System.out.println("Emitted armDest");
             active[2]=1;
             ends[2]=1;
             tdone[2]=1;
             break;
           
           case 3 : 
-            if(pusherExtended.getprestatus()){//sysj\capLoaderController.sysj line: 32, column: 10
+            if(armAtDest.getprestatus()){//sysj\capLoaderController.sysj line: 29, column: 10
+              ;//sysj\capLoaderController.sysj line: 31, column: 5
               S2=4;
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
             }
             else {
-              pusherExtend.setPresent();//sysj\capLoaderController.sysj line: 33, column: 5
-              currsigs.addElement(pusherExtend);
-              System.out.println("Emitted pusherExtend");
+              armDest.setPresent();//sysj\capLoaderController.sysj line: 30, column: 5
+              currsigs.addElement(armDest);
+              System.out.println("Emitted armDest");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -151,22 +138,25 @@ public class capLoaderController extends ClockDomain{
           case 4 : 
             S2=4;
             S2=5;
+            pusherExtend.setPresent();//sysj\capLoaderController.sysj line: 34, column: 5
+            currsigs.addElement(pusherExtend);
+            System.out.println("Emitted pusherExtend");
             active[2]=1;
             ends[2]=1;
             tdone[2]=1;
             break;
           
           case 5 : 
-            if(pusherRetracted.getprestatus()){//sysj\capLoaderController.sysj line: 36, column: 10
+            if(pusherExtended.getprestatus()){//sysj\capLoaderController.sysj line: 33, column: 10
               S2=6;
-              armSource.setPresent();//sysj\capLoaderController.sysj line: 38, column: 5
-              currsigs.addElement(armSource);
-              System.out.println("Emitted armSource");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
             }
             else {
+              pusherExtend.setPresent();//sysj\capLoaderController.sysj line: 34, column: 5
+              currsigs.addElement(pusherExtend);
+              System.out.println("Emitted pusherExtend");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -174,15 +164,40 @@ public class capLoaderController extends ClockDomain{
             break;
           
           case 6 : 
-            if(armAtSource.getprestatus()){//sysj\capLoaderController.sysj line: 37, column: 10
-              ;//sysj\capLoaderController.sysj line: 39, column: 5
-              S2=7;
+            S2=6;
+            S2=7;
+            active[2]=1;
+            ends[2]=1;
+            tdone[2]=1;
+            break;
+          
+          case 7 : 
+            if(pusherRetracted.getprestatus()){//sysj\capLoaderController.sysj line: 37, column: 10
+              S2=8;
+              armSource.setPresent();//sysj\capLoaderController.sysj line: 39, column: 5
+              currsigs.addElement(armSource);
+              System.out.println("Emitted armSource");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
             }
             else {
-              armSource.setPresent();//sysj\capLoaderController.sysj line: 38, column: 5
+              active[2]=1;
+              ends[2]=1;
+              tdone[2]=1;
+            }
+            break;
+          
+          case 8 : 
+            if(armAtSource.getprestatus()){//sysj\capLoaderController.sysj line: 38, column: 10
+              ;//sysj\capLoaderController.sysj line: 40, column: 5
+              S2=9;
+              active[2]=1;
+              ends[2]=1;
+              tdone[2]=1;
+            }
+            else {
+              armSource.setPresent();//sysj\capLoaderController.sysj line: 39, column: 5
               currsigs.addElement(armSource);
               System.out.println("Emitted armSource");
               active[2]=1;
@@ -191,11 +206,11 @@ public class capLoaderController extends ClockDomain{
             }
             break;
           
-          case 7 : 
-            S2=7;
-            S2=8;
+          case 9 : 
+            S2=9;
+            S2=10;
             S33=0;
-            vacOn.setPresent();//sysj\capLoaderController.sysj line: 42, column: 5
+            vacOn.setPresent();//sysj\capLoaderController.sysj line: 43, column: 5
             currsigs.addElement(vacOn);
             System.out.println("Emitted vacOn");
             active[2]=1;
@@ -203,10 +218,10 @@ public class capLoaderController extends ClockDomain{
             tdone[2]=1;
             break;
           
-          case 8 : 
-            if(WPgripped.getprestatus()){//sysj\capLoaderController.sysj line: 41, column: 10
-              ;//sysj\capLoaderController.sysj line: 44, column: 5
-              S2=9;
+          case 10 : 
+            if(WPgripped.getprestatus()){//sysj\capLoaderController.sysj line: 42, column: 10
+              ;//sysj\capLoaderController.sysj line: 45, column: 5
+              S2=11;
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -214,7 +229,7 @@ public class capLoaderController extends ClockDomain{
             else {
               switch(S33){
                 case 0 : 
-                  vacOn.setPresent();//sysj\capLoaderController.sysj line: 42, column: 5
+                  vacOn.setPresent();//sysj\capLoaderController.sysj line: 43, column: 5
                   currsigs.addElement(vacOn);
                   System.out.println("Emitted vacOn");
                   active[2]=1;
@@ -223,9 +238,9 @@ public class capLoaderController extends ClockDomain{
                   break;
                 
                 case 1 : 
-                  if(WPgripped.getprestatus()){//sysj\capLoaderController.sysj line: 43, column: 11
-                    ;//sysj\capLoaderController.sysj line: 44, column: 5
-                    S2=9;
+                  if(WPgripped.getprestatus()){//sysj\capLoaderController.sysj line: 44, column: 11
+                    ;//sysj\capLoaderController.sysj line: 45, column: 5
+                    S2=11;
                     active[2]=1;
                     ends[2]=1;
                     tdone[2]=1;
@@ -241,13 +256,13 @@ public class capLoaderController extends ClockDomain{
             }
             break;
           
-          case 9 : 
-            S2=9;
-            S2=10;
-            vacOn.setPresent();//sysj\capLoaderController.sysj line: 48, column: 6
+          case 11 : 
+            S2=11;
+            S2=12;
+            vacOn.setPresent();//sysj\capLoaderController.sysj line: 49, column: 6
             currsigs.addElement(vacOn);
             System.out.println("Emitted vacOn");
-            armDest.setPresent();//sysj\capLoaderController.sysj line: 49, column: 6
+            armDest.setPresent();//sysj\capLoaderController.sysj line: 50, column: 6
             currsigs.addElement(armDest);
             System.out.println("Emitted armDest");
             active[2]=1;
@@ -255,18 +270,18 @@ public class capLoaderController extends ClockDomain{
             tdone[2]=1;
             break;
           
-          case 10 : 
-            if(armAtDest.getprestatus()){//sysj\capLoaderController.sysj line: 46, column: 10
-              S2=11;
+          case 12 : 
+            if(armAtDest.getprestatus()){//sysj\capLoaderController.sysj line: 47, column: 10
+              S2=13;
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
             }
             else {
-              vacOn.setPresent();//sysj\capLoaderController.sysj line: 48, column: 6
+              vacOn.setPresent();//sysj\capLoaderController.sysj line: 49, column: 6
               currsigs.addElement(vacOn);
               System.out.println("Emitted vacOn");
-              armDest.setPresent();//sysj\capLoaderController.sysj line: 49, column: 6
+              armDest.setPresent();//sysj\capLoaderController.sysj line: 50, column: 6
               currsigs.addElement(armDest);
               System.out.println("Emitted armDest");
               active[2]=1;
@@ -275,10 +290,15 @@ public class capLoaderController extends ClockDomain{
             }
             break;
           
-          case 11 : 
-            if(!WPgripped.getprestatus()){//sysj\capLoaderController.sysj line: 53, column: 10
-              S2=12;
-              armSource.setPresent();//sysj\capLoaderController.sysj line: 55, column: 5
+          case 13 : 
+            if(!WPgripped.getprestatus()){//sysj\capLoaderController.sysj line: 54, column: 10
+              id_thread_2 = (int)(bottleID_1.getpreval() == null ? 0 : ((Integer)bottleID_1.getpreval()).intValue());//sysj\capLoaderController.sysj line: 55, column: 4
+              capOnID.setPresent();//sysj\capLoaderController.sysj line: 56, column: 4
+              currsigs.addElement(capOnID);
+              capOnID.setValue(id_thread_2);//sysj\capLoaderController.sysj line: 56, column: 4
+              System.out.println("Emitted capOnID");
+              S2=14;
+              armSource.setPresent();//sysj\capLoaderController.sysj line: 58, column: 5
               currsigs.addElement(armSource);
               System.out.println("Emitted armSource");
               active[2]=1;
@@ -292,28 +312,23 @@ public class capLoaderController extends ClockDomain{
             }
             break;
           
-          case 12 : 
-            if(armAtSource.getprestatus()){//sysj\capLoaderController.sysj line: 54, column: 10
-              ;//sysj\capLoaderController.sysj line: 56, column: 5
-              id_thread_2 = (int)(bottleID_1.getpreval() == null ? 0 : ((Integer)bottleID_1.getpreval()).intValue());//sysj\capLoaderController.sysj line: 57, column: 4
-              capOnID.setPresent();//sysj\capLoaderController.sysj line: 58, column: 4
-              currsigs.addElement(capOnID);
-              capOnID.setValue(id_thread_2);//sysj\capLoaderController.sysj line: 58, column: 4
-              System.out.println("Emitted capOnID");
-              capOn.setPresent();//sysj\capLoaderController.sysj line: 59, column: 4
+          case 14 : 
+            if(armAtSource.getprestatus()){//sysj\capLoaderController.sysj line: 57, column: 10
+              ;//sysj\capLoaderController.sysj line: 59, column: 5
+              capOn.setPresent();//sysj\capLoaderController.sysj line: 60, column: 4
               currsigs.addElement(capOn);
               System.out.println("Emitted capOn");
-              bottleID_1.setPresent();//sysj\capLoaderController.sysj line: 60, column: 4
+              bottleID_1.setPresent();//sysj\capLoaderController.sysj line: 61, column: 4
               currsigs.addElement(bottleID_1);
-              bottleID_1.setValue(-1);//sysj\capLoaderController.sysj line: 60, column: 4
+              bottleID_1.setValue(-1);//sysj\capLoaderController.sysj line: 61, column: 4
               System.out.println("Emitted bottleID_1");
-              S2=13;
+              S2=15;
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
             }
             else {
-              armSource.setPresent();//sysj\capLoaderController.sysj line: 55, column: 5
+              armSource.setPresent();//sysj\capLoaderController.sysj line: 58, column: 5
               currsigs.addElement(armSource);
               System.out.println("Emitted armSource");
               active[2]=1;
@@ -322,8 +337,8 @@ public class capLoaderController extends ClockDomain{
             }
             break;
           
-          case 13 : 
-            S2=13;
+          case 15 : 
+            S2=15;
             S2=0;
             active[2]=1;
             ends[2]=1;
@@ -338,9 +353,9 @@ public class capLoaderController extends ClockDomain{
 
   public void thread385(int [] tdone, int [] ends){
         S190=1;
-    bottleID_1.setPresent();//sysj\capLoaderController.sysj line: 66, column: 3
+    bottleID_1.setPresent();//sysj\capLoaderController.sysj line: 67, column: 3
     currsigs.addElement(bottleID_1);
-    bottleID_1.setValue(-1);//sysj\capLoaderController.sysj line: 66, column: 3
+    bottleID_1.setValue(-1);//sysj\capLoaderController.sysj line: 67, column: 3
     System.out.println("Emitted bottleID_1");
     active[3]=1;
     ends[3]=1;

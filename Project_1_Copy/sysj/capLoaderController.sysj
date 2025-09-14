@@ -17,12 +17,13 @@ capLoaderController(
 		while(true){
 			
 			await(request);
-			
+			pause;
+			pause;
+
 			int currnetID = (int)#bottleID;
 			if(currnetID == -1) {
 				break;
 			}
-		    System.err.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
 
 
 			abort(armAtDest){
@@ -51,11 +52,11 @@ capLoaderController(
 				}
 			}
 			await(!WPgripped);
+			int id = (int)#bottleID;
+			emit capOnID(id);
 			abort(armAtSource){
 				sustain armSource;
 			};
-			int id = (int)#bottleID;
-			emit capOnID(id);
 			emit capOn;
 			emit bottleID(-1);
 			pause;

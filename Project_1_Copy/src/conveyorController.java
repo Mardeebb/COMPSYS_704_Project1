@@ -19,8 +19,8 @@ public class conveyorController extends ClockDomain{
   public Signal conveyorMoving = new Signal("conveyorMoving", Signal.OUTPUT);
   public Signal conveyorStop = new Signal("conveyorStop", Signal.OUTPUT);
   public Signal conveyorMoved = new Signal("conveyorMoved", Signal.OUTPUT);
-  private int S1808 = 1;
-  private int S1750 = 1;
+  private int S1688 = 1;
+  private int S1630 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -32,24 +32,24 @@ public class conveyorController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S1808){
+      switch(S1688){
         case 0 : 
-          S1808=0;
+          S1688=0;
           break RUN;
         
         case 1 : 
-          S1808=2;
-          S1808=2;
-          S1750=0;
+          S1688=2;
+          S1688=2;
+          S1630=0;
           active[1]=1;
           ends[1]=1;
           break RUN;
         
         case 2 : 
-          switch(S1750){
+          switch(S1630){
             case 0 : 
               if(move.getprestatus()){//sysj\conveyorController.sysj line: 13, column: 10
-                S1750=1;
+                S1630=1;
                 active[1]=1;
                 ends[1]=1;
                 break RUN;
@@ -62,7 +62,7 @@ public class conveyorController extends ClockDomain{
             
             case 1 : 
               if(!bottleAtPos1.getprestatus()){//sysj\conveyorController.sysj line: 14, column: 10
-                S1750=2;
+                S1630=2;
                 conveyorMoving.setPresent();//sysj\conveyorController.sysj line: 16, column: 5
                 currsigs.addElement(conveyorMoving);
                 System.out.println("Emitted conveyorMoving");
@@ -87,7 +87,7 @@ public class conveyorController extends ClockDomain{
                 conveyorStop.setPresent();//sysj\conveyorController.sysj line: 20, column: 4
                 currsigs.addElement(conveyorStop);
                 System.out.println("Emitted conveyorStop");
-                S1750=0;
+                S1630=0;
                 active[1]=1;
                 ends[1]=1;
                 break RUN;

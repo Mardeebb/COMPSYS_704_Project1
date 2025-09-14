@@ -20,18 +20,18 @@ public class fController extends ClockDomain{
   public Signal dosUnitValveRetract = new Signal("dosUnitValveRetract", Signal.OUTPUT);
   public Signal dosUnitValveExtend = new Signal("dosUnitValveExtend", Signal.OUTPUT);
   public Signal Filled = new Signal("Filled", Signal.OUTPUT);
-  private int S2527 = 1;
-  private int S2145 = 1;
-  private int S2150 = 1;
-  private int S2155 = 1;
-  private int S2172 = 1;
-  private int S2177 = 1;
+  private int S2407 = 1;
+  private int S2025 = 1;
+  private int S2030 = 1;
+  private int S2035 = 1;
+  private int S2052 = 1;
+  private int S2057 = 1;
   
   private int[] ends = new int[6];
   private int[] tdone = new int[6];
   
-  public void thread2539(int [] tdone, int [] ends){
-        switch(S2177){
+  public void thread2419(int [] tdone, int [] ends){
+        switch(S2057){
       case 0 : 
         active[5]=0;
         ends[5]=0;
@@ -50,8 +50,8 @@ public class fController extends ClockDomain{
     }
   }
 
-  public void thread2538(int [] tdone, int [] ends){
-        switch(S2172){
+  public void thread2418(int [] tdone, int [] ends){
+        switch(S2052){
       case 0 : 
         active[4]=0;
         ends[4]=0;
@@ -70,8 +70,8 @@ public class fController extends ClockDomain{
     }
   }
 
-  public void thread2536(int [] tdone, int [] ends){
-        S2177=1;
+  public void thread2416(int [] tdone, int [] ends){
+        S2057=1;
     valveInletOnOff.setPresent();//sysj\fillerController.sysj line: 35, column: 8
     currsigs.addElement(valveInletOnOff);
     System.out.println("Emitted valveInletOnOff");
@@ -80,8 +80,8 @@ public class fController extends ClockDomain{
     tdone[5]=1;
   }
 
-  public void thread2535(int [] tdone, int [] ends){
-        S2172=1;
+  public void thread2415(int [] tdone, int [] ends){
+        S2052=1;
     dosUnitValveExtend.setPresent();//sysj\fillerController.sysj line: 31, column: 12
     currsigs.addElement(dosUnitValveExtend);
     System.out.println("Emitted dosUnitValveExtend");
@@ -90,8 +90,8 @@ public class fController extends ClockDomain{
     tdone[4]=1;
   }
 
-  public void thread2533(int [] tdone, int [] ends){
-        switch(S2155){
+  public void thread2413(int [] tdone, int [] ends){
+        switch(S2035){
       case 0 : 
         active[3]=0;
         ends[3]=0;
@@ -110,8 +110,8 @@ public class fController extends ClockDomain{
     }
   }
 
-  public void thread2532(int [] tdone, int [] ends){
-        switch(S2150){
+  public void thread2412(int [] tdone, int [] ends){
+        switch(S2030){
       case 0 : 
         active[2]=0;
         ends[2]=0;
@@ -130,8 +130,8 @@ public class fController extends ClockDomain{
     }
   }
 
-  public void thread2530(int [] tdone, int [] ends){
-        S2155=1;
+  public void thread2410(int [] tdone, int [] ends){
+        S2035=1;
     valveInjectorOnOff.setPresent();//sysj\fillerController.sysj line: 23, column: 8
     currsigs.addElement(valveInjectorOnOff);
     System.out.println("Emitted valveInjectorOnOff");
@@ -140,8 +140,8 @@ public class fController extends ClockDomain{
     tdone[3]=1;
   }
 
-  public void thread2529(int [] tdone, int [] ends){
-        S2150=1;
+  public void thread2409(int [] tdone, int [] ends){
+        S2030=1;
     dosUnitValveRetract.setPresent();//sysj\fillerController.sysj line: 19, column: 12
     currsigs.addElement(dosUnitValveRetract);
     System.out.println("Emitted dosUnitValveRetract");
@@ -157,25 +157,25 @@ public class fController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S2527){
+      switch(S2407){
         case 0 : 
-          S2527=0;
+          S2407=0;
           break RUN;
         
         case 1 : 
-          S2527=2;
-          S2527=2;
+          S2407=2;
+          S2407=2;
           System.out.println("filler Controller started");//sysj\fillerController.sysj line: 9, column: 2
-          S2145=0;
+          S2025=0;
           active[1]=1;
           ends[1]=1;
           break RUN;
         
         case 2 : 
-          switch(S2145){
+          switch(S2025){
             case 0 : 
               if(startFilling.getprestatus()){//sysj\fillerController.sysj line: 13, column: 12
-                S2145=1;
+                S2025=1;
                 active[1]=1;
                 ends[1]=1;
                 break RUN;
@@ -188,17 +188,17 @@ public class fController extends ClockDomain{
             
             case 1 : 
               if(bottleAtPos2.getprestatus()){//sysj\fillerController.sysj line: 14, column: 12
-                S2145=2;
-                thread2529(tdone,ends);
-                thread2530(tdone,ends);
-                int biggest2531 = 0;
-                if(ends[2]>=biggest2531){
-                  biggest2531=ends[2];
+                S2025=2;
+                thread2409(tdone,ends);
+                thread2410(tdone,ends);
+                int biggest2411 = 0;
+                if(ends[2]>=biggest2411){
+                  biggest2411=ends[2];
                 }
-                if(ends[3]>=biggest2531){
-                  biggest2531=ends[3];
+                if(ends[3]>=biggest2411){
+                  biggest2411=ends[3];
                 }
-                if(biggest2531 == 1){
+                if(biggest2411 == 1){
                   active[1]=1;
                   ends[1]=1;
                   break RUN;
@@ -212,29 +212,29 @@ public class fController extends ClockDomain{
             
             case 2 : 
               if(dosUnitFilled.getprestatus()){//sysj\fillerController.sysj line: 17, column: 12
-                S2145=3;
+                S2025=3;
                 active[1]=1;
                 ends[1]=1;
                 break RUN;
               }
               else {
-                thread2532(tdone,ends);
-                thread2533(tdone,ends);
-                int biggest2534 = 0;
-                if(ends[2]>=biggest2534){
-                  biggest2534=ends[2];
+                thread2412(tdone,ends);
+                thread2413(tdone,ends);
+                int biggest2414 = 0;
+                if(ends[2]>=biggest2414){
+                  biggest2414=ends[2];
                 }
-                if(ends[3]>=biggest2534){
-                  biggest2534=ends[3];
+                if(ends[3]>=biggest2414){
+                  biggest2414=ends[3];
                 }
-                if(biggest2534 == 1){
+                if(biggest2414 == 1){
                   active[1]=1;
                   ends[1]=1;
                   break RUN;
                 }
                 //FINXME code
-                if(biggest2534 == 0){
-                  S2145=3;
+                if(biggest2414 == 0){
+                  S2025=3;
                   active[1]=1;
                   ends[1]=1;
                   break RUN;
@@ -242,18 +242,18 @@ public class fController extends ClockDomain{
               }
             
             case 3 : 
-              S2145=3;
-              S2145=4;
-              thread2535(tdone,ends);
-              thread2536(tdone,ends);
-              int biggest2537 = 0;
-              if(ends[4]>=biggest2537){
-                biggest2537=ends[4];
+              S2025=3;
+              S2025=4;
+              thread2415(tdone,ends);
+              thread2416(tdone,ends);
+              int biggest2417 = 0;
+              if(ends[4]>=biggest2417){
+                biggest2417=ends[4];
               }
-              if(ends[5]>=biggest2537){
-                biggest2537=ends[5];
+              if(ends[5]>=biggest2417){
+                biggest2417=ends[5];
               }
-              if(biggest2537 == 1){
+              if(biggest2417 == 1){
                 active[1]=1;
                 ends[1]=1;
                 break RUN;
@@ -264,32 +264,32 @@ public class fController extends ClockDomain{
                 Filled.setPresent();//sysj\fillerController.sysj line: 38, column: 6
                 currsigs.addElement(Filled);
                 System.out.println("Emitted Filled");
-                S2145=0;
+                S2025=0;
                 active[1]=1;
                 ends[1]=1;
                 break RUN;
               }
               else {
-                thread2538(tdone,ends);
-                thread2539(tdone,ends);
-                int biggest2540 = 0;
-                if(ends[4]>=biggest2540){
-                  biggest2540=ends[4];
+                thread2418(tdone,ends);
+                thread2419(tdone,ends);
+                int biggest2420 = 0;
+                if(ends[4]>=biggest2420){
+                  biggest2420=ends[4];
                 }
-                if(ends[5]>=biggest2540){
-                  biggest2540=ends[5];
+                if(ends[5]>=biggest2420){
+                  biggest2420=ends[5];
                 }
-                if(biggest2540 == 1){
+                if(biggest2420 == 1){
                   active[1]=1;
                   ends[1]=1;
                   break RUN;
                 }
                 //FINXME code
-                if(biggest2540 == 0){
+                if(biggest2420 == 0){
                   Filled.setPresent();//sysj\fillerController.sysj line: 38, column: 6
                   currsigs.addElement(Filled);
                   System.out.println("Emitted Filled");
-                  S2145=0;
+                  S2025=0;
                   active[1]=1;
                   ends[1]=1;
                   break RUN;
