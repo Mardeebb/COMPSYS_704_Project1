@@ -32,7 +32,8 @@
 			<iSignal Name="roturn" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10005" />
 
 			<oSignal Name="bottleAtPos1" To="conveyorControllerCD.bottleAtPos1" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10006" />
-			<oSignal Name="bottleLeftPos5" To="UconveyorControllerCDI.bottleLeftPos5" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10006" />
+			<oSignal Name="moved" To="conveyorControllerCD.moved" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10006" />
+			<oSignal Name="bottleLeftPos5" To="conveyorControllerCD.bottleLeftPos5" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10006" />
 			<oSignal Name="pos0"       To="UI.pos0"       Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="pos1"       To="UI.pos1"       Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="pos5"       To="UI.pos5"       Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />

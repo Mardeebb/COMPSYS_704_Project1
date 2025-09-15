@@ -16,19 +16,21 @@ rotPlant(
 	signal turn;
 	BottleTwin signal pos1, pos2, pos3, pos4, pos5, pos6;
 	
-	{	    
+	{
 		while(true){
 			abort(!rotaryTableTrigger){
 				int[] packedArray = new int[6]; 
-				await(rotaryTableTrigger);
 				await(enable);
-				
+				await(rotaryTableTrigger);
 				BottleTwin b1 = (BottleTwin)#pos1;
 				BottleTwin b2 = (BottleTwin)#pos2;
 				BottleTwin b3 = (BottleTwin)#pos3;
 				BottleTwin b4 = (BottleTwin)#pos4;
 				BottleTwin b5 = null;
 				BottleTwin b6 = (BottleTwin)#pos6;
+
+				await(!enable);
+				await(enable);
 				if(b1 != null) {
 					int ID = b1.ID;
 					packedArray[1] = ID;
@@ -102,7 +104,6 @@ rotPlant(
 		while(true) {
 			await(posOne);
 			
-
 			BottleTwin b = (BottleTwin)#posOne;
 			System.err.println(b.ID);
 

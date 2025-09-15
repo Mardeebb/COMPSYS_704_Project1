@@ -16,6 +16,9 @@ capLoaderController(
 		// pusher control
 		while(true){
 			
+			pause;
+			emit capOn;
+			emit bottleID(-1);
 			await(request);
 			pause;
 			pause;
@@ -57,8 +60,6 @@ capLoaderController(
 			abort(armAtSource){
 				sustain armSource;
 			};
-			emit capOn;
-			emit bottleID(-1);
 			pause;
 		}
 	}

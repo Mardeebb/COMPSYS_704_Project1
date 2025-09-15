@@ -12,6 +12,8 @@ Orchestrator(
 	BottleTwin signal posZero, posOne, posTwo, posThree, posFour, posFive, posSix, posSeven, posEight;
 	signal posZeroLeft, posOneLeft, posTwoLeft, posThreeLeft, posFourLeft, posFiveLeft, posSixLeft, posSevenLeft, posEightLeft;
 	signal rotTurn;
+	
+	signal filling, capLoading, startRotThread, startCapLoaderThread;
 	{
 		while(true){
 		    System.err.println("new Orchestrator Cycle");
@@ -26,14 +28,14 @@ Orchestrator(
 			    System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOo " + b);
 			    System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOo " + ID);
 			    System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOo " + name);
-			    await(!newBottleTwin);
 //				emit posEight(b);
 //				await(request);
 //				await(posEightLeft);
 				emit posZero(b);
 				await(posZeroLeft);
 				await(request);
-
+				// emit recieve conformation to the backend
+				await(!newBottleTwin);
 				emit recieveTwin;
 			}
 		}
@@ -53,13 +55,14 @@ Orchestrator(
 				emit posZeroLeft;
 				{
 				    await(rotTableTurned);
-				} 
+				}
 					||
 				{
 				    await(posZero);
 				}
+			}else {
+				pause;
 			}
-			pause;
 		}
 	}
 	
@@ -69,26 +72,28 @@ Orchestrator(
 	{
 		while(true){
 			await(posOne);
-			await(request);
-
+			await(!filling);
+			await(!capLoading);
+//			await(request);
 			emit turnRotTable;
-			await(rotTableTurned);
-			emit fillerBottleOut;
-			emit capperBottleOut;
-//			pause;
 			BottleTwin b1 = (BottleTwin)#posOne;
 			BottleTwin b2 = (BottleTwin)#posTwo;
 			BottleTwin b3 = (BottleTwin)#posThree;
 			BottleTwin b4 = (BottleTwin)#posFour;
 			BottleTwin b5 = (BottleTwin)#posFive;
 			BottleTwin b6 = (BottleTwin)#posSix;
-			
 			emit posOne(b6);
 			emit posTwo(b1);
 			emit posThree(b2);
 			emit posFour(b3);
 			emit posFive(b4);
-			emit posSix(b5);
+			emit posSix(null);
+
+			await(rotTableTurned);
+			emit fillerBottleOut;
+			emit capperBottleOut;
+//			pause;
+			
 			pause;
 			emit rotTurn;
 
@@ -100,9 +105,11 @@ Orchestrator(
 	// filler control
 	{
 		while(true){
-			await(request);
+			await(posTwo);
 			emit startFilling;
-			await(filled);
+			abort(filled){
+				sustain filling;
+			}
 		}
 	}
 
@@ -111,10 +118,15 @@ Orchestrator(
 	// caploader control
 	{
 		while(true){
-			await(request);
-			await(rotTurn);
+			await(posThree);
+			BottleTwin b3 = (BottleTwin)#posThree;
+			if(b3 == null) {
+				break;
+			}
 			emit startCapOn;
-			await(capOn);
+			abort(capOn){
+				sustain capLoading;
+			}
 		}
 	}
 

@@ -3,7 +3,7 @@ import run.BottleTwin;
 rotController(
 		input signal turn;
 
-		input signal tableAlignedWithSensorC ;
+		input signal tableAlignedWithSensorC;
 		output signal rotaryTableTrigger, rotTableTurned;
 		)
 ->{

@@ -6,7 +6,7 @@ conveyorPlant(
 		// real world sim signal a bottle has been placed
 		input BottleTwin signal bottleArriveToZero, bottleArriveToFive, roturn;
 		
-		output signal bottleAtPos1, bottleLeftPos5;
+		output signal bottleAtPos1, bottleLeftPos5, moved;
 		
 		// backend update
 		output signal pos0, pos1, pos5, pos7;
@@ -19,11 +19,10 @@ conveyorPlant(
 	{
 		while(true) {
 			await(motConveyorOnOff);
-			await(enable);
 			abort(!motConveyorOnOff){
 				BottleTwin bZero = (BottleTwin)#posZero;
 				BottleTwin bFive = (BottleTwin)#posFive;
-
+				await(enable);
 				if(bZero != null) {
 					emit posOne(bZero);
 					emit posZero(null);
@@ -83,7 +82,6 @@ conveyorPlant(
 			await(posOne);
 			BottleTwin b = (BottleTwin)#posOne;
 			if(b != null) {
-
 				int id = b.ID;
 				abort(roturn){
 					emit pos1(id);
@@ -93,5 +91,4 @@ conveyorPlant(
 			}
 		}
 	}
-
 }

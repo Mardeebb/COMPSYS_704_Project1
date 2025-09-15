@@ -29,26 +29,26 @@ public class rotPlant extends ClockDomain{
   private Signal pos4_1;
   private Signal pos5_1;
   private Signal pos6_1;
-  private BottleTwin b1_thread_2;//sysj\rotPlant.sysj line: 26, column: 5
-  private BottleTwin b2_thread_2;//sysj\rotPlant.sysj line: 27, column: 5
-  private BottleTwin b3_thread_2;//sysj\rotPlant.sysj line: 28, column: 5
-  private BottleTwin b4_thread_2;//sysj\rotPlant.sysj line: 29, column: 5
-  private BottleTwin b5_thread_2;//sysj\rotPlant.sysj line: 30, column: 5
-  private BottleTwin b6_thread_2;//sysj\rotPlant.sysj line: 31, column: 5
-  private int ID_thread_2;//sysj\rotPlant.sysj line: 33, column: 6
+  private BottleTwin b1_thread_2;//sysj\rotPlant.sysj line: 25, column: 5
+  private BottleTwin b2_thread_2;//sysj\rotPlant.sysj line: 26, column: 5
+  private BottleTwin b3_thread_2;//sysj\rotPlant.sysj line: 27, column: 5
+  private BottleTwin b4_thread_2;//sysj\rotPlant.sysj line: 28, column: 5
+  private BottleTwin b5_thread_2;//sysj\rotPlant.sysj line: 29, column: 5
+  private BottleTwin b6_thread_2;//sysj\rotPlant.sysj line: 30, column: 5
+  private int ID_thread_2;//sysj\rotPlant.sysj line: 35, column: 6
   private int[] packedArray_thread_2;//sysj\rotPlant.sysj line: 22, column: 5
-  private BottleTwin b_thread_4;//sysj\rotPlant.sysj line: 106, column: 4
-  private int S4032 = 1;
-  private int S4020 = 1;
-  private int S3985 = 1;
-  private int S4022 = 1;
-  private int S4030 = 1;
+  private BottleTwin b_thread_4;//sysj\rotPlant.sysj line: 107, column: 4
+  private int S3336 = 1;
+  private int S3324 = 1;
+  private int S3277 = 1;
+  private int S3326 = 1;
+  private int S3334 = 1;
   
   private int[] ends = new int[5];
   private int[] tdone = new int[5];
   
-  public void thread4040(int [] tdone, int [] ends){
-        switch(S4030){
+  public void thread3344(int [] tdone, int [] ends){
+        switch(S3334){
       case 0 : 
         active[4]=0;
         ends[4]=0;
@@ -56,12 +56,12 @@ public class rotPlant extends ClockDomain{
         break;
       
       case 1 : 
-        if(posOne.getprestatus()){//sysj\rotPlant.sysj line: 103, column: 10
-          b_thread_4 = (BottleTwin)(posOne.getpreval() == null ? null : ((BottleTwin)posOne.getpreval()));//sysj\rotPlant.sysj line: 106, column: 4
-          System.err.println(b_thread_4.ID);//sysj\rotPlant.sysj line: 107, column: 4
-          pos1_1.setPresent();//sysj\rotPlant.sysj line: 109, column: 4
+        if(posOne.getprestatus()){//sysj\rotPlant.sysj line: 105, column: 10
+          b_thread_4 = (BottleTwin)(posOne.getpreval() == null ? null : ((BottleTwin)posOne.getpreval()));//sysj\rotPlant.sysj line: 107, column: 4
+          System.err.println(b_thread_4.ID);//sysj\rotPlant.sysj line: 108, column: 4
+          pos1_1.setPresent();//sysj\rotPlant.sysj line: 110, column: 4
           currsigs.addElement(pos1_1);
-          pos1_1.setValue(b_thread_4);//sysj\rotPlant.sysj line: 109, column: 4
+          pos1_1.setValue(b_thread_4);//sysj\rotPlant.sysj line: 110, column: 4
           System.out.println("Emitted pos1_1");
           active[4]=1;
           ends[4]=1;
@@ -77,8 +77,8 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread4039(int [] tdone, int [] ends){
-        switch(S4022){
+  public void thread3343(int [] tdone, int [] ends){
+        switch(S3326){
       case 0 : 
         active[3]=0;
         ends[3]=0;
@@ -94,8 +94,8 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread4038(int [] tdone, int [] ends){
-        switch(S4020){
+  public void thread3342(int [] tdone, int [] ends){
+        switch(S3324){
       case 0 : 
         active[2]=0;
         ends[2]=0;
@@ -105,16 +105,16 @@ public class rotPlant extends ClockDomain{
       case 1 : 
         if(!rotaryTableTrigger.getprestatus()){//sysj\rotPlant.sysj line: 21, column: 10
           packedArray_thread_2 = new int[6];//sysj\rotPlant.sysj line: 22, column: 5
-          S3985=0;
+          S3277=0;
           active[2]=1;
           ends[2]=1;
           tdone[2]=1;
         }
         else {
-          switch(S3985){
+          switch(S3277){
             case 0 : 
-              if(rotaryTableTrigger.getprestatus()){//sysj\rotPlant.sysj line: 23, column: 11
-                S3985=1;
+              if(enable.getprestatus()){//sysj\rotPlant.sysj line: 23, column: 11
+                S3277=1;
                 active[2]=1;
                 ends[2]=1;
                 tdone[2]=1;
@@ -127,92 +127,120 @@ public class rotPlant extends ClockDomain{
               break;
             
             case 1 : 
-              if(enable.getprestatus()){//sysj\rotPlant.sysj line: 24, column: 11
-                b1_thread_2 = (BottleTwin)(pos1_1.getpreval() == null ? null : ((BottleTwin)pos1_1.getpreval()));//sysj\rotPlant.sysj line: 26, column: 5
-                b2_thread_2 = (BottleTwin)(pos2_1.getpreval() == null ? null : ((BottleTwin)pos2_1.getpreval()));//sysj\rotPlant.sysj line: 27, column: 5
-                b3_thread_2 = (BottleTwin)(pos3_1.getpreval() == null ? null : ((BottleTwin)pos3_1.getpreval()));//sysj\rotPlant.sysj line: 28, column: 5
-                b4_thread_2 = (BottleTwin)(pos4_1.getpreval() == null ? null : ((BottleTwin)pos4_1.getpreval()));//sysj\rotPlant.sysj line: 29, column: 5
-                b5_thread_2 = null;//sysj\rotPlant.sysj line: 30, column: 5
-                b6_thread_2 = (BottleTwin)(pos6_1.getpreval() == null ? null : ((BottleTwin)pos6_1.getpreval()));//sysj\rotPlant.sysj line: 31, column: 5
-                if(b1_thread_2 != null) {//sysj\rotPlant.sysj line: 32, column: 20
-                  ID_thread_2 = b1_thread_2.ID;//sysj\rotPlant.sysj line: 33, column: 6
-                  packedArray_thread_2[1] = ID_thread_2;//sysj\rotPlant.sysj line: 34, column: 6
+              if(rotaryTableTrigger.getprestatus()){//sysj\rotPlant.sysj line: 24, column: 11
+                b1_thread_2 = (BottleTwin)(pos1_1.getpreval() == null ? null : ((BottleTwin)pos1_1.getpreval()));//sysj\rotPlant.sysj line: 25, column: 5
+                b2_thread_2 = (BottleTwin)(pos2_1.getpreval() == null ? null : ((BottleTwin)pos2_1.getpreval()));//sysj\rotPlant.sysj line: 26, column: 5
+                b3_thread_2 = (BottleTwin)(pos3_1.getpreval() == null ? null : ((BottleTwin)pos3_1.getpreval()));//sysj\rotPlant.sysj line: 27, column: 5
+                b4_thread_2 = (BottleTwin)(pos4_1.getpreval() == null ? null : ((BottleTwin)pos4_1.getpreval()));//sysj\rotPlant.sysj line: 28, column: 5
+                b5_thread_2 = null;//sysj\rotPlant.sysj line: 29, column: 5
+                b6_thread_2 = (BottleTwin)(pos6_1.getpreval() == null ? null : ((BottleTwin)pos6_1.getpreval()));//sysj\rotPlant.sysj line: 30, column: 5
+                S3277=2;
+                active[2]=1;
+                ends[2]=1;
+                tdone[2]=1;
+              }
+              else {
+                active[2]=1;
+                ends[2]=1;
+                tdone[2]=1;
+              }
+              break;
+            
+            case 2 : 
+              if(!enable.getprestatus()){//sysj\rotPlant.sysj line: 32, column: 11
+                S3277=3;
+                active[2]=1;
+                ends[2]=1;
+                tdone[2]=1;
+              }
+              else {
+                active[2]=1;
+                ends[2]=1;
+                tdone[2]=1;
+              }
+              break;
+            
+            case 3 : 
+              if(enable.getprestatus()){//sysj\rotPlant.sysj line: 33, column: 11
+                if(b1_thread_2 != null) {//sysj\rotPlant.sysj line: 34, column: 20
+                  ID_thread_2 = b1_thread_2.ID;//sysj\rotPlant.sysj line: 35, column: 6
+                  packedArray_thread_2[1] = ID_thread_2;//sysj\rotPlant.sysj line: 36, column: 6
                 }
-                else {//sysj\rotPlant.sysj line: 35, column: 11
-                  packedArray_thread_2[1] = -1;//sysj\rotPlant.sysj line: 36, column: 6
+                else {//sysj\rotPlant.sysj line: 37, column: 11
+                  packedArray_thread_2[1] = -1;//sysj\rotPlant.sysj line: 38, column: 6
                 }
-                if(b2_thread_2 != null) {//sysj\rotPlant.sysj line: 38, column: 20
-                  ID_thread_2 = b2_thread_2.ID;//sysj\rotPlant.sysj line: 39, column: 6
-                  packedArray_thread_2[2] = ID_thread_2;//sysj\rotPlant.sysj line: 40, column: 6
+                if(b2_thread_2 != null) {//sysj\rotPlant.sysj line: 40, column: 20
+                  ID_thread_2 = b2_thread_2.ID;//sysj\rotPlant.sysj line: 41, column: 6
+                  packedArray_thread_2[2] = ID_thread_2;//sysj\rotPlant.sysj line: 42, column: 6
                 }
-                else {//sysj\rotPlant.sysj line: 41, column: 11
-                  packedArray_thread_2[2] = -1;//sysj\rotPlant.sysj line: 42, column: 6
+                else {//sysj\rotPlant.sysj line: 43, column: 11
+                  packedArray_thread_2[2] = -1;//sysj\rotPlant.sysj line: 44, column: 6
                 }
-                if(b3_thread_2 != null) {//sysj\rotPlant.sysj line: 44, column: 20
-                  ID_thread_2 = b3_thread_2.ID;//sysj\rotPlant.sysj line: 45, column: 6
-                  packedArray_thread_2[3] = ID_thread_2;//sysj\rotPlant.sysj line: 46, column: 6
+                if(b3_thread_2 != null) {//sysj\rotPlant.sysj line: 46, column: 20
+                  ID_thread_2 = b3_thread_2.ID;//sysj\rotPlant.sysj line: 47, column: 6
+                  packedArray_thread_2[3] = ID_thread_2;//sysj\rotPlant.sysj line: 48, column: 6
                 }
-                else {//sysj\rotPlant.sysj line: 47, column: 11
-                  packedArray_thread_2[3] = -1;//sysj\rotPlant.sysj line: 48, column: 6
+                else {//sysj\rotPlant.sysj line: 49, column: 11
+                  packedArray_thread_2[3] = -1;//sysj\rotPlant.sysj line: 50, column: 6
                 }
-                if(b4_thread_2 != null) {//sysj\rotPlant.sysj line: 50, column: 20
-                  ID_thread_2 = b4_thread_2.ID;//sysj\rotPlant.sysj line: 51, column: 6
-                  packedArray_thread_2[4] = ID_thread_2;//sysj\rotPlant.sysj line: 52, column: 6
+                if(b4_thread_2 != null) {//sysj\rotPlant.sysj line: 52, column: 20
+                  ID_thread_2 = b4_thread_2.ID;//sysj\rotPlant.sysj line: 53, column: 6
+                  packedArray_thread_2[4] = ID_thread_2;//sysj\rotPlant.sysj line: 54, column: 6
                 }
-                else {//sysj\rotPlant.sysj line: 53, column: 11
-                  packedArray_thread_2[4] = -1;//sysj\rotPlant.sysj line: 54, column: 6
+                else {//sysj\rotPlant.sysj line: 55, column: 11
+                  packedArray_thread_2[4] = -1;//sysj\rotPlant.sysj line: 56, column: 6
                 }
-                if(b5_thread_2 != null) {//sysj\rotPlant.sysj line: 56, column: 20
-                  ID_thread_2 = b5_thread_2.ID;//sysj\rotPlant.sysj line: 57, column: 6
-                  packedArray_thread_2[5] = ID_thread_2;//sysj\rotPlant.sysj line: 58, column: 6
+                if(b5_thread_2 != null) {//sysj\rotPlant.sysj line: 58, column: 20
+                  ID_thread_2 = b5_thread_2.ID;//sysj\rotPlant.sysj line: 59, column: 6
+                  packedArray_thread_2[5] = ID_thread_2;//sysj\rotPlant.sysj line: 60, column: 6
                 }
-                else {//sysj\rotPlant.sysj line: 59, column: 11
-                  packedArray_thread_2[5] = -1;//sysj\rotPlant.sysj line: 60, column: 6
+                else {//sysj\rotPlant.sysj line: 61, column: 11
+                  packedArray_thread_2[5] = -1;//sysj\rotPlant.sysj line: 62, column: 6
                 }
-                if(b6_thread_2 != null) {//sysj\rotPlant.sysj line: 62, column: 20
-                  ID_thread_2 = b6_thread_2.ID;//sysj\rotPlant.sysj line: 63, column: 6
-                  packedArray_thread_2[0] = ID_thread_2;//sysj\rotPlant.sysj line: 64, column: 6
+                if(b6_thread_2 != null) {//sysj\rotPlant.sysj line: 64, column: 20
+                  ID_thread_2 = b6_thread_2.ID;//sysj\rotPlant.sysj line: 65, column: 6
+                  packedArray_thread_2[0] = ID_thread_2;//sysj\rotPlant.sysj line: 66, column: 6
                 }
-                else {//sysj\rotPlant.sysj line: 65, column: 11
-                  packedArray_thread_2[0] = -1;//sysj\rotPlant.sysj line: 66, column: 6
+                else {//sysj\rotPlant.sysj line: 67, column: 11
+                  packedArray_thread_2[0] = -1;//sysj\rotPlant.sysj line: 68, column: 6
                 }
-                System.err.println(packedArray_thread_2);//sysj\rotPlant.sysj line: 68, column: 5
-                pos1_1.setPresent();//sysj\rotPlant.sysj line: 70, column: 5
+                System.err.println(packedArray_thread_2);//sysj\rotPlant.sysj line: 70, column: 5
+                pos1_1.setPresent();//sysj\rotPlant.sysj line: 72, column: 5
                 currsigs.addElement(pos1_1);
-                pos1_1.setValue(b6_thread_2);//sysj\rotPlant.sysj line: 70, column: 5
+                pos1_1.setValue(b6_thread_2);//sysj\rotPlant.sysj line: 72, column: 5
                 System.out.println("Emitted pos1_1");
-                pos2_1.setPresent();//sysj\rotPlant.sysj line: 71, column: 5
+                pos2_1.setPresent();//sysj\rotPlant.sysj line: 73, column: 5
                 currsigs.addElement(pos2_1);
-                pos2_1.setValue(b1_thread_2);//sysj\rotPlant.sysj line: 71, column: 5
+                pos2_1.setValue(b1_thread_2);//sysj\rotPlant.sysj line: 73, column: 5
                 System.out.println("Emitted pos2_1");
-                pos3_1.setPresent();//sysj\rotPlant.sysj line: 72, column: 5
+                pos3_1.setPresent();//sysj\rotPlant.sysj line: 74, column: 5
                 currsigs.addElement(pos3_1);
-                pos3_1.setValue(b2_thread_2);//sysj\rotPlant.sysj line: 72, column: 5
+                pos3_1.setValue(b2_thread_2);//sysj\rotPlant.sysj line: 74, column: 5
                 System.out.println("Emitted pos3_1");
-                pos4_1.setPresent();//sysj\rotPlant.sysj line: 73, column: 5
+                pos4_1.setPresent();//sysj\rotPlant.sysj line: 75, column: 5
                 currsigs.addElement(pos4_1);
-                pos4_1.setValue(b3_thread_2);//sysj\rotPlant.sysj line: 73, column: 5
+                pos4_1.setValue(b3_thread_2);//sysj\rotPlant.sysj line: 75, column: 5
                 System.out.println("Emitted pos4_1");
-                pos5_1.setPresent();//sysj\rotPlant.sysj line: 74, column: 5
+                pos5_1.setPresent();//sysj\rotPlant.sysj line: 76, column: 5
                 currsigs.addElement(pos5_1);
-                pos5_1.setValue(b4_thread_2);//sysj\rotPlant.sysj line: 74, column: 5
+                pos5_1.setValue(b4_thread_2);//sysj\rotPlant.sysj line: 76, column: 5
                 System.out.println("Emitted pos5_1");
-                pos6_1.setPresent();//sysj\rotPlant.sysj line: 75, column: 5
+                pos6_1.setPresent();//sysj\rotPlant.sysj line: 77, column: 5
                 currsigs.addElement(pos6_1);
-                pos6_1.setValue(b5_thread_2);//sysj\rotPlant.sysj line: 75, column: 5
+                pos6_1.setValue(b5_thread_2);//sysj\rotPlant.sysj line: 77, column: 5
                 System.out.println("Emitted pos6_1");
-                rotTurned.setPresent();//sysj\rotPlant.sysj line: 77, column: 5
+                rotTurned.setPresent();//sysj\rotPlant.sysj line: 79, column: 5
                 currsigs.addElement(rotTurned);
                 System.out.println("Emitted rotTurned");
-                rotTurn.setPresent();//sysj\rotPlant.sysj line: 78, column: 5
+                rotTurn.setPresent();//sysj\rotPlant.sysj line: 80, column: 5
                 currsigs.addElement(rotTurn);
-                rotTurn.setValue(packedArray_thread_2);//sysj\rotPlant.sysj line: 78, column: 5
+                rotTurn.setValue(packedArray_thread_2);//sysj\rotPlant.sysj line: 80, column: 5
                 System.out.println("Emitted rotTurn");
-                turn_1.setPresent();//sysj\rotPlant.sysj line: 79, column: 5
+                turn_1.setPresent();//sysj\rotPlant.sysj line: 81, column: 5
                 currsigs.addElement(turn_1);
                 System.out.println("Emitted turn_1");
-                S3985=2;
-                tableAlignedWithSensorC.setPresent();//sysj\rotPlant.sysj line: 80, column: 5
+                S3277=4;
+                tableAlignedWithSensorC.setPresent();//sysj\rotPlant.sysj line: 82, column: 5
                 currsigs.addElement(tableAlignedWithSensorC);
                 System.out.println("Emitted tableAlignedWithSensorC");
                 active[2]=1;
@@ -226,8 +254,8 @@ public class rotPlant extends ClockDomain{
               }
               break;
             
-            case 2 : 
-              tableAlignedWithSensorC.setPresent();//sysj\rotPlant.sysj line: 80, column: 5
+            case 4 : 
+              tableAlignedWithSensorC.setPresent();//sysj\rotPlant.sysj line: 82, column: 5
               currsigs.addElement(tableAlignedWithSensorC);
               System.out.println("Emitted tableAlignedWithSensorC");
               active[2]=1;
@@ -242,24 +270,24 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread4036(int [] tdone, int [] ends){
-        S4030=1;
+  public void thread3340(int [] tdone, int [] ends){
+        S3334=1;
     active[4]=1;
     ends[4]=1;
     tdone[4]=1;
   }
 
-  public void thread4035(int [] tdone, int [] ends){
-        S4022=1;
+  public void thread3339(int [] tdone, int [] ends){
+        S3326=1;
     active[3]=1;
     ends[3]=1;
     tdone[3]=1;
   }
 
-  public void thread4034(int [] tdone, int [] ends){
-        S4020=1;
+  public void thread3338(int [] tdone, int [] ends){
+        S3324=1;
     packedArray_thread_2 = new int[6];//sysj\rotPlant.sysj line: 22, column: 5
-    S3985=0;
+    S3277=0;
     active[2]=1;
     ends[2]=1;
     tdone[2]=1;
@@ -272,14 +300,14 @@ public class rotPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S4032){
+      switch(S3336){
         case 0 : 
-          S4032=0;
+          S3336=0;
           break RUN;
         
         case 1 : 
-          S4032=2;
-          S4032=2;
+          S3336=2;
+          S3336=2;
           turn_1.setClear();//sysj\rotPlant.sysj line: 16, column: 2
           pos1_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
           pos2_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
@@ -287,20 +315,20 @@ public class rotPlant extends ClockDomain{
           pos4_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
           pos5_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
           pos6_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
-          thread4034(tdone,ends);
-          thread4035(tdone,ends);
-          thread4036(tdone,ends);
-          int biggest4037 = 0;
-          if(ends[2]>=biggest4037){
-            biggest4037=ends[2];
+          thread3338(tdone,ends);
+          thread3339(tdone,ends);
+          thread3340(tdone,ends);
+          int biggest3341 = 0;
+          if(ends[2]>=biggest3341){
+            biggest3341=ends[2];
           }
-          if(ends[3]>=biggest4037){
-            biggest4037=ends[3];
+          if(ends[3]>=biggest3341){
+            biggest3341=ends[3];
           }
-          if(ends[4]>=biggest4037){
-            biggest4037=ends[4];
+          if(ends[4]>=biggest3341){
+            biggest3341=ends[4];
           }
-          if(biggest4037 == 1){
+          if(biggest3341 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
@@ -314,30 +342,30 @@ public class rotPlant extends ClockDomain{
           pos4_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
           pos5_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
           pos6_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
-          thread4038(tdone,ends);
-          thread4039(tdone,ends);
-          thread4040(tdone,ends);
-          int biggest4041 = 0;
-          if(ends[2]>=biggest4041){
-            biggest4041=ends[2];
+          thread3342(tdone,ends);
+          thread3343(tdone,ends);
+          thread3344(tdone,ends);
+          int biggest3345 = 0;
+          if(ends[2]>=biggest3345){
+            biggest3345=ends[2];
           }
-          if(ends[3]>=biggest4041){
-            biggest4041=ends[3];
+          if(ends[3]>=biggest3345){
+            biggest3345=ends[3];
           }
-          if(ends[4]>=biggest4041){
-            biggest4041=ends[4];
+          if(ends[4]>=biggest3345){
+            biggest3345=ends[4];
           }
-          if(biggest4041 == 1){
+          if(biggest3345 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest4041 == 0){
-            S4032=0;
+          if(biggest3345 == 0){
+            S3336=0;
             active[1]=0;
             ends[1]=0;
-            S4032=0;
+            S3336=0;
             break RUN;
           }
         

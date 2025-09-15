@@ -35,6 +35,7 @@
 			<iSignal Name="move" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10006" />
 			<iSignal Name="bottleAtPos1" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10006" />
 			<iSignal Name="bottleLeftPos5" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10006" />
+			<iSignal Name="moved" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10006" />
 
 
 			<oSignal Name="conveyorMoving" To="UI.conveyorMoving" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
@@ -97,7 +98,7 @@
 			<iSignal Name="gripperTurnHomePos" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10042"/>
 			<iSignal Name="gripperTurnFinalPos" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10042"/>
 			
-			<oSignal Name="cylPos5ZaxisExtend" To="CapperPlantCD.cylPos5ZaxisExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10041"/>
+			<oSignal Name="cylPos5ZAxisExtend" To="CapperPlantCD.cylPos5ZaxisExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10041"/>
 			<oSignal Name="gripperTurnRetract" To="CapperPlantCD.gripperTurnRetract" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10041"/>
 			<oSignal Name="gripperTurnExtend" To="CapperPlantCD.gripperTurnExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10041"/>
 			<oSignal Name="capGripperPos5Extend" To="CapperPlantCD.capGripperPos5Extend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10041"/>
