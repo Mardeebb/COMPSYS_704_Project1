@@ -3,25 +3,22 @@ import run.BottleTwin;
 
 Orchestrator(
 		input BottleTwin signal newBottleTwin;
-		input signal request, conveyorMoved, rotTableTurned, filled, capOn;
+		input signal request, conveyorMoved, rotTableTurned, filled, capLoaded;
 		
-		output signal recieveTwin, moveConveyor, turnRotTable, fillerBottleOut, startFilling, startCapOn, capperBottleOut;
-		output BottleTwin signal bottlePos0, bottlePos1, bottlePos2, bottlePos3, bottlePos4, bottlePos5, bottlePos6, bottlePos7, bottlePos8;
+		output signal recieveTwin, startConveyor, startRotTable, startFilling, startCapLoading, capperBottleOut;
+		output BottleTwin signal bottlePos0, bottlePos1, bottlePos2, bottlePos3, bottlePos4, bottlePos5, bottlePos6, bottlePos7, bottlePos8, bottlePos9;
+		output int signal bottlePos0B, bottlePos1B, bottlePos2B, bottlePos3B, bottlePos4B, bottlePos5B, bottlePos6B, bottlePos7B, bottlePos8B, bottlePos9B;
 		)
 ->{	
-	BottleTwin signal posZero, posOne, posTwo, posThree, posFour, posFive, posSix, posSeven, posEight;
-	signal posZeroLeft, posOneLeft, posTwoLeft, posThreeLeft, posFourLeft, posFiveLeft, posSixLeft, posSevenLeft, posEightLeft;
-	signal rotTurn;
 	
-	signal filling, capLoading, startRotThread, startCapLoaderThread;
+	BottleTwin signal posZeroUpdate, posOneUpdate, posTwoUpdate, posThreeUpdate, posFourUpdate, posFiveUpdate, posSixUpdate, posSevenUpdate, posEightUpdate, posNineUpdate;
+	signal filling, capLoading, startRobotLoader, startConveyorThread, startRotThread, startCapLoaderThread;
 	{
 		while(true){
-		    System.err.println("new Orchestrator Cycle");
-
 			await(newBottleTwin);
-		    System.err.println("newBottleTwin ");
-
+		    System.err.println("Orchestrator newBottleTwin ");
 			BottleTwin b = (BottleTwin)#newBottleTwin;
+			
 			if(b != null) {
 				int ID = b.ID;
 				String name = b.name;
@@ -31,8 +28,10 @@ Orchestrator(
 //				emit posEight(b);
 //				await(request);
 //				await(posEightLeft);
-				emit posZero(b);
-				await(posZeroLeft);
+				emit posZeroUpdate(b);
+				pause;
+				pause;
+				await(!bottlePos0);
 				await(request);
 				// emit recieve conformation to the backend
 				await(!newBottleTwin);
@@ -43,139 +42,99 @@ Orchestrator(
 	
 	||
 	
-	//conveyor control
 	{
-		await(posZero);
-		while(true){
-			BottleTwin b = (BottleTwin)#posZero;
-			if (b != null) {
-				emit moveConveyor;
-				await(conveyorMoved);
-				emit posOne(b);
-				emit posZeroLeft;
-				{
-				    await(rotTableTurned);
-				}
-					||
-				{
-				    await(posZero);
-				}
-			}else {
-				pause;
-			}
-		}
-	}
-	
-	||
-	
-	//rotable control
-	{
-		while(true){
-			await(posOne);
-			await(!filling);
-			await(!capLoading);
-//			await(request);
-			emit turnRotTable;
-			BottleTwin b1 = (BottleTwin)#posOne;
-			BottleTwin b2 = (BottleTwin)#posTwo;
-			BottleTwin b3 = (BottleTwin)#posThree;
-			BottleTwin b4 = (BottleTwin)#posFour;
-			BottleTwin b5 = (BottleTwin)#posFive;
-			BottleTwin b6 = (BottleTwin)#posSix;
-			emit posOne(b6);
-			emit posTwo(b1);
-			emit posThree(b2);
-			emit posFour(b3);
-			emit posFive(b4);
-			emit posSix(null);
-
-			await(rotTableTurned);
-			emit fillerBottleOut;
-			emit capperBottleOut;
-//			pause;
+		while(true) {
+			await(startRobotLoader);
+			// wait for plant update first
+			BottleTwin bZero = (BottleTwin)#posZeroUpdate;
+			BottleTwin bFive = (BottleTwin)#posFiveUpdate;
 			
-			pause;
-			emit rotTurn;
+			emit posZeroUpdate(null);
+			emit posFiveUpdate(null);
+			emit posOneUpdate(bZero);
+			emit posSevenUpdate(bFive);
 
+			
 		}
 	}
+
 	
 	||
-
-	// filler control
+	
 	{
-		while(true){
-			await(posTwo);
-			emit startFilling;
-			abort(filled){
-				sustain filling;
-			}
+		while(true) {
+			await(startConveyorThread);
+			// wait for plant update first
+			BottleTwin bZero = (BottleTwin)#posZeroUpdate;
+			BottleTwin bFive = (BottleTwin)#posFiveUpdate;
+			
+			emit posZeroUpdate(null);
+			emit posFiveUpdate(null);
+			emit posOneUpdate(bZero);
+			emit posSevenUpdate(bFive);
+
+			
 		}
 	}
-
-	||
-
-	// caploader control
-	{
-		while(true){
-			await(posThree);
-			BottleTwin b3 = (BottleTwin)#posThree;
-			if(b3 == null) {
-				break;
-			}
-			emit startCapOn;
-			abort(capOn){
-				sustain capLoading;
-			}
-		}
-	}
-
+	
+	
+	
+	
 	
 	
 	||
-	
-	
-	
-	
-	
-	
 	
 	// sustain bottlepos0 when bottle arrives
 	{
 		while(true){
-			await(posZero);
-			BottleTwin b = (BottleTwin)#posZero;
-			if (b != null) {
-				emit bottlePos0(b);
-			}
+			BottleTwin b = (BottleTwin)#posZeroUpdate;
+			int id = b.ID;
 			pause;
-		}
+			if (b != null) {
+				abort(posZeroUpdate){
+					emit bottlePos0B(id);
+					sustain bottlePos0(b);
+				}
+			} else {
+				emit bottlePos0B(-1);
+			}
+		}	
 	}
 	
 	||
 	
 	{
 		while(true){
-			await(posOne);
-			BottleTwin b = (BottleTwin)#posOne;
-			if (b != null) {
-				emit bottlePos1(b);
-			}
+			BottleTwin b = (BottleTwin)#posOneUpdate;
+			int id = b.ID;
 			pause;
-		}
+			if (b != null) {
+				abort(posOneUpdate){
+					emit bottlePos1B(id);
+					sustain bottlePos1(b);
+				}
+			} else {
+				emit bottlePos1B(-1);
+			}
+		}	
 	}
 	
 	||
 
 	{
 		while(true){
-			await(posTwo);
-			BottleTwin b = (BottleTwin)#posTwo;
-			if (b != null) {
-			emit bottlePos2(b);
-			}
+			BottleTwin b = (BottleTwin)#posTwoUpdate;
+			int id = b.ID;
 			pause;
-		}
+			if (b != null) {
+				abort(posTwoUpdate){
+					emit bottlePos2B(id);
+					sustain bottlePos2(b);
+				}
+			} else {
+				emit bottlePos2B(-1);
+			}
+		}	
 			
 	}
 	
@@ -183,38 +142,35 @@ Orchestrator(
 
 	{
 		while(true){
-			await(posThree);
-			BottleTwin b = (BottleTwin)#posThree;
-			if (b != null) {
-			emit bottlePos3(b);
-			}
+			BottleTwin b = (BottleTwin)#posThreeUpdate;
+			int id = b.ID;
 			pause;
-		}
+			if (b != null) {
+				abort(posThreeUpdate){
+					emit bottlePos3B(id);
+					sustain bottlePos3(b);
+				}
+			} else {
+				emit bottlePos3B(-1);
+			}
+		}	
 	}
 	
 		||
 
 	{
 		while(true){
-			await(posFour);
-			BottleTwin b = (BottleTwin)#posFour;
-			if (b != null) {
-			emit bottlePos4(b);
-			}
+			BottleTwin b = (BottleTwin)#posFourUpdate;
+			int id = b.ID;
 			pause;
-		}		
-	}
-		
-		||
-
-	{
-		while(true){
-			await(posFive);
-			BottleTwin b = (BottleTwin)#posFive;
 			if (b != null) {
-			emit bottlePos5(b);
+				abort(posFourUpdate){
+					emit bottlePos4B(id);
+					sustain bottlePos4(b);
+				}
+			} else {
+				emit bottlePos4B(-1);
 			}
-			pause;
 		}	
 	}
 		
@@ -222,12 +178,17 @@ Orchestrator(
 
 	{
 		while(true){
-			await(posSix);
-			BottleTwin b = (BottleTwin)#posSix;
-			if (b != null) {
-			emit bottlePos6(b);
-			}
+			BottleTwin b = (BottleTwin)#posFiveUpdate;
+			int id = b.ID;
 			pause;
+			if (b != null) {
+				abort(posFiveUpdate){
+					emit bottlePos5B(id);
+					sustain bottlePos5(b);
+				}
+			} else {
+				emit bottlePos5B(-1);
+			}
 		}	
 	}
 		
@@ -235,12 +196,17 @@ Orchestrator(
 
 	{
 		while(true){
-			await(posSeven);
-			BottleTwin b = (BottleTwin)#posSeven;
-			if (b != null) {
-			emit bottlePos7(b);
-			}
+			BottleTwin b = (BottleTwin)#posSixUpdate;
+			int id = b.ID;
 			pause;
+			if (b != null) {
+				abort(posSixUpdate){
+					emit bottlePos6B(id);
+					sustain bottlePos6(b);
+				}
+			} else {
+				emit bottlePos6B(-1);
+			}
 		}	
 	}
 		
@@ -248,15 +214,55 @@ Orchestrator(
 
 	{
 		while(true){
-			await(posEight);
-			BottleTwin b = (BottleTwin)#posEight;
-			if (b != null) {
-			emit bottlePos8(b);
-			}
+			BottleTwin b = (BottleTwin)#posSevenUpdate;
+			int id = b.ID;
 			pause;
+			if (b != null) {
+				abort(posSevenUpdate){
+					emit bottlePos7B(id);
+					sustain bottlePos7(b);
+				}
+			} else {
+				emit bottlePos7B(-1);
+			}
 		}	
 	}
 		
+		||
+
+	{
+		while(true){
+			BottleTwin b = (BottleTwin)#posEightUpdate;
+			int id = b.ID;
+			pause;
+			if (b != null) {
+				abort(posEightUpdate){
+					emit bottlePos8B(id);
+					sustain bottlePos8(b);
+				}
+			} else {
+				emit bottlePos8B(-1);
+			}
+		}	
+	}
+		
+		||
+
+	{
+		while(true){
+			pause;
+			BottleTwin b = (BottleTwin)#posNineUpdate;
+			int id = b.ID;
+			if (b != null) {
+				abort(posNineUpdate){
+					emit bottlePos9B(id);
+					sustain bottlePos9(b);
+				}
+			} else {
+				emit bottlePos9B(-1);
+			}
+		}	
+	}
 
 
 }

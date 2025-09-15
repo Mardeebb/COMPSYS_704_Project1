@@ -31,7 +31,7 @@ public class CapperPlant extends ClockDomain{
   public Signal gripperTurnFinalPosE = new Signal("gripperTurnFinalPosE", Signal.OUTPUT);
   public Signal gripperGripped = new Signal("gripperGripped", Signal.OUTPUT);
   public Signal cylClamped = new Signal("cylClamped", Signal.OUTPUT);
-  private int S1635 = 1;
+  private int S9 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -43,17 +43,17 @@ public class CapperPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S1635){
+      switch(S9){
         case 0 : 
-          S1635=0;
+          S9=0;
           break RUN;
         
         case 1 : 
-          S1635=2;
-          S1635=2;
+          S9=2;
+          S9=2;
           active[1]=0;
           ends[1]=0;
-          S1635=0;
+          S9=0;
           break RUN;
         
       }

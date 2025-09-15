@@ -8,6 +8,8 @@ public class robot {
 	public static volatile String rightArmPosition ="C";
 	public static volatile boolean rightArmgrip=true;
 	public static volatile boolean bottleSize;
+	public static volatile int posEightID = -1;
+	public static volatile int posNineID = -1;
 
 	public robot(int p){
 		robot.leftArmPosition="A";

@@ -28,6 +28,20 @@
 			<oSignal Name="bottlePos6" To="UI.bottlePos6" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="bottlePos7" To="UI.bottlePos7" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="bottlePos8" To="UI.bottlePos8" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos9" To="UI.bottlePos9" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			
+		 	<oSignal Name="bottlePos0B" To="UI.bottlePos0" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos1B" To="UI.bottlePos1" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos2B" To="UI.bottlePos2" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos3B" To="UI.bottlePos3" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos4B" To="UI.bottlePos4" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos5B" To="UI.bottlePos5" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos6B" To="UI.bottlePos6" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos7B" To="UI.bottlePos7" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos8B" To="UI.bottlePos8" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottlePos9B" To="UI.bottlePos9" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+
+
 		</ClockDomain>
 
 

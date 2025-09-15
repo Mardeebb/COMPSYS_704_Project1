@@ -210,6 +210,8 @@ public class Canvas extends JPanel {
 	    boolean signal2 = TurnTable.bottleAtPos5;
 	    int rightImage = robot.rightImage(robot.cmdR);
 	    int leftImage = robot.leftImage(robot.cmdL);
+    	drawBottle(robot.posEightID, 200, 300, g);
+    	drawBottle(robot.posNineID, 700, 300, g);
 	    if(robot.bottleSize) {
 	//	    System.err.println(leftImage);
 		    // draw left arm

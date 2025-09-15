@@ -10,14 +10,14 @@ rotController(
     System.out.println("Controller startedh");
 	{
 		// pusher control
-		while(true){
-			await(turn);
-
-			abort(tableAlignedWithSensorC){
-				sustain rotaryTableTrigger;
-			}
-			emit rotTableTurned;
-			await(!turn);
-		}
+//		while(true){
+//			await(turn);
+//
+//			abort(tableAlignedWithSensorC){
+//				sustain rotaryTableTrigger;
+//			}
+//			emit rotTableTurned;
+//			await(!turn);
+//		}
 	}
 }

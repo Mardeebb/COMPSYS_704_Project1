@@ -76,31 +76,7 @@ public class SysJWorker extends Worker{
 			}
 			break;
 		
-		case "pos0":
-	        if (status && value != null) {
-	            int id = (int) value;
-				Conveyor.posZeroID = id;
-	        }
-			break;
 			
-		case "pos1":
-	        if (status && value != null) {
-	            int id = (int) value;
-				Conveyor.posOneID = id;
-	        }
-			break;
-		case "pos5":
-	        if (status && value != null) {
-	            int id = (int) value;
-				Conveyor.posFiveID = id;
-	        }
-			break;
-		case "pos7":
-	        if (status && value != null) {
-	            int id = (int) value;
-				Conveyor.posSevenID = id;
-	        }
-			break;
 		case "conveyorMoving":
 			if (status) {
 				Conveyor.moving = true;
@@ -176,6 +152,65 @@ public class SysJWorker extends Worker{
 			if(status) {
 				robot.cmdR = (String) value;
 			}
+		
+		case "bottlePos0":
+	        if (status && value != null) {
+	            int id = (int) value;
+	            Conveyor.posZeroID = id;
+	        }
+
+		case "bottlePos1":
+	        if (status && value != null) {
+	            int id = (int) value;
+	            TurnTable.RT[0] = id;
+	        }
+
+		case "bottlePos2":
+	        if (status && value != null) {
+	            int id = (int) value;
+	            TurnTable.RT[1] = id;
+	        }
+
+		case "bottlePos3":
+	        if (status && value != null) {
+	            int id = (int) value;
+	            TurnTable.RT[2] = id;
+	        }
+
+		case "bottlePos4":
+	        if (status && value != null) {
+	            int id = (int) value;
+	            TurnTable.RT[3] = id;
+	        }
+
+		case "bottlePos5":
+	        if (status && value != null) {
+	            int id = (int) value;
+	            TurnTable.RT[4] = id;
+	        }
+
+		case "bottlePos6":
+	        if (status && value != null) {
+	            int id = (int) value;
+	            TurnTable.RT[5] = id;
+	        }
+
+		case "bottlePos7":
+	        if (status && value != null) {
+	            int id = (int) value;
+	        }
+
+		case "bottlePos8":
+	        if (status && value != null) {
+	            int id = (int) value;
+	        }
+
+		case "bottlePos9":
+	        if (status && value != null) {
+	            int id = (int) value;
+	        }
+
+
 
 		default: 
 			System.err.println("Wrong sig name : "+signame);
@@ -183,7 +218,7 @@ public class SysJWorker extends Worker{
 		}
 	}
 	
-	static final List<String> signames = Arrays.asList("CMD_RE", "CMD_R2E", "CMD_L2E", "CMD_LE","gripperTurnFinalPosE", "gripperTurnHomePosE", "gripperZAxisLiftedE", "gripperZAxisLoweredE", "capOnID", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","pos0","pos1","pos5","pos7","conveyorMoving","conveyorStop","fillID");
+	static final List<String> signames = Arrays.asList("bottlePos9","bottlePos8","bottlePos7","bottlePos6","bottlePos5","bottlePos4","bottlePos3","bottlePos2","bottlePos1","bottlePos0","CMD_RE", "CMD_R2E", "CMD_L2E", "CMD_LE","gripperTurnFinalPosE", "gripperTurnHomePosE", "gripperZAxisLiftedE", "gripperZAxisLoweredE", "capOnID", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","conveyorMoving","conveyorStop","fillID");
 	
 	@Override
 	public boolean hasSignal(String sn) {

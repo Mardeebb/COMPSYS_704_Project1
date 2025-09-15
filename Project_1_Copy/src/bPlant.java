@@ -26,7 +26,7 @@ public class bPlant extends ClockDomain{
   public Signal CMD_L2E = new Signal("CMD_L2E", Signal.OUTPUT);
   public Signal CMD_RE = new Signal("CMD_RE", Signal.OUTPUT);
   public Signal CMD_R2E = new Signal("CMD_R2E", Signal.OUTPUT);
-  private int S3191 = 1;
+  private int S1357 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -38,18 +38,18 @@ public class bPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S3191){
+      switch(S1357){
         case 0 : 
-          S3191=0;
+          S1357=0;
           break RUN;
         
         case 1 : 
-          S3191=2;
+          S1357=2;
           System.out.println("Baxter robot Plant started");//sysj\robotPlant.sysj line: 9, column: 3
-          S3191=0;
+          S1357=0;
           active[1]=0;
           ends[1]=0;
-          S3191=0;
+          S1357=0;
           break RUN;
         
       }
