@@ -3,16 +3,19 @@ import run.BottleTwin;
 
 Orchestrator(
 		input BottleTwin signal newBottleTwin;
-		input signal request, conveyorMoved, rotTableTurned, filled, capLoaded;
+		input signal request, conveyorMoved, rotTableTurned, filled, capLoaded, capOn;
 		
-		output signal recieveTwin, startConveyor, startRotTable, startFilling, startCapLoading, capperBottleOut;
+		output signal recieveTwin, startConveyor, startRotTable, startFilling, startCapLoading;
 		output BottleTwin signal bottlePos0, bottlePos1, bottlePos2, bottlePos3, bottlePos4, bottlePos5, bottlePos6, bottlePos7, bottlePos8, bottlePos9;
 		output int signal bottlePos0B, bottlePos1B, bottlePos2B, bottlePos3B, bottlePos4B, bottlePos5B, bottlePos6B, bottlePos7B, bottlePos8B, bottlePos9B;
 		)
 ->{	
 	
 	BottleTwin signal posZeroUpdate, posOneUpdate, posTwoUpdate, posThreeUpdate, posFourUpdate, posFiveUpdate, posSixUpdate, posSevenUpdate, posEightUpdate, posNineUpdate;
-	signal filling, capLoading, startRobotLoader, startConveyorThread, startRotThread, startCapLoaderThread;
+	signal filling, capLoading, startRobotLoaderThread, startConveyorThread, startRotThread, startCapLoaderThread;
+	signal checkRobotLoader, checkConveyor, checkRotTable;
+	signal robotLoaderFinish, conveyorFinish, rotTableFinish;
+	// thread for getting new bottle
 	{
 		while(true){
 			await(newBottleTwin);
@@ -25,13 +28,11 @@ Orchestrator(
 			    System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOo " + b);
 			    System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOo " + ID);
 			    System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOo " + name);
-//				emit posEight(b);
-//				await(request);
-//				await(posEightLeft);
-				emit posZeroUpdate(b);
+				emit posEightUpdate(b);
 				pause;
 				pause;
-				await(!bottlePos0);
+				await(!bottlePos8);
+				await(!request);
 				await(request);
 				// emit recieve conformation to the backend
 				await(!newBottleTwin);
@@ -42,42 +43,149 @@ Orchestrator(
 	
 	||
 	
+	// Bottle loader logic
 	{
 		while(true) {
-			await(startRobotLoader);
-			// wait for plant update first
-			BottleTwin bZero = (BottleTwin)#posZeroUpdate;
-			BottleTwin bFive = (BottleTwin)#posFiveUpdate;
+			await(!request);
+			await(request);
 			
-			emit posZeroUpdate(null);
-			emit posFiveUpdate(null);
-			emit posOneUpdate(bZero);
-			emit posSevenUpdate(bFive);
+			emit checkRobotLoader;
+			await(robotLoaderFinish);
+			await(!request);
+			await(request);
 
-			
+			emit checkConveyor;
+			await(conveyorFinish);
+			await(!request);
+			await(request);
+
+			emit checkRotTable;
+			await(rotTableFinish);
+		}
+	}
+
+	||
+	
+	// Bottle loader logic
+	{
+		while(true) {
+			await(checkRobotLoader);
+			present(!bottlePos0 && bottlePos8){
+				emit startRobotLoaderThread;
+				pause;
+			} else {
+				pause;
+				emit robotLoaderFinish;
+			}
+		}
+	}
+	
+	||
+	// Conveyor logic
+	{
+		while(true) {
+			await(checkConveyor);
+			present(bottlePos0 && !bottlePos1){
+				emit startConveyorThread;
+				pause;
+			} else {
+				pause;
+				emit conveyorFinish;
+			}
+		}
+	}
+	
+	||
+	// rotTable logic
+	{
+		while(true) {
+			await(checkRotTable);
+			// wait for plants
+			present(bottlePos1 || bottlePos2 || bottlePos3 || bottlePos4 || bottlePos5 || bottlePos6){
+				emit startRotThread;
+				pause;
+			} else {
+				pause;
+				emit rotTableFinish;
+
+			}
 		}
 	}
 
 	
 	||
 	
+	// Bottle loader thread
+	{
+		while(true) {
+			await(startRobotLoaderThread);
+			// wait for plant update first
+			BottleTwin bEight = (BottleTwin)#posEightUpdate;
+			pause;
+			emit posEightUpdate(null);
+			emit posZeroUpdate(bEight);
+		
+			pause;
+			emit robotLoaderFinish;
+			await(!startRobotLoaderThread);
+
+		}
+	}
+
+	
+	||
+	
+	// Conveyor thread
 	{
 		while(true) {
 			await(startConveyorThread);
 			// wait for plant update first
 			BottleTwin bZero = (BottleTwin)#posZeroUpdate;
 			BottleTwin bFive = (BottleTwin)#posFiveUpdate;
-			
+			pause;
 			emit posZeroUpdate(null);
-			emit posFiveUpdate(null);
+//					emit posFiveUpdate(null);
 			emit posOneUpdate(bZero);
 			emit posSevenUpdate(bFive);
-
+			
+			pause;
+			emit conveyorFinish;
+			await(!startConveyorThread);
 			
 		}
 	}
 	
+	||
 	
+	// rotTable thread
+	{
+		while(true) {
+			await(startRotThread);
+		
+			// wait for plant update first
+			BottleTwin bOne = (BottleTwin)#posOneUpdate;
+			BottleTwin bTwo = (BottleTwin)#posTwoUpdate;
+			BottleTwin bThree = (BottleTwin)#posThreeUpdate;
+			BottleTwin bFour = (BottleTwin)#posFourUpdate;
+			BottleTwin bFive = (BottleTwin)#posFiveUpdate;
+			BottleTwin bSix = (BottleTwin)#posSixUpdate;
+			pause;
+			emit posOneUpdate(bSix);
+			emit posTwoUpdate(bOne);
+			emit posThreeUpdate(bTwo);
+			emit posFourUpdate(bThree);
+			emit posFiveUpdate(bFour);
+			emit posSixUpdate(bFive);
+			
+			pause;
+			emit rotTableFinish;
+			await(!startRotThread);
+				
+			
+			
+		}
+	}
+
 	
 	
 	
@@ -88,15 +196,16 @@ Orchestrator(
 	{
 		while(true){
 			BottleTwin b = (BottleTwin)#posZeroUpdate;
-			int id = b.ID;
 			pause;
 			if (b != null) {
+				int id = b.ID;
 				abort(posZeroUpdate){
 					emit bottlePos0B(id);
 					sustain bottlePos0(b);
 				}
 			} else {
 				emit bottlePos0B(-1);
+				await(posZeroUpdate);
 			}
 		}	
 	}
@@ -106,15 +215,16 @@ Orchestrator(
 	{
 		while(true){
 			BottleTwin b = (BottleTwin)#posOneUpdate;
-			int id = b.ID;
 			pause;
 			if (b != null) {
+				int id = b.ID;
 				abort(posOneUpdate){
 					emit bottlePos1B(id);
 					sustain bottlePos1(b);
 				}
 			} else {
 				emit bottlePos1B(-1);
+				await(posOneUpdate);
 			}
 		}	
 	}
@@ -124,15 +234,16 @@ Orchestrator(
 	{
 		while(true){
 			BottleTwin b = (BottleTwin)#posTwoUpdate;
-			int id = b.ID;
 			pause;
 			if (b != null) {
+				int id = b.ID;
 				abort(posTwoUpdate){
 					emit bottlePos2B(id);
 					sustain bottlePos2(b);
 				}
 			} else {
 				emit bottlePos2B(-1);
+				await(posTwoUpdate);
 			}
 		}	
 			
@@ -143,15 +254,16 @@ Orchestrator(
 	{
 		while(true){
 			BottleTwin b = (BottleTwin)#posThreeUpdate;
-			int id = b.ID;
 			pause;
 			if (b != null) {
+				int id = b.ID;
 				abort(posThreeUpdate){
 					emit bottlePos3B(id);
 					sustain bottlePos3(b);
 				}
 			} else {
 				emit bottlePos3B(-1);
+				await(posThreeUpdate);
 			}
 		}	
 	}
@@ -161,15 +273,16 @@ Orchestrator(
 	{
 		while(true){
 			BottleTwin b = (BottleTwin)#posFourUpdate;
-			int id = b.ID;
 			pause;
 			if (b != null) {
+				int id = b.ID;
 				abort(posFourUpdate){
 					emit bottlePos4B(id);
 					sustain bottlePos4(b);
 				}
 			} else {
 				emit bottlePos4B(-1);
+				await(posFourUpdate);
 			}
 		}	
 	}
@@ -179,15 +292,16 @@ Orchestrator(
 	{
 		while(true){
 			BottleTwin b = (BottleTwin)#posFiveUpdate;
-			int id = b.ID;
 			pause;
 			if (b != null) {
+				int id = b.ID;
 				abort(posFiveUpdate){
 					emit bottlePos5B(id);
 					sustain bottlePos5(b);
 				}
 			} else {
 				emit bottlePos5B(-1);
+				await(posFiveUpdate);
 			}
 		}	
 	}
@@ -197,15 +311,16 @@ Orchestrator(
 	{
 		while(true){
 			BottleTwin b = (BottleTwin)#posSixUpdate;
-			int id = b.ID;
 			pause;
 			if (b != null) {
+				int id = b.ID;
 				abort(posSixUpdate){
 					emit bottlePos6B(id);
 					sustain bottlePos6(b);
 				}
 			} else {
 				emit bottlePos6B(-1);
+				await(posSixUpdate);
 			}
 		}	
 	}
@@ -215,15 +330,16 @@ Orchestrator(
 	{
 		while(true){
 			BottleTwin b = (BottleTwin)#posSevenUpdate;
-			int id = b.ID;
 			pause;
 			if (b != null) {
+				int id = b.ID;
 				abort(posSevenUpdate){
 					emit bottlePos7B(id);
 					sustain bottlePos7(b);
 				}
 			} else {
 				emit bottlePos7B(-1);
+				await(posSevenUpdate);
 			}
 		}	
 	}
@@ -233,15 +349,16 @@ Orchestrator(
 	{
 		while(true){
 			BottleTwin b = (BottleTwin)#posEightUpdate;
-			int id = b.ID;
 			pause;
 			if (b != null) {
+				int id = b.ID;
 				abort(posEightUpdate){
 					emit bottlePos8B(id);
 					sustain bottlePos8(b);
 				}
 			} else {
 				emit bottlePos8B(-1);
+				await(posEightUpdate);
 			}
 		}	
 	}
@@ -252,14 +369,15 @@ Orchestrator(
 		while(true){
 			pause;
 			BottleTwin b = (BottleTwin)#posNineUpdate;
-			int id = b.ID;
 			if (b != null) {
+				int id = b.ID;
 				abort(posNineUpdate){
 					emit bottlePos9B(id);
 					sustain bottlePos9(b);
 				}
 			} else {
 				emit bottlePos9B(-1);
+				await(posNineUpdate);
 			}
 		}	
 	}

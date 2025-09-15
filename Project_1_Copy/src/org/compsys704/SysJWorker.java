@@ -135,11 +135,13 @@ public class SysJWorker extends Worker{
 				robot.cmdL = (String) value;
 
 			}
+			break;
 
 		case "CMD_L2E":
 			if(status) {
 				robot.cmdL = (String) value;
 			}
+			break;
 
 			
 		case "CMD_RE":
@@ -147,47 +149,55 @@ public class SysJWorker extends Worker{
 				robot.cmdR = (String) value;
 
 			}
+			break;
 
 		case "CMD_R2E":
 			if(status) {
 				robot.cmdR = (String) value;
 			}
-		
+			break;
+
 		case "bottlePos0":
 	        if (status && value != null) {
 	            int id = (int) value;
 	            Conveyor.posZeroID = id;
 	        }
+			break;
 
 		case "bottlePos1":
 	        if (status && value != null) {
 	            int id = (int) value;
 	            TurnTable.RT[0] = id;
 	        }
+			break;
 
 		case "bottlePos2":
 	        if (status && value != null) {
 	            int id = (int) value;
 	            TurnTable.RT[1] = id;
 	        }
+			break;
 
 		case "bottlePos3":
 	        if (status && value != null) {
 	            int id = (int) value;
 	            TurnTable.RT[2] = id;
 	        }
+			break;
 
 		case "bottlePos4":
 	        if (status && value != null) {
 	            int id = (int) value;
 	            TurnTable.RT[3] = id;
 	        }
+			break;
 
 		case "bottlePos5":
 	        if (status && value != null) {
 	            int id = (int) value;
 	            TurnTable.RT[4] = id;
 	        }
+			break;
 
 		case "bottlePos6":
 	        if (status && value != null) {
@@ -199,16 +209,20 @@ public class SysJWorker extends Worker{
 	        if (status && value != null) {
 	            int id = (int) value;
 	        }
+			break;
 
 		case "bottlePos8":
 	        if (status && value != null) {
 	            int id = (int) value;
+	            robot.posEightID = id;
 	        }
+			break;
 
 		case "bottlePos9":
 	        if (status && value != null) {
 	            int id = (int) value;
 	        }
+			break;
 
 
 
