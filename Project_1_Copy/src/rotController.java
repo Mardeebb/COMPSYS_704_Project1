@@ -16,7 +16,7 @@ public class rotController extends ClockDomain{
   public Signal tableAlignedWithSensorC = new Signal("tableAlignedWithSensorC", Signal.INPUT);
   public Signal rotaryTableTrigger = new Signal("rotaryTableTrigger", Signal.OUTPUT);
   public Signal rotTableTurned = new Signal("rotTableTurned", Signal.OUTPUT);
-  private int S2536 = 1;
+  private int S2609 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -28,18 +28,18 @@ public class rotController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S2536){
+      switch(S2609){
         case 0 : 
-          S2536=0;
+          S2609=0;
           break RUN;
         
         case 1 : 
-          S2536=2;
+          S2609=2;
           System.out.println("Controller startedh");//sysj\rotController.sysj line: 10, column: 5
-          S2536=0;
+          S2609=0;
           active[1]=0;
           ends[1]=0;
-          S2536=0;
+          S2609=0;
           break RUN;
         
       }

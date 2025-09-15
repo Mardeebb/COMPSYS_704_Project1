@@ -29,42 +29,42 @@ public class rotPlant extends ClockDomain{
   private Signal pos4_1;
   private Signal pos5_1;
   private Signal pos6_1;
-  private int S2549 = 1;
+  private int S2622 = 1;
   
   private int[] ends = new int[5];
   private int[] tdone = new int[5];
   
-  public void thread2557(int [] tdone, int [] ends){
+  public void thread2630(int [] tdone, int [] ends){
         active[4]=0;
     ends[4]=0;
     tdone[4]=1;
   }
 
-  public void thread2556(int [] tdone, int [] ends){
+  public void thread2629(int [] tdone, int [] ends){
         active[3]=0;
     ends[3]=0;
     tdone[3]=1;
   }
 
-  public void thread2555(int [] tdone, int [] ends){
+  public void thread2628(int [] tdone, int [] ends){
         active[2]=0;
     ends[2]=0;
     tdone[2]=1;
   }
 
-  public void thread2553(int [] tdone, int [] ends){
+  public void thread2626(int [] tdone, int [] ends){
         active[4]=0;
     ends[4]=0;
     tdone[4]=1;
   }
 
-  public void thread2552(int [] tdone, int [] ends){
+  public void thread2625(int [] tdone, int [] ends){
         active[3]=0;
     ends[3]=0;
     tdone[3]=1;
   }
 
-  public void thread2551(int [] tdone, int [] ends){
+  public void thread2624(int [] tdone, int [] ends){
         active[2]=0;
     ends[2]=0;
     tdone[2]=1;
@@ -77,14 +77,14 @@ public class rotPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S2549){
+      switch(S2622){
         case 0 : 
-          S2549=0;
+          S2622=0;
           break RUN;
         
         case 1 : 
-          S2549=2;
-          S2549=2;
+          S2622=2;
+          S2622=2;
           turn_1.setClear();//sysj\rotPlant.sysj line: 16, column: 2
           pos1_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
           pos2_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
@@ -92,25 +92,25 @@ public class rotPlant extends ClockDomain{
           pos4_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
           pos5_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
           pos6_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
-          thread2551(tdone,ends);
-          thread2552(tdone,ends);
-          thread2553(tdone,ends);
-          int biggest2554 = 0;
-          if(ends[2]>=biggest2554){
-            biggest2554=ends[2];
+          thread2624(tdone,ends);
+          thread2625(tdone,ends);
+          thread2626(tdone,ends);
+          int biggest2627 = 0;
+          if(ends[2]>=biggest2627){
+            biggest2627=ends[2];
           }
-          if(ends[3]>=biggest2554){
-            biggest2554=ends[3];
+          if(ends[3]>=biggest2627){
+            biggest2627=ends[3];
           }
-          if(ends[4]>=biggest2554){
-            biggest2554=ends[4];
+          if(ends[4]>=biggest2627){
+            biggest2627=ends[4];
           }
           //FINXME code
-          if(biggest2554 == 0){
-            S2549=0;
+          if(biggest2627 == 0){
+            S2622=0;
             active[1]=0;
             ends[1]=0;
-            S2549=0;
+            S2622=0;
             break RUN;
           }
         
@@ -122,25 +122,25 @@ public class rotPlant extends ClockDomain{
           pos4_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
           pos5_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
           pos6_1.setClear();//sysj\rotPlant.sysj line: 17, column: 2
-          thread2555(tdone,ends);
-          thread2556(tdone,ends);
-          thread2557(tdone,ends);
-          int biggest2558 = 0;
-          if(ends[2]>=biggest2558){
-            biggest2558=ends[2];
+          thread2628(tdone,ends);
+          thread2629(tdone,ends);
+          thread2630(tdone,ends);
+          int biggest2631 = 0;
+          if(ends[2]>=biggest2631){
+            biggest2631=ends[2];
           }
-          if(ends[3]>=biggest2558){
-            biggest2558=ends[3];
+          if(ends[3]>=biggest2631){
+            biggest2631=ends[3];
           }
-          if(ends[4]>=biggest2558){
-            biggest2558=ends[4];
+          if(ends[4]>=biggest2631){
+            biggest2631=ends[4];
           }
           //FINXME code
-          if(biggest2558 == 0){
-            S2549=0;
+          if(biggest2631 == 0){
+            S2622=0;
             active[1]=0;
             ends[1]=0;
-            S2549=0;
+            S2622=0;
             break RUN;
           }
         

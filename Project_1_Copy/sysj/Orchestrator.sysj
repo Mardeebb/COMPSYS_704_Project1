@@ -12,9 +12,9 @@ Orchestrator(
 ->{	
 	
 	BottleTwin signal posZeroUpdate, posOneUpdate, posTwoUpdate, posThreeUpdate, posFourUpdate, posFiveUpdate, posSixUpdate, posSevenUpdate, posEightUpdate, posNineUpdate;
-	signal filling, capLoading, startRobotLoaderThread, startConveyorThread, startRotThread, startCapLoaderThread;
-	signal checkRobotLoader, checkConveyor, checkRotTable;
-	signal robotLoaderFinish, conveyorFinish, rotTableFinish;
+	signal filling, capLoading, startRobotLoaderThread, startConveyorThread, startRotThread, startCapLoaderThread, startRobotUnloaderThread;
+	signal checkRobotLoader, checkConveyor, checkRotTable, checkRobotUnloader;
+	signal robotLoaderFinish, conveyorFinish, rotTableFinish, robotUnloaderFinish;
 	// thread for getting new bottle
 	{
 		while(true){
@@ -51,16 +51,25 @@ Orchestrator(
 			
 			emit checkRobotLoader;
 			await(robotLoaderFinish);
+			
 			await(!request);
 			await(request);
 
 			emit checkConveyor;
 			await(conveyorFinish);
+			
 			await(!request);
 			await(request);
 
 			emit checkRotTable;
 			await(rotTableFinish);
+			
+			await(!request);
+			await(request);
+			
+			emit checkRobotUnloader;
+			await(robotUnloaderFinish);
+
 		}
 	}
 
@@ -111,8 +120,22 @@ Orchestrator(
 			}
 		}
 	}
-
 	
+	||
+	// Bottle unloader logic
+	{
+		while(true) {
+			await(checkRobotUnloader);
+			present(bottlePos7){
+				emit startRobotUnloaderThread;
+				pause;
+			} else {
+				pause;
+				emit robotUnloaderFinish;
+			}
+		}
+	}
+
 	||
 	
 	// Bottle loader thread
@@ -144,7 +167,7 @@ Orchestrator(
 			BottleTwin bFive = (BottleTwin)#posFiveUpdate;
 			pause;
 			emit posZeroUpdate(null);
-//					emit posFiveUpdate(null);
+			emit posFiveUpdate(null);
 			emit posOneUpdate(bZero);
 			emit posSevenUpdate(bFive);
 			
@@ -181,12 +204,29 @@ Orchestrator(
 			emit rotTableFinish;
 			await(!startRotThread);
 				
-			
-			
 		}
 	}
 
+	||
 	
+	// Bottle unloader thread
+	{
+		while(true) {
+			await(startRobotUnloaderThread);
+			// wait for plant update first
+			BottleTwin bSeven = (BottleTwin)#posSevenUpdate;
+			pause;
+			emit posSevenUpdate(null);
+			emit posNineUpdate(bSeven);
+		
+			pause;
+			emit robotUnloaderFinish;
+			await(!startRobotUnloaderThread);
+
+		}
+	}
+
+
 	
 	
 	

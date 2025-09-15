@@ -208,6 +208,7 @@ public class SysJWorker extends Worker{
 		case "bottlePos7":
 	        if (status && value != null) {
 	            int id = (int) value;
+	            Conveyor.posSevenID = id;
 	        }
 			break;
 
@@ -221,6 +222,7 @@ public class SysJWorker extends Worker{
 		case "bottlePos9":
 	        if (status && value != null) {
 	            int id = (int) value;
+	            robot.posNineID = id;
 	        }
 			break;
 
