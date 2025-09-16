@@ -46,8 +46,8 @@ Orchestrator(
 	// logic
 	{
 		while(true) {
-//			await(!request);
-//			await(request);
+			await(!request);
+			await(request);
 
 			emit checkCapLoader;
 			await(capLoaderFinish);

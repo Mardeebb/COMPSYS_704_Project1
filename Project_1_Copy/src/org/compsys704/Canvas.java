@@ -37,7 +37,7 @@ public class Canvas extends JPanel {
 	BufferedImage conveyor_static;
 	BufferedImage filler_off;
 	BufferedImage filler_on;
-	BufferedImage capper_on, capper1, capper_off, capper2;
+	BufferedImage capper_on, capper_off;
 	BufferedImage LARM, LARM0, LARM1, LARM2, LARM3, LARM4;
 	BufferedImage SARM, SARM0, SARM1, SARM2, SARM3, SARM4;
 
@@ -108,8 +108,8 @@ public class Canvas extends JPanel {
 			filler_on = bi.getSubimage(1935, 0, 2050, 1685);
 			filler_on = scaleImage(filler_on, 170, 170);
 			bi = ImageIO.read(new File("res/CapperStates.png"));
-			capper_off = bi.getSubimage(195,35, 130,100);
-			capper_on = bi.getSubimage(21,35, 183,100);
+			capper_off = bi.getSubimage(195,35, 130,110);
+			capper_on = bi.getSubimage(21,35, 183,110);
 			bi = ImageIO.read(new File("res/robot.png"));
 			LARM = bi.getSubimage(30,100, 600,250);
 			LARM0 = scaleImage(LARM, 250, 100);

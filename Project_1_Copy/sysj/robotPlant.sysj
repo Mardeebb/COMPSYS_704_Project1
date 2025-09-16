@@ -8,92 +8,92 @@ bPlant(
 {
   System.out.println("Baxter robot Plant started");
 
-//  // LEFT limb simulator
-//  {
-//    while (true) {
-//      // Simulated action time (2 logical ticks works well)
-// 	  await(enable);  
-//      await(!enable);  
-//      abort(CMD_L2){
-//    	  sustain CMDfb_L; 
-//      }
-// 	  await(enable);  
-//      await(!enable);  
-//      abort(CMD_L){
-//    	  sustain CMDfb_L2;              // acknowledge completion
-//      }
-//    }
-//  }
-//  
-//  ||
-//  // Right arm simulator
-//  {
-//	    while (true) {
-//	      // Simulated action time (2 logical ticks works well)
-//	 	  await(enable);  
-//	      await(!enable);  
-//	      abort(CMD_L2){
-//	    	  sustain CMDfb_R; 
-//	      }
-//	 	  await(enable);  
-//	      await(!enable);  
-//	      abort(CMD_L){
-//	    	  sustain CMDfb_R2;              // acknowledge completion
-//	      }
-//	    }
-//	  }
-//  
-//  ||
-//	{
-//		{
-//
-//			while(true){
-//		      present(CMD_L){
-//			      String s = (String)#CMD_L;
-//			      System.err.println("[PLANT L] got: " + s);   
-//			      emit CMD_LE(s);
-//			      await(enable);
-//
-//		      }
-//		      pause;
-//			}
-//		}
-//		||
-//		{
-//			while(true){
-//		      present(CMD_L2){
-//			      String s = (String)#CMD_L2;
-//			      System.err.println("[PLANT L2] got: " + s);    
-//			      emit CMD_L2E(s);
-//			      await(enable);
-//
-//		      }
-//		      pause;
-//			}
-//		}
-//		
-//		||
-//		{while(true){
-//		      present(CMD_R){
-//			      String s = (String)#CMD_R;
-//			      System.err.println("[PLANT R] got: " + s);  
-//			      emit CMD_RE(s);
-//			      await(enable);
-//		      }
-//		      pause;
-//			}
-//		}
-//		||
-//		{while(true){
-//		      present(CMD_R2){
-//			      String s = (String)#CMD_R2;
-//			      System.err.println("[PLANT R2] got: " + s);   
-//			      emit CMD_R2E(s);
-//			      await(enable);
-//		      }
-//		      pause;
-//			}
-//		}
-//		
-//	}
+  // LEFT limb simulator
+  {
+    while (true) {
+      // Simulated action time (2 logical ticks works well)
+ 	  await(enable);  
+      await(!enable);  
+      abort(CMD_L2){
+    	  sustain CMDfb_L; 
+      }
+ 	  await(enable);  
+      await(!enable);  
+      abort(CMD_L){
+    	  sustain CMDfb_L2;              // acknowledge completion
+      }
+    }
+  }
+  
+  ||
+  // Right arm simulator
+  {
+	    while (true) {
+	      // Simulated action time (2 logical ticks works well)
+	 	  await(enable);  
+	      await(!enable);  
+	      abort(CMD_L2){
+	    	  sustain CMDfb_R; 
+	      }
+	 	  await(enable);  
+	      await(!enable);  
+	      abort(CMD_L){
+	    	  sustain CMDfb_R2;              // acknowledge completion
+	      }
+	    }
+	  }
+  
+  ||
+	{
+		{
+
+			while(true){
+		      present(CMD_L){
+			      String s = (String)#CMD_L;
+			      System.err.println("[PLANT L] got: " + s);   
+			      emit CMD_LE(s);
+			      await(enable);
+
+		      }
+		      pause;
+			}
+		}
+		||
+		{
+			while(true){
+		      present(CMD_L2){
+			      String s = (String)#CMD_L2;
+			      System.err.println("[PLANT L2] got: " + s);    
+			      emit CMD_L2E(s);
+			      await(enable);
+
+		      }
+		      pause;
+			}
+		}
+		
+		||
+		{while(true){
+		      present(CMD_R){
+			      String s = (String)#CMD_R;
+			      System.err.println("[PLANT R] got: " + s);  
+			      emit CMD_RE(s);
+			      await(enable);
+		      }
+		      pause;
+			}
+		}
+		||
+		{while(true){
+		      present(CMD_R2){
+			      String s = (String)#CMD_R2;
+			      System.err.println("[PLANT R2] got: " + s);   
+			      emit CMD_R2E(s);
+			      await(enable);
+		      }
+		      pause;
+			}
+		}
+		
+	}
 }
