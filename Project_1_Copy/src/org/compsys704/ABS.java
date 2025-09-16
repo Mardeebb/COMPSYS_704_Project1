@@ -106,15 +106,20 @@ public class ABS extends JFrame {
 //		enable.addActionListener(new SignalClient(10033, "fillerPlantCD.enable", null));
 //		enable.addActionListener(new SignalClient(10031, "baxtorRobotPlantCD.enable", null));
 		enable.addActionListener(new SignalClient(10041, "CapperPlantCD.enable", null));
+		enable.addActionListener(new SignalClient(10051, "FaultTolerancePlantCD.enable", null));
 
 		JButton request = new JButton("request");
 		request.addActionListener(new SignalClient(Ports.PORT_LOADER_CONTROLLER, Ports.REQUEST_SIGNAL, null));
 		request.addActionListener(new SignalClient(10004, "OrchestratorCD.request", null));
         POSPanel posPanel = new POSPanel(backend);
-
+        
+        JButton fault = new JButton("fault");
+        fault.addActionListener(new SignalClient(10051, "FaultTolerancePlantCD.fault", null));
+        
 		JPanel ss = new JPanel();
 		ss.add(enable);
 		ss.add(request);
+		ss.add(fault);
 
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();

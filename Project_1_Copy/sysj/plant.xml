@@ -61,6 +61,13 @@
 			<oSignal Name="gripperTurnHomePosE"           To="UI.gripperTurnHomePosE"           Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="gripperTurnFinalPosE"           To="UI.gripperTurnFinalPosE"           Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />	
 		</ClockDomain>
+		
+		<ClockDomain Name="FaultTolerancePlantCD" Class="FaultTolerancePlant">
+			<iSignal Name="enable" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10051" />
+			<iSignal Name="fault" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10051" />
+			
+			<oSignal Name="faultOnE"           To="UI.faultOnE"           Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+		</ClockDomain>
 
 		
 		<ClockDomain Name="rotaryTablePlantCD" Class="rotPlant">

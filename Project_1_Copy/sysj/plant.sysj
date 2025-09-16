@@ -205,6 +205,25 @@ CapperPlant (
 	}
 }
 
+FaultTolerancePlant( 
+		input signal enable, fault;
+		output signal faultOnE;
+		)
+->{
+	{
+		while(true) {
+			present(fault) {
+				System.err.println("Fualt");
+				abort(enable) {
+					sustain faultOnE;
+				}
+				System.err.println("aborted");
+			}
+			await(!enable);
+		}
+	}
+}
+
 
 rotPlant(
 		input signal rotaryTableTrigger, enable, bottleIn;

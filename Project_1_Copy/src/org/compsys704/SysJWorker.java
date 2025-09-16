@@ -150,13 +150,17 @@ public class SysJWorker extends Worker{
 			Capper.gripper_fullyturned = status;
 			break;
 			
+		case "faultOnE":
+			FaultTolerance.faultTolerance_On = status;
+			break;
+			
 		default: 
 			System.err.println("Wrong sig name : "+signame);
 			System.exit(1);
 		}
 	}
 	
-	static final List<String> signames = Arrays.asList("CMD_L2E", "CMD_LE",  "gripperTurnFinalPosE", "gripperTurnHomePosE", "gripperZAxisLiftedE", "gripperZAxisLoweredE", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","pos0","pos1","pos5","pos7","conveyorMoving","conveyorStop");
+	static final List<String> signames = Arrays.asList("CMD_L2E", "CMD_LE",  "faultOnE", "gripperTurnFinalPosE", "gripperTurnHomePosE", "gripperZAxisLiftedE", "gripperZAxisLoweredE", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","pos0","pos1","pos5","pos7","conveyorMoving","conveyorStop");
 	
 	@Override
 	public boolean hasSignal(String sn) {

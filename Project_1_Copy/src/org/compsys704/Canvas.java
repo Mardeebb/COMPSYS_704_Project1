@@ -111,7 +111,7 @@ public class Canvas extends JPanel {
 			bi = ImageIO.read(new File("res/FaultTolerance.png"));
 			faultToleranceIDLE = bi.getSubimage(11,20, 270,370);
 			faultToleranceIDLE = scaleImage(faultToleranceIDLE, 200, 300);
-			faultToleranceON = bi.getSubimage(325,10, 250,370);
+			faultToleranceON = bi.getSubimage(325,10, 270,380);
 			faultToleranceON = scaleImage(faultToleranceON, 200, 300);
 
 			} catch (IOException e) {
@@ -220,9 +220,11 @@ public class Canvas extends JPanel {
 	    }
 	    
 	    // fault tolerance image
-	    
-	    g.drawImage(faultToleranceIDLE, 750, 50, null);
-	    g.drawImage(faultToleranceON, 750, 40, null);
+	    if (FaultTolerance.faultTolerance_On) {
+	    	 g.drawImage(faultToleranceON, 750, 40, null);
+	    } else {
+	    	g.drawImage(faultToleranceIDLE, 750, 50, null);
+	    }
 	    	
 
 	    // Draw Signal 1
