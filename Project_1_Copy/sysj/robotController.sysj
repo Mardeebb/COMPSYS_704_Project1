@@ -10,19 +10,19 @@ bController(
 //				sustain CMD_L("limb_moveto left_limb B"); // Moves the arm to the position B
 //			}
 //			abort(CMDfb_L2 ){
-//				sustain CMD_L2("limb_gripper left_limb close"); 
+//				 sustain CMD_L2("limb_gripper left_limb open");
 //			}
 //			abort(CMDfb_L){
+//				sustain CMD_L2("limb_gripper left_limb close");
+//			}
+//			abort(CMDfb_L2){
 //				sustain CMD_L("limb_moveto left_limb C"); 
 //			}
-//			abort(CMDfb_L2){
-//				sustain CMD_L2("limb_gripper left_limb open");
-//			}
 //			abort(CMDfb_L){
-//				 sustain CMD_L("limb_moveto left_limb A"); //Move the arm back to the ready location (Position A
+//				 sustain CMD_L2("limb_gripper left_limb open");
 //			}
 //			abort(CMDfb_L2){
-//				
+//				sustain CMD_L("limb_moveto left_limb A"); //Move the arm back to the ready location (Position A
 //			}
 //		}
 //	}

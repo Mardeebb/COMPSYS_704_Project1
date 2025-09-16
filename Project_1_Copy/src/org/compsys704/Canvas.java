@@ -73,6 +73,7 @@ public class Canvas extends JPanel {
                 }
             }
         });
+        
 
 		try {
 			BufferedImage bi = ImageIO.read(new File("res/arm.png"));

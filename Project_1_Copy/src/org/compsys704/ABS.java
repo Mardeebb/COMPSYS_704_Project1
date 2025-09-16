@@ -34,7 +34,7 @@ class POSPanel extends JPanel {
         this.backend = backend;
         setLayout(new GridLayout(0,1));
 
-        // Input fields
+        // Input field
         JTextField orderIdField = new JTextField("Order1");
         JTextField qtyField = new JTextField("5");
         JButton submitBtn = new JButton("Submit Order");

@@ -10,16 +10,16 @@ conveyorController(
 		)
 ->{
 	{
-//		while(true){
-//			await(move);
-//			await(!bottleAtPos1);
-//			abort(bottleAtPos1){
-//				emit conveyorMoving;
-//				sustain motConveyorOnOff;
-//			}
-//			emit conveyorMoved;
-//			emit conveyorStop;
-//		}
+		while(true){
+			await(move);
+			await(!bottleAtPos1);
+			abort(bottleAtPos1){
+				emit conveyorMoving;
+				sustain motConveyorOnOff;
+			}
+			emit conveyorMoved;
+			emit conveyorStop;
+		}
 	}
 }
 

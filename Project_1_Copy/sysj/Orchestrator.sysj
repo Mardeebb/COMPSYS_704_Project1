@@ -48,11 +48,7 @@ Orchestrator(
 		while(true) {
 			await(!request);
 			await(request);
-			
-			
 
-//			await(!request);
-//			await(request);
 
 			emit checkRobotLoader;
 			await(robotLoaderFinish);

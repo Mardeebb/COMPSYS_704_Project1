@@ -26,7 +26,7 @@ public class BottleTwin implements Serializable {
     		return 3;
     	}else if(this.isCapOn) {
     		return 2;
-    	}else if(this.isFilled) {
+    	}else if(this.isFilled) { 
     		return 1;
     	}else {
 	    	return 0;
