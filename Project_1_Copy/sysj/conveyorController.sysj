@@ -1,9 +1,9 @@
 import run.BottleTwin;
 
 conveyorController(
-		input signal move;
+		input signal move, plantMoved;
 
-		input signal bottleAtPos1, bottleLeftPos5, moved;
+		input signal bottleAtPos1, bottleLeftPos5;
 		
 		output signal motConveyorOnOff;
 		output signal conveyorMoving, conveyorStop, conveyorMoved;
@@ -11,13 +11,20 @@ conveyorController(
 ->{
 	{
 		while(true){
+			await(!move);
 			await(move);
 			await(!bottleAtPos1);
-			abort(bottleAtPos1){
+			abort(plantMoved){
+				
+				// Backend digital twin update
 				emit conveyorMoving;
 				sustain motConveyorOnOff;
 			}
+			
+			// Orchestrator update
 			emit conveyorMoved;
+			
+			// Backend digital twin update
 			emit conveyorStop;
 		}
 	}

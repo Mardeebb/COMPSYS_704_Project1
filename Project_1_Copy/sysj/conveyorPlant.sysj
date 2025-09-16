@@ -4,33 +4,58 @@ conveyorPlant(
 		input signal motConveyorOnOff, enable;
 		
 		// real world sim signal a bottle has been placed
-		input BottleTwin signal bottleAtZero, bottleAtFive;
+		input BottleTwin signal bottleAtOne, bottleAtFive;
 		
-		output signal bottleAtPos1, bottleLeftPos5, moved;
+		output signal bottleAtPos1, bottleLeftPos5, plantMoved;
 )
 ->
 {
 	signal conveyorMove;
-	BottleTwin signal posZero, posOne, posFive, posSeven;
+//	BottleTwin signal posOne, posFive;
 	{
 		while(true) {
-			await(motConveyorOnOff);
-			abort(!motConveyorOnOff){
-				BottleTwin bZero = (BottleTwin)#bottleAtZero;
-				BottleTwin bFive = (BottleTwin)#posFive;
-				await(enable);
-				if(bZero != null) {
-					emit posOne(bZero);
-					emit posZero(null);
-					emit pos0(-1);
+			abort(motConveyorOnOff){
+				while(true) {
+					present(bottleAtOne){
+						emit bottleAtPos1;
+					}
+					present(!bottleAtFive){
+						sustain bottleLeftPos5;
+					}
+					pause;
 				}
+			}
+			
+			abort(!motConveyorOnOff){
+//				BottleTwin bZero = (BottleTwin)#bottleAtZero;
+//				BottleTwin bFive = (BottleTwin)#bottleAtFive;
+				await(enable);
+//			    System.err.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC ");
+//				if(bZero != null) {
+//					emit posOne(bZero);
+//					emit posZero(null);
+//					emit pos0(-1);
+//				}
 //				if(bFive != null) {
 //					emit posSeven(bFive);
-//					emit posFive;
+//					emit posFive(null);
 //					emit pos5(-1);
 //				}
+			    pause;
 			}
+			
+//			// one doesn't go through??
+//			emit plantMoved;
+//			pause;
+//
+//			emit plantMoved;
+//			pause;
+
+			abort(!motConveyorOnOff){
+				sustain plantMoved;
+			}
+
 		}
 	}
-	
+		
 }

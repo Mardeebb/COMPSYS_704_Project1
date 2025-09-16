@@ -20,7 +20,7 @@ public class fController extends ClockDomain{
   public Signal dosUnitValveRetract = new Signal("dosUnitValveRetract", Signal.OUTPUT);
   public Signal dosUnitValveExtend = new Signal("dosUnitValveExtend", Signal.OUTPUT);
   public Signal Filled = new Signal("Filled", Signal.OUTPUT);
-  private int S39 = 1;
+  private int S271 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -32,18 +32,18 @@ public class fController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S39){
+      switch(S271){
         case 0 : 
-          S39=0;
+          S271=0;
           break RUN;
         
         case 1 : 
-          S39=2;
+          S271=2;
           System.out.println("filler Controller started");//sysj\fillerController.sysj line: 9, column: 2
-          S39=0;
+          S271=0;
           active[1]=0;
           ends[1]=0;
-          S39=0;
+          S271=0;
           break RUN;
         
       }

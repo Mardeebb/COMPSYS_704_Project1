@@ -6,7 +6,7 @@ Orchestrator(
 		input signal request, conveyorMoved, rotTableTurned, filled, capLoaded, capOn;
 		
 		output signal recieveTwin, startConveyor, startRotTable, startFilling, startCapLoading;
-		output BottleTwin signal bottlePos0, bottlePos1, bottlePos2, bottlePos3, bottlePos4, bottlePos5, bottlePos6, bottlePos7, bottlePos8, bottlePos9;
+		output BottleTwin signal bottlePos0, bottlePos1, bottlePos2, bottlePos3, bottlePos4, bottlePos5, bottlePos6, bottlePos7, bottlePos8, bottlePos9, bottlePos1Rot;
 		output int signal bottlePos0B, bottlePos1B, bottlePos2B, bottlePos3B, bottlePos4B, bottlePos5B, bottlePos6B, bottlePos7B, bottlePos8B, bottlePos9B;
 		)
 ->{	
@@ -186,7 +186,11 @@ Orchestrator(
 	{
 		while(true) {
 			await(startConveyorThread);
+			
 			// wait for plant update first
+			emit startConveyor;
+			await(conveyorMoved);
+			
 			BottleTwin bZero = (BottleTwin)#posZeroUpdate;
 			BottleTwin bFive = (BottleTwin)#posFiveUpdate;
 			pause;
@@ -211,6 +215,8 @@ Orchestrator(
 			await(startRotThread);
 		
 			// wait for plant update first
+			emit startRotTable;
+			await(rotTableTurned);
 			BottleTwin bOne = (BottleTwin)#posOneUpdate;
 			BottleTwin bTwo = (BottleTwin)#posTwoUpdate;
 			BottleTwin bThree = (BottleTwin)#posThreeUpdate;
@@ -297,7 +303,11 @@ Orchestrator(
 				int id = b.ID;
 				abort(posOneUpdate){
 					emit bottlePos1B(id);
-					sustain bottlePos1(b);
+					while(true){
+						emit bottlePos1(b);
+						emit bottlePos1Rot(b);
+						pause;
+					}
 				}
 			} else {
 				emit bottlePos1B(-1);

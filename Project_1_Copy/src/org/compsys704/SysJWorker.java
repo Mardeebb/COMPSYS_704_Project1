@@ -50,10 +50,6 @@ public class SysJWorker extends Worker{
 					pos = 0;
 				}
 				TurnTable.RT_PS = pos;
-		        if (status && value != null) {
-		            int[] val = (int[]) value;
-		            TurnTable.RT = val;
-		        }
 			}
 			break;
 			

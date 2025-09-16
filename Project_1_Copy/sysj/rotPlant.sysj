@@ -3,112 +3,53 @@ import run.BottleTwin;
 rotPlant(
 		input signal rotaryTableTrigger, enable;
 		
-		input BottleTwin signal posOne, posSix;
+		input BottleTwin signal posOne, posFive;
 		
 		output signal bottleAtPos5, tableAlignedWithSensor, capOnBottleAtPos1, tableAlignedWithSensorC;
 		
-		output signal rotTurned;
 		// backend signal
 		output signal rotTurn;
 )
 ->
 {
-	signal turn;
-	BottleTwin signal pos1, pos2, pos3, pos4, pos5, pos6;
 	
 	{
-//		while(true){
-//			abort(!rotaryTableTrigger){
-//				int[] packedArray = new int[6]; 
-//				await(enable);
-//				await(rotaryTableTrigger);
-//				BottleTwin b1 = (BottleTwin)#pos1;
-//				BottleTwin b2 = (BottleTwin)#pos2;
-//				BottleTwin b3 = (BottleTwin)#pos3;
-//				BottleTwin b4 = (BottleTwin)#pos4;
-//				BottleTwin b5 = null;
-//				BottleTwin b6 = (BottleTwin)#pos6;
-//
-//				await(!enable);
-//				await(enable);
-//				if(b1 != null) {
-//					int ID = b1.ID;
-//					packedArray[1] = ID;
-//				}else {
-//					packedArray[1] = -1;
-//				}
-//				if(b2 != null) {
-//					int ID = b2.ID;
-//					packedArray[2] = ID;
-//				}else {
-//					packedArray[2] = -1;
-//				}
-//				if(b3 != null) {
-//					int ID = b3.ID;
-//					packedArray[3] = ID;
-//				}else {
-//					packedArray[3] = -1;
-//				}
-//				if(b4 != null) {
-//					int ID = b4.ID;
-//					packedArray[4] = ID;
-//				}else {
-//					packedArray[4] = -1;
-//				}
-//				if(b5 != null) {
-//					int ID = b5.ID;
-//					packedArray[5] = ID;
-//				}else {
-//					packedArray[5] = -1;
-//				}
-//				if(b6 != null) {
-//					int ID = b6.ID;
-//					packedArray[0] = ID;
-//				}else {
-//					packedArray[0] = -1;
-//				}
-//				System.err.println(packedArray);
-//
-//				emit pos1(b6);
-//				emit pos2(b1);
-//				emit pos3(b2);
-//				emit pos4(b3);
-//				emit pos5(b4);
-//				emit pos6(b5);
-//
-//				emit rotTurned;
-//				emit rotTurn(packedArray);
-//				emit turn;
-//				sustain tableAlignedWithSensorC;
-//			}
-//		}
+		while(true){
+			abort(!rotaryTableTrigger){
+				await(enable);
+
+				emit rotTurn;
+				sustain tableAlignedWithSensorC;
+			}
+		}
+	}
+		
+	||
+	
+	{
+		while(true) {
+			await(posOne);
+			BottleTwin b = (BottleTwin)#posOne;
+			if(b != null) {
+				if(b.isCapped || b.isCapOn) {
+					emit capOnBottleAtPos1;
+				}
+			}
+			pause;
+		}
 	}
 	
 	||
 	
 	{
-//		while(true) {
-////			if((Integer)#posOne == 5){
-//////				emit capOnBottleAtPos1;
-////			}
-////			if((Integer)#posFive != 0){
-//////				emit bottleAtPos5;
-////			}
-//			pause;
-//		}
-	}
-	
-	||
-	
-	{
-//		while(true) {
-//			await(posOne);
-//			
-//			BottleTwin b = (BottleTwin)#posOne;
-//			System.err.println(b.ID);
-//
-//			emit pos1(b);
-//		}
+		while(true) {
+			await(posFive);
+			BottleTwin b = (BottleTwin)#posFive;
+			if(b != null) {
+				emit bottleAtPos5;
+				}
+			pause;
+		}
 	}
 }
 
