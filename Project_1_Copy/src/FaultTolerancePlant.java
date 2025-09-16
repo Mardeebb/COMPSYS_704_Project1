@@ -16,8 +16,8 @@ public class FaultTolerancePlant extends ClockDomain{
   public Signal enable = new Signal("enable", Signal.INPUT);
   public Signal fault = new Signal("fault", Signal.INPUT);
   public Signal faultOnE = new Signal("faultOnE", Signal.OUTPUT);
-  private int S3226 = 1;
-  private int S3196 = 1;
+  private int S3220 = 1;
+  private int S3184 = 1;
   
   private int[] ends = new int[29];
   private int[] tdone = new int[29];
@@ -29,36 +29,41 @@ public class FaultTolerancePlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S3226){
+      switch(S3220){
         case 0 : 
-          S3226=0;
+          S3220=0;
           break RUN;
         
         case 1 : 
-          S3226=2;
-          S3226=2;
-          S3196=0;
-          if(fault.getprestatus()){//sysj\plant.sysj line: 215, column: 12
-            System.err.println("Fualt");//sysj\plant.sysj line: 216, column: 5
-            faultOnE.setPresent();//sysj\plant.sysj line: 218, column: 6
-            currsigs.addElement(faultOnE);
-            active[13]=1;
-            ends[13]=1;
-            break RUN;
-          }
-          else {
-            S3196=1;
-            active[13]=1;
-            ends[13]=1;
-            break RUN;
-          }
+          S3220=2;
+          S3220=2;
+          S3184=0;
+          active[13]=1;
+          ends[13]=1;
+          break RUN;
         
         case 2 : 
-          switch(S3196){
+          switch(S3184){
             case 0 : 
+              if(fault.getprestatus()){//sysj\plant.sysj line: 215, column: 10
+                System.err.println("Fualt");//sysj\plant.sysj line: 216, column: 5
+                S3184=1;
+                faultOnE.setPresent();//sysj\plant.sysj line: 218, column: 6
+                currsigs.addElement(faultOnE);
+                active[13]=1;
+                ends[13]=1;
+                break RUN;
+              }
+              else {
+                active[13]=1;
+                ends[13]=1;
+                break RUN;
+              }
+            
+            case 1 : 
               if(enable.getprestatus()){//sysj\plant.sysj line: 217, column: 11
                 System.err.println("aborted");//sysj\plant.sysj line: 220, column: 5
-                S3196=1;
+                S3184=2;
                 active[13]=1;
                 ends[13]=1;
                 break RUN;
@@ -71,23 +76,12 @@ public class FaultTolerancePlant extends ClockDomain{
                 break RUN;
               }
             
-            case 1 : 
+            case 2 : 
               if(!enable.getprestatus()){//sysj\plant.sysj line: 222, column: 10
-                S3196=0;
-                if(fault.getprestatus()){//sysj\plant.sysj line: 215, column: 12
-                  System.err.println("Fualt");//sysj\plant.sysj line: 216, column: 5
-                  faultOnE.setPresent();//sysj\plant.sysj line: 218, column: 6
-                  currsigs.addElement(faultOnE);
-                  active[13]=1;
-                  ends[13]=1;
-                  break RUN;
-                }
-                else {
-                  S3196=1;
-                  active[13]=1;
-                  ends[13]=1;
-                  break RUN;
-                }
+                S3184=0;
+                active[13]=1;
+                ends[13]=1;
+                break RUN;
               }
               else {
                 active[13]=1;

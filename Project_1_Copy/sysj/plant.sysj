@@ -212,13 +212,13 @@ FaultTolerancePlant(
 ->{
 	{
 		while(true) {
-			present(fault) {
+			await(fault);
 				System.err.println("Fualt");
 				abort(enable) {
 					sustain faultOnE;
 				}
 				System.err.println("aborted");
-			}
+			
 			await(!enable);
 		}
 	}

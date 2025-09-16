@@ -50,7 +50,7 @@ public class CapperPlant extends ClockDomain{
   private int[] ends = new int[29];
   private int[] tdone = new int[29];
   
-  public void thread3773(int [] tdone, int [] ends){
+  public void thread3767(int [] tdone, int [] ends){
         switch(S3178){
       case 0 : 
         active[12]=0;
@@ -76,7 +76,7 @@ public class CapperPlant extends ClockDomain{
     }
   }
 
-  public void thread3772(int [] tdone, int [] ends){
+  public void thread3766(int [] tdone, int [] ends){
         switch(S3170){
       case 0 : 
         active[11]=0;
@@ -102,7 +102,7 @@ public class CapperPlant extends ClockDomain{
     }
   }
 
-  public void thread3771(int [] tdone, int [] ends){
+  public void thread3765(int [] tdone, int [] ends){
         switch(S3162){
       case 0 : 
         active[10]=0;
@@ -128,7 +128,7 @@ public class CapperPlant extends ClockDomain{
     }
   }
 
-  public void thread3770(int [] tdone, int [] ends){
+  public void thread3764(int [] tdone, int [] ends){
         switch(S3154){
       case 0 : 
         active[9]=0;
@@ -154,7 +154,7 @@ public class CapperPlant extends ClockDomain{
     }
   }
 
-  public void thread3769(int [] tdone, int [] ends){
+  public void thread3763(int [] tdone, int [] ends){
         switch(S3180){
       case 0 : 
         active[8]=0;
@@ -163,30 +163,30 @@ public class CapperPlant extends ClockDomain{
         break;
       
       case 1 : 
-        thread3770(tdone,ends);
-        thread3771(tdone,ends);
-        thread3772(tdone,ends);
-        thread3773(tdone,ends);
-        int biggest3774 = 0;
-        if(ends[9]>=biggest3774){
-          biggest3774=ends[9];
+        thread3764(tdone,ends);
+        thread3765(tdone,ends);
+        thread3766(tdone,ends);
+        thread3767(tdone,ends);
+        int biggest3768 = 0;
+        if(ends[9]>=biggest3768){
+          biggest3768=ends[9];
         }
-        if(ends[10]>=biggest3774){
-          biggest3774=ends[10];
+        if(ends[10]>=biggest3768){
+          biggest3768=ends[10];
         }
-        if(ends[11]>=biggest3774){
-          biggest3774=ends[11];
+        if(ends[11]>=biggest3768){
+          biggest3768=ends[11];
         }
-        if(ends[12]>=biggest3774){
-          biggest3774=ends[12];
+        if(ends[12]>=biggest3768){
+          biggest3768=ends[12];
         }
-        if(biggest3774 == 1){
+        if(biggest3768 == 1){
           active[8]=1;
           ends[8]=1;
           tdone[8]=1;
         }
         //FINXME code
-        if(biggest3774 == 0){
+        if(biggest3768 == 0){
           S3180=0;
           active[8]=0;
           ends[8]=0;
@@ -197,7 +197,7 @@ public class CapperPlant extends ClockDomain{
     }
   }
 
-  public void thread3768(int [] tdone, int [] ends){
+  public void thread3762(int [] tdone, int [] ends){
         switch(S3146){
       case 0 : 
         active[7]=0;
@@ -253,7 +253,7 @@ public class CapperPlant extends ClockDomain{
     }
   }
 
-  public void thread3767(int [] tdone, int [] ends){
+  public void thread3761(int [] tdone, int [] ends){
         switch(S3114){
       case 0 : 
         active[6]=0;
@@ -349,7 +349,7 @@ public class CapperPlant extends ClockDomain{
     }
   }
 
-  public void thread3766(int [] tdone, int [] ends){
+  public void thread3760(int [] tdone, int [] ends){
         switch(S3046){
       case 0 : 
         active[5]=0;
@@ -405,7 +405,7 @@ public class CapperPlant extends ClockDomain{
     }
   }
 
-  public void thread3765(int [] tdone, int [] ends){
+  public void thread3759(int [] tdone, int [] ends){
         switch(S3014){
       case 0 : 
         active[4]=0;
@@ -489,7 +489,7 @@ public class CapperPlant extends ClockDomain{
     }
   }
 
-  public void thread3764(int [] tdone, int [] ends){
+  public void thread3758(int [] tdone, int [] ends){
         switch(S2901){
       case 0 : 
         active[3]=0;
@@ -546,7 +546,7 @@ public class CapperPlant extends ClockDomain{
     }
   }
 
-  public void thread3761(int [] tdone, int [] ends){
+  public void thread3755(int [] tdone, int [] ends){
         S3178=1;
     if(gripperTurnFinalPos.getprestatus()){//sysj\plant.sysj line: 204, column: 25
       gripperTurnFinalPosE.setPresent();//sysj\plant.sysj line: 204, column: 46
@@ -562,7 +562,7 @@ public class CapperPlant extends ClockDomain{
     }
   }
 
-  public void thread3760(int [] tdone, int [] ends){
+  public void thread3754(int [] tdone, int [] ends){
         S3170=1;
     if(gripperTurnHomePos.getprestatus()){//sysj\plant.sysj line: 202, column: 25
       gripperTurnHomePosE.setPresent();//sysj\plant.sysj line: 202, column: 45
@@ -578,7 +578,7 @@ public class CapperPlant extends ClockDomain{
     }
   }
 
-  public void thread3759(int [] tdone, int [] ends){
+  public void thread3753(int [] tdone, int [] ends){
         S3162=1;
     if(gripperZAxisLifted.getprestatus()){//sysj\plant.sysj line: 200, column: 25
       gripperZAxisLiftedE.setPresent();//sysj\plant.sysj line: 200, column: 45
@@ -594,7 +594,7 @@ public class CapperPlant extends ClockDomain{
     }
   }
 
-  public void thread3758(int [] tdone, int [] ends){
+  public void thread3752(int [] tdone, int [] ends){
         S3154=1;
     if(gripperZAxisLowered.getprestatus()){//sysj\plant.sysj line: 198, column: 25
       gripperZAxisLoweredE.setPresent();//sysj\plant.sysj line: 198, column: 46
@@ -610,33 +610,33 @@ public class CapperPlant extends ClockDomain{
     }
   }
 
-  public void thread3757(int [] tdone, int [] ends){
+  public void thread3751(int [] tdone, int [] ends){
         S3180=1;
-    thread3758(tdone,ends);
-    thread3759(tdone,ends);
-    thread3760(tdone,ends);
-    thread3761(tdone,ends);
-    int biggest3762 = 0;
-    if(ends[9]>=biggest3762){
-      biggest3762=ends[9];
+    thread3752(tdone,ends);
+    thread3753(tdone,ends);
+    thread3754(tdone,ends);
+    thread3755(tdone,ends);
+    int biggest3756 = 0;
+    if(ends[9]>=biggest3756){
+      biggest3756=ends[9];
     }
-    if(ends[10]>=biggest3762){
-      biggest3762=ends[10];
+    if(ends[10]>=biggest3756){
+      biggest3756=ends[10];
     }
-    if(ends[11]>=biggest3762){
-      biggest3762=ends[11];
+    if(ends[11]>=biggest3756){
+      biggest3756=ends[11];
     }
-    if(ends[12]>=biggest3762){
-      biggest3762=ends[12];
+    if(ends[12]>=biggest3756){
+      biggest3756=ends[12];
     }
-    if(biggest3762 == 1){
+    if(biggest3756 == 1){
       active[8]=1;
       ends[8]=1;
       tdone[8]=1;
     }
   }
 
-  public void thread3756(int [] tdone, int [] ends){
+  public void thread3750(int [] tdone, int [] ends){
         S3146=1;
     S3124=0;
     active[7]=1;
@@ -644,7 +644,7 @@ public class CapperPlant extends ClockDomain{
     tdone[7]=1;
   }
 
-  public void thread3755(int [] tdone, int [] ends){
+  public void thread3749(int [] tdone, int [] ends){
         S3114=1;
     S3055=0;
     if(gripperTurnExtend.getprestatus() && !gripperTurnRetract.getprestatus()){//sysj\plant.sysj line: 171, column: 13
@@ -662,7 +662,7 @@ public class CapperPlant extends ClockDomain{
     }
   }
 
-  public void thread3754(int [] tdone, int [] ends){
+  public void thread3748(int [] tdone, int [] ends){
         S3046=1;
     S3024=0;
     active[5]=1;
@@ -670,7 +670,7 @@ public class CapperPlant extends ClockDomain{
     tdone[5]=1;
   }
 
-  public void thread3753(int [] tdone, int [] ends){
+  public void thread3747(int [] tdone, int [] ends){
         S3014=1;
     System.err.println("Check lift");//sysj\plant.sysj line: 143, column: 4
     S2918=0;
@@ -682,7 +682,7 @@ public class CapperPlant extends ClockDomain{
     tdone[4]=1;
   }
 
-  public void thread3752(int [] tdone, int [] ends){
+  public void thread3746(int [] tdone, int [] ends){
         S2901=1;
     S2863=0;
     active[3]=1;
@@ -705,70 +705,70 @@ public class CapperPlant extends ClockDomain{
         case 1 : 
           S3182=2;
           S3182=2;
-          thread3752(tdone,ends);
-          thread3753(tdone,ends);
-          thread3754(tdone,ends);
-          thread3755(tdone,ends);
-          thread3756(tdone,ends);
-          thread3757(tdone,ends);
-          int biggest3763 = 0;
-          if(ends[3]>=biggest3763){
-            biggest3763=ends[3];
+          thread3746(tdone,ends);
+          thread3747(tdone,ends);
+          thread3748(tdone,ends);
+          thread3749(tdone,ends);
+          thread3750(tdone,ends);
+          thread3751(tdone,ends);
+          int biggest3757 = 0;
+          if(ends[3]>=biggest3757){
+            biggest3757=ends[3];
           }
-          if(ends[4]>=biggest3763){
-            biggest3763=ends[4];
+          if(ends[4]>=biggest3757){
+            biggest3757=ends[4];
           }
-          if(ends[5]>=biggest3763){
-            biggest3763=ends[5];
+          if(ends[5]>=biggest3757){
+            biggest3757=ends[5];
           }
-          if(ends[6]>=biggest3763){
-            biggest3763=ends[6];
+          if(ends[6]>=biggest3757){
+            biggest3757=ends[6];
           }
-          if(ends[7]>=biggest3763){
-            biggest3763=ends[7];
+          if(ends[7]>=biggest3757){
+            biggest3757=ends[7];
           }
-          if(ends[8]>=biggest3763){
-            biggest3763=ends[8];
+          if(ends[8]>=biggest3757){
+            biggest3757=ends[8];
           }
-          if(biggest3763 == 1){
+          if(biggest3757 == 1){
             active[2]=1;
             ends[2]=1;
             break RUN;
           }
         
         case 2 : 
-          thread3764(tdone,ends);
-          thread3765(tdone,ends);
-          thread3766(tdone,ends);
-          thread3767(tdone,ends);
-          thread3768(tdone,ends);
-          thread3769(tdone,ends);
-          int biggest3775 = 0;
-          if(ends[3]>=biggest3775){
-            biggest3775=ends[3];
+          thread3758(tdone,ends);
+          thread3759(tdone,ends);
+          thread3760(tdone,ends);
+          thread3761(tdone,ends);
+          thread3762(tdone,ends);
+          thread3763(tdone,ends);
+          int biggest3769 = 0;
+          if(ends[3]>=biggest3769){
+            biggest3769=ends[3];
           }
-          if(ends[4]>=biggest3775){
-            biggest3775=ends[4];
+          if(ends[4]>=biggest3769){
+            biggest3769=ends[4];
           }
-          if(ends[5]>=biggest3775){
-            biggest3775=ends[5];
+          if(ends[5]>=biggest3769){
+            biggest3769=ends[5];
           }
-          if(ends[6]>=biggest3775){
-            biggest3775=ends[6];
+          if(ends[6]>=biggest3769){
+            biggest3769=ends[6];
           }
-          if(ends[7]>=biggest3775){
-            biggest3775=ends[7];
+          if(ends[7]>=biggest3769){
+            biggest3769=ends[7];
           }
-          if(ends[8]>=biggest3775){
-            biggest3775=ends[8];
+          if(ends[8]>=biggest3769){
+            biggest3769=ends[8];
           }
-          if(biggest3775 == 1){
+          if(biggest3769 == 1){
             active[2]=1;
             ends[2]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest3775 == 0){
+          if(biggest3769 == 0){
             S3182=0;
             active[2]=0;
             ends[2]=0;
