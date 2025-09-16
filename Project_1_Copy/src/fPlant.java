@@ -26,42 +26,42 @@ public class fPlant extends ClockDomain{
   public Signal dosUnitFilledE = new Signal("dosUnitFilledE", Signal.OUTPUT);
   public Signal fillID = new Signal("fillID", Signal.OUTPUT);
   private Signal bottle_1;
-  private int S426 = 1;
+  private int S46 = 1;
   
   private int[] ends = new int[5];
   private int[] tdone = new int[5];
   
-  public void thread434(int [] tdone, int [] ends){
+  public void thread54(int [] tdone, int [] ends){
         active[4]=0;
     ends[4]=0;
     tdone[4]=1;
   }
 
-  public void thread433(int [] tdone, int [] ends){
+  public void thread53(int [] tdone, int [] ends){
         active[3]=0;
     ends[3]=0;
     tdone[3]=1;
   }
 
-  public void thread432(int [] tdone, int [] ends){
+  public void thread52(int [] tdone, int [] ends){
         active[2]=0;
     ends[2]=0;
     tdone[2]=1;
   }
 
-  public void thread430(int [] tdone, int [] ends){
+  public void thread50(int [] tdone, int [] ends){
         active[4]=0;
     ends[4]=0;
     tdone[4]=1;
   }
 
-  public void thread429(int [] tdone, int [] ends){
+  public void thread49(int [] tdone, int [] ends){
         active[3]=0;
     ends[3]=0;
     tdone[3]=1;
   }
 
-  public void thread428(int [] tdone, int [] ends){
+  public void thread48(int [] tdone, int [] ends){
         active[2]=0;
     ends[2]=0;
     tdone[2]=1;
@@ -74,58 +74,58 @@ public class fPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S426){
+      switch(S46){
         case 0 : 
-          S426=0;
+          S46=0;
           break RUN;
         
         case 1 : 
-          S426=2;
-          S426=2;
+          S46=2;
+          S46=2;
           bottle_1.setClear();//sysj\fillerPlant.sysj line: 13, column: 2
-          thread428(tdone,ends);
-          thread429(tdone,ends);
-          thread430(tdone,ends);
-          int biggest431 = 0;
-          if(ends[2]>=biggest431){
-            biggest431=ends[2];
+          thread48(tdone,ends);
+          thread49(tdone,ends);
+          thread50(tdone,ends);
+          int biggest51 = 0;
+          if(ends[2]>=biggest51){
+            biggest51=ends[2];
           }
-          if(ends[3]>=biggest431){
-            biggest431=ends[3];
+          if(ends[3]>=biggest51){
+            biggest51=ends[3];
           }
-          if(ends[4]>=biggest431){
-            biggest431=ends[4];
+          if(ends[4]>=biggest51){
+            biggest51=ends[4];
           }
           //FINXME code
-          if(biggest431 == 0){
-            S426=0;
+          if(biggest51 == 0){
+            S46=0;
             active[1]=0;
             ends[1]=0;
-            S426=0;
+            S46=0;
             break RUN;
           }
         
         case 2 : 
           bottle_1.setClear();//sysj\fillerPlant.sysj line: 13, column: 2
-          thread432(tdone,ends);
-          thread433(tdone,ends);
-          thread434(tdone,ends);
-          int biggest435 = 0;
-          if(ends[2]>=biggest435){
-            biggest435=ends[2];
+          thread52(tdone,ends);
+          thread53(tdone,ends);
+          thread54(tdone,ends);
+          int biggest55 = 0;
+          if(ends[2]>=biggest55){
+            biggest55=ends[2];
           }
-          if(ends[3]>=biggest435){
-            biggest435=ends[3];
+          if(ends[3]>=biggest55){
+            biggest55=ends[3];
           }
-          if(ends[4]>=biggest435){
-            biggest435=ends[4];
+          if(ends[4]>=biggest55){
+            biggest55=ends[4];
           }
           //FINXME code
-          if(biggest435 == 0){
-            S426=0;
+          if(biggest55 == 0){
+            S46=0;
             active[1]=0;
             ends[1]=0;
-            S426=0;
+            S46=0;
             break RUN;
           }
         

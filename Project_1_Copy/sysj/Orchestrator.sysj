@@ -12,7 +12,7 @@ Orchestrator(
 ->{	
 	
 	BottleTwin signal posZeroUpdate, posOneUpdate, posTwoUpdate, posThreeUpdate, posFourUpdate, posFiveUpdate, posSixUpdate, posSevenUpdate, posEightUpdate, posNineUpdate;
-	signal filling, capLoading, startRobotLoaderThread, startConveyorThread, startRotThread, startCapLoaderThread, startRobotUnloaderThread;
+	signal filling, capLoading, startRobotLoaderThread, startConveyorThread, startRotThread, startCapLoaderThread, startRobotUnloaderThread, startFillerThread;
 	signal checkRobotLoader, checkConveyor, checkRotTable, checkRobotUnloader;
 	signal robotLoaderFinish, conveyorFinish, rotTableFinish, robotUnloaderFinish;
 	// thread for getting new bottle
@@ -32,8 +32,8 @@ Orchestrator(
 				pause;
 				pause;
 				await(!bottlePos8);
-				await(!request);
-				await(request);
+//				await(!request);
+//				await(request);
 				// emit recieve conformation to the backend
 				await(!newBottleTwin);
 				emit recieveTwin;
@@ -49,26 +49,54 @@ Orchestrator(
 			await(!request);
 			await(request);
 			
+			
+
+//			await(!request);
+//			await(request);
+
 			emit checkRobotLoader;
 			await(robotLoaderFinish);
+			pause;
+			pause;
+
+			emit checkRobotUnloader;
+			await(robotUnloaderFinish);
+			pause;
+			pause;
+
+//			await(!request);
+//			await(request);
 			
-			await(!request);
-			await(request);
 
 			emit checkConveyor;
 			await(conveyorFinish);
+			pause;
+			pause;
 			
-			await(!request);
-			await(request);
+			emit checkRobotLoader;
+			await(robotLoaderFinish);
+			pause;
+			pause;
+
+			emit checkRobotUnloader;
+			await(robotUnloaderFinish);
+			pause;
+			pause;
+			
+			emit checkConveyor;
+			await(conveyorFinish);
+			pause;
+			pause;
+
+//			await(!request);
+//			await(request);
 
 			emit checkRotTable;
 			await(rotTableFinish);
+			pause;
+			pause;
+
 			
-			await(!request);
-			await(request);
-			
-			emit checkRobotUnloader;
-			await(robotUnloaderFinish);
 
 		}
 	}
@@ -94,7 +122,7 @@ Orchestrator(
 	{
 		while(true) {
 			await(checkConveyor);
-			present(bottlePos0 && !bottlePos1){
+			present((!bottlePos7 && !bottlePos1 )&&(bottlePos0 || bottlePos5)){
 				emit startConveyorThread;
 				pause;
 			} else {
@@ -172,6 +200,7 @@ Orchestrator(
 			emit posSevenUpdate(bFive);
 			
 			pause;
+			await(!posFiveUpdate);
 			emit conveyorFinish;
 			await(!startConveyorThread);
 			
@@ -226,6 +255,18 @@ Orchestrator(
 		}
 	}
 
+	||
+	
+	// filler thread
+	{
+		while(true) {
+			await(startFillerThread);
+			// wait for plant update first		
+			pause;
+			emit startFilling;
+			await(!startFillerThread);
+		}
+	}
 
 	
 	

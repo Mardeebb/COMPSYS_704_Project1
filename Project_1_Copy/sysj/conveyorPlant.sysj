@@ -17,78 +17,78 @@ conveyorPlant(
 	signal conveyorMove;
 	BottleTwin signal posZero, posOne, posFive, posSeven;
 	{
-		while(true) {
-			await(motConveyorOnOff);
-			abort(!motConveyorOnOff){
-				BottleTwin bZero = (BottleTwin)#posZero;
-				BottleTwin bFive = (BottleTwin)#posFive;
-				await(enable);
-				if(bZero != null) {
-					emit posOne(bZero);
-					emit posZero(null);
-					emit pos0(-1);
-				}
-//				if(bFive != null) {
-//					emit posSeven(bFive);
-//					emit posFive;
-//					emit pos5(-1);
+//		while(true) {
+//			await(motConveyorOnOff);
+//			abort(!motConveyorOnOff){
+//				BottleTwin bZero = (BottleTwin)#posZero;
+//				BottleTwin bFive = (BottleTwin)#posFive;
+//				await(enable);
+//				if(bZero != null) {
+//					emit posOne(bZero);
+//					emit posZero(null);
+//					emit pos0(-1);
 //				}
-			}
-		}
+////				if(bFive != null) {
+////					emit posSeven(bFive);
+////					emit posFive;
+////					emit pos5(-1);
+////				}
+//			}
+//		}
 	}
 	
 	||
 	
 	{
-		while(true) {
-			await(bottleArriveToZero);
-			BottleTwin b = (BottleTwin)#bottleArriveToZero;
-			if(b != null) {
-				int id = b.ID;
-				emit pos0(id);
-				emit posZero(b);
-			}
-		}
+//		while(true) {
+//			await(bottleArriveToZero);
+//			BottleTwin b = (BottleTwin)#bottleArriveToZero;
+//			if(b != null) {
+//				int id = b.ID;
+//				emit pos0(id);
+//				emit posZero(b);
+//			}
+//		}
 	}
 	
 	||
 	
 	{
-		while(true) {
-			await(bottleArriveToFive);
-			BottleTwin b = (BottleTwin)#bottleArriveToFive;
-			if(b != null) {
-				int id = b.ID;
-				emit pos5(id);
-				emit posFive(b);
-			}
-		}
+//		while(true) {
+//			await(bottleArriveToFive);
+//			BottleTwin b = (BottleTwin)#bottleArriveToFive;
+//			if(b != null) {
+//				int id = b.ID;
+//				emit pos5(id);
+//				emit posFive(b);
+//			}
+//		}
 	}
 	
 	||
 	
 	// real world sim
 	{
-		while(true) {
-			await(roturn);
-			emit posOne(null);
-		}
+//		while(true) {
+//			await(roturn);
+//			emit posOne(null);
+//		}
 	}
 	
 	||
 	
 	{
-		while(true) {
-			await(posOne);
-			BottleTwin b = (BottleTwin)#posOne;
-			if(b != null) {
-				int id = b.ID;
-				abort(roturn){
-					emit pos1(id);
-					sustain bottleAtPos1;
-				}
-				emit pos1(-1);
-			}
-		}
+//		while(true) {
+//			await(posOne);
+//			BottleTwin b = (BottleTwin)#posOne;
+//			if(b != null) {
+//				int id = b.ID;
+//				abort(roturn){
+//					emit pos1(id);
+//					sustain bottleAtPos1;
+//				}
+//				emit pos1(-1);
+//			}
+//		}
 	}
 }
