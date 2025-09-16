@@ -23,19 +23,19 @@ public class rotPlant extends ClockDomain{
   public Signal rotTurn = new Signal("rotTurn", Signal.OUTPUT);
   private BottleTwin b_thread_3;//sysj\rotPlant.sysj line: 32, column: 4
   private BottleTwin b_thread_4;//sysj\rotPlant.sysj line: 47, column: 4
-  private int S4737 = 1;
-  private int S4701 = 1;
-  private int S4674 = 1;
-  private int S4721 = 1;
-  private int S4703 = 1;
-  private int S4735 = 1;
-  private int S4723 = 1;
+  private int S7013 = 1;
+  private int S6977 = 1;
+  private int S6950 = 1;
+  private int S6997 = 1;
+  private int S6979 = 1;
+  private int S7011 = 1;
+  private int S6999 = 1;
   
   private int[] ends = new int[5];
   private int[] tdone = new int[5];
   
-  public void thread4745(int [] tdone, int [] ends){
-        switch(S4735){
+  public void thread7021(int [] tdone, int [] ends){
+        switch(S7011){
       case 0 : 
         active[4]=0;
         ends[4]=0;
@@ -43,7 +43,7 @@ public class rotPlant extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S4723){
+        switch(S6999){
           case 0 : 
             if(posFive.getprestatus()){//sysj\rotPlant.sysj line: 46, column: 10
               b_thread_4 = (BottleTwin)(posFive.getpreval() == null ? null : ((BottleTwin)posFive.getpreval()));//sysj\rotPlant.sysj line: 47, column: 4
@@ -51,13 +51,13 @@ public class rotPlant extends ClockDomain{
                 bottleAtPos5.setPresent();//sysj\rotPlant.sysj line: 49, column: 5
                 currsigs.addElement(bottleAtPos5);
                 System.out.println("Emitted bottleAtPos5");
-                S4723=1;
+                S6999=1;
                 active[4]=1;
                 ends[4]=1;
                 tdone[4]=1;
               }
               else {
-                S4723=1;
+                S6999=1;
                 active[4]=1;
                 ends[4]=1;
                 tdone[4]=1;
@@ -71,8 +71,8 @@ public class rotPlant extends ClockDomain{
             break;
           
           case 1 : 
-            S4723=1;
-            S4723=0;
+            S6999=1;
+            S6999=0;
             active[4]=1;
             ends[4]=1;
             tdone[4]=1;
@@ -84,8 +84,8 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread4744(int [] tdone, int [] ends){
-        switch(S4721){
+  public void thread7020(int [] tdone, int [] ends){
+        switch(S6997){
       case 0 : 
         active[3]=0;
         ends[3]=0;
@@ -93,7 +93,7 @@ public class rotPlant extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S4703){
+        switch(S6979){
           case 0 : 
             if(posOne.getprestatus()){//sysj\rotPlant.sysj line: 31, column: 10
               b_thread_3 = (BottleTwin)(posOne.getpreval() == null ? null : ((BottleTwin)posOne.getpreval()));//sysj\rotPlant.sysj line: 32, column: 4
@@ -102,20 +102,20 @@ public class rotPlant extends ClockDomain{
                   capOnBottleAtPos1.setPresent();//sysj\rotPlant.sysj line: 35, column: 6
                   currsigs.addElement(capOnBottleAtPos1);
                   System.out.println("Emitted capOnBottleAtPos1");
-                  S4703=1;
+                  S6979=1;
                   active[3]=1;
                   ends[3]=1;
                   tdone[3]=1;
                 }
                 else {
-                  S4703=1;
+                  S6979=1;
                   active[3]=1;
                   ends[3]=1;
                   tdone[3]=1;
                 }
               }
               else {
-                S4703=1;
+                S6979=1;
                 active[3]=1;
                 ends[3]=1;
                 tdone[3]=1;
@@ -129,8 +129,8 @@ public class rotPlant extends ClockDomain{
             break;
           
           case 1 : 
-            S4703=1;
-            S4703=0;
+            S6979=1;
+            S6979=0;
             active[3]=1;
             ends[3]=1;
             tdone[3]=1;
@@ -142,8 +142,8 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread4743(int [] tdone, int [] ends){
-        switch(S4701){
+  public void thread7019(int [] tdone, int [] ends){
+        switch(S6977){
       case 0 : 
         active[2]=0;
         ends[2]=0;
@@ -152,19 +152,19 @@ public class rotPlant extends ClockDomain{
       
       case 1 : 
         if(!rotaryTableTrigger.getprestatus()){//sysj\rotPlant.sysj line: 18, column: 10
-          S4674=0;
+          S6950=0;
           active[2]=1;
           ends[2]=1;
           tdone[2]=1;
         }
         else {
-          switch(S4674){
+          switch(S6950){
             case 0 : 
               if(enable.getprestatus()){//sysj\rotPlant.sysj line: 19, column: 11
                 rotTurn.setPresent();//sysj\rotPlant.sysj line: 21, column: 5
                 currsigs.addElement(rotTurn);
                 System.out.println("Emitted rotTurn");
-                S4674=1;
+                S6950=1;
                 tableAlignedWithSensorC.setPresent();//sysj\rotPlant.sysj line: 22, column: 5
                 currsigs.addElement(tableAlignedWithSensorC);
                 System.out.println("Emitted tableAlignedWithSensorC");
@@ -195,25 +195,25 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread4741(int [] tdone, int [] ends){
-        S4735=1;
-    S4723=0;
+  public void thread7017(int [] tdone, int [] ends){
+        S7011=1;
+    S6999=0;
     active[4]=1;
     ends[4]=1;
     tdone[4]=1;
   }
 
-  public void thread4740(int [] tdone, int [] ends){
-        S4721=1;
-    S4703=0;
+  public void thread7016(int [] tdone, int [] ends){
+        S6997=1;
+    S6979=0;
     active[3]=1;
     ends[3]=1;
     tdone[3]=1;
   }
 
-  public void thread4739(int [] tdone, int [] ends){
-        S4701=1;
-    S4674=0;
+  public void thread7015(int [] tdone, int [] ends){
+        S6977=1;
+    S6950=0;
     active[2]=1;
     ends[2]=1;
     tdone[2]=1;
@@ -226,58 +226,58 @@ public class rotPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S4737){
+      switch(S7013){
         case 0 : 
-          S4737=0;
+          S7013=0;
           break RUN;
         
         case 1 : 
-          S4737=2;
-          S4737=2;
-          thread4739(tdone,ends);
-          thread4740(tdone,ends);
-          thread4741(tdone,ends);
-          int biggest4742 = 0;
-          if(ends[2]>=biggest4742){
-            biggest4742=ends[2];
+          S7013=2;
+          S7013=2;
+          thread7015(tdone,ends);
+          thread7016(tdone,ends);
+          thread7017(tdone,ends);
+          int biggest7018 = 0;
+          if(ends[2]>=biggest7018){
+            biggest7018=ends[2];
           }
-          if(ends[3]>=biggest4742){
-            biggest4742=ends[3];
+          if(ends[3]>=biggest7018){
+            biggest7018=ends[3];
           }
-          if(ends[4]>=biggest4742){
-            biggest4742=ends[4];
+          if(ends[4]>=biggest7018){
+            biggest7018=ends[4];
           }
-          if(biggest4742 == 1){
+          if(biggest7018 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
         
         case 2 : 
-          thread4743(tdone,ends);
-          thread4744(tdone,ends);
-          thread4745(tdone,ends);
-          int biggest4746 = 0;
-          if(ends[2]>=biggest4746){
-            biggest4746=ends[2];
+          thread7019(tdone,ends);
+          thread7020(tdone,ends);
+          thread7021(tdone,ends);
+          int biggest7022 = 0;
+          if(ends[2]>=biggest7022){
+            biggest7022=ends[2];
           }
-          if(ends[3]>=biggest4746){
-            biggest4746=ends[3];
+          if(ends[3]>=biggest7022){
+            biggest7022=ends[3];
           }
-          if(ends[4]>=biggest4746){
-            biggest4746=ends[4];
+          if(ends[4]>=biggest7022){
+            biggest7022=ends[4];
           }
-          if(biggest4746 == 1){
+          if(biggest7022 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest4746 == 0){
-            S4737=0;
+          if(biggest7022 == 0){
+            S7013=0;
             active[1]=0;
             ends[1]=0;
-            S4737=0;
+            S7013=0;
             break RUN;
           }
         

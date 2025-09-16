@@ -1,73 +1,82 @@
 CapperController (
 		input signal bottleAtPos4, gripperZAxisLowered, gripperZAxisLifted;
 		input signal gripperTurnHomePos, gripperTurnFinalPos;
-		input signal capperStart;
 		input signal gripperGripped, cylClamped;
-
+		
 		output signal cylPos5ZAxisExtend, gripperTurnRetract, gripperTurnExtend, capGripperPos5Extend;
 		output signal cylClampBottleExtend;
 		)
 -> {
-//	System.out.println("Capper CD");
-//	{
-//		signal releaseCap, raiseGripper, unclampBottle; 
-//		{
-//			while(true) {
-//				// wait until bottle is at position 4
-//				//await(bottleAtPos4);
-//				
-//				abort(unclampBottle) {
-//					System.out.println("Bottle clamped");
-//					sustain cylClampBottleExtend; // keep bottle clamped
-//				}
-//				
-//			}
-//		}
-//		||
-//		{
-//			while(true) {
-//				//await(bottleAtPos4);
-//				waitl(4 s);
-//				abort(raiseGripper) {
-//					System.err.println("gripper lowered");
-//					sustain cylPos5ZAxisExtend; // keep gripper lowered
-//				}
-//				System.err.println("lifted");
-//				pause;
-//			}
-//		}
-//		||
-//		{
-//			while(true) {
-//				//await(bottleAtPos4);
-//				{await(gripperZAxisLowered);} || {await(cylClamped);}
-//				System.out.println("gripped the cap");
-//				abort(releaseCap) {
-//					sustain capGripperPos5Extend; // grip cap when lowered and clamped
-//				}
-//			}
-//		}
-//		||
-//		{
-//			while(true) {
-//				//await(bottleAtPos4);
-//				await(gripperGripped);
-//				
-//				abort(gripperTurnFinalPos) {
-//					System.out.println("Twist");
-//					sustain gripperTurnExtend; // twist the gripper
-//				}
-//				
-//				emit releaseCap;
-//				abort (gripperTurnHomePos) {
-//					System.out.println("retract");
-//					sustain gripperTurnRetract; // retract
-//				}
-//				emit raiseGripper ;
-//				System.err.println("raise the gripper");
-//				emit unclampBottle;
-//			}
-//		}
-//	}
-//
+	//System.out.println("Capper CD");
+	{
+		signal releaseCap, raiseGripper, unclampBottle; 
+		while(true) {
+			System.out.println("waiting");
+			await(bottleAtPos4);
+				System.out.println("Capper doing work");
+				{
+					while(true) {
+						// wait until bottle is at position 4
+						{await(!raiseGripper);} || {await(!unclampBottle);}
+						abort(unclampBottle) {
+							System.out.println("Bottle clamped");
+							sustain cylClampBottleExtend; // keep bottle clamped
+						}
+						pause;
+					}
+				}
+				||
+				{
+					while(true) {
+						System.err.println("waiting");
+						{await(!raiseGripper);} || {await(!unclampBottle);}
+						pause;
+						abort(raiseGripper) {
+							System.err.println("gripper lowered");
+							sustain cylPos5ZAxisExtend; // keep gripper lowered
+						}
+						System.err.println("lifted");
+						pause;
+					}
+				}
+				||
+				{
+					while(true) {
+						{await(gripperZAxisLowered);} || {await(cylClamped);}
+						System.out.println("gripped the cap");
+						abort(releaseCap) {
+							sustain capGripperPos5Extend; // grip cap when lowered and clamped
+						}
+						pause;
+					}
+				}
+				||
+				{
+					{
+						while(true) {
+							await(gripperGripped);
+							
+							abort(gripperTurnFinalPos) {
+								System.out.println("Twist");
+								sustain gripperTurnExtend; // twist the gripper
+							}
+							
+							emit releaseCap;
+							abort (gripperTurnHomePos) {
+								System.out.println("retract");
+								sustain gripperTurnRetract; // retract
+							}
+							pause;
+							emit raiseGripper;
+							System.err.println("raise the gripper");
+							pause;
+							emit unclampBottle;
+							pause;
+						}
+
+					}
+				}
+			pause;
+		}
+	}
 }

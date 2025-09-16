@@ -21,7 +21,7 @@ public class bController extends ClockDomain{
   public Signal CMD_L2 = new Signal("CMD_L2", Signal.OUTPUT);
   public Signal CMD_R = new Signal("CMD_R", Signal.OUTPUT);
   public Signal CMD_R2 = new Signal("CMD_R2", Signal.OUTPUT);
-  private int S4593 = 1;
+  private int S6869 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -33,18 +33,18 @@ public class bController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S4593){
+      switch(S6869){
         case 0 : 
-          S4593=0;
+          S6869=0;
           break RUN;
         
         case 1 : 
-          S4593=2;
+          S6869=2;
           System.out.println("Baxtor robot Controller started");//sysj\robotController.sysj line: 6, column: 2
-          S4593=0;
+          S6869=0;
           active[1]=0;
           ends[1]=0;
-          S4593=0;
+          S6869=0;
           break RUN;
         
       }
