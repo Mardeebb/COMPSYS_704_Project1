@@ -94,7 +94,7 @@
 			<iSignal Name="startFilling" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10007" />
 
 
-			<oSignal Name="Filled" To="OrchestratorCD.filled" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10004" />
+			<oSignal Name="filled" To="OrchestratorCD.filled" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10004" />
 			<oSignal Name="valveInjectorOnOff" To="fillerPlantCD.valveInjectorOnOff" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10008" />
 			<oSignal Name="valveInletOnOff" To="fillerPlantCD.valveInletOnOff" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10008" />
 			<oSignal Name="dosUnitValveRetract" To="fillerPlantCD.dosUnitValveRetract" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10008" />

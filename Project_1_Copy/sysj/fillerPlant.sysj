@@ -13,46 +13,45 @@ fPlant(
 	BottleTwin signal bottle;
     // Bottle at position 2 
     {
-//        while(true){
-//            // For now simulate bottle always available when enabled
-//            await(bottleIn);
-//            
-//			BottleTwin b = (BottleTwin)#bottleIn;
-//			emit bottle(b);
-//            abort(bottleOut){
-//                sustain bottleAtPos2;
-//            }
-//            
-//        }
+        while(true){
+            await(bottleIn);
+			BottleTwin b = (BottleTwin)#bottleIn;
+			if(b != null) {
+				emit bottle(b);
+	            emit bottleAtPos2;
+			}
+            pause;
+        }
     }
+    
     ||
 
     //  canister unit 
     {
-//        while(true){
-//            // Retract = canister up
-//            abort(dosUnitValveRetract && enable){
-//                sustain  dosUnitEvac;  // at top
-//            }
-//            await(!enable);
-//
-//            // Extend = canister down
-//            abort(dosUnitValveExtend && enable){
-//                sustain dosUnitFilled;    // at bottom
-//            }
-//            await(!enable);
-//			BottleTwin b = (BottleTwin)#bottle;
-//			int id = b.ID;
-//			emit fillID(id);
-//			}
+        while(true){
+            // Retract = canister up
+            abort(dosUnitValveRetract && enable){
+                sustain  dosUnitEvac;  // at top
+            }
+            await(!enable);
+
+            // Extend = canister down
+            abort(dosUnitValveExtend && enable){
+                sustain dosUnitFilled;    // at bottom
+            }
+            await(!enable);
+			BottleTwin b = (BottleTwin)#bottle;
+			int id = b.ID;
+			emit fillID(id);
+			}
     }
         ||
 
     // To viz (for GUI signals) 
     {
-//        {while(true){present(dosUnitEvac){emit dosUnitEvacE;} pause;}}
-//        ||
-//        {while(true){present(dosUnitFilled){emit dosUnitFilledE;} pause;}}
+        {while(true){present(dosUnitEvac){emit dosUnitEvacE;} pause;}}
+        ||
+        {while(true){present(dosUnitFilled){emit dosUnitFilledE;} pause;}}
 
     }
 

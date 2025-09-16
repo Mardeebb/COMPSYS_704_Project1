@@ -13,8 +13,8 @@ Orchestrator(
 	
 	BottleTwin signal posZeroUpdate, posOneUpdate, posTwoUpdate, posThreeUpdate, posFourUpdate, posFiveUpdate, posSixUpdate, posSevenUpdate, posEightUpdate, posNineUpdate;
 	signal filling, capLoading, startRobotLoaderThread, startConveyorThread, startRotThread, startCapLoaderThread, startRobotUnloaderThread, startFillerThread;
-	signal checkRobotLoader, checkConveyor, checkRotTable, checkRobotUnloader;
-	signal robotLoaderFinish, conveyorFinish, rotTableFinish, robotUnloaderFinish;
+	signal checkRobotLoader, checkConveyor, checkRotTable, checkRobotUnloader, checkFiller;
+	signal robotLoaderFinish, conveyorFinish, rotTableFinish, robotUnloaderFinish, fillerFinish;
 	// thread for getting new bottle
 	{
 		while(true){
@@ -43,15 +43,16 @@ Orchestrator(
 	
 	||
 	
-	// Bottle loader logic
+	// logic
 	{
 		while(true) {
-			await(!request);
-			await(request);
+//			await(!request);
+//			await(request);
 
 
-			emit checkRobotLoader;
-			await(robotLoaderFinish);
+			emit checkFiller;
+			await(fillerFinish);
+
 			pause;
 			pause;
 
@@ -156,6 +157,24 @@ Orchestrator(
 			} else {
 				pause;
 				emit robotUnloaderFinish;
+			}
+		}
+	}
+	
+	||
+	// Filler logic
+	{
+		while(true) {
+			await(checkFiller);
+			present(bottlePos2){
+				BottleTwin b = (BottleTwin)#posTwoUpdate;
+				if(!b.isFilled) {
+					emit startFillerThread;
+				}
+				pause;
+			} else {
+				pause;
+				emit fillerFinish;
 			}
 		}
 	}
@@ -264,8 +283,12 @@ Orchestrator(
 		while(true) {
 			await(startFillerThread);
 			// wait for plant update first		
-			pause;
 			emit startFilling;
+			await(filled);
+			pause;
+			pause;
+			emit fillerFinish;
+
 			await(!startFillerThread);
 		}
 	}
