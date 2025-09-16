@@ -31,11 +31,896 @@ public class capLoaderPlant extends ClockDomain{
   public Signal armAtSourceE = new Signal("armAtSourceE", Signal.OUTPUT);
   public Signal armAtDestE = new Signal("armAtDestE", Signal.OUTPUT);
   public Signal emptyE = new Signal("emptyE", Signal.OUTPUT);
-  private int S5 = 1;
+  private Signal capDec_1;
+  private Signal capPos_1;
+  private int capcount_thread_6;//sysj\capLoaderPlant.sysj line: 83, column: 3
+  private int S1603 = 1;
+  private int S450 = 1;
+  private int S404 = 1;
+  private int S503 = 1;
+  private int S457 = 1;
+  private int S547 = 1;
+  private int S517 = 1;
+  private int S512 = 1;
+  private int S615 = 1;
+  private int S569 = 1;
+  private int S551 = 1;
+  private int S647 = 1;
+  private int S697 = 1;
+  private int S655 = 1;
+  private int S663 = 1;
+  private int S671 = 1;
+  private int S679 = 1;
+  private int S687 = 1;
+  private int S695 = 1;
   
-  private int[] ends = new int[2];
-  private int[] tdone = new int[2];
+  private int[] ends = new int[14];
+  private int[] tdone = new int[14];
   
+  public void thread1630(int [] tdone, int [] ends){
+        switch(S695){
+      case 0 : 
+        active[13]=0;
+        ends[13]=0;
+        tdone[13]=1;
+        break;
+      
+      case 1 : 
+        if(empty.getprestatus()){//sysj\capLoaderPlant.sysj line: 111, column: 24
+          emptyE.setPresent();//sysj\capLoaderPlant.sysj line: 111, column: 31
+          currsigs.addElement(emptyE);
+          System.out.println("Emitted emptyE");
+          active[13]=1;
+          ends[13]=1;
+          tdone[13]=1;
+        }
+        else {
+          active[13]=1;
+          ends[13]=1;
+          tdone[13]=1;
+        }
+        break;
+      
+    }
+  }
+
+  public void thread1629(int [] tdone, int [] ends){
+        switch(S687){
+      case 0 : 
+        active[12]=0;
+        ends[12]=0;
+        tdone[12]=1;
+        break;
+      
+      case 1 : 
+        if(armAtDest.getprestatus()){//sysj\capLoaderPlant.sysj line: 109, column: 24
+          armAtDestE.setPresent();//sysj\capLoaderPlant.sysj line: 109, column: 35
+          currsigs.addElement(armAtDestE);
+          System.out.println("Emitted armAtDestE");
+          active[12]=1;
+          ends[12]=1;
+          tdone[12]=1;
+        }
+        else {
+          active[12]=1;
+          ends[12]=1;
+          tdone[12]=1;
+        }
+        break;
+      
+    }
+  }
+
+  public void thread1628(int [] tdone, int [] ends){
+        switch(S679){
+      case 0 : 
+        active[11]=0;
+        ends[11]=0;
+        tdone[11]=1;
+        break;
+      
+      case 1 : 
+        if(armAtSource.getprestatus()){//sysj\capLoaderPlant.sysj line: 107, column: 24
+          armAtSourceE.setPresent();//sysj\capLoaderPlant.sysj line: 107, column: 37
+          currsigs.addElement(armAtSourceE);
+          System.out.println("Emitted armAtSourceE");
+          active[11]=1;
+          ends[11]=1;
+          tdone[11]=1;
+        }
+        else {
+          active[11]=1;
+          ends[11]=1;
+          tdone[11]=1;
+        }
+        break;
+      
+    }
+  }
+
+  public void thread1627(int [] tdone, int [] ends){
+        switch(S671){
+      case 0 : 
+        active[10]=0;
+        ends[10]=0;
+        tdone[10]=1;
+        break;
+      
+      case 1 : 
+        if(WPgripped.getprestatus()){//sysj\capLoaderPlant.sysj line: 105, column: 24
+          WPgrippedE.setPresent();//sysj\capLoaderPlant.sysj line: 105, column: 35
+          currsigs.addElement(WPgrippedE);
+          System.out.println("Emitted WPgrippedE");
+          active[10]=1;
+          ends[10]=1;
+          tdone[10]=1;
+        }
+        else {
+          active[10]=1;
+          ends[10]=1;
+          tdone[10]=1;
+        }
+        break;
+      
+    }
+  }
+
+  public void thread1626(int [] tdone, int [] ends){
+        switch(S663){
+      case 0 : 
+        active[9]=0;
+        ends[9]=0;
+        tdone[9]=1;
+        break;
+      
+      case 1 : 
+        if(pusherExtended.getprestatus()){//sysj\capLoaderPlant.sysj line: 103, column: 24
+          pusherExtendedE.setPresent();//sysj\capLoaderPlant.sysj line: 103, column: 40
+          currsigs.addElement(pusherExtendedE);
+          System.out.println("Emitted pusherExtendedE");
+          active[9]=1;
+          ends[9]=1;
+          tdone[9]=1;
+        }
+        else {
+          active[9]=1;
+          ends[9]=1;
+          tdone[9]=1;
+        }
+        break;
+      
+    }
+  }
+
+  public void thread1625(int [] tdone, int [] ends){
+        switch(S655){
+      case 0 : 
+        active[8]=0;
+        ends[8]=0;
+        tdone[8]=1;
+        break;
+      
+      case 1 : 
+        if(pusherRetracted.getprestatus()){//sysj\capLoaderPlant.sysj line: 101, column: 24
+          pusherRetractedE.setPresent();//sysj\capLoaderPlant.sysj line: 101, column: 41
+          currsigs.addElement(pusherRetractedE);
+          System.out.println("Emitted pusherRetractedE");
+          active[8]=1;
+          ends[8]=1;
+          tdone[8]=1;
+        }
+        else {
+          active[8]=1;
+          ends[8]=1;
+          tdone[8]=1;
+        }
+        break;
+      
+    }
+  }
+
+  public void thread1624(int [] tdone, int [] ends){
+        switch(S697){
+      case 0 : 
+        active[7]=0;
+        ends[7]=0;
+        tdone[7]=1;
+        break;
+      
+      case 1 : 
+        thread1625(tdone,ends);
+        thread1626(tdone,ends);
+        thread1627(tdone,ends);
+        thread1628(tdone,ends);
+        thread1629(tdone,ends);
+        thread1630(tdone,ends);
+        int biggest1631 = 0;
+        if(ends[8]>=biggest1631){
+          biggest1631=ends[8];
+        }
+        if(ends[9]>=biggest1631){
+          biggest1631=ends[9];
+        }
+        if(ends[10]>=biggest1631){
+          biggest1631=ends[10];
+        }
+        if(ends[11]>=biggest1631){
+          biggest1631=ends[11];
+        }
+        if(ends[12]>=biggest1631){
+          biggest1631=ends[12];
+        }
+        if(ends[13]>=biggest1631){
+          biggest1631=ends[13];
+        }
+        if(biggest1631 == 1){
+          active[7]=1;
+          ends[7]=1;
+          tdone[7]=1;
+        }
+        //FINXME code
+        if(biggest1631 == 0){
+          S697=0;
+          active[7]=0;
+          ends[7]=0;
+          tdone[7]=1;
+        }
+        break;
+      
+    }
+  }
+
+  public void thread1623(int [] tdone, int [] ends){
+        switch(S647){
+      case 0 : 
+        active[6]=0;
+        ends[6]=0;
+        tdone[6]=1;
+        break;
+      
+      case 1 : 
+        if(capDec_1.getprestatus()){//sysj\capLoaderPlant.sysj line: 85, column: 12
+          if(capcount_thread_6 > 0) {//sysj\capLoaderPlant.sysj line: 86, column: 5
+            capcount_thread_6 = capcount_thread_6 - 1;//sysj\capLoaderPlant.sysj line: 87, column: 6
+          }
+          if(refill.getprestatus()){//sysj\capLoaderPlant.sysj line: 89, column: 12
+            capcount_thread_6 = 5;//sysj\capLoaderPlant.sysj line: 90, column: 5
+            active[6]=1;
+            ends[6]=1;
+            tdone[6]=1;
+          }
+          else {
+            active[6]=1;
+            ends[6]=1;
+            tdone[6]=1;
+          }
+        }
+        else {
+          if(refill.getprestatus()){//sysj\capLoaderPlant.sysj line: 89, column: 12
+            capcount_thread_6 = 5;//sysj\capLoaderPlant.sysj line: 90, column: 5
+            active[6]=1;
+            ends[6]=1;
+            tdone[6]=1;
+          }
+          else {
+            active[6]=1;
+            ends[6]=1;
+            tdone[6]=1;
+          }
+        }
+        break;
+      
+    }
+  }
+
+  public void thread1622(int [] tdone, int [] ends){
+        switch(S615){
+      case 0 : 
+        active[5]=0;
+        ends[5]=0;
+        tdone[5]=1;
+        break;
+      
+      case 1 : 
+        switch(S569){
+          case 0 : 
+            if(empty.getprestatus()){//sysj\capLoaderPlant.sysj line: 68, column: 10
+              S569=1;
+              active[5]=1;
+              ends[5]=1;
+              tdone[5]=1;
+            }
+            else {
+              switch(S551){
+                case 0 : 
+                  if(pusherRetracted.getprestatus()){//sysj\capLoaderPlant.sysj line: 70, column: 13
+                    S551=1;
+                    active[5]=1;
+                    ends[5]=1;
+                    tdone[5]=1;
+                  }
+                  else {
+                    active[5]=1;
+                    ends[5]=1;
+                    tdone[5]=1;
+                  }
+                  break;
+                
+                case 1 : 
+                  if(pusherExtended.getprestatus()){//sysj\capLoaderPlant.sysj line: 71, column: 13
+                    capPos_1.setPresent();//sysj\capLoaderPlant.sysj line: 73, column: 7
+                    currsigs.addElement(capPos_1);
+                    capPos_1.setValue(1);//sysj\capLoaderPlant.sysj line: 73, column: 7
+                    System.out.println("Emitted capPos_1");
+                    S551=2;
+                    active[5]=1;
+                    ends[5]=1;
+                    tdone[5]=1;
+                  }
+                  else {
+                    active[5]=1;
+                    ends[5]=1;
+                    tdone[5]=1;
+                  }
+                  break;
+                
+                case 2 : 
+                  if(pusherRetracted.getprestatus()){//sysj\capLoaderPlant.sysj line: 74, column: 13
+                    capDec_1.setPresent();//sysj\capLoaderPlant.sysj line: 75, column: 7
+                    currsigs.addElement(capDec_1);
+                    System.out.println("Emitted capDec_1");
+                    S551=0;
+                    active[5]=1;
+                    ends[5]=1;
+                    tdone[5]=1;
+                  }
+                  else {
+                    active[5]=1;
+                    ends[5]=1;
+                    tdone[5]=1;
+                  }
+                  break;
+                
+              }
+            }
+            break;
+          
+          case 1 : 
+            if(refill.getprestatus()){//sysj\capLoaderPlant.sysj line: 78, column: 10
+              S569=0;
+              S551=0;
+              active[5]=1;
+              ends[5]=1;
+              tdone[5]=1;
+            }
+            else {
+              active[5]=1;
+              ends[5]=1;
+              tdone[5]=1;
+            }
+            break;
+          
+        }
+        break;
+      
+    }
+  }
+
+  public void thread1621(int [] tdone, int [] ends){
+        switch(S547){
+      case 0 : 
+        active[4]=0;
+        ends[4]=0;
+        tdone[4]=1;
+        break;
+      
+      case 1 : 
+        switch(S517){
+          case 0 : 
+            switch(S512){
+              case 0 : 
+                if(!vacOn.getprestatus()){//sysj\capLoaderPlant.sysj line: 48, column: 12
+                  S512=1;
+                  if(armAtSource.getprestatus()){//sysj\capLoaderPlant.sysj line: 51, column: 14
+                    capPos_1.setPresent();//sysj\capLoaderPlant.sysj line: 52, column: 7
+                    currsigs.addElement(capPos_1);
+                    capPos_1.setValue(1);//sysj\capLoaderPlant.sysj line: 52, column: 7
+                    System.out.println("Emitted capPos_1");
+                    S517=1;
+                    active[4]=1;
+                    ends[4]=1;
+                    tdone[4]=1;
+                  }
+                  else {
+                    S517=1;
+                    active[4]=1;
+                    ends[4]=1;
+                    tdone[4]=1;
+                  }
+                }
+                else {
+                  WPgripped.setPresent();//sysj\capLoaderPlant.sysj line: 49, column: 7
+                  currsigs.addElement(WPgripped);
+                  System.out.println("Emitted WPgripped");
+                  active[4]=1;
+                  ends[4]=1;
+                  tdone[4]=1;
+                }
+                break;
+              
+              case 1 : 
+                S517=0;
+                if(vacOn.getprestatus() && armAtSource.getprestatus()){//sysj\capLoaderPlant.sysj line: 45, column: 12
+                  if((Integer)(capPos_1.getpreval() == null ? 0 : ((Integer)capPos_1.getpreval()).intValue()) == 1){//sysj\capLoaderPlant.sysj line: 46, column: 8
+                    capPos_1.setPresent();//sysj\capLoaderPlant.sysj line: 47, column: 6
+                    currsigs.addElement(capPos_1);
+                    capPos_1.setValue(0);//sysj\capLoaderPlant.sysj line: 47, column: 6
+                    System.out.println("Emitted capPos_1");
+                    S512=0;
+                    WPgripped.setPresent();//sysj\capLoaderPlant.sysj line: 49, column: 7
+                    currsigs.addElement(WPgripped);
+                    System.out.println("Emitted WPgripped");
+                    active[4]=1;
+                    ends[4]=1;
+                    tdone[4]=1;
+                  }
+                  else {
+                    S517=1;
+                    active[4]=1;
+                    ends[4]=1;
+                    tdone[4]=1;
+                  }
+                }
+                else {
+                  S517=1;
+                  active[4]=1;
+                  ends[4]=1;
+                  tdone[4]=1;
+                }
+                break;
+              
+            }
+            break;
+          
+          case 1 : 
+            S517=1;
+            S517=0;
+            if(vacOn.getprestatus() && armAtSource.getprestatus()){//sysj\capLoaderPlant.sysj line: 45, column: 12
+              if((Integer)(capPos_1.getpreval() == null ? 0 : ((Integer)capPos_1.getpreval()).intValue()) == 1){//sysj\capLoaderPlant.sysj line: 46, column: 8
+                capPos_1.setPresent();//sysj\capLoaderPlant.sysj line: 47, column: 6
+                currsigs.addElement(capPos_1);
+                capPos_1.setValue(0);//sysj\capLoaderPlant.sysj line: 47, column: 6
+                System.out.println("Emitted capPos_1");
+                S512=0;
+                WPgripped.setPresent();//sysj\capLoaderPlant.sysj line: 49, column: 7
+                currsigs.addElement(WPgripped);
+                System.out.println("Emitted WPgripped");
+                active[4]=1;
+                ends[4]=1;
+                tdone[4]=1;
+              }
+              else {
+                S517=1;
+                active[4]=1;
+                ends[4]=1;
+                tdone[4]=1;
+              }
+            }
+            else {
+              S517=1;
+              active[4]=1;
+              ends[4]=1;
+              tdone[4]=1;
+            }
+            break;
+          
+        }
+        break;
+      
+    }
+  }
+
+  public void thread1620(int [] tdone, int [] ends){
+        switch(S503){
+      case 0 : 
+        active[3]=0;
+        ends[3]=0;
+        tdone[3]=1;
+        break;
+      
+      case 1 : 
+        switch(S457){
+          case 0 : 
+            if(pusherExtend.getprestatus() && enable.getprestatus()){//sysj\capLoaderPlant.sysj line: 32, column: 10
+              S457=1;
+              active[3]=1;
+              ends[3]=1;
+              tdone[3]=1;
+            }
+            else {
+              pusherRetracted.setPresent();//sysj\capLoaderPlant.sysj line: 33, column: 5
+              currsigs.addElement(pusherRetracted);
+              System.out.println("Emitted pusherRetracted");
+              active[3]=1;
+              ends[3]=1;
+              tdone[3]=1;
+            }
+            break;
+          
+          case 1 : 
+            if(!enable.getprestatus()){//sysj\capLoaderPlant.sysj line: 35, column: 10
+              S457=2;
+              pusherExtended.setPresent();//sysj\capLoaderPlant.sysj line: 37, column: 5
+              currsigs.addElement(pusherExtended);
+              System.out.println("Emitted pusherExtended");
+              active[3]=1;
+              ends[3]=1;
+              tdone[3]=1;
+            }
+            else {
+              active[3]=1;
+              ends[3]=1;
+              tdone[3]=1;
+            }
+            break;
+          
+          case 2 : 
+            if(!pusherExtend.getprestatus() && enable.getprestatus()){//sysj\capLoaderPlant.sysj line: 36, column: 10
+              S457=3;
+              active[3]=1;
+              ends[3]=1;
+              tdone[3]=1;
+            }
+            else {
+              pusherExtended.setPresent();//sysj\capLoaderPlant.sysj line: 37, column: 5
+              currsigs.addElement(pusherExtended);
+              System.out.println("Emitted pusherExtended");
+              active[3]=1;
+              ends[3]=1;
+              tdone[3]=1;
+            }
+            break;
+          
+          case 3 : 
+            if(!enable.getprestatus()){//sysj\capLoaderPlant.sysj line: 39, column: 10
+              S457=0;
+              pusherRetracted.setPresent();//sysj\capLoaderPlant.sysj line: 33, column: 5
+              currsigs.addElement(pusherRetracted);
+              System.out.println("Emitted pusherRetracted");
+              active[3]=1;
+              ends[3]=1;
+              tdone[3]=1;
+            }
+            else {
+              active[3]=1;
+              ends[3]=1;
+              tdone[3]=1;
+            }
+            break;
+          
+        }
+        break;
+      
+    }
+  }
+
+  public void thread1619(int [] tdone, int [] ends){
+        switch(S450){
+      case 0 : 
+        active[2]=0;
+        ends[2]=0;
+        tdone[2]=1;
+        break;
+      
+      case 1 : 
+        switch(S404){
+          case 0 : 
+            if(armSource.getprestatus() && enable.getprestatus()){//sysj\capLoaderPlant.sysj line: 19, column: 10
+              S404=1;
+              active[2]=1;
+              ends[2]=1;
+              tdone[2]=1;
+            }
+            else {
+              armAtDest.setPresent();//sysj\capLoaderPlant.sysj line: 20, column: 5
+              currsigs.addElement(armAtDest);
+              System.out.println("Emitted armAtDest");
+              active[2]=1;
+              ends[2]=1;
+              tdone[2]=1;
+            }
+            break;
+          
+          case 1 : 
+            if(!enable.getprestatus()){//sysj\capLoaderPlant.sysj line: 22, column: 10
+              S404=2;
+              armAtSource.setPresent();//sysj\capLoaderPlant.sysj line: 24, column: 5
+              currsigs.addElement(armAtSource);
+              System.out.println("Emitted armAtSource");
+              active[2]=1;
+              ends[2]=1;
+              tdone[2]=1;
+            }
+            else {
+              active[2]=1;
+              ends[2]=1;
+              tdone[2]=1;
+            }
+            break;
+          
+          case 2 : 
+            if(armDest.getprestatus() && enable.getprestatus()){//sysj\capLoaderPlant.sysj line: 23, column: 10
+              S404=3;
+              active[2]=1;
+              ends[2]=1;
+              tdone[2]=1;
+            }
+            else {
+              armAtSource.setPresent();//sysj\capLoaderPlant.sysj line: 24, column: 5
+              currsigs.addElement(armAtSource);
+              System.out.println("Emitted armAtSource");
+              active[2]=1;
+              ends[2]=1;
+              tdone[2]=1;
+            }
+            break;
+          
+          case 3 : 
+            if(!enable.getprestatus()){//sysj\capLoaderPlant.sysj line: 26, column: 10
+              S404=0;
+              armAtDest.setPresent();//sysj\capLoaderPlant.sysj line: 20, column: 5
+              currsigs.addElement(armAtDest);
+              System.out.println("Emitted armAtDest");
+              active[2]=1;
+              ends[2]=1;
+              tdone[2]=1;
+            }
+            else {
+              active[2]=1;
+              ends[2]=1;
+              tdone[2]=1;
+            }
+            break;
+          
+        }
+        break;
+      
+    }
+  }
+
+  public void thread1616(int [] tdone, int [] ends){
+        S695=1;
+    if(empty.getprestatus()){//sysj\capLoaderPlant.sysj line: 111, column: 24
+      emptyE.setPresent();//sysj\capLoaderPlant.sysj line: 111, column: 31
+      currsigs.addElement(emptyE);
+      System.out.println("Emitted emptyE");
+      active[13]=1;
+      ends[13]=1;
+      tdone[13]=1;
+    }
+    else {
+      active[13]=1;
+      ends[13]=1;
+      tdone[13]=1;
+    }
+  }
+
+  public void thread1615(int [] tdone, int [] ends){
+        S687=1;
+    if(armAtDest.getprestatus()){//sysj\capLoaderPlant.sysj line: 109, column: 24
+      armAtDestE.setPresent();//sysj\capLoaderPlant.sysj line: 109, column: 35
+      currsigs.addElement(armAtDestE);
+      System.out.println("Emitted armAtDestE");
+      active[12]=1;
+      ends[12]=1;
+      tdone[12]=1;
+    }
+    else {
+      active[12]=1;
+      ends[12]=1;
+      tdone[12]=1;
+    }
+  }
+
+  public void thread1614(int [] tdone, int [] ends){
+        S679=1;
+    if(armAtSource.getprestatus()){//sysj\capLoaderPlant.sysj line: 107, column: 24
+      armAtSourceE.setPresent();//sysj\capLoaderPlant.sysj line: 107, column: 37
+      currsigs.addElement(armAtSourceE);
+      System.out.println("Emitted armAtSourceE");
+      active[11]=1;
+      ends[11]=1;
+      tdone[11]=1;
+    }
+    else {
+      active[11]=1;
+      ends[11]=1;
+      tdone[11]=1;
+    }
+  }
+
+  public void thread1613(int [] tdone, int [] ends){
+        S671=1;
+    if(WPgripped.getprestatus()){//sysj\capLoaderPlant.sysj line: 105, column: 24
+      WPgrippedE.setPresent();//sysj\capLoaderPlant.sysj line: 105, column: 35
+      currsigs.addElement(WPgrippedE);
+      System.out.println("Emitted WPgrippedE");
+      active[10]=1;
+      ends[10]=1;
+      tdone[10]=1;
+    }
+    else {
+      active[10]=1;
+      ends[10]=1;
+      tdone[10]=1;
+    }
+  }
+
+  public void thread1612(int [] tdone, int [] ends){
+        S663=1;
+    if(pusherExtended.getprestatus()){//sysj\capLoaderPlant.sysj line: 103, column: 24
+      pusherExtendedE.setPresent();//sysj\capLoaderPlant.sysj line: 103, column: 40
+      currsigs.addElement(pusherExtendedE);
+      System.out.println("Emitted pusherExtendedE");
+      active[9]=1;
+      ends[9]=1;
+      tdone[9]=1;
+    }
+    else {
+      active[9]=1;
+      ends[9]=1;
+      tdone[9]=1;
+    }
+  }
+
+  public void thread1611(int [] tdone, int [] ends){
+        S655=1;
+    if(pusherRetracted.getprestatus()){//sysj\capLoaderPlant.sysj line: 101, column: 24
+      pusherRetractedE.setPresent();//sysj\capLoaderPlant.sysj line: 101, column: 41
+      currsigs.addElement(pusherRetractedE);
+      System.out.println("Emitted pusherRetractedE");
+      active[8]=1;
+      ends[8]=1;
+      tdone[8]=1;
+    }
+    else {
+      active[8]=1;
+      ends[8]=1;
+      tdone[8]=1;
+    }
+  }
+
+  public void thread1610(int [] tdone, int [] ends){
+        S697=1;
+    thread1611(tdone,ends);
+    thread1612(tdone,ends);
+    thread1613(tdone,ends);
+    thread1614(tdone,ends);
+    thread1615(tdone,ends);
+    thread1616(tdone,ends);
+    int biggest1617 = 0;
+    if(ends[8]>=biggest1617){
+      biggest1617=ends[8];
+    }
+    if(ends[9]>=biggest1617){
+      biggest1617=ends[9];
+    }
+    if(ends[10]>=biggest1617){
+      biggest1617=ends[10];
+    }
+    if(ends[11]>=biggest1617){
+      biggest1617=ends[11];
+    }
+    if(ends[12]>=biggest1617){
+      biggest1617=ends[12];
+    }
+    if(ends[13]>=biggest1617){
+      biggest1617=ends[13];
+    }
+    if(biggest1617 == 1){
+      active[7]=1;
+      ends[7]=1;
+      tdone[7]=1;
+    }
+  }
+
+  public void thread1609(int [] tdone, int [] ends){
+        S647=1;
+    capcount_thread_6 = 5;//sysj\capLoaderPlant.sysj line: 83, column: 3
+    if(capDec_1.getprestatus()){//sysj\capLoaderPlant.sysj line: 85, column: 12
+      if(capcount_thread_6 > 0) {//sysj\capLoaderPlant.sysj line: 86, column: 5
+        capcount_thread_6 = capcount_thread_6 - 1;//sysj\capLoaderPlant.sysj line: 87, column: 6
+      }
+      if(refill.getprestatus()){//sysj\capLoaderPlant.sysj line: 89, column: 12
+        capcount_thread_6 = 5;//sysj\capLoaderPlant.sysj line: 90, column: 5
+        active[6]=1;
+        ends[6]=1;
+        tdone[6]=1;
+      }
+      else {
+        active[6]=1;
+        ends[6]=1;
+        tdone[6]=1;
+      }
+    }
+    else {
+      if(refill.getprestatus()){//sysj\capLoaderPlant.sysj line: 89, column: 12
+        capcount_thread_6 = 5;//sysj\capLoaderPlant.sysj line: 90, column: 5
+        active[6]=1;
+        ends[6]=1;
+        tdone[6]=1;
+      }
+      else {
+        active[6]=1;
+        ends[6]=1;
+        tdone[6]=1;
+      }
+    }
+  }
+
+  public void thread1608(int [] tdone, int [] ends){
+        S615=1;
+    S569=0;
+    S551=0;
+    active[5]=1;
+    ends[5]=1;
+    tdone[5]=1;
+  }
+
+  public void thread1607(int [] tdone, int [] ends){
+        S547=1;
+    S517=0;
+    if(vacOn.getprestatus() && armAtSource.getprestatus()){//sysj\capLoaderPlant.sysj line: 45, column: 12
+      if((Integer)(capPos_1.getpreval() == null ? 0 : ((Integer)capPos_1.getpreval()).intValue()) == 1){//sysj\capLoaderPlant.sysj line: 46, column: 8
+        capPos_1.setPresent();//sysj\capLoaderPlant.sysj line: 47, column: 6
+        currsigs.addElement(capPos_1);
+        capPos_1.setValue(0);//sysj\capLoaderPlant.sysj line: 47, column: 6
+        System.out.println("Emitted capPos_1");
+        S512=0;
+        WPgripped.setPresent();//sysj\capLoaderPlant.sysj line: 49, column: 7
+        currsigs.addElement(WPgripped);
+        System.out.println("Emitted WPgripped");
+        active[4]=1;
+        ends[4]=1;
+        tdone[4]=1;
+      }
+      else {
+        S517=1;
+        active[4]=1;
+        ends[4]=1;
+        tdone[4]=1;
+      }
+    }
+    else {
+      S517=1;
+      active[4]=1;
+      ends[4]=1;
+      tdone[4]=1;
+    }
+  }
+
+  public void thread1606(int [] tdone, int [] ends){
+        S503=1;
+    S457=0;
+    pusherRetracted.setPresent();//sysj\capLoaderPlant.sysj line: 33, column: 5
+    currsigs.addElement(pusherRetracted);
+    System.out.println("Emitted pusherRetracted");
+    active[3]=1;
+    ends[3]=1;
+    tdone[3]=1;
+  }
+
+  public void thread1605(int [] tdone, int [] ends){
+        S450=1;
+    S404=0;
+    armAtDest.setPresent();//sysj\capLoaderPlant.sysj line: 20, column: 5
+    currsigs.addElement(armAtDest);
+    System.out.println("Emitted armAtDest");
+    active[2]=1;
+    ends[2]=1;
+    tdone[2]=1;
+  }
+
   public void runClockDomain(){
     for(int i=0;i<ends.length;i++){
       ends[i] = 0;
@@ -43,32 +928,108 @@ public class capLoaderPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S5){
+      switch(S1603){
         case 0 : 
-          S5=0;
+          S1603=0;
           break RUN;
         
         case 1 : 
-          S5=2;
+          S1603=2;
+          S1603=2;
           new Thread(new GUI()).start();//sysj\capLoaderPlant.sysj line: 13, column: 2
-          S5=0;
-          active[1]=0;
-          ends[1]=0;
-          S5=0;
-          break RUN;
+          capDec_1.setClear();//sysj\capLoaderPlant.sysj line: 14, column: 2
+          capPos_1.setClear();//sysj\capLoaderPlant.sysj line: 15, column: 2
+          capPos_1.setPresent();//sysj\capLoaderPlant.sysj line: 16, column: 2
+          currsigs.addElement(capPos_1);
+          capPos_1.setValue(0);//sysj\capLoaderPlant.sysj line: 16, column: 2
+          System.out.println("Emitted capPos_1");
+          thread1605(tdone,ends);
+          thread1606(tdone,ends);
+          thread1607(tdone,ends);
+          thread1608(tdone,ends);
+          thread1609(tdone,ends);
+          thread1610(tdone,ends);
+          int biggest1618 = 0;
+          if(ends[2]>=biggest1618){
+            biggest1618=ends[2];
+          }
+          if(ends[3]>=biggest1618){
+            biggest1618=ends[3];
+          }
+          if(ends[4]>=biggest1618){
+            biggest1618=ends[4];
+          }
+          if(ends[5]>=biggest1618){
+            biggest1618=ends[5];
+          }
+          if(ends[6]>=biggest1618){
+            biggest1618=ends[6];
+          }
+          if(ends[7]>=biggest1618){
+            biggest1618=ends[7];
+          }
+          if(biggest1618 == 1){
+            active[1]=1;
+            ends[1]=1;
+            break RUN;
+          }
+        
+        case 2 : 
+          capDec_1.setClear();//sysj\capLoaderPlant.sysj line: 14, column: 2
+          capPos_1.setClear();//sysj\capLoaderPlant.sysj line: 15, column: 2
+          thread1619(tdone,ends);
+          thread1620(tdone,ends);
+          thread1621(tdone,ends);
+          thread1622(tdone,ends);
+          thread1623(tdone,ends);
+          thread1624(tdone,ends);
+          int biggest1632 = 0;
+          if(ends[2]>=biggest1632){
+            biggest1632=ends[2];
+          }
+          if(ends[3]>=biggest1632){
+            biggest1632=ends[3];
+          }
+          if(ends[4]>=biggest1632){
+            biggest1632=ends[4];
+          }
+          if(ends[5]>=biggest1632){
+            biggest1632=ends[5];
+          }
+          if(ends[6]>=biggest1632){
+            biggest1632=ends[6];
+          }
+          if(ends[7]>=biggest1632){
+            biggest1632=ends[7];
+          }
+          if(biggest1632 == 1){
+            active[1]=1;
+            ends[1]=1;
+            break RUN;
+          }
+          //FINXME code
+          if(biggest1632 == 0){
+            S1603=0;
+            active[1]=0;
+            ends[1]=0;
+            S1603=0;
+            break RUN;
+          }
         
       }
     }
   }
 
   public void init(){
-    char [] active1 = {1, 1};
-    char [] paused1 = {0, 0};
-    char [] suspended1 = {0, 0};
+    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;
     // Now instantiate all the local signals ONLY
+    capDec_1 = new Signal();
+    capPos_1 = new Signal();
     // --------------------------------------------------
   }
   
@@ -111,6 +1072,8 @@ public class capLoaderPlant extends ClockDomain{
       armAtSourceE.setpreclear();
       armAtDestE.setpreclear();
       emptyE.setpreclear();
+      capDec_1.setpreclear();
+      capPos_1.setpreclear();
       int dummyint = 0;
       for(int qw=0;qw<currsigs.size();++qw){
         dummyint = ((Signal)currsigs.elementAt(qw)).getStatus() ? ((Signal)currsigs.elementAt(qw)).setprepresent() : ((Signal)currsigs.elementAt(qw)).setpreclear();
@@ -159,6 +1122,8 @@ public class capLoaderPlant extends ClockDomain{
       armAtDestE.setClear();
       emptyE.sethook();
       emptyE.setClear();
+      capDec_1.setClear();
+      capPos_1.setClear();
       if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
         pusherExtend.gethook();

@@ -2,10 +2,10 @@
 import run.BottleTwin;
 
 capLoaderController(
-		input signal pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,empty,request;
+		input signal pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,empty, startLoading;
 		input BottleTwin signal bottleIn;
 
-		output signal pusherExtend,vacOn,armSource,armDest, capOn;
+		output signal pusherExtend,vacOn,armSource,armDest, capLoaded;
 		output int signal capOnID;
 		)
 ->{
@@ -14,64 +14,68 @@ capLoaderController(
     System.out.println("caploader Controller started");
 	{
 		// pusher control
-//		while(true){
-//			
-//			pause;
-//			emit capOn;
-//			emit bottleID(-1);
-//			await(request);
-//			pause;
-//			pause;
-//
-//			int currnetID = (int)#bottleID;
-//			if(currnetID == -1) {
-//				break;
-//			}
-//
-//
-//			abort(armAtDest){
-//				sustain armDest;
-//			}; 
-//			pause;
-//			abort(pusherExtended){
-//				sustain pusherExtend;
-//			}
-//			pause;
-//			await(pusherRetracted);
-//			abort(armAtSource){
-//				sustain armSource;
-//			};
-//			pause;
-//			abort(WPgripped){
-//				sustain vacOn;
-//				await(WPgripped);
-//			};
-//			pause;
-//			abort(armAtDest){
-//				while(true){
-//					emit vacOn;
-//					emit armDest;
-//					pause;
-//				}
-//			}
-//			await(!WPgripped);
-//			int id = (int)#bottleID;
-//			emit capOnID(id);
-//			abort(armAtSource){
-//				sustain armSource;
-//			};
-//			pause;
-//		}
-//	}
-//	||
-//	{
-//		emit bottleID(-1);
-//		while(true) {
-//			await(bottleIn);
-//			BottleTwin b = (BottleTwin)#bottleIn;
-//			int id = b.ID;
-//			emit bottleID(id);
-//		}
+		while(true){
+			
+			pause;
+			await(startLoading);
+
+			pause;
+
+			int currnetID = (int)#bottleID;
+			if(currnetID == -1) {
+				break;
+			}
+
+
+			abort(armAtDest){
+				sustain armDest;
+			}; 
+			pause;
+			abort(pusherExtended){
+				sustain pusherExtend;
+			}
+			pause;
+			await(pusherRetracted);
+			abort(armAtSource){
+				sustain armSource;
+			};
+			pause;
+			abort(WPgripped){
+				sustain vacOn;
+				await(WPgripped);
+			};
+			pause;
+			abort(armAtDest){
+				while(true){
+					emit vacOn;
+					emit armDest;
+					pause;
+				}
+			}
+			await(!WPgripped);
+			int id = (int)#bottleID;
+			emit capOnID(id);
+			abort(armAtSource){
+				sustain armSource;
+			};
+			pause;
+			emit capLoaded;
+		}
+	}
+	||
+	{
+		emit bottleID(-1);
+		while(true) {
+			await(bottleIn);
+
+			BottleTwin b = (BottleTwin)#bottleIn;
+			int id = -1;
+			if(b!=null) {
+				id = b.ID;
+			}
+			emit bottleID(id);
+			pause;
+		}
 	}
 
 }
