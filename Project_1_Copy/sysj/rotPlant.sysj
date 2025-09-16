@@ -35,7 +35,6 @@ rotPlant(
 					emit capOnBottleAtPos1;
 				}
 			}
-			pause;
 		}
 	}
 	
@@ -48,7 +47,6 @@ rotPlant(
 			if(b != null) {
 				emit bottleAtPos5;
 				}
-			pause;
 		}
 	}
 }

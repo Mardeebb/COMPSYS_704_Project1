@@ -105,6 +105,7 @@ public class ABS extends JFrame {
 		enable.addActionListener(new SignalClient(10008, "fillerPlantCD.enable", null));
 		enable.addActionListener(new SignalClient(10041, "CapperPlantCD.enable", null));
 		enable.addActionListener(new SignalClient(10031, "baxtorRobotPlantCD.enable", null));
+		enable.addActionListener(new SignalClient(10004, "OrchestratorCD.enable", null));
 
 		JButton request = new JButton("request");
 //		request.addActionListener(new SignalClient(Ports.PORT_LOADER_CONTROLLER, Ports.REQUEST_SIGNAL, null));

@@ -13,7 +13,7 @@ conveyorController(
 		while(true){
 			await(!move);
 			await(move);
-			await(!bottleAtPos1);
+//			await(!bottleAtPos1);
 			abort(plantMoved){
 				
 				// Backend digital twin update

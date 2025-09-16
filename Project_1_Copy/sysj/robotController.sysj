@@ -1,6 +1,6 @@
 bController(
 	input signal startBottleLoading, startBottleUnloading, CMDfb_L, CMDfb_L2, CMDfb_R, CMDfb_R2;
-	output String signal CMD_L, CMD_L2, CMD_R,CMD_R2, bottleLoaded, bottleUnloaded, bottleLoaderRelease;
+	output String signal CMD_L, CMD_L2, CMD_R,CMD_R2, bottleLoaded, bottleUnloaded, bottleLoaderRelease, bottleUnloaderRelease;
 	)
 ->{
 	System.out.println("Baxtor robot Controller started");
@@ -56,6 +56,7 @@ bController(
 			abort(CMDfb_R2){
 				sustain CMD_R2("limb_moveto right_limb A"); //Move the arm back to the ready location (Position A
 			}
+			emit bottleUnloaderRelease;
 		}
 	}
 }

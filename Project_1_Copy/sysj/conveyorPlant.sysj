@@ -14,23 +14,12 @@ conveyorPlant(
 //	BottleTwin signal posOne, posFive;
 	{
 		while(true) {
-			abort(motConveyorOnOff){
-				while(true) {
-					present(bottleAtOne){
-						emit bottleAtPos1;
-					}
-					present(!bottleAtFive){
-						sustain bottleLeftPos5;
-					}
-					pause;
-				}
-			}
-			
+			await(motConveyorOnOff);
 			abort(!motConveyorOnOff){
 //				BottleTwin bZero = (BottleTwin)#bottleAtZero;
 //				BottleTwin bFive = (BottleTwin)#bottleAtFive;
+				await(!enable);
 				await(enable);
-//			    System.err.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC ");
 //				if(bZero != null) {
 //					emit posOne(bZero);
 //					emit posZero(null);
@@ -42,20 +31,25 @@ conveyorPlant(
 //					emit pos5(-1);
 //				}
 			    pause;
-			}
-			
-//			// one doesn't go through??
-//			emit plantMoved;
-//			pause;
-//
-//			emit plantMoved;
-//			pause;
-
-			abort(!motConveyorOnOff){
 				sustain plantMoved;
 			}
 
 		}
+	}
+	
+	||
+	
+	{
+		while(true) {
+			present(bottleAtOne){
+				emit bottleAtPos1;
+			}
+			present(!bottleAtFive){
+				emit bottleLeftPos5;
+			}
+			pause;
+		}
+
 	}
 		
 }
