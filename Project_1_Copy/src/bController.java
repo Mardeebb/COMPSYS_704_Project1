@@ -11,8 +11,8 @@ public class bController extends ClockDomain{
   private char [] active;
   private char [] paused;
   private char [] suspended;
-  public Signal bottleLoad = new Signal("bottleLoad", Signal.INPUT);
-  public Signal bottleUnload = new Signal("bottleUnload", Signal.INPUT);
+  public Signal startBottleLoading = new Signal("startBottleLoading", Signal.INPUT);
+  public Signal startBottleUnloading = new Signal("startBottleUnloading", Signal.INPUT);
   public Signal CMDfb_L = new Signal("CMDfb_L", Signal.INPUT);
   public Signal CMDfb_L2 = new Signal("CMDfb_L2", Signal.INPUT);
   public Signal CMDfb_R = new Signal("CMDfb_R", Signal.INPUT);
@@ -21,17 +21,20 @@ public class bController extends ClockDomain{
   public Signal CMD_L2 = new Signal("CMD_L2", Signal.OUTPUT);
   public Signal CMD_R = new Signal("CMD_R", Signal.OUTPUT);
   public Signal CMD_R2 = new Signal("CMD_R2", Signal.OUTPUT);
-  private int S7393 = 1;
-  private int S6980 = 1;
-  private int S6856 = 1;
-  private int S7117 = 1;
-  private int S6993 = 1;
+  public Signal bottleLoaded = new Signal("bottleLoaded", Signal.OUTPUT);
+  public Signal bottleUnloaded = new Signal("bottleUnloaded", Signal.OUTPUT);
+  public Signal bottleLoaderRelease = new Signal("bottleLoaderRelease", Signal.OUTPUT);
+  private int S7576 = 1;
+  private int S7028 = 1;
+  private int S6850 = 1;
+  private int S7210 = 1;
+  private int S7032 = 1;
   
   private int[] ends = new int[4];
   private int[] tdone = new int[4];
   
-  public void thread7399(int [] tdone, int [] ends){
-        switch(S7117){
+  public void thread7582(int [] tdone, int [] ends){
+        switch(S7210){
       case 0 : 
         active[3]=0;
         ends[3]=0;
@@ -39,23 +42,15 @@ public class bController extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S6993){
+        switch(S7032){
           case 0 : 
-            if(CMDfb_R.getprestatus()){//sysj\robotController.sysj line: 32, column: 10
-              S6993=1;
-              CMD_R2.setPresent();//sysj\robotController.sysj line: 36, column: 5
-              currsigs.addElement(CMD_R2);
-              CMD_R2.setValue("limb_gripper right_limb open");//sysj\robotController.sysj line: 36, column: 5
-              System.out.println("Emitted CMD_R2");
+            if(!startBottleUnloading.getprestatus()){//sysj\robotController.sysj line: 37, column: 10
+              S7032=1;
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
             }
             else {
-              CMD_R.setPresent();//sysj\robotController.sysj line: 33, column: 5
-              currsigs.addElement(CMD_R);
-              CMD_R.setValue("limb_moveto right_limb C");//sysj\robotController.sysj line: 33, column: 5
-              System.out.println("Emitted CMD_R");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -63,21 +58,17 @@ public class bController extends ClockDomain{
             break;
           
           case 1 : 
-            if(CMDfb_R2.getprestatus()){//sysj\robotController.sysj line: 35, column: 10
-              S6993=2;
-              CMD_R.setPresent();//sysj\robotController.sysj line: 39, column: 5
+            if(startBottleUnloading.getprestatus()){//sysj\robotController.sysj line: 38, column: 10
+              S7032=2;
+              CMD_R.setPresent();//sysj\robotController.sysj line: 40, column: 5
               currsigs.addElement(CMD_R);
-              CMD_R.setValue("limb_gripper right_limb close");//sysj\robotController.sysj line: 39, column: 5
+              CMD_R.setValue("limb_moveto right_limb C");//sysj\robotController.sysj line: 40, column: 5
               System.out.println("Emitted CMD_R");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
             }
             else {
-              CMD_R2.setPresent();//sysj\robotController.sysj line: 36, column: 5
-              currsigs.addElement(CMD_R2);
-              CMD_R2.setValue("limb_gripper right_limb open");//sysj\robotController.sysj line: 36, column: 5
-              System.out.println("Emitted CMD_R2");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -85,20 +76,20 @@ public class bController extends ClockDomain{
             break;
           
           case 2 : 
-            if(CMDfb_R.getprestatus()){//sysj\robotController.sysj line: 38, column: 10
-              S6993=3;
-              CMD_R2.setPresent();//sysj\robotController.sysj line: 42, column: 5
+            if(CMDfb_R.getprestatus()){//sysj\robotController.sysj line: 39, column: 10
+              S7032=3;
+              CMD_R2.setPresent();//sysj\robotController.sysj line: 43, column: 5
               currsigs.addElement(CMD_R2);
-              CMD_R2.setValue("limb_moveto right_limb B");//sysj\robotController.sysj line: 42, column: 5
+              CMD_R2.setValue("limb_gripper right_limb open");//sysj\robotController.sysj line: 43, column: 5
               System.out.println("Emitted CMD_R2");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
             }
             else {
-              CMD_R.setPresent();//sysj\robotController.sysj line: 39, column: 5
+              CMD_R.setPresent();//sysj\robotController.sysj line: 40, column: 5
               currsigs.addElement(CMD_R);
-              CMD_R.setValue("limb_gripper right_limb close");//sysj\robotController.sysj line: 39, column: 5
+              CMD_R.setValue("limb_moveto right_limb C");//sysj\robotController.sysj line: 40, column: 5
               System.out.println("Emitted CMD_R");
               active[3]=1;
               ends[3]=1;
@@ -107,20 +98,20 @@ public class bController extends ClockDomain{
             break;
           
           case 3 : 
-            if(CMDfb_R2.getprestatus()){//sysj\robotController.sysj line: 41, column: 10
-              S6993=4;
-              CMD_R.setPresent();//sysj\robotController.sysj line: 45, column: 5
+            if(CMDfb_R2.getprestatus()){//sysj\robotController.sysj line: 42, column: 10
+              S7032=4;
+              CMD_R.setPresent();//sysj\robotController.sysj line: 46, column: 5
               currsigs.addElement(CMD_R);
-              CMD_R.setValue("limb_gripper right_limb open");//sysj\robotController.sysj line: 45, column: 5
+              CMD_R.setValue("limb_gripper right_limb close");//sysj\robotController.sysj line: 46, column: 5
               System.out.println("Emitted CMD_R");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
             }
             else {
-              CMD_R2.setPresent();//sysj\robotController.sysj line: 42, column: 5
+              CMD_R2.setPresent();//sysj\robotController.sysj line: 43, column: 5
               currsigs.addElement(CMD_R2);
-              CMD_R2.setValue("limb_moveto right_limb B");//sysj\robotController.sysj line: 42, column: 5
+              CMD_R2.setValue("limb_gripper right_limb open");//sysj\robotController.sysj line: 43, column: 5
               System.out.println("Emitted CMD_R2");
               active[3]=1;
               ends[3]=1;
@@ -129,20 +120,23 @@ public class bController extends ClockDomain{
             break;
           
           case 4 : 
-            if(CMDfb_R.getprestatus()){//sysj\robotController.sysj line: 44, column: 10
-              S6993=5;
-              CMD_R2.setPresent();//sysj\robotController.sysj line: 48, column: 5
+            if(CMDfb_R.getprestatus()){//sysj\robotController.sysj line: 45, column: 10
+              S7032=5;
+              bottleUnloaded.setPresent();//sysj\robotController.sysj line: 50, column: 5
+              currsigs.addElement(bottleUnloaded);
+              System.out.println("Emitted bottleUnloaded");
+              CMD_R2.setPresent();//sysj\robotController.sysj line: 51, column: 5
               currsigs.addElement(CMD_R2);
-              CMD_R2.setValue("limb_moveto right_limb A");//sysj\robotController.sysj line: 48, column: 5
+              CMD_R2.setValue("limb_moveto right_limb B");//sysj\robotController.sysj line: 51, column: 5
               System.out.println("Emitted CMD_R2");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
             }
             else {
-              CMD_R.setPresent();//sysj\robotController.sysj line: 45, column: 5
+              CMD_R.setPresent();//sysj\robotController.sysj line: 46, column: 5
               currsigs.addElement(CMD_R);
-              CMD_R.setValue("limb_gripper right_limb open");//sysj\robotController.sysj line: 45, column: 5
+              CMD_R.setValue("limb_gripper right_limb close");//sysj\robotController.sysj line: 46, column: 5
               System.out.println("Emitted CMD_R");
               active[3]=1;
               ends[3]=1;
@@ -151,20 +145,60 @@ public class bController extends ClockDomain{
             break;
           
           case 5 : 
-            if(CMDfb_R2.getprestatus()){//sysj\robotController.sysj line: 47, column: 10
-              S6993=0;
-              CMD_R.setPresent();//sysj\robotController.sysj line: 33, column: 5
+            if(CMDfb_R2.getprestatus()){//sysj\robotController.sysj line: 48, column: 10
+              S7032=6;
+              CMD_R.setPresent();//sysj\robotController.sysj line: 54, column: 5
               currsigs.addElement(CMD_R);
-              CMD_R.setValue("limb_moveto right_limb C");//sysj\robotController.sysj line: 33, column: 5
+              CMD_R.setValue("limb_gripper right_limb open");//sysj\robotController.sysj line: 54, column: 5
               System.out.println("Emitted CMD_R");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
             }
             else {
-              CMD_R2.setPresent();//sysj\robotController.sysj line: 48, column: 5
+              CMD_R2.setPresent();//sysj\robotController.sysj line: 51, column: 5
               currsigs.addElement(CMD_R2);
-              CMD_R2.setValue("limb_moveto right_limb A");//sysj\robotController.sysj line: 48, column: 5
+              CMD_R2.setValue("limb_moveto right_limb B");//sysj\robotController.sysj line: 51, column: 5
+              System.out.println("Emitted CMD_R2");
+              active[3]=1;
+              ends[3]=1;
+              tdone[3]=1;
+            }
+            break;
+          
+          case 6 : 
+            if(CMDfb_R.getprestatus()){//sysj\robotController.sysj line: 53, column: 10
+              S7032=7;
+              CMD_R2.setPresent();//sysj\robotController.sysj line: 57, column: 5
+              currsigs.addElement(CMD_R2);
+              CMD_R2.setValue("limb_moveto right_limb A");//sysj\robotController.sysj line: 57, column: 5
+              System.out.println("Emitted CMD_R2");
+              active[3]=1;
+              ends[3]=1;
+              tdone[3]=1;
+            }
+            else {
+              CMD_R.setPresent();//sysj\robotController.sysj line: 54, column: 5
+              currsigs.addElement(CMD_R);
+              CMD_R.setValue("limb_gripper right_limb open");//sysj\robotController.sysj line: 54, column: 5
+              System.out.println("Emitted CMD_R");
+              active[3]=1;
+              ends[3]=1;
+              tdone[3]=1;
+            }
+            break;
+          
+          case 7 : 
+            if(CMDfb_R2.getprestatus()){//sysj\robotController.sysj line: 56, column: 10
+              S7032=0;
+              active[3]=1;
+              ends[3]=1;
+              tdone[3]=1;
+            }
+            else {
+              CMD_R2.setPresent();//sysj\robotController.sysj line: 57, column: 5
+              currsigs.addElement(CMD_R2);
+              CMD_R2.setValue("limb_moveto right_limb A");//sysj\robotController.sysj line: 57, column: 5
               System.out.println("Emitted CMD_R2");
               active[3]=1;
               ends[3]=1;
@@ -178,8 +212,8 @@ public class bController extends ClockDomain{
     }
   }
 
-  public void thread7398(int [] tdone, int [] ends){
-        switch(S6980){
+  public void thread7581(int [] tdone, int [] ends){
+        switch(S7028){
       case 0 : 
         active[2]=0;
         ends[2]=0;
@@ -187,23 +221,15 @@ public class bController extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S6856){
+        switch(S6850){
           case 0 : 
-            if(CMDfb_L.getprestatus()){//sysj\robotController.sysj line: 9, column: 10
-              S6856=1;
-              CMD_L2.setPresent();//sysj\robotController.sysj line: 13, column: 6
-              currsigs.addElement(CMD_L2);
-              CMD_L2.setValue("limb_gripper left_limb open");//sysj\robotController.sysj line: 13, column: 6
-              System.out.println("Emitted CMD_L2");
+            if(!startBottleLoading.getprestatus()){//sysj\robotController.sysj line: 9, column: 10
+              S6850=1;
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
             }
             else {
-              CMD_L.setPresent();//sysj\robotController.sysj line: 10, column: 5
-              currsigs.addElement(CMD_L);
-              CMD_L.setValue("limb_moveto left_limb B");//sysj\robotController.sysj line: 10, column: 5
-              System.out.println("Emitted CMD_L");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -211,21 +237,17 @@ public class bController extends ClockDomain{
             break;
           
           case 1 : 
-            if(CMDfb_L2.getprestatus()){//sysj\robotController.sysj line: 12, column: 10
-              S6856=2;
-              CMD_L2.setPresent();//sysj\robotController.sysj line: 16, column: 5
-              currsigs.addElement(CMD_L2);
-              CMD_L2.setValue("limb_gripper left_limb close");//sysj\robotController.sysj line: 16, column: 5
-              System.out.println("Emitted CMD_L2");
+            if(startBottleLoading.getprestatus()){//sysj\robotController.sysj line: 10, column: 10
+              S6850=2;
+              CMD_L.setPresent();//sysj\robotController.sysj line: 12, column: 5
+              currsigs.addElement(CMD_L);
+              CMD_L.setValue("limb_moveto left_limb B");//sysj\robotController.sysj line: 12, column: 5
+              System.out.println("Emitted CMD_L");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
             }
             else {
-              CMD_L2.setPresent();//sysj\robotController.sysj line: 13, column: 6
-              currsigs.addElement(CMD_L2);
-              CMD_L2.setValue("limb_gripper left_limb open");//sysj\robotController.sysj line: 13, column: 6
-              System.out.println("Emitted CMD_L2");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -233,21 +255,21 @@ public class bController extends ClockDomain{
             break;
           
           case 2 : 
-            if(CMDfb_L.getprestatus()){//sysj\robotController.sysj line: 15, column: 10
-              S6856=3;
-              CMD_L.setPresent();//sysj\robotController.sysj line: 19, column: 5
-              currsigs.addElement(CMD_L);
-              CMD_L.setValue("limb_moveto left_limb C");//sysj\robotController.sysj line: 19, column: 5
-              System.out.println("Emitted CMD_L");
+            if(CMDfb_L.getprestatus()){//sysj\robotController.sysj line: 11, column: 10
+              S6850=3;
+              CMD_L2.setPresent();//sysj\robotController.sysj line: 15, column: 5
+              currsigs.addElement(CMD_L2);
+              CMD_L2.setValue("limb_gripper left_limb open");//sysj\robotController.sysj line: 15, column: 5
+              System.out.println("Emitted CMD_L2");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
             }
             else {
-              CMD_L2.setPresent();//sysj\robotController.sysj line: 16, column: 5
-              currsigs.addElement(CMD_L2);
-              CMD_L2.setValue("limb_gripper left_limb close");//sysj\robotController.sysj line: 16, column: 5
-              System.out.println("Emitted CMD_L2");
+              CMD_L.setPresent();//sysj\robotController.sysj line: 12, column: 5
+              currsigs.addElement(CMD_L);
+              CMD_L.setValue("limb_moveto left_limb B");//sysj\robotController.sysj line: 12, column: 5
+              System.out.println("Emitted CMD_L");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -255,21 +277,21 @@ public class bController extends ClockDomain{
             break;
           
           case 3 : 
-            if(CMDfb_L2.getprestatus()){//sysj\robotController.sysj line: 18, column: 10
-              S6856=4;
-              CMD_L2.setPresent();//sysj\robotController.sysj line: 22, column: 6
-              currsigs.addElement(CMD_L2);
-              CMD_L2.setValue("limb_gripper left_limb open");//sysj\robotController.sysj line: 22, column: 6
-              System.out.println("Emitted CMD_L2");
+            if(CMDfb_L2.getprestatus()){//sysj\robotController.sysj line: 14, column: 10
+              S6850=4;
+              CMD_L.setPresent();//sysj\robotController.sysj line: 18, column: 5
+              currsigs.addElement(CMD_L);
+              CMD_L.setValue("limb_gripper left_limb close");//sysj\robotController.sysj line: 18, column: 5
+              System.out.println("Emitted CMD_L");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
             }
             else {
-              CMD_L.setPresent();//sysj\robotController.sysj line: 19, column: 5
-              currsigs.addElement(CMD_L);
-              CMD_L.setValue("limb_moveto left_limb C");//sysj\robotController.sysj line: 19, column: 5
-              System.out.println("Emitted CMD_L");
+              CMD_L2.setPresent();//sysj\robotController.sysj line: 15, column: 5
+              currsigs.addElement(CMD_L2);
+              CMD_L2.setValue("limb_gripper left_limb open");//sysj\robotController.sysj line: 15, column: 5
+              System.out.println("Emitted CMD_L2");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -277,21 +299,24 @@ public class bController extends ClockDomain{
             break;
           
           case 4 : 
-            if(CMDfb_L.getprestatus()){//sysj\robotController.sysj line: 21, column: 10
-              S6856=5;
-              CMD_L.setPresent();//sysj\robotController.sysj line: 25, column: 5
-              currsigs.addElement(CMD_L);
-              CMD_L.setValue("limb_moveto left_limb A");//sysj\robotController.sysj line: 25, column: 5
-              System.out.println("Emitted CMD_L");
+            if(CMDfb_L.getprestatus()){//sysj\robotController.sysj line: 17, column: 10
+              S6850=5;
+              bottleLoaded.setPresent();//sysj\robotController.sysj line: 22, column: 5
+              currsigs.addElement(bottleLoaded);
+              System.out.println("Emitted bottleLoaded");
+              CMD_L2.setPresent();//sysj\robotController.sysj line: 23, column: 5
+              currsigs.addElement(CMD_L2);
+              CMD_L2.setValue("limb_moveto left_limb C");//sysj\robotController.sysj line: 23, column: 5
+              System.out.println("Emitted CMD_L2");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
             }
             else {
-              CMD_L2.setPresent();//sysj\robotController.sysj line: 22, column: 6
-              currsigs.addElement(CMD_L2);
-              CMD_L2.setValue("limb_gripper left_limb open");//sysj\robotController.sysj line: 22, column: 6
-              System.out.println("Emitted CMD_L2");
+              CMD_L.setPresent();//sysj\robotController.sysj line: 18, column: 5
+              currsigs.addElement(CMD_L);
+              CMD_L.setValue("limb_gripper left_limb close");//sysj\robotController.sysj line: 18, column: 5
+              System.out.println("Emitted CMD_L");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -299,21 +324,64 @@ public class bController extends ClockDomain{
             break;
           
           case 5 : 
-            if(CMDfb_L2.getprestatus()){//sysj\robotController.sysj line: 24, column: 10
-              S6856=0;
-              CMD_L.setPresent();//sysj\robotController.sysj line: 10, column: 5
+            if(CMDfb_L2.getprestatus()){//sysj\robotController.sysj line: 20, column: 10
+              S6850=6;
+              CMD_L.setPresent();//sysj\robotController.sysj line: 26, column: 5
               currsigs.addElement(CMD_L);
-              CMD_L.setValue("limb_moveto left_limb B");//sysj\robotController.sysj line: 10, column: 5
+              CMD_L.setValue("limb_gripper left_limb open");//sysj\robotController.sysj line: 26, column: 5
               System.out.println("Emitted CMD_L");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
             }
             else {
-              CMD_L.setPresent();//sysj\robotController.sysj line: 25, column: 5
+              CMD_L2.setPresent();//sysj\robotController.sysj line: 23, column: 5
+              currsigs.addElement(CMD_L2);
+              CMD_L2.setValue("limb_moveto left_limb C");//sysj\robotController.sysj line: 23, column: 5
+              System.out.println("Emitted CMD_L2");
+              active[2]=1;
+              ends[2]=1;
+              tdone[2]=1;
+            }
+            break;
+          
+          case 6 : 
+            if(CMDfb_L.getprestatus()){//sysj\robotController.sysj line: 25, column: 10
+              S6850=7;
+              CMD_L2.setPresent();//sysj\robotController.sysj line: 29, column: 5
+              currsigs.addElement(CMD_L2);
+              CMD_L2.setValue("limb_moveto left_limb A");//sysj\robotController.sysj line: 29, column: 5
+              System.out.println("Emitted CMD_L2");
+              active[2]=1;
+              ends[2]=1;
+              tdone[2]=1;
+            }
+            else {
+              CMD_L.setPresent();//sysj\robotController.sysj line: 26, column: 5
               currsigs.addElement(CMD_L);
-              CMD_L.setValue("limb_moveto left_limb A");//sysj\robotController.sysj line: 25, column: 5
+              CMD_L.setValue("limb_gripper left_limb open");//sysj\robotController.sysj line: 26, column: 5
               System.out.println("Emitted CMD_L");
+              active[2]=1;
+              ends[2]=1;
+              tdone[2]=1;
+            }
+            break;
+          
+          case 7 : 
+            if(CMDfb_L2.getprestatus()){//sysj\robotController.sysj line: 28, column: 10
+              bottleLoaderRelease.setPresent();//sysj\robotController.sysj line: 31, column: 4
+              currsigs.addElement(bottleLoaderRelease);
+              System.out.println("Emitted bottleLoaderRelease");
+              S6850=0;
+              active[2]=1;
+              ends[2]=1;
+              tdone[2]=1;
+            }
+            else {
+              CMD_L2.setPresent();//sysj\robotController.sysj line: 29, column: 5
+              currsigs.addElement(CMD_L2);
+              CMD_L2.setValue("limb_moveto left_limb A");//sysj\robotController.sysj line: 29, column: 5
+              System.out.println("Emitted CMD_L2");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -326,25 +394,17 @@ public class bController extends ClockDomain{
     }
   }
 
-  public void thread7396(int [] tdone, int [] ends){
-        S7117=1;
-    S6993=0;
-    CMD_R.setPresent();//sysj\robotController.sysj line: 33, column: 5
-    currsigs.addElement(CMD_R);
-    CMD_R.setValue("limb_moveto right_limb C");//sysj\robotController.sysj line: 33, column: 5
-    System.out.println("Emitted CMD_R");
+  public void thread7579(int [] tdone, int [] ends){
+        S7210=1;
+    S7032=0;
     active[3]=1;
     ends[3]=1;
     tdone[3]=1;
   }
 
-  public void thread7395(int [] tdone, int [] ends){
-        S6980=1;
-    S6856=0;
-    CMD_L.setPresent();//sysj\robotController.sysj line: 10, column: 5
-    currsigs.addElement(CMD_L);
-    CMD_L.setValue("limb_moveto left_limb B");//sysj\robotController.sysj line: 10, column: 5
-    System.out.println("Emitted CMD_L");
+  public void thread7578(int [] tdone, int [] ends){
+        S7028=1;
+    S6850=0;
     active[2]=1;
     ends[2]=1;
     tdone[2]=1;
@@ -357,51 +417,51 @@ public class bController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S7393){
+      switch(S7576){
         case 0 : 
-          S7393=0;
+          S7576=0;
           break RUN;
         
         case 1 : 
-          S7393=2;
-          S7393=2;
+          S7576=2;
+          S7576=2;
           System.out.println("Baxtor robot Controller started");//sysj\robotController.sysj line: 6, column: 2
-          thread7395(tdone,ends);
-          thread7396(tdone,ends);
-          int biggest7397 = 0;
-          if(ends[2]>=biggest7397){
-            biggest7397=ends[2];
+          thread7578(tdone,ends);
+          thread7579(tdone,ends);
+          int biggest7580 = 0;
+          if(ends[2]>=biggest7580){
+            biggest7580=ends[2];
           }
-          if(ends[3]>=biggest7397){
-            biggest7397=ends[3];
+          if(ends[3]>=biggest7580){
+            biggest7580=ends[3];
           }
-          if(biggest7397 == 1){
+          if(biggest7580 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
         
         case 2 : 
-          thread7398(tdone,ends);
-          thread7399(tdone,ends);
-          int biggest7400 = 0;
-          if(ends[2]>=biggest7400){
-            biggest7400=ends[2];
+          thread7581(tdone,ends);
+          thread7582(tdone,ends);
+          int biggest7583 = 0;
+          if(ends[2]>=biggest7583){
+            biggest7583=ends[2];
           }
-          if(ends[3]>=biggest7400){
-            biggest7400=ends[3];
+          if(ends[3]>=biggest7583){
+            biggest7583=ends[3];
           }
-          if(biggest7400 == 1){
+          if(biggest7583 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest7400 == 0){
-            S7393=0;
+          if(biggest7583 == 0){
+            S7576=0;
             active[1]=0;
             ends[1]=0;
-            S7393=0;
+            S7576=0;
             break RUN;
           }
         
@@ -431,8 +491,8 @@ public class bController extends ClockDomain{
       if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
         if(!df){
-          bottleLoad.gethook();
-          bottleUnload.gethook();
+          startBottleLoading.gethook();
+          startBottleUnloading.gethook();
           CMDfb_L.gethook();
           CMDfb_L2.gethook();
           CMDfb_R.gethook();
@@ -441,8 +501,8 @@ public class bController extends ClockDomain{
         }
         runClockDomain();
       }
-      bottleLoad.setpreclear();
-      bottleUnload.setpreclear();
+      startBottleLoading.setpreclear();
+      startBottleUnloading.setpreclear();
       CMDfb_L.setpreclear();
       CMDfb_L2.setpreclear();
       CMDfb_R.setpreclear();
@@ -451,18 +511,21 @@ public class bController extends ClockDomain{
       CMD_L2.setpreclear();
       CMD_R.setpreclear();
       CMD_R2.setpreclear();
+      bottleLoaded.setpreclear();
+      bottleUnloaded.setpreclear();
+      bottleLoaderRelease.setpreclear();
       int dummyint = 0;
       for(int qw=0;qw<currsigs.size();++qw){
         dummyint = ((Signal)currsigs.elementAt(qw)).getStatus() ? ((Signal)currsigs.elementAt(qw)).setprepresent() : ((Signal)currsigs.elementAt(qw)).setpreclear();
         ((Signal)currsigs.elementAt(qw)).setpreval(((Signal)currsigs.elementAt(qw)).getValue());
       }
       currsigs.removeAllElements();
-      dummyint = bottleLoad.getStatus() ? bottleLoad.setprepresent() : bottleLoad.setpreclear();
-      bottleLoad.setpreval(bottleLoad.getValue());
-      bottleLoad.setClear();
-      dummyint = bottleUnload.getStatus() ? bottleUnload.setprepresent() : bottleUnload.setpreclear();
-      bottleUnload.setpreval(bottleUnload.getValue());
-      bottleUnload.setClear();
+      dummyint = startBottleLoading.getStatus() ? startBottleLoading.setprepresent() : startBottleLoading.setpreclear();
+      startBottleLoading.setpreval(startBottleLoading.getValue());
+      startBottleLoading.setClear();
+      dummyint = startBottleUnloading.getStatus() ? startBottleUnloading.setprepresent() : startBottleUnloading.setpreclear();
+      startBottleUnloading.setpreval(startBottleUnloading.getValue());
+      startBottleUnloading.setClear();
       dummyint = CMDfb_L.getStatus() ? CMDfb_L.setprepresent() : CMDfb_L.setpreclear();
       CMDfb_L.setpreval(CMDfb_L.getValue());
       CMDfb_L.setClear();
@@ -483,10 +546,16 @@ public class bController extends ClockDomain{
       CMD_R.setClear();
       CMD_R2.sethook();
       CMD_R2.setClear();
+      bottleLoaded.sethook();
+      bottleLoaded.setClear();
+      bottleUnloaded.sethook();
+      bottleUnloaded.setClear();
+      bottleLoaderRelease.sethook();
+      bottleLoaderRelease.setClear();
       if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
-        bottleLoad.gethook();
-        bottleUnload.gethook();
+        startBottleLoading.gethook();
+        startBottleUnloading.gethook();
         CMDfb_L.gethook();
         CMDfb_L2.gethook();
         CMDfb_R.gethook();

@@ -8,6 +8,10 @@
 			<iSignal Name="rotTableTurned" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
 			<iSignal Name="filled" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
 			<iSignal Name="capLoaded" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
+			<iSignal Name="bottleLoaded" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
+			<iSignal Name="bottleUnloaded" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
+			<iSignal Name="bottleLoaderRelease" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
+
 
 
 			<oSignal Name="recieveTwin" To="UI.recieveTwin" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
@@ -15,6 +19,8 @@
 			<oSignal Name="startRotTable" To="rotaryTableControllerCD.turn" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10003" />
 			<oSignal Name="startFilling" To="fillerControllerCD.startFilling" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10007" />
 			<oSignal Name="startCapLoading" To="capLoaderControllerCD.startLoading" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10009" />
+			<oSignal Name="startBottleLoading" To="baxtorRobotControllerCD.startBottleLoading" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10030" />
+			<oSignal Name="startBottleUnloading" To="baxtorRobotControllerCD.startBottleUnloading" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10030" />
 
 
 			<oSignal Name="bottlePos0" To="conveyorPlantCD.bottleArriveToZero" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10005" />
@@ -116,13 +122,18 @@
 		</ClockDomain>
 		
 		<ClockDomain Name="baxtorRobotControllerCD" Class="bController">
-			<iSignal Name="bottleLoad" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10030" />
-			<iSignal Name="bottleUnload" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10030" />
+			<iSignal Name="startBottleLoading" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10030" />
+			<iSignal Name="startBottleUnloading" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10030" />
+			
 			<iSignal Name="CMDfb_L" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10030" />
 			<iSignal Name="CMDfb_L2" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10030" />
 			<iSignal Name="CMDfb_R" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10030" />
 			<iSignal Name="CMDfb_R2" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10030" />
 			
+			<oSignal Name="bottleUnloaded" To="OrchestratorCD.bottleUnloaded" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10004" />
+			<oSignal Name="bottleLoaded" To="OrchestratorCD.bottleLoaded" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10004" />
+			<oSignal Name="bottleLoaderRelease" To="OrchestratorCD.bottleLoaderRelease" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10004" />
+
 			<oSignal Name="CMD_L" To="baxtorRobotPlantCD.CMD_L" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10031" />
 			<oSignal Name="CMD_L2" To="baxtorRobotPlantCD.CMD_L2" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10031" />
 			<oSignal Name="CMD_R" To="baxtorRobotPlantCD.CMD_R" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10031" />

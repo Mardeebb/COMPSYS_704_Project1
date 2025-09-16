@@ -1,34 +1,41 @@
 bController(
-	input signal bottleLoad, bottleUnload, CMDfb_L, CMDfb_L2, CMDfb_R, CMDfb_R2;
-	output String signal CMD_L, CMD_L2, CMD_R,CMD_R2 ;
+	input signal startBottleLoading, startBottleUnloading, CMDfb_L, CMDfb_L2, CMDfb_R, CMDfb_R2;
+	output String signal CMD_L, CMD_L2, CMD_R,CMD_R2, bottleLoaded, bottleUnloaded, bottleLoaderRelease;
 	)
 ->{
 	System.out.println("Baxtor robot Controller started");
 	{
 		while(true){
+			await(!startBottleLoading);
+			await(startBottleLoading);
 			abort(CMDfb_L){
 				sustain CMD_L("limb_moveto left_limb B"); // Moves the arm to the position B
 			}
 			abort(CMDfb_L2 ){
-				 sustain CMD_L2("limb_gripper left_limb open");
+				sustain CMD_L2("limb_gripper left_limb open"); 
 			}
 			abort(CMDfb_L){
-				sustain CMD_L2("limb_gripper left_limb close");
+				sustain CMD_L("limb_gripper left_limb close"); 
 			}
 			abort(CMDfb_L2){
-				sustain CMD_L("limb_moveto left_limb C"); 
+				
+				emit bottleLoaded;
+				sustain CMD_L2("limb_moveto left_limb C"); 
 			}
 			abort(CMDfb_L){
-				 sustain CMD_L2("limb_gripper left_limb open");
+				sustain CMD_L("limb_gripper left_limb open"); 
 			}
 			abort(CMDfb_L2){
-				sustain CMD_L("limb_moveto left_limb A"); //Move the arm back to the ready location (Position A
+				sustain CMD_L2("limb_moveto left_limb A"); //Move the arm back to the ready location (Position A				
 			}
+			emit bottleLoaderRelease;
 		}
 	}
 	||
 	{
 		while(true){
+			await(!startBottleUnloading);
+			await(startBottleUnloading);
 			abort(CMDfb_R){
 				sustain CMD_R("limb_moveto right_limb C"); // Moves the arm to the position C for pickup
 			}
@@ -39,6 +46,8 @@ bController(
 				sustain CMD_R("limb_gripper right_limb close"); 
 			}
 			abort(CMDfb_R2){
+				
+				emit bottleUnloaded;
 				sustain CMD_R2("limb_moveto right_limb B");  // lower horizontal place
 			}
 			abort(CMDfb_R){

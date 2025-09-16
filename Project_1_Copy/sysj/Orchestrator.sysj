@@ -3,9 +3,9 @@ import run.BottleTwin;
 
 Orchestrator(
 		input BottleTwin signal newBottleTwin;
-		input signal request, conveyorMoved, rotTableTurned, filled, capLoaded;
+		input signal request, conveyorMoved, rotTableTurned, filled, capLoaded, bottleLoaded, bottleUnloaded, bottleLoaderRelease;
 		
-		output signal recieveTwin, startConveyor, startRotTable, startFilling, startCapLoading;
+		output signal recieveTwin, startConveyor, startRotTable, startFilling, startCapLoading, startBottleLoading, startBottleUnloading;
 		output BottleTwin signal bottlePos0, bottlePos1, bottlePos2, bottlePos3, bottlePos4, bottlePos5, bottlePos6, bottlePos7, bottlePos8, bottlePos9, bottlePos1Rot;
 		output int signal bottlePos0B, bottlePos1B, bottlePos2B, bottlePos3B, bottlePos4B, bottlePos5B, bottlePos6B, bottlePos7B, bottlePos8B, bottlePos9B;
 		)
@@ -46,8 +46,8 @@ Orchestrator(
 	// logic
 	{
 		while(true) {
-			await(!request);
-			await(request);
+//			await(!request);
+//			await(request);
 
 			emit checkCapLoader;
 			await(capLoaderFinish);
@@ -209,11 +209,16 @@ Orchestrator(
 		while(true) {
 			await(startRobotLoaderThread);
 			// wait for plant update first
+			emit startBottleLoading;
+			await(bottleLoaded);
+			
 			BottleTwin bEight = (BottleTwin)#posEightUpdate;
 			pause;
 			emit posEightUpdate(null);
 			emit posZeroUpdate(bEight);
-		
+			
+			await(bottleLoaderRelease);
+			
 			pause;
 			emit robotLoaderFinish;
 			await(!startRobotLoaderThread);
