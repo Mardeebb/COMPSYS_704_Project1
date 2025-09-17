@@ -16,8 +16,8 @@ public class rotController extends ClockDomain{
   public Signal tableAlignedWithSensorC = new Signal("tableAlignedWithSensorC", Signal.INPUT);
   public Signal rotaryTableTrigger = new Signal("rotaryTableTrigger", Signal.OUTPUT);
   public Signal rotTableTurned = new Signal("rotTableTurned", Signal.OUTPUT);
-  private int S8489 = 1;
-  private int S8419 = 1;
+  private int S8515 = 1;
+  private int S8445 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -29,25 +29,25 @@ public class rotController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S8489){
+      switch(S8515){
         case 0 : 
-          S8489=0;
+          S8515=0;
           break RUN;
         
         case 1 : 
-          S8489=2;
-          S8489=2;
+          S8515=2;
+          S8515=2;
           System.out.println("Controller startedh");//sysj\rotController.sysj line: 11, column: 5
-          S8419=0;
+          S8445=0;
           active[1]=1;
           ends[1]=1;
           break RUN;
         
         case 2 : 
-          switch(S8419){
+          switch(S8445){
             case 0 : 
               if(!turn.getprestatus()){//sysj\rotController.sysj line: 14, column: 10
-                S8419=1;
+                S8445=1;
                 active[1]=1;
                 ends[1]=1;
                 break RUN;
@@ -60,7 +60,7 @@ public class rotController extends ClockDomain{
             
             case 1 : 
               if(turn.getprestatus()){//sysj\rotController.sysj line: 15, column: 10
-                S8419=2;
+                S8445=2;
                 rotaryTableTrigger.setPresent();//sysj\rotController.sysj line: 18, column: 5
                 currsigs.addElement(rotaryTableTrigger);
                 System.out.println("Emitted rotaryTableTrigger");
@@ -79,7 +79,7 @@ public class rotController extends ClockDomain{
                 rotTableTurned.setPresent();//sysj\rotController.sysj line: 20, column: 4
                 currsigs.addElement(rotTableTurned);
                 System.out.println("Emitted rotTableTurned");
-                S8419=0;
+                S8445=0;
                 active[1]=1;
                 ends[1]=1;
                 break RUN;

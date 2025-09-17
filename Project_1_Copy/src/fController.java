@@ -3,6 +3,7 @@ import com.systemj.ClockDomain;
 import com.systemj.Signal;
 import com.systemj.input_Channel;
 import com.systemj.output_Channel;
+import run.BottleTwin;//sysj\fillerController.sysj line: 1, column: 1
 
 public class fController extends ClockDomain{
   public fController(String name){super(name);}
@@ -20,6 +21,7 @@ public class fController extends ClockDomain{
   public Signal dosUnitValveRetract = new Signal("dosUnitValveRetract", Signal.OUTPUT);
   public Signal dosUnitValveExtend = new Signal("dosUnitValveExtend", Signal.OUTPUT);
   public Signal filled = new Signal("filled", Signal.OUTPUT);
+  private BottleTwin b_thread_1;//sysj\fillerController.sysj line: 17, column: 3
   private int S4597 = 1;
   private int S4047 = 1;
   private int S4052 = 1;
@@ -43,7 +45,7 @@ public class fController extends ClockDomain{
         break;
       
       case 1 : 
-        valveInletOnOff.setPresent();//sysj\fillerController.sysj line: 59, column: 8
+        valveInletOnOff.setPresent();//sysj\fillerController.sysj line: 72, column: 8
         currsigs.addElement(valveInletOnOff);
         System.out.println("Emitted valveInletOnOff");
         active[9]=1;
@@ -63,7 +65,7 @@ public class fController extends ClockDomain{
         break;
       
       case 1 : 
-        dosUnitValveExtend.setPresent();//sysj\fillerController.sysj line: 55, column: 12
+        dosUnitValveExtend.setPresent();//sysj\fillerController.sysj line: 68, column: 12
         currsigs.addElement(dosUnitValveExtend);
         System.out.println("Emitted dosUnitValveExtend");
         active[8]=1;
@@ -76,7 +78,7 @@ public class fController extends ClockDomain{
 
   public void thread4618(int [] tdone, int [] ends){
         S4123=1;
-    valveInletOnOff.setPresent();//sysj\fillerController.sysj line: 59, column: 8
+    valveInletOnOff.setPresent();//sysj\fillerController.sysj line: 72, column: 8
     currsigs.addElement(valveInletOnOff);
     System.out.println("Emitted valveInletOnOff");
     active[9]=1;
@@ -86,7 +88,7 @@ public class fController extends ClockDomain{
 
   public void thread4617(int [] tdone, int [] ends){
         S4118=1;
-    dosUnitValveExtend.setPresent();//sysj\fillerController.sysj line: 55, column: 12
+    dosUnitValveExtend.setPresent();//sysj\fillerController.sysj line: 68, column: 12
     currsigs.addElement(dosUnitValveExtend);
     System.out.println("Emitted dosUnitValveExtend");
     active[8]=1;
@@ -103,7 +105,7 @@ public class fController extends ClockDomain{
         break;
       
       case 1 : 
-        valveInjectorOnOff.setPresent();//sysj\fillerController.sysj line: 47, column: 8
+        valveInjectorOnOff.setPresent();//sysj\fillerController.sysj line: 60, column: 8
         currsigs.addElement(valveInjectorOnOff);
         System.out.println("Emitted valveInjectorOnOff");
         active[7]=1;
@@ -123,7 +125,7 @@ public class fController extends ClockDomain{
         break;
       
       case 1 : 
-        dosUnitValveRetract.setPresent();//sysj\fillerController.sysj line: 43, column: 12
+        dosUnitValveRetract.setPresent();//sysj\fillerController.sysj line: 56, column: 12
         currsigs.addElement(dosUnitValveRetract);
         System.out.println("Emitted dosUnitValveRetract");
         active[6]=1;
@@ -136,7 +138,7 @@ public class fController extends ClockDomain{
 
   public void thread4612(int [] tdone, int [] ends){
         S4101=1;
-    valveInjectorOnOff.setPresent();//sysj\fillerController.sysj line: 47, column: 8
+    valveInjectorOnOff.setPresent();//sysj\fillerController.sysj line: 60, column: 8
     currsigs.addElement(valveInjectorOnOff);
     System.out.println("Emitted valveInjectorOnOff");
     active[7]=1;
@@ -146,7 +148,7 @@ public class fController extends ClockDomain{
 
   public void thread4611(int [] tdone, int [] ends){
         S4096=1;
-    dosUnitValveRetract.setPresent();//sysj\fillerController.sysj line: 43, column: 12
+    dosUnitValveRetract.setPresent();//sysj\fillerController.sysj line: 56, column: 12
     currsigs.addElement(dosUnitValveRetract);
     System.out.println("Emitted dosUnitValveRetract");
     active[6]=1;
@@ -163,7 +165,7 @@ public class fController extends ClockDomain{
         break;
       
       case 1 : 
-        valveInletOnOff.setPresent();//sysj\fillerController.sysj line: 35, column: 8
+        valveInletOnOff.setPresent();//sysj\fillerController.sysj line: 48, column: 8
         currsigs.addElement(valveInletOnOff);
         System.out.println("Emitted valveInletOnOff");
         active[5]=1;
@@ -183,7 +185,7 @@ public class fController extends ClockDomain{
         break;
       
       case 1 : 
-        dosUnitValveExtend.setPresent();//sysj\fillerController.sysj line: 31, column: 12
+        dosUnitValveExtend.setPresent();//sysj\fillerController.sysj line: 44, column: 12
         currsigs.addElement(dosUnitValveExtend);
         System.out.println("Emitted dosUnitValveExtend");
         active[4]=1;
@@ -196,7 +198,7 @@ public class fController extends ClockDomain{
 
   public void thread4606(int [] tdone, int [] ends){
         S4079=1;
-    valveInletOnOff.setPresent();//sysj\fillerController.sysj line: 35, column: 8
+    valveInletOnOff.setPresent();//sysj\fillerController.sysj line: 48, column: 8
     currsigs.addElement(valveInletOnOff);
     System.out.println("Emitted valveInletOnOff");
     active[5]=1;
@@ -206,7 +208,7 @@ public class fController extends ClockDomain{
 
   public void thread4605(int [] tdone, int [] ends){
         S4074=1;
-    dosUnitValveExtend.setPresent();//sysj\fillerController.sysj line: 31, column: 12
+    dosUnitValveExtend.setPresent();//sysj\fillerController.sysj line: 44, column: 12
     currsigs.addElement(dosUnitValveExtend);
     System.out.println("Emitted dosUnitValveExtend");
     active[4]=1;
@@ -223,7 +225,7 @@ public class fController extends ClockDomain{
         break;
       
       case 1 : 
-        valveInjectorOnOff.setPresent();//sysj\fillerController.sysj line: 23, column: 8
+        valveInjectorOnOff.setPresent();//sysj\fillerController.sysj line: 36, column: 8
         currsigs.addElement(valveInjectorOnOff);
         System.out.println("Emitted valveInjectorOnOff");
         active[3]=1;
@@ -243,7 +245,7 @@ public class fController extends ClockDomain{
         break;
       
       case 1 : 
-        dosUnitValveRetract.setPresent();//sysj\fillerController.sysj line: 19, column: 12
+        dosUnitValveRetract.setPresent();//sysj\fillerController.sysj line: 32, column: 12
         currsigs.addElement(dosUnitValveRetract);
         System.out.println("Emitted dosUnitValveRetract");
         active[2]=1;
@@ -256,7 +258,7 @@ public class fController extends ClockDomain{
 
   public void thread4600(int [] tdone, int [] ends){
         S4057=1;
-    valveInjectorOnOff.setPresent();//sysj\fillerController.sysj line: 23, column: 8
+    valveInjectorOnOff.setPresent();//sysj\fillerController.sysj line: 36, column: 8
     currsigs.addElement(valveInjectorOnOff);
     System.out.println("Emitted valveInjectorOnOff");
     active[3]=1;
@@ -266,7 +268,7 @@ public class fController extends ClockDomain{
 
   public void thread4599(int [] tdone, int [] ends){
         S4052=1;
-    dosUnitValveRetract.setPresent();//sysj\fillerController.sysj line: 19, column: 12
+    dosUnitValveRetract.setPresent();//sysj\fillerController.sysj line: 32, column: 12
     currsigs.addElement(dosUnitValveRetract);
     System.out.println("Emitted dosUnitValveRetract");
     active[2]=1;
@@ -289,7 +291,7 @@ public class fController extends ClockDomain{
         case 1 : 
           S4597=2;
           S4597=2;
-          System.out.println("filler Controller started");//sysj\fillerController.sysj line: 9, column: 2
+          System.out.println("filler Controller started");//sysj\fillerController.sysj line: 11, column: 2
           S4047=0;
           active[1]=1;
           ends[1]=1;
@@ -298,7 +300,7 @@ public class fController extends ClockDomain{
         case 2 : 
           switch(S4047){
             case 0 : 
-              if(startFilling.getprestatus()){//sysj\fillerController.sysj line: 13, column: 12
+              if(startFilling.getprestatus()){//sysj\fillerController.sysj line: 15, column: 12
                 S4047=1;
                 active[1]=1;
                 ends[1]=1;
@@ -311,7 +313,17 @@ public class fController extends ClockDomain{
               }
             
             case 1 : 
-              if(bottleAtPos2.getprestatus()){//sysj\fillerController.sysj line: 14, column: 12
+              if(bottleAtPos2.getprestatus()){//sysj\fillerController.sysj line: 16, column: 12
+                b_thread_1 = (BottleTwin)(bottleAtPos2.getpreval() == null ? null : ((BottleTwin)bottleAtPos2.getpreval()));//sysj\fillerController.sysj line: 17, column: 3
+                if(b_thread_1 != null) {//sysj\fillerController.sysj line: 18, column: 17
+                  while(true) {//sysj\fillerController.sysj line: 19, column: 16
+                    System.err.println(b_thread_1.recipe[0]);//sysj\fillerController.sysj line: 20, column: 5
+                    System.err.println(b_thread_1.recipe[1]);//sysj\fillerController.sysj line: 21, column: 5
+                    System.err.println(b_thread_1.recipe[2]);//sysj\fillerController.sysj line: 22, column: 5
+                    System.err.println(b_thread_1.recipe[3]);//sysj\fillerController.sysj line: 23, column: 5
+                    System.err.println(b_thread_1.recipe[4]);//sysj\fillerController.sysj line: 24, column: 5
+                  }
+                }
                 S4047=2;
                 thread4599(tdone,ends);
                 thread4600(tdone,ends);
@@ -335,7 +347,7 @@ public class fController extends ClockDomain{
               }
             
             case 2 : 
-              if(dosUnitFilled.getprestatus()){//sysj\fillerController.sysj line: 17, column: 12
+              if(dosUnitFilled.getprestatus()){//sysj\fillerController.sysj line: 30, column: 12
                 S4047=3;
                 active[1]=1;
                 ends[1]=1;
@@ -384,7 +396,7 @@ public class fController extends ClockDomain{
               }
             
             case 4 : 
-              if(dosUnitEvac.getprestatus()){//sysj\fillerController.sysj line: 29, column: 12
+              if(dosUnitEvac.getprestatus()){//sysj\fillerController.sysj line: 42, column: 12
                 S4047=5;
                 active[1]=1;
                 ends[1]=1;
@@ -433,7 +445,7 @@ public class fController extends ClockDomain{
               }
             
             case 6 : 
-              if(dosUnitFilled.getprestatus()){//sysj\fillerController.sysj line: 41, column: 12
+              if(dosUnitFilled.getprestatus()){//sysj\fillerController.sysj line: 54, column: 12
                 S4047=7;
                 active[1]=1;
                 ends[1]=1;
@@ -482,7 +494,7 @@ public class fController extends ClockDomain{
               }
             
             case 8 : 
-              if(dosUnitEvac.getprestatus()){//sysj\fillerController.sysj line: 53, column: 12
+              if(dosUnitEvac.getprestatus()){//sysj\fillerController.sysj line: 66, column: 12
                 S4047=9;
                 active[1]=1;
                 ends[1]=1;
@@ -514,7 +526,7 @@ public class fController extends ClockDomain{
             
             case 9 : 
               S4047=9;
-              filled.setPresent();//sysj\fillerController.sysj line: 64, column: 6
+              filled.setPresent();//sysj\fillerController.sysj line: 77, column: 6
               currsigs.addElement(filled);
               System.out.println("Emitted filled");
               S4047=0;

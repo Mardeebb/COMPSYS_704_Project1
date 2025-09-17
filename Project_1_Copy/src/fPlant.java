@@ -19,16 +19,18 @@ public class fPlant extends ClockDomain{
   public Signal enable = new Signal("enable", Signal.INPUT);
   public Signal bottleOut = new Signal("bottleOut", Signal.INPUT);
   public Signal bottleIn = new Signal("bottleIn", Signal.INPUT);
-  public Signal bottleAtPos2 = new Signal("bottleAtPos2", Signal.OUTPUT);
   public Signal dosUnitEvac = new Signal("dosUnitEvac", Signal.OUTPUT);
   public Signal dosUnitFilled = new Signal("dosUnitFilled", Signal.OUTPUT);
+  public Signal bottleAtPos2 = new Signal("bottleAtPos2", Signal.OUTPUT);
   public Signal dosUnitEvacE = new Signal("dosUnitEvacE", Signal.OUTPUT);
   public Signal dosUnitFilledE = new Signal("dosUnitFilledE", Signal.OUTPUT);
+  public Signal fillerWorkingID = new Signal("fillerWorkingID", Signal.OUTPUT);
   public Signal fillID = new Signal("fillID", Signal.OUTPUT);
   private Signal bottle_1;
-  private BottleTwin b_thread_2;//sysj\fillerPlant.sysj line: 18, column: 4
-  private BottleTwin b_thread_3;//sysj\fillerPlant.sysj line: 53, column: 4
-  private int id_thread_3;//sysj\fillerPlant.sysj line: 54, column: 4
+  private BottleTwin b_thread_2;//sysj\fillerPlant.sysj line: 19, column: 4
+  private int id_thread_2;//sysj\fillerPlant.sysj line: 20, column: 4
+  private BottleTwin b_thread_3;//sysj\fillerPlant.sysj line: 56, column: 4
+  private int id_thread_3;//sysj\fillerPlant.sysj line: 57, column: 4
   private int S4776 = 1;
   private int S4643 = 1;
   private int S4625 = 1;
@@ -50,8 +52,8 @@ public class fPlant extends ClockDomain{
         break;
       
       case 1 : 
-        if(dosUnitFilled.getprestatus()){//sysj\fillerPlant.sysj line: 64, column: 30
-          dosUnitFilledE.setPresent();//sysj\fillerPlant.sysj line: 64, column: 45
+        if(dosUnitFilled.getprestatus()){//sysj\fillerPlant.sysj line: 67, column: 30
+          dosUnitFilledE.setPresent();//sysj\fillerPlant.sysj line: 67, column: 45
           currsigs.addElement(dosUnitFilledE);
           System.out.println("Emitted dosUnitFilledE");
           active[6]=1;
@@ -77,8 +79,8 @@ public class fPlant extends ClockDomain{
         break;
       
       case 1 : 
-        if(dosUnitEvac.getprestatus()){//sysj\fillerPlant.sysj line: 62, column: 30
-          dosUnitEvacE.setPresent();//sysj\fillerPlant.sysj line: 62, column: 43
+        if(dosUnitEvac.getprestatus()){//sysj\fillerPlant.sysj line: 65, column: 30
+          dosUnitEvacE.setPresent();//sysj\fillerPlant.sysj line: 65, column: 43
           currsigs.addElement(dosUnitEvacE);
           System.out.println("Emitted dosUnitEvacE");
           active[5]=1;
@@ -141,14 +143,14 @@ public class fPlant extends ClockDomain{
       case 1 : 
         switch(S4650){
           case 0 : 
-            if(dosUnitValveRetract.getprestatus() && enable.getprestatus()){//sysj\fillerPlant.sysj line: 33, column: 19
+            if(dosUnitValveRetract.getprestatus() && enable.getprestatus()){//sysj\fillerPlant.sysj line: 36, column: 19
               S4650=1;
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
             }
             else {
-              dosUnitEvac.setPresent();//sysj\fillerPlant.sysj line: 34, column: 17
+              dosUnitEvac.setPresent();//sysj\fillerPlant.sysj line: 37, column: 17
               currsigs.addElement(dosUnitEvac);
               System.out.println("Emitted dosUnitEvac");
               active[3]=1;
@@ -158,9 +160,9 @@ public class fPlant extends ClockDomain{
             break;
           
           case 1 : 
-            if(!enable.getprestatus()){//sysj\fillerPlant.sysj line: 36, column: 19
+            if(!enable.getprestatus()){//sysj\fillerPlant.sysj line: 39, column: 19
               S4650=2;
-              dosUnitFilled.setPresent();//sysj\fillerPlant.sysj line: 40, column: 17
+              dosUnitFilled.setPresent();//sysj\fillerPlant.sysj line: 43, column: 17
               currsigs.addElement(dosUnitFilled);
               System.out.println("Emitted dosUnitFilled");
               active[3]=1;
@@ -175,14 +177,14 @@ public class fPlant extends ClockDomain{
             break;
           
           case 2 : 
-            if(dosUnitValveExtend.getprestatus() && enable.getprestatus()){//sysj\fillerPlant.sysj line: 39, column: 19
+            if(dosUnitValveExtend.getprestatus() && enable.getprestatus()){//sysj\fillerPlant.sysj line: 42, column: 19
               S4650=3;
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
             }
             else {
-              dosUnitFilled.setPresent();//sysj\fillerPlant.sysj line: 40, column: 17
+              dosUnitFilled.setPresent();//sysj\fillerPlant.sysj line: 43, column: 17
               currsigs.addElement(dosUnitFilled);
               System.out.println("Emitted dosUnitFilled");
               active[3]=1;
@@ -192,9 +194,9 @@ public class fPlant extends ClockDomain{
             break;
           
           case 3 : 
-            if(!enable.getprestatus()){//sysj\fillerPlant.sysj line: 42, column: 19
+            if(!enable.getprestatus()){//sysj\fillerPlant.sysj line: 45, column: 19
               S4650=4;
-              dosUnitEvac.setPresent();//sysj\fillerPlant.sysj line: 44, column: 17
+              dosUnitEvac.setPresent();//sysj\fillerPlant.sysj line: 47, column: 17
               currsigs.addElement(dosUnitEvac);
               System.out.println("Emitted dosUnitEvac");
               active[3]=1;
@@ -209,14 +211,14 @@ public class fPlant extends ClockDomain{
             break;
           
           case 4 : 
-            if(dosUnitValveRetract.getprestatus() && enable.getprestatus()){//sysj\fillerPlant.sysj line: 43, column: 19
+            if(dosUnitValveRetract.getprestatus() && enable.getprestatus()){//sysj\fillerPlant.sysj line: 46, column: 19
               S4650=5;
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
             }
             else {
-              dosUnitEvac.setPresent();//sysj\fillerPlant.sysj line: 44, column: 17
+              dosUnitEvac.setPresent();//sysj\fillerPlant.sysj line: 47, column: 17
               currsigs.addElement(dosUnitEvac);
               System.out.println("Emitted dosUnitEvac");
               active[3]=1;
@@ -226,9 +228,9 @@ public class fPlant extends ClockDomain{
             break;
           
           case 5 : 
-            if(!enable.getprestatus()){//sysj\fillerPlant.sysj line: 46, column: 19
+            if(!enable.getprestatus()){//sysj\fillerPlant.sysj line: 49, column: 19
               S4650=6;
-              dosUnitFilled.setPresent();//sysj\fillerPlant.sysj line: 50, column: 17
+              dosUnitFilled.setPresent();//sysj\fillerPlant.sysj line: 53, column: 17
               currsigs.addElement(dosUnitFilled);
               System.out.println("Emitted dosUnitFilled");
               active[3]=1;
@@ -243,14 +245,14 @@ public class fPlant extends ClockDomain{
             break;
           
           case 6 : 
-            if(dosUnitValveExtend.getprestatus() && enable.getprestatus()){//sysj\fillerPlant.sysj line: 49, column: 19
+            if(dosUnitValveExtend.getprestatus() && enable.getprestatus()){//sysj\fillerPlant.sysj line: 52, column: 19
               S4650=7;
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
             }
             else {
-              dosUnitFilled.setPresent();//sysj\fillerPlant.sysj line: 50, column: 17
+              dosUnitFilled.setPresent();//sysj\fillerPlant.sysj line: 53, column: 17
               currsigs.addElement(dosUnitFilled);
               System.out.println("Emitted dosUnitFilled");
               active[3]=1;
@@ -260,15 +262,15 @@ public class fPlant extends ClockDomain{
             break;
           
           case 7 : 
-            if(!enable.getprestatus()){//sysj\fillerPlant.sysj line: 52, column: 19
-              b_thread_3 = (BottleTwin)(bottle_1.getpreval() == null ? null : ((BottleTwin)bottle_1.getpreval()));//sysj\fillerPlant.sysj line: 53, column: 4
-              id_thread_3 = b_thread_3.ID;//sysj\fillerPlant.sysj line: 54, column: 4
-              fillID.setPresent();//sysj\fillerPlant.sysj line: 55, column: 4
+            if(!enable.getprestatus()){//sysj\fillerPlant.sysj line: 55, column: 19
+              b_thread_3 = (BottleTwin)(bottle_1.getpreval() == null ? null : ((BottleTwin)bottle_1.getpreval()));//sysj\fillerPlant.sysj line: 56, column: 4
+              id_thread_3 = b_thread_3.ID;//sysj\fillerPlant.sysj line: 57, column: 4
+              fillID.setPresent();//sysj\fillerPlant.sysj line: 58, column: 4
               currsigs.addElement(fillID);
-              fillID.setValue(id_thread_3);//sysj\fillerPlant.sysj line: 55, column: 4
+              fillID.setValue(id_thread_3);//sysj\fillerPlant.sysj line: 58, column: 4
               System.out.println("Emitted fillID");
               S4650=0;
-              dosUnitEvac.setPresent();//sysj\fillerPlant.sysj line: 34, column: 17
+              dosUnitEvac.setPresent();//sysj\fillerPlant.sysj line: 37, column: 17
               currsigs.addElement(dosUnitEvac);
               System.out.println("Emitted dosUnitEvac");
               active[3]=1;
@@ -299,16 +301,22 @@ public class fPlant extends ClockDomain{
       case 1 : 
         switch(S4625){
           case 0 : 
-            if(bottleIn.getprestatus()){//sysj\fillerPlant.sysj line: 17, column: 19
-              b_thread_2 = (BottleTwin)(bottleIn.getpreval() == null ? null : ((BottleTwin)bottleIn.getpreval()));//sysj\fillerPlant.sysj line: 18, column: 4
-              if(b_thread_2 != null){//sysj\fillerPlant.sysj line: 19, column: 7
-                bottle_1.setPresent();//sysj\fillerPlant.sysj line: 20, column: 5
+            if(bottleIn.getprestatus()){//sysj\fillerPlant.sysj line: 18, column: 19
+              b_thread_2 = (BottleTwin)(bottleIn.getpreval() == null ? null : ((BottleTwin)bottleIn.getpreval()));//sysj\fillerPlant.sysj line: 19, column: 4
+              id_thread_2 = b_thread_2.ID;//sysj\fillerPlant.sysj line: 20, column: 4
+              if(b_thread_2 != null){//sysj\fillerPlant.sysj line: 21, column: 7
+                bottle_1.setPresent();//sysj\fillerPlant.sysj line: 22, column: 5
                 currsigs.addElement(bottle_1);
-                bottle_1.setValue(b_thread_2);//sysj\fillerPlant.sysj line: 20, column: 5
+                bottle_1.setValue(b_thread_2);//sysj\fillerPlant.sysj line: 22, column: 5
                 System.out.println("Emitted bottle_1");
-                bottleAtPos2.setPresent();//sysj\fillerPlant.sysj line: 21, column: 14
+                bottleAtPos2.setPresent();//sysj\fillerPlant.sysj line: 23, column: 14
                 currsigs.addElement(bottleAtPos2);
+                bottleAtPos2.setValue(b_thread_2);//sysj\fillerPlant.sysj line: 23, column: 14
                 System.out.println("Emitted bottleAtPos2");
+                fillerWorkingID.setPresent();//sysj\fillerPlant.sysj line: 24, column: 14
+                currsigs.addElement(fillerWorkingID);
+                fillerWorkingID.setValue(id_thread_2);//sysj\fillerPlant.sysj line: 24, column: 14
+                System.out.println("Emitted fillerWorkingID");
                 S4625=1;
                 active[2]=1;
                 ends[2]=1;
@@ -344,8 +352,8 @@ public class fPlant extends ClockDomain{
 
   public void thread4782(int [] tdone, int [] ends){
         S4772=1;
-    if(dosUnitFilled.getprestatus()){//sysj\fillerPlant.sysj line: 64, column: 30
-      dosUnitFilledE.setPresent();//sysj\fillerPlant.sysj line: 64, column: 45
+    if(dosUnitFilled.getprestatus()){//sysj\fillerPlant.sysj line: 67, column: 30
+      dosUnitFilledE.setPresent();//sysj\fillerPlant.sysj line: 67, column: 45
       currsigs.addElement(dosUnitFilledE);
       System.out.println("Emitted dosUnitFilledE");
       active[6]=1;
@@ -361,8 +369,8 @@ public class fPlant extends ClockDomain{
 
   public void thread4781(int [] tdone, int [] ends){
         S4764=1;
-    if(dosUnitEvac.getprestatus()){//sysj\fillerPlant.sysj line: 62, column: 30
-      dosUnitEvacE.setPresent();//sysj\fillerPlant.sysj line: 62, column: 43
+    if(dosUnitEvac.getprestatus()){//sysj\fillerPlant.sysj line: 65, column: 30
+      dosUnitEvacE.setPresent();//sysj\fillerPlant.sysj line: 65, column: 43
       currsigs.addElement(dosUnitEvacE);
       System.out.println("Emitted dosUnitEvacE");
       active[5]=1;
@@ -397,7 +405,7 @@ public class fPlant extends ClockDomain{
   public void thread4779(int [] tdone, int [] ends){
         S4756=1;
     S4650=0;
-    dosUnitEvac.setPresent();//sysj\fillerPlant.sysj line: 34, column: 17
+    dosUnitEvac.setPresent();//sysj\fillerPlant.sysj line: 37, column: 17
     currsigs.addElement(dosUnitEvac);
     System.out.println("Emitted dosUnitEvac");
     active[3]=1;
@@ -428,7 +436,7 @@ public class fPlant extends ClockDomain{
         case 1 : 
           S4776=2;
           S4776=2;
-          bottle_1.setClear();//sysj\fillerPlant.sysj line: 13, column: 2
+          bottle_1.setClear();//sysj\fillerPlant.sysj line: 14, column: 2
           thread4778(tdone,ends);
           thread4779(tdone,ends);
           thread4780(tdone,ends);
@@ -449,7 +457,7 @@ public class fPlant extends ClockDomain{
           }
         
         case 2 : 
-          bottle_1.setClear();//sysj\fillerPlant.sysj line: 13, column: 2
+          bottle_1.setClear();//sysj\fillerPlant.sysj line: 14, column: 2
           thread4785(tdone,ends);
           thread4786(tdone,ends);
           thread4787(tdone,ends);
@@ -522,11 +530,12 @@ public class fPlant extends ClockDomain{
       enable.setpreclear();
       bottleOut.setpreclear();
       bottleIn.setpreclear();
-      bottleAtPos2.setpreclear();
       dosUnitEvac.setpreclear();
       dosUnitFilled.setpreclear();
+      bottleAtPos2.setpreclear();
       dosUnitEvacE.setpreclear();
       dosUnitFilledE.setpreclear();
+      fillerWorkingID.setpreclear();
       fillID.setpreclear();
       bottle_1.setpreclear();
       int dummyint = 0;
@@ -556,16 +565,18 @@ public class fPlant extends ClockDomain{
       dummyint = bottleIn.getStatus() ? bottleIn.setprepresent() : bottleIn.setpreclear();
       bottleIn.setpreval(bottleIn.getValue());
       bottleIn.setClear();
-      bottleAtPos2.sethook();
-      bottleAtPos2.setClear();
       dosUnitEvac.sethook();
       dosUnitEvac.setClear();
       dosUnitFilled.sethook();
       dosUnitFilled.setClear();
+      bottleAtPos2.sethook();
+      bottleAtPos2.setClear();
       dosUnitEvacE.sethook();
       dosUnitEvacE.setClear();
       dosUnitFilledE.sethook();
       dosUnitFilledE.setClear();
+      fillerWorkingID.sethook();
+      fillerWorkingID.setClear();
       fillID.sethook();
       fillID.setClear();
       bottle_1.setClear();

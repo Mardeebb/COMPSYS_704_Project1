@@ -100,6 +100,13 @@ public class SysJWorker extends Worker{
 	            bottle.status = "Filled";
 	        }
 			break;
+			
+		case "fillerWorkingID":
+	        if (status && value != null) {
+	            int id = (int) value;	    
+	            Filler.workingBottleID = id;
+	        }
+			break;
 		case "capOnID":
 	        if (status && value != null) {
 	            int id = (int) value;
@@ -231,7 +238,12 @@ public class SysJWorker extends Worker{
 		}
 	}
 	
-	static final List<String> signames = Arrays.asList("bottlePos9","bottlePos8","bottlePos7","bottlePos6","bottlePos5","bottlePos4","bottlePos3","bottlePos2","bottlePos1","bottlePos0","CMD_RE", "CMD_R2E", "CMD_L2E", "CMD_LE","gripperTurnFinalPosE", "gripperTurnHomePosE", "gripperZAxisLiftedE", "gripperZAxisLoweredE", "capOnID", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","conveyorMoving","conveyorStop","fillID");
+	static final List<String> signames = Arrays.asList("bottlePos9","bottlePos8","bottlePos7","bottlePos6","bottlePos5","bottlePos4","bottlePos3",
+														"bottlePos2","bottlePos1","bottlePos0","CMD_RE", "CMD_R2E", "CMD_L2E", "CMD_LE",
+														"gripperTurnFinalPosE", "gripperTurnHomePosE", "gripperZAxisLiftedE", "gripperZAxisLoweredE", 
+														"capOnID", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE",
+														"armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", 
+														"capOnBottleAtPos1","recieveTwin","conveyorMoving","conveyorStop","fillID","fillerWorkingID");
 	
 	@Override
 	public boolean hasSignal(String sn) {

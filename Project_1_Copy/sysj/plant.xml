@@ -66,6 +66,7 @@
 			<oSignal Name="dosUnitFilled" To="fillerControllerCD.dosUnitFilled" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10007" />
 			
 			<oSignal Name="fillID"           To="UI.fillID"           Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="fillerWorkingID"           To="UI.fillerWorkingID"           Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="dosUnitEvacE"           To="UI.dosUnitEvacE"           Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="dosUnitFilledE"           To="UI.dosUnitFilledE"           Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 		</ClockDomain>

@@ -25,17 +25,17 @@ public class bController extends ClockDomain{
   public Signal bottleUnloaded = new Signal("bottleUnloaded", Signal.OUTPUT);
   public Signal bottleLoaderRelease = new Signal("bottleLoaderRelease", Signal.OUTPUT);
   public Signal bottleUnloaderRelease = new Signal("bottleUnloaderRelease", Signal.OUTPUT);
-  private int S7951 = 1;
-  private int S7403 = 1;
-  private int S7225 = 1;
-  private int S7585 = 1;
-  private int S7407 = 1;
+  private int S7977 = 1;
+  private int S7429 = 1;
+  private int S7251 = 1;
+  private int S7611 = 1;
+  private int S7433 = 1;
   
   private int[] ends = new int[4];
   private int[] tdone = new int[4];
   
-  public void thread7957(int [] tdone, int [] ends){
-        switch(S7585){
+  public void thread7983(int [] tdone, int [] ends){
+        switch(S7611){
       case 0 : 
         active[3]=0;
         ends[3]=0;
@@ -43,10 +43,10 @@ public class bController extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S7407){
+        switch(S7433){
           case 0 : 
             if(!startBottleUnloading.getprestatus()){//sysj\robotController.sysj line: 36, column: 10
-              S7407=1;
+              S7433=1;
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -60,7 +60,7 @@ public class bController extends ClockDomain{
           
           case 1 : 
             if(startBottleUnloading.getprestatus()){//sysj\robotController.sysj line: 37, column: 10
-              S7407=2;
+              S7433=2;
               CMD_R.setPresent();//sysj\robotController.sysj line: 39, column: 5
               currsigs.addElement(CMD_R);
               CMD_R.setValue("limb_moveto right_limb C");//sysj\robotController.sysj line: 39, column: 5
@@ -78,7 +78,7 @@ public class bController extends ClockDomain{
           
           case 2 : 
             if(CMDfb_R.getprestatus()){//sysj\robotController.sysj line: 38, column: 10
-              S7407=3;
+              S7433=3;
               CMD_R2.setPresent();//sysj\robotController.sysj line: 42, column: 5
               currsigs.addElement(CMD_R2);
               CMD_R2.setValue("limb_gripper right_limb open");//sysj\robotController.sysj line: 42, column: 5
@@ -100,7 +100,7 @@ public class bController extends ClockDomain{
           
           case 3 : 
             if(CMDfb_R2.getprestatus()){//sysj\robotController.sysj line: 41, column: 10
-              S7407=4;
+              S7433=4;
               CMD_R.setPresent();//sysj\robotController.sysj line: 45, column: 5
               currsigs.addElement(CMD_R);
               CMD_R.setValue("limb_gripper right_limb close");//sysj\robotController.sysj line: 45, column: 5
@@ -122,7 +122,7 @@ public class bController extends ClockDomain{
           
           case 4 : 
             if(CMDfb_R.getprestatus()){//sysj\robotController.sysj line: 44, column: 10
-              S7407=5;
+              S7433=5;
               bottleUnloaded.setPresent();//sysj\robotController.sysj line: 48, column: 5
               currsigs.addElement(bottleUnloaded);
               System.out.println("Emitted bottleUnloaded");
@@ -147,7 +147,7 @@ public class bController extends ClockDomain{
           
           case 5 : 
             if(CMDfb_R2.getprestatus()){//sysj\robotController.sysj line: 47, column: 10
-              S7407=6;
+              S7433=6;
               CMD_R.setPresent();//sysj\robotController.sysj line: 52, column: 5
               currsigs.addElement(CMD_R);
               CMD_R.setValue("limb_gripper right_limb open");//sysj\robotController.sysj line: 52, column: 5
@@ -169,7 +169,7 @@ public class bController extends ClockDomain{
           
           case 6 : 
             if(CMDfb_R.getprestatus()){//sysj\robotController.sysj line: 51, column: 10
-              S7407=7;
+              S7433=7;
               CMD_R2.setPresent();//sysj\robotController.sysj line: 55, column: 5
               currsigs.addElement(CMD_R2);
               CMD_R2.setValue("limb_moveto right_limb A");//sysj\robotController.sysj line: 55, column: 5
@@ -194,7 +194,7 @@ public class bController extends ClockDomain{
               bottleUnloaderRelease.setPresent();//sysj\robotController.sysj line: 58, column: 4
               currsigs.addElement(bottleUnloaderRelease);
               System.out.println("Emitted bottleUnloaderRelease");
-              S7407=0;
+              S7433=0;
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -216,8 +216,8 @@ public class bController extends ClockDomain{
     }
   }
 
-  public void thread7956(int [] tdone, int [] ends){
-        switch(S7403){
+  public void thread7982(int [] tdone, int [] ends){
+        switch(S7429){
       case 0 : 
         active[2]=0;
         ends[2]=0;
@@ -225,10 +225,10 @@ public class bController extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S7225){
+        switch(S7251){
           case 0 : 
             if(!startBottleLoading.getprestatus()){//sysj\robotController.sysj line: 9, column: 10
-              S7225=1;
+              S7251=1;
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -242,7 +242,7 @@ public class bController extends ClockDomain{
           
           case 1 : 
             if(startBottleLoading.getprestatus()){//sysj\robotController.sysj line: 10, column: 10
-              S7225=2;
+              S7251=2;
               CMD_L.setPresent();//sysj\robotController.sysj line: 12, column: 5
               currsigs.addElement(CMD_L);
               CMD_L.setValue("limb_moveto left_limb B");//sysj\robotController.sysj line: 12, column: 5
@@ -260,7 +260,7 @@ public class bController extends ClockDomain{
           
           case 2 : 
             if(CMDfb_L.getprestatus()){//sysj\robotController.sysj line: 11, column: 10
-              S7225=3;
+              S7251=3;
               CMD_L2.setPresent();//sysj\robotController.sysj line: 15, column: 5
               currsigs.addElement(CMD_L2);
               CMD_L2.setValue("limb_gripper left_limb open");//sysj\robotController.sysj line: 15, column: 5
@@ -282,7 +282,7 @@ public class bController extends ClockDomain{
           
           case 3 : 
             if(CMDfb_L2.getprestatus()){//sysj\robotController.sysj line: 14, column: 10
-              S7225=4;
+              S7251=4;
               CMD_L.setPresent();//sysj\robotController.sysj line: 18, column: 5
               currsigs.addElement(CMD_L);
               CMD_L.setValue("limb_gripper left_limb close");//sysj\robotController.sysj line: 18, column: 5
@@ -304,7 +304,7 @@ public class bController extends ClockDomain{
           
           case 4 : 
             if(CMDfb_L.getprestatus()){//sysj\robotController.sysj line: 17, column: 10
-              S7225=5;
+              S7251=5;
               bottleLoaded.setPresent();//sysj\robotController.sysj line: 21, column: 5
               currsigs.addElement(bottleLoaded);
               System.out.println("Emitted bottleLoaded");
@@ -329,7 +329,7 @@ public class bController extends ClockDomain{
           
           case 5 : 
             if(CMDfb_L2.getprestatus()){//sysj\robotController.sysj line: 20, column: 10
-              S7225=6;
+              S7251=6;
               CMD_L.setPresent();//sysj\robotController.sysj line: 25, column: 5
               currsigs.addElement(CMD_L);
               CMD_L.setValue("limb_gripper left_limb open");//sysj\robotController.sysj line: 25, column: 5
@@ -351,7 +351,7 @@ public class bController extends ClockDomain{
           
           case 6 : 
             if(CMDfb_L.getprestatus()){//sysj\robotController.sysj line: 24, column: 10
-              S7225=7;
+              S7251=7;
               CMD_L2.setPresent();//sysj\robotController.sysj line: 28, column: 5
               currsigs.addElement(CMD_L2);
               CMD_L2.setValue("limb_moveto left_limb A");//sysj\robotController.sysj line: 28, column: 5
@@ -376,7 +376,7 @@ public class bController extends ClockDomain{
               bottleLoaderRelease.setPresent();//sysj\robotController.sysj line: 30, column: 4
               currsigs.addElement(bottleLoaderRelease);
               System.out.println("Emitted bottleLoaderRelease");
-              S7225=0;
+              S7251=0;
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -398,17 +398,17 @@ public class bController extends ClockDomain{
     }
   }
 
-  public void thread7954(int [] tdone, int [] ends){
-        S7585=1;
-    S7407=0;
+  public void thread7980(int [] tdone, int [] ends){
+        S7611=1;
+    S7433=0;
     active[3]=1;
     ends[3]=1;
     tdone[3]=1;
   }
 
-  public void thread7953(int [] tdone, int [] ends){
-        S7403=1;
-    S7225=0;
+  public void thread7979(int [] tdone, int [] ends){
+        S7429=1;
+    S7251=0;
     active[2]=1;
     ends[2]=1;
     tdone[2]=1;
@@ -421,51 +421,51 @@ public class bController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S7951){
+      switch(S7977){
         case 0 : 
-          S7951=0;
+          S7977=0;
           break RUN;
         
         case 1 : 
-          S7951=2;
-          S7951=2;
+          S7977=2;
+          S7977=2;
           System.out.println("Baxtor robot Controller started");//sysj\robotController.sysj line: 6, column: 2
-          thread7953(tdone,ends);
-          thread7954(tdone,ends);
-          int biggest7955 = 0;
-          if(ends[2]>=biggest7955){
-            biggest7955=ends[2];
+          thread7979(tdone,ends);
+          thread7980(tdone,ends);
+          int biggest7981 = 0;
+          if(ends[2]>=biggest7981){
+            biggest7981=ends[2];
           }
-          if(ends[3]>=biggest7955){
-            biggest7955=ends[3];
+          if(ends[3]>=biggest7981){
+            biggest7981=ends[3];
           }
-          if(biggest7955 == 1){
+          if(biggest7981 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
         
         case 2 : 
-          thread7956(tdone,ends);
-          thread7957(tdone,ends);
-          int biggest7958 = 0;
-          if(ends[2]>=biggest7958){
-            biggest7958=ends[2];
+          thread7982(tdone,ends);
+          thread7983(tdone,ends);
+          int biggest7984 = 0;
+          if(ends[2]>=biggest7984){
+            biggest7984=ends[2];
           }
-          if(ends[3]>=biggest7958){
-            biggest7958=ends[3];
+          if(ends[3]>=biggest7984){
+            biggest7984=ends[3];
           }
-          if(biggest7958 == 1){
+          if(biggest7984 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest7958 == 0){
-            S7951=0;
+          if(biggest7984 == 0){
+            S7977=0;
             active[1]=0;
             ends[1]=0;
-            S7951=0;
+            S7977=0;
             break RUN;
           }
         
