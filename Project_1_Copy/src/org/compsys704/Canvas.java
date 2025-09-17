@@ -12,6 +12,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import AST.List;
 import run.BottleTwin;
 
 public class Canvas extends JPanel {
@@ -323,6 +325,17 @@ public class Canvas extends JPanel {
 		}else {		
 			g.drawImage(filler_off, 75, 75, null);
 		}
+//		String[] liquids = {"A", "B", "C", "D", "E"};
+//
+//		ArrayList<String> result = new ArrayList<String>();
+//		int[] recipe = BottleTwin.getRecipe();
+//
+//		for (int i = 0; i < 5; i++) {
+//		    if (BottleTwin.recipe[i] > 0) {
+//		        result.add(liquids[i] + ", " + BottleTwin.recipe[i] + "%");
+//		    }
+//		}
+//		  g2d.drawString("bottleAtPos5", 70, 70); 
 
 	    	
 		if(TurnTable.RT_PS == 0) {

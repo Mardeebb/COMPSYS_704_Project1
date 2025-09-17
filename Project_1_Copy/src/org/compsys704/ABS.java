@@ -14,6 +14,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -23,46 +24,174 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 import run.BottleTwin;
+import java.awt.*;
+import javax.swing.*;
 
 class POSPanel extends JPanel {
     private EABSBackend backend;
     private DefaultListModel<String> waitingModel = new DefaultListModel<>();
     private DefaultListModel<String> completedModel = new DefaultListModel<>();
     private JLabel processingLabel = new JLabel("No order processing");
+    private int orderNumber=0;
 
-    public POSPanel(EABSBackend backend) {
+
+    public POSPanel(EABSBackend backend) {    	
         this.backend = backend;
-        setLayout(new GridLayout(0,1));
+        setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.weightx = 1.0;
+        c.fill = GridBagConstraints.BOTH;
+        
+
+        //-----------------submit order--------------
+        JPanel orderPannel = new JPanel();
+        orderPannel.setBorder(BorderFactory.createTitledBorder("Order"));
+        orderPannel.setLayout(new GridBagLayout());
+        GridBagConstraints oc = new GridBagConstraints();
+        oc.insets = new Insets(5, 5, 5, 5);
+        oc.gridx = 0;
+        oc.gridy = 0;
+        oc.weightx = 1.0;
+        oc.fill = GridBagConstraints.HORIZONTAL;
 
         // Input field
-        JTextField orderIdField = new JTextField("Order1");
+        JTextField orderIdField = new JTextField("Order"+orderNumber);
         JTextField qtyField = new JTextField("5");
+        String[]size= {"100ml", "200ml"};
+        JComboBox<String> sizebox = new JComboBox<>(size);
+        orderPannel.add(orderIdField,oc);
+        oc.gridy++;
+        orderPannel.add(qtyField,oc);
+        oc.gridy++;
+        orderPannel.add(sizebox,oc);
+        c.gridy = 0;
+        c.weighty = 0.15; // 15% vertical space
+        add(orderPannel,c);
+        
+        JPanel recipePanel = new JPanel();
+        recipePanel.setBorder(BorderFactory.createTitledBorder("Select Recipe"));
+        GridBagConstraints rc = new GridBagConstraints();
+        recipePanel.setLayout(new GridBagLayout());
+        rc.insets = new Insets(5,5,5,5);
+        rc.gridx = 0;
+        rc.gridy = 0;
+        rc.fill = GridBagConstraints.HORIZONTAL;
+        rc.weightx = 0.5;
+
+        String[] liquids = {"Liquid A", "Liquid B", "Liquid C", "Liquid D", "Liquid E"};
+        JComboBox<String> liquid1Box = new JComboBox<>(liquids);
+        recipePanel.add(new JLabel("First Liquid:"), rc);
+        rc.gridx = 1;
+        recipePanel.add(liquid1Box, rc);
+
+        rc.gridx = 0;
+        rc.gridy++;
+        JSpinner percent1 = new JSpinner(new SpinnerNumberModel(50,0,100,5));
+        recipePanel.add(new JLabel("Percentage:"), rc);
+        rc.gridx = 1;
+        recipePanel.add(percent1, rc);
+
+        rc.gridx = 0;
+        rc.gridy++;
+        JComboBox<String> liquid2Box = new JComboBox<>(liquids);
+        liquid2Box.setSelectedIndex(1); 
+        recipePanel.add(new JLabel("Second Liquid:"), rc);
+        rc.gridx = 1;
+        recipePanel.add(liquid2Box, rc);
+
+        rc.gridx = 0;
+        rc.gridy++;
+        JSpinner percent2 = new JSpinner(new SpinnerNumberModel(50,0,100,5));
+        recipePanel.add(new JLabel("Percentage:"), rc);
+        rc.gridx = 1;
+        recipePanel.add(percent2, rc);
+
+        // Add recipePanel to main layout
+        c.gridy = 1;
+        c.weighty = 0.25; // 25% vertical space
+        add(recipePanel, c);
         JButton submitBtn = new JButton("Submit Order");
+        submitBtn.setPreferredSize(new Dimension(140, 40));
+        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        btnPanel.add(submitBtn);
+
+        c.gridy = 2;
+        c.weighty = 0.05; // small vertical space
+        c.fill = GridBagConstraints.NONE;
+        c.anchor = GridBagConstraints.CENTER;
+        add(btnPanel, c);
+        c.fill = GridBagConstraints.BOTH; // restore fill for next components
 
         submitBtn.addActionListener(e -> {
             String orderId = orderIdField.getText();
             int qty = Integer.parseInt(qtyField.getText());
-            Order o = new Order(orderId, qty);
+            int idx1 = liquid1Box.getSelectedIndex();
+            int idx2 = liquid2Box.getSelectedIndex();
+            int p1 = (Integer) percent1.getValue();
+            int p2 = (Integer) percent2.getValue();
+            int bottlesize = sizebox.getSelectedIndex();
+            boolean sizeSignal = false;
+            
+            if (bottlesize == 1) {
+            	sizeSignal = true;
+            }
+
+            if (idx1 == idx2) {
+                JOptionPane.showMessageDialog(this,
+                        "Please choose two different liquids!",
+                        "Invalid selection", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (p1 + p2 != 100) {
+                JOptionPane.showMessageDialog(this,
+                        "Total percentage must equal 100!",
+                        "Invalid percentages", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            int[] recipe = new int[5];
+            recipe[idx1] = p1;
+            recipe[idx2] = p2;
+            Order o = new Order(orderId, qty,recipe, sizeSignal);
             backend.enqueueOrder(o);
+            orderNumber++;
+            orderIdField.setText("Order" + orderNumber);
         });
 
-        add(orderIdField);
-        add(qtyField);
-        add(submitBtn);
+        //--------------------- order process panel-------------------
+        JPanel processPanel = new JPanel(new GridBagLayout());
+        processPanel.setBorder(BorderFactory.createTitledBorder("Order Processing"));
+        processPanel.setLayout(new GridBagLayout());
+        GridBagConstraints pc = new GridBagConstraints();
+        pc.insets = new Insets(5,5,5,5);
+        pc.gridx = 0;
+        pc.gridy = 0;
+        pc.fill = GridBagConstraints.BOTH;
+        pc.weightx = 1.0;
 
-        // Waiting orders
-        add(new JLabel("Waiting Orders:"));
+        processPanel.add(new JLabel("Waiting Orders:"), pc);
+        pc.gridy++;
         JList<String> waitingList = new JList<>(waitingModel);
-        add(new JScrollPane(waitingList));
+        processPanel.add(new JScrollPane(waitingList), pc);
 
-        // Processing order
-        add(new JLabel("Processing Order:"));
-        add(processingLabel);
+        pc.gridy++;
+        processPanel.add(new JLabel("Processing Order:"), pc);
+        pc.gridy++;
+        processingLabel.setForeground(Color.BLUE); // text color
+        processingLabel.setFont(processingLabel.getFont().deriveFont(Font.ITALIC)); // italic
+        processPanel.add(processingLabel, pc);
 
-        // Completed orders
-        add(new JLabel("Completed Orders:"));
+        pc.gridy++;
+        processPanel.add(new JLabel("Completed Orders:"), pc);
+        pc.gridy++;
         JList<String> completedList = new JList<>(completedModel);
-        add(new JScrollPane(completedList));
+        processPanel.add(new JScrollPane(completedList), pc);
+
+        // Add processPanel to main layout
+        c.gridy = 3;
+        c.weighty = 0.55; // 55% vertical space
+        add(processPanel, c);
 
         // Refresh UI every 0.5s
         new Timer(500, e -> refreshUI()).start();
@@ -127,10 +256,12 @@ public class ABS extends JFrame {
 
 		c.gridx = 0;
 		c.gridy = 1;
-		c.weightx = 0;
-		c.weighty = 0.2;
-		c.fill = GridBagConstraints.NONE;
+		c.weightx = 1.0;  // allow horizontal expansion
+		c.weighty = 0.0;  // no vertical weight, stay at bottom
+		c.fill = GridBagConstraints.HORIZONTAL; // expand horizontally
+		c.anchor = GridBagConstraints.SOUTH;   // stick to bottom
 		this.add(ss, c);
+
 
 		c.gridx = 1;
 		c.gridy = 0;
@@ -143,12 +274,13 @@ public class ABS extends JFrame {
 		this.setTitle("ABS_roTable");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-		this.setResizable(false);
+		this.setResizable(true);
+		this.setSize(1000, 600);
 	}
 
 	public static void main(String[] args) {
 		ABS cl = new ABS();
-		cl.pack();
+//		cl.pack();
 		cl.setVisible(true);
         new Thread(new OrderDispatcher(cl.backend)).start();
 

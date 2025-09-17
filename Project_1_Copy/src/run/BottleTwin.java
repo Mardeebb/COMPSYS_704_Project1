@@ -11,12 +11,17 @@ public class BottleTwin implements Serializable {
 	public volatile boolean isFilled = false;
 	public volatile boolean isCapOn = false;
 	public volatile boolean isCapped = false;
+	public volatile int[] recipe =new int[5];
+	public volatile boolean isLarge = false; // isLarge is false means that the bottle size is 100ml
 	
-	public BottleTwin(int id, String name, String orderName){
+	
+	public BottleTwin(int id, String name, String orderName, int[] recipe, boolean isLarge){
 		this.ID = id;
 		this.name = name;
 		this.status = "scheduled";
 		this.order = orderName;
+		this.recipe = recipe;
+		this.isLarge = isLarge;
 	}
 	
     public boolean isCompleted() { return "completed".equals(status); }
@@ -31,6 +36,9 @@ public class BottleTwin implements Serializable {
     	}else {
 	    	return 0;
     	}
+    }
+    public int[] getRecipe() {
+    	return recipe;
     }
 
 }

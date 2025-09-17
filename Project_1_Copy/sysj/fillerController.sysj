@@ -36,6 +36,30 @@ fController(
 	    	}
 	    }
 	    pause;
+	    // fill second liquid
+	    // Phase 1: go up & inject until TOP
+	    abort(dosUnitFilled) {
+	    	{
+	  	      	sustain dosUnitValveRetract;
+	    	}
+	    		||
+	    	{
+	    		sustain valveInjectorOnOff;
+	    	}
+	    }
+	    pause;                            
+	
+	    // Phase 2: open inlet & go down until BOTTOM
+	    abort(dosUnitEvac) {
+	    	{
+	  	      	sustain dosUnitValveExtend;
+	    	}
+	    		||
+	    	{
+	    		sustain valveInletOnOff;
+	    	}
+	    }
+	    pause;
 	    
 	    emit filled;
 	  }
