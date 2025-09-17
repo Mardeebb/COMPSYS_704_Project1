@@ -235,7 +235,7 @@ Orchestrator(
 		while(true) {
 			await(checkCapper);
 			present(bottlePos4){
-				BottleTwin b = (BottleTwin)#posThreeUpdate;
+				BottleTwin b = (BottleTwin)#posFourUpdate;
 				if(!b.isCapped) {
 					emit startCapperThread;
 				}else {

@@ -1738,7 +1738,7 @@ public class Orchestrator extends ClockDomain{
               S3225=1;
               if(bottlePos4.getprestatus()){//sysj\Orchestrator.sysj line: 237, column: 12
                 S3219=0;
-                b_thread_17 = (BottleTwin)(posThreeUpdate_1.getpreval() == null ? null : ((BottleTwin)posThreeUpdate_1.getpreval()));//sysj\Orchestrator.sysj line: 238, column: 5
+                b_thread_17 = (BottleTwin)(posFourUpdate_1.getpreval() == null ? null : ((BottleTwin)posFourUpdate_1.getpreval()));//sysj\Orchestrator.sysj line: 238, column: 5
                 if(!b_thread_17.isCapped){//sysj\Orchestrator.sysj line: 239, column: 8
                   startCapperThread_1.setPresent();//sysj\Orchestrator.sysj line: 240, column: 6
                   currsigs.addElement(startCapperThread_1);
