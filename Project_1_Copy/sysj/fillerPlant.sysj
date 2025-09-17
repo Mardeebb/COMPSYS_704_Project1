@@ -43,16 +43,6 @@ fPlant(
                 sustain dosUnitFilled;    // at bottom
             }
             await(!enable);
-            abort(dosUnitValveRetract && enable){
-                sustain  dosUnitEvac;  // at top
-            }
-            await(!enable);
-
-            // Extend = canister down
-            abort(dosUnitValveExtend && enable){
-                sustain dosUnitFilled;    // at bottom
-            }
-            await(!enable);
 			BottleTwin b = (BottleTwin)#bottle;
 			int id = b.ID;
 			emit fillID(id);

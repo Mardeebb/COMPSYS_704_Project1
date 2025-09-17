@@ -210,7 +210,7 @@ public class Canvas extends JPanel {
 	    int rightImage = robot.rightImage(robot.cmdR);
 	    int leftImage = robot.leftImage(robot.cmdL);
     	drawBottle(robot.posEightID, 200, 300, g);
-    	drawBottle(robot.posNineID, 700, 300, g);
+    	drawBottle(robot.posNineID, 800, 300, g);
 	    if(robot.bottleSize) {
 	    	
 		    // draw left arm
@@ -301,19 +301,19 @@ public class Canvas extends JPanel {
 	    }
 	    g2d.drawString("bottleAtPos5", 450, 130);
 	    
-	    if(Conveyor.bottleAtPos1) {
-	        g2d.setColor(Color.green);
-	    } else {
-	        g2d.setColor(Color.red);
-	    }
-	    g2d.drawString("bottleAtPos1", 450, 160);
-
-	    if(Conveyor.bottleLeftPos5) {
-	        g2d.setColor(Color.green);
-	    } else {
-	        g2d.setColor(Color.red);
-	    }
-	    g2d.drawString("bottleLeftPos5", 450, 190);
+//	    if(Conveyor.bottleAtPos1) {
+//	        g2d.setColor(Color.green);
+//	    } else {
+//	        g2d.setColor(Color.red);
+//	    }
+//	    g2d.drawString("bottleAtPos1", 450, 160);
+//
+//	    if(Conveyor.bottleLeftPos5) {
+//	        g2d.setColor(Color.green);
+//	    } else {
+//	        g2d.setColor(Color.red);
+//	    }
+//	    g2d.drawString("bottleLeftPos5", 450, 190);
 	    
 	    g2d.drawString(Filler.liquidMessage, 150, 60);
 

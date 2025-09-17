@@ -40,7 +40,7 @@ public class Order {
     public synchronized int getCompletedCount() {
         int cnt = 0;
         for (BottleTwin b : bottles) {
-            if (b.isCompleted()) cnt++;
+            if (b.isCapped) cnt++;
         }
         return cnt;
     }

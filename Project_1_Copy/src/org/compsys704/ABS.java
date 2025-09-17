@@ -176,14 +176,14 @@ class POSPanel extends JPanel {
         processPanel.add(new JScrollPane(waitingList), pc);
 
         pc.gridy++;
-        processPanel.add(new JLabel("Processing Order:"), pc);
+        processPanel.add(new JLabel("Sending Order:"), pc);
         pc.gridy++;
         processingLabel.setForeground(Color.BLUE); // text color
         processingLabel.setFont(processingLabel.getFont().deriveFont(Font.ITALIC)); // italic
         processPanel.add(processingLabel, pc);
 
         pc.gridy++;
-        processPanel.add(new JLabel("Completed Orders:"), pc);
+        processPanel.add(new JLabel("Sent Orders:"), pc);
         pc.gridy++;
         JList<String> completedList = new JList<>(completedModel);
         processPanel.add(new JScrollPane(completedList), pc);
@@ -209,10 +209,10 @@ class POSPanel extends JPanel {
         } else {
             processingLabel.setText("No order processing");
         }
-
+        
         completedModel.clear();
         for (Order o : backend.getCompletedOrders()) {
-            completedModel.addElement(o.id + " (done)");
+            completedModel.addElement(o.id + " (" + o.getCompletedCount() + "/" + o.bottles.size() + ")");
         }
     }
 }
@@ -243,7 +243,7 @@ public class ABS extends JFrame {
 
 		JPanel ss = new JPanel();
 		ss.add(enable);
-		ss.add(request);
+//		ss.add(request);
 
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
