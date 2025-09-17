@@ -13,82 +13,83 @@ CapperPlant (
 		output signal gripperZAxisLoweredE, gripperZAxisLiftedE;
 		output signal gripperTurnHomePosE, gripperTurnFinalPosE;
 		output signal gripperGripped, cylClamped;
+		output signal capID;
 		)
 -> {
+	BottleTwin signal bottle;
+	signal grip;
+	
 	{
 		while(true) {
-//			await(enable);
-//			abort(!enable) {
-				System.err.println("Bottle at pos 4");
-				sustain bottleAtPos4;
+			await(bottleIn);
+			BottleTwin b = (BottleTwin)#bottleIn;
+			if(b != null) {
+				emit bottle(b);
+	            emit bottleAtPos4;
+			}
+            pause;
+		}
+	}
+	
+	||
+	
+	{
+		while(true) {
+			await(!enable);
+			await(enable);
+
+			abort(cylPos5ZAxisExtend){
+				emit gripperZAxisLiftedE;
+				sustain gripperZAxisLifted;
+			}
+			pause;
+				await(!enable);
+				await(enable);
+			abort(!cylPos5ZAxisExtend){
+				emit gripperZAxisLoweredE;
+				sustain gripperZAxisLowered;
+			}
+		}
+	}
+	
+//	||
+//	
+//	{
+//		while(true) {
+//			abort(capGripperPos5Extend){
+//				halt;
 //			}
-			pause;
-		}
-	}
+//
+//			abort(!capGripperPos5Extend){
+//				sustain grip;
+//			}
+//		}
+//	}
+
 	||
-	{ // gripper lowered or lifted
+	
+	{
 		while(true) {
-			System.err.println("Check lift");
-			abort(cylPos5ZAxisExtend && enable) {
-				System.err.println("Gripper Lifted");
-				sustain gripperZAxisLifted; // when the gripper/capper is lifted
+			abort(gripperTurnExtend){
+				sustain gripperTurnHomePos;
 			}
-			await(!enable);
+			pause;
+//			await(!enable);
+//			await(enable);
+//			System.err.println("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+//			System.err.println("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+//			System.err.println("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+//			System.err.println("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+//			System.err.println("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+//			System.err.println("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+			BottleTwin b = (BottleTwin)#bottle;
+			int id = b.ID;
+			emit capID(id);
 			
-			System.err.println("Check lower");
-			abort(!cylPos5ZAxisExtend) {
-				System.err.println("Gripper lowered");
-				sustain gripperZAxisLowered; // when the gripper/capper is lowered
+			abort(gripperTurnRetract){
+				sustain gripperTurnFinalPos;
 			}
-			await(!enable);
 		}
 	}
-	||
-	{
-		while(true) {
-			await(capGripperPos5Extend);
-			abort(!capGripperPos5Extend) {
-				sustain gripperGripped;
-			}
-			pause;
-		}
-	}
-	||
-	{ // gripper gripping
-		while(true) {
-			present (gripperTurnExtend && !gripperTurnRetract) {
-				abort (gripperTurnRetract && enable) {
-					sustain gripperTurnFinalPos; // gripper final position 
-				}
-			}
-			await(!enable);
-			present (gripperTurnRetract && !gripperTurnExtend) {
-				abort(gripperTurnExtend && enable) {
-					sustain gripperTurnHomePos; // gripper initial position
-				}
-			}
-			await(!enable);
-		}
-	}
-	||
-	{
-		while(true) {
-			await(cylClampBottleExtend);
-			
-			abort(!cylClampBottleExtend) {
-				sustain cylClamped; // indicate that it is clamped, abort if it is not 
-			}
-			pause;
-		}
-	}
-	||
-	{
-		{while(true) {present(gripperZAxisLowered){emit gripperZAxisLoweredE;} pause;}}
-		||
-		{while(true) {present(gripperZAxisLifted){emit gripperZAxisLiftedE;} pause;}}
-		||
-		{while(true) {present(gripperTurnHomePos){emit gripperTurnHomePosE;} pause;}}
-		||
-		{while(true) {present(gripperTurnFinalPos){emit gripperTurnFinalPosE;} pause;}}
-	}
+	
 }

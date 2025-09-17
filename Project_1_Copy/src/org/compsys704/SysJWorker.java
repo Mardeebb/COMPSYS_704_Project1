@@ -100,23 +100,35 @@ public class SysJWorker extends Worker{
 	            bottle.status = "Filled";
 	        }
 			break;
+			
 		case "capOnID":
 	        if (status && value != null) {
 	            int id = (int) value;
 	            BottleTwin bottle = EABSBackend.getBottleFromID(id);
 	            bottle.isCapOn = true;
-	            bottle.status = "Filled";
+	            bottle.status = "caploaded";
 	        }
 			break;
 			
+		case "capID":
+	        if (status && value != null) {
+	            int id = (int) value;
+	            BottleTwin bottle = EABSBackend.getBottleFromID(id);
+	            bottle.isCapped = true;
+	            bottle.status = "Finished";
+	        }
+			break;
+
 		case "gripperZAxisLoweredE":
-			Capper.capper_lowered = status;
-			System.err.println("Lowered " + Capper.capper_lowered);
+			if(status) {
+				Capper.capper_lowered = true;
+			}
 			break;
 		
 		case "gripperZAxisLiftedE":
-			Capper.capper_lifted = status;
-			System.err.println("Lifted (Lifted signal) " + Capper.capper_lifted);
+			if(status) {
+				Capper.capper_lowered = false;
+			}
 			break;
 		
 		case "gripperTurnHomePosE":
@@ -222,16 +234,17 @@ public class SysJWorker extends Worker{
 	            robot.posNineID = id;
 	        }
 			break;
+			
 
 
-
+			
 		default: 
 			System.err.println("Wrong sig name : "+signame);
 			System.exit(1);
 		}
 	}
 	
-	static final List<String> signames = Arrays.asList("bottlePos9","bottlePos8","bottlePos7","bottlePos6","bottlePos5","bottlePos4","bottlePos3","bottlePos2","bottlePos1","bottlePos0","CMD_RE", "CMD_R2E", "CMD_L2E", "CMD_LE","gripperTurnFinalPosE", "gripperTurnHomePosE", "gripperZAxisLiftedE", "gripperZAxisLoweredE", "capOnID", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","conveyorMoving","conveyorStop","fillID");
+	static final List<String> signames = Arrays.asList("capID", "bottlePos9","bottlePos8","bottlePos7","bottlePos6","bottlePos5","bottlePos4","bottlePos3","bottlePos2","bottlePos1","bottlePos0","CMD_RE", "CMD_R2E", "CMD_L2E", "CMD_LE","gripperTurnFinalPosE", "gripperTurnHomePosE", "gripperZAxisLiftedE", "gripperZAxisLoweredE", "capOnID", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","conveyorMoving","conveyorStop","fillID");
 	
 	@Override
 	public boolean hasSignal(String sn) {

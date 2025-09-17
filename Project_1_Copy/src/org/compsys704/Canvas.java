@@ -46,7 +46,6 @@ public class Canvas extends JPanel {
     private Map<Integer, Rectangle> clickableAreas = new HashMap<>();
     
     private void showBottleInfo(BottleTwin bottle) {
-        // A small popup, you can use JDialog if you want more custom UI
         JOptionPane.showMessageDialog(
             this,
             "Bottle ID: " + bottle.ID +"\nOrder: " + bottle.order + "\nName: " + bottle.name + "\nStatus: " + bottle.status+ "\nFilled: " + bottle.isFilled+ "\nCapOn: " + bottle.isCapOn,
@@ -207,14 +206,13 @@ public class Canvas extends JPanel {
 		
 		super.paintComponent(g);
 	    Graphics2D g2d = (Graphics2D) g;
-	    boolean signal1 = TurnTable.capOnBottleAtPos1;  // replace with your actual signal
-	    boolean signal2 = TurnTable.bottleAtPos5;
+	    
 	    int rightImage = robot.rightImage(robot.cmdR);
 	    int leftImage = robot.leftImage(robot.cmdL);
     	drawBottle(robot.posEightID, 200, 300, g);
     	drawBottle(robot.posNineID, 700, 300, g);
 	    if(robot.bottleSize) {
-	//	    System.err.println(leftImage);
+	    	
 		    // draw left arm
 		    switch(leftImage) {
 		    case 0:
@@ -286,29 +284,42 @@ public class Canvas extends JPanel {
 		    	break;
 		    }
 	    }
-	    // Draw Signal 1
-	    if(signal1) {
+	    
+	    // Draw Signals
+	    if(TurnTable.capOnBottleAtPos1) {
 	        g2d.setColor(Color.green);
 	    } else {
 	        g2d.setColor(Color.red);
 	    }
-	    g2d.drawString("capOnBottleAtPos1", 450, 100); // (x, y) position on panel
+	    g2d.drawString("capOnBottleAtPos1", 450, 100);
 
-	    // Draw Signal 2
-	    if(signal2) {
+	    if(TurnTable.bottleAtPos5) {
 	    	
 	        g2d.setColor(Color.green);
 	    } else {
 	        g2d.setColor(Color.red);
 	    }
-	    g2d.drawString("bottleAtPos5", 450, 130); // slightly lower y for separation
+	    g2d.drawString("bottleAtPos5", 450, 130);
+	    
+	    if(Conveyor.bottleAtPos1) {
+	        g2d.setColor(Color.green);
+	    } else {
+	        g2d.setColor(Color.red);
+	    }
+	    g2d.drawString("bottleAtPos1", 450, 160);
+
+	    if(Conveyor.bottleLeftPos5) {
+	        g2d.setColor(Color.green);
+	    } else {
+	        g2d.setColor(Color.red);
+	    }
+	    g2d.drawString("bottleLeftPos5", 450, 190);
 	    
 	    if(Conveyor.moving) {
 			g.drawImage(conveyor_moving, rotTable_X + -250, rotTable_Y + 190, null);
 	    }else {
 			g.drawImage(conveyor_static, rotTable_X + -250, rotTable_Y + 190, null);
 	    }
-//		System.err.println(Conveyor.posZeroID);
 	    
 	    // capper image
 	    if (Capper.capper_lowered) {
@@ -324,7 +335,6 @@ public class Canvas extends JPanel {
 			g.drawImage(filler_off, 75, 75, null);
 		}
 
-	    	
 		if(TurnTable.RT_PS == 0) {
 			g.drawImage(rotary_table, rotTable_X, rotTable_Y, null);
 		}else if(TurnTable.RT_PS == 1){

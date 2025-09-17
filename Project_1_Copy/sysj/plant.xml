@@ -81,6 +81,7 @@
 
 			
 			
+			<oSignal Name="capID" To="UI.capID" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000"/>
 			<oSignal Name="bottleAtPos4" To="CapperControllerCD.bottleAtPos4" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10042"/>
 			<oSignal Name="gripperZAxisLowered" To="CapperControllerCD.gripperZAxisLowered" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10042"/>
 			<oSignal Name="gripperZAxisLifted" To="CapperControllerCD.gripperZAxisLifted" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10042"/>

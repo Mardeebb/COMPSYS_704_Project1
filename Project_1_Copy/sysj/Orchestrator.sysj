@@ -3,18 +3,18 @@ import run.BottleTwin;
 
 Orchestrator(
 		input BottleTwin signal newBottleTwin;
-		input signal request, enable, conveyorMoved, rotTableTurned, filled, capLoaded, bottleLoaded, bottleUnloaded, bottleLoaderRelease, bottleUnloaderRelease;
-		
-		output signal recieveTwin, startConveyor, startRotTable, startFilling, startCapLoading, startBottleLoading, startBottleUnloading;
+		input signal request, enable, conveyorMoved, rotTableTurned, filled, capLoaded, capped, bottleLoaded, bottleUnloaded, bottleLoaderRelease, bottleUnloaderRelease;
+
+		output signal recieveTwin, startConveyor, startRotTable, startFilling, startCapLoading, startCapping, startBottleLoading, startBottleUnloading;
 		output BottleTwin signal bottlePos0, bottlePos1, bottlePos2, bottlePos3, bottlePos4, bottlePos5, bottlePos6, bottlePos7, bottlePos8, bottlePos9, bottlePos1Rot;
 		output int signal bottlePos0B, bottlePos1B, bottlePos2B, bottlePos3B, bottlePos4B, bottlePos5B, bottlePos6B, bottlePos7B, bottlePos8B, bottlePos9B;
 		)
 ->{	
 	
 	BottleTwin signal posZeroUpdate, posOneUpdate, posTwoUpdate, posThreeUpdate, posFourUpdate, posFiveUpdate, posSixUpdate, posSevenUpdate, posEightUpdate, posNineUpdate;
-	signal filling, capLoading, startRobotLoaderThread, startConveyorThread, startRotThread, startCapLoaderThread, startRobotUnloaderThread, startFillerThread;
-	signal checkRobotLoader, checkConveyor, checkRotTable, checkRobotUnloader, checkFiller, checkCapLoader;
-	signal robotLoaderFinish, conveyorFinish, rotTableFinish, robotUnloaderFinish, fillerFinish, capLoaderFinish;
+	signal filling, capLoading, startRobotLoaderThread, startConveyorThread, startRotThread, startCapLoaderThread, startRobotUnloaderThread, startFillerThread, startCapperThread;
+	signal checkRobotLoader, checkConveyor, checkRotTable, checkRobotUnloader, checkFiller, checkCapLoader, checkCapper;
+	signal robotLoaderFinish, conveyorFinish, rotTableFinish, robotUnloaderFinish, fillerFinish, capLoaderFinish, capperFinish;
 	// thread for getting new bottle
 	{
 		while(true){
@@ -71,6 +71,14 @@ Orchestrator(
 			}
 			||
 			{
+				emit checkCapper;
+				await(capperFinish);
+
+				pause;
+				pause;
+			}
+			||
+			{
 				emit checkRobotLoader;
 				await(robotLoaderFinish);
 				pause;
@@ -116,12 +124,10 @@ Orchestrator(
 			await(!enable);
 			await(enable);
 
-
 		}
 	}
-
-	||
 	
+	||
 	// Bottle loader logic
 	{
 		while(true) {
@@ -192,6 +198,8 @@ Orchestrator(
 				BottleTwin b = (BottleTwin)#posTwoUpdate;
 				if(!b.isFilled) {
 					emit startFillerThread;
+				}else {
+					emit fillerFinish;
 				}
 				pause;
 			} else {
@@ -210,6 +218,8 @@ Orchestrator(
 				BottleTwin b = (BottleTwin)#posThreeUpdate;
 				if(!b.isCapOn && !b.isCapped) {
 					emit startCapLoaderThread;
+				}else {
+					emit capLoaderFinish;
 				}
 				pause;
 			} else {
@@ -218,9 +228,28 @@ Orchestrator(
 			}
 		}
 	}
+	
+	||
+	// Capper logic
+	{
+		while(true) {
+			await(checkCapper);
+			present(bottlePos4){
+				BottleTwin b = (BottleTwin)#posThreeUpdate;
+				if(!b.isCapped) {
+					emit startCapperThread;
+				}else {
+					emit capperFinish;
+				}
+				pause;
+			} else {
+			pause;
+			emit capperFinish;
+			}
+		}
+	}
 
 	||
-	
 	// Bottle loader thread
 	{
 		while(true) {
@@ -258,6 +287,7 @@ Orchestrator(
 			BottleTwin bZero = (BottleTwin)#posZeroUpdate;
 			BottleTwin bFive = (BottleTwin)#posFiveUpdate;
 			pause;
+			
 			emit posZeroUpdate(null);
 			emit posFiveUpdate(null);
 			emit posOneUpdate(bZero);
@@ -339,6 +369,23 @@ Orchestrator(
 		}
 	}
 	
+	||
+	
+	// capper thread
+	{
+		while(true) {
+			await(startCapperThread);
+			// wait for plant update first		
+			emit startCapping;
+			await(capped);
+			pause;
+			pause;
+			emit capperFinish;
+
+			await(!startCapperThread);
+		}
+	}
+
 	||
 	
 	// capLoader thread
