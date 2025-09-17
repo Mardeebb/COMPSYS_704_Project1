@@ -32,12 +32,12 @@ bPlant(
 	      // Simulated action time (2 logical ticks works well)
 	 	  await(enable);  
 	      await(!enable);  
-	      abort(CMD_L2){
+	      abort(CMD_R2){
 	    	  sustain CMDfb_R; 
 	      }
 	 	  await(enable);  
 	      await(!enable);  
-	      abort(CMD_L){
+	      abort(CMD_R){
 	    	  sustain CMDfb_R2;              // acknowledge completion
 	      }
 	    }

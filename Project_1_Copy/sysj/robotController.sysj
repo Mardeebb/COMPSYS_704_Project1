@@ -18,7 +18,6 @@ bController(
 				sustain CMD_L("limb_gripper left_limb close"); 
 			}
 			abort(CMDfb_L2){
-				
 				emit bottleLoaded;
 				sustain CMD_L2("limb_moveto left_limb C"); 
 			}
@@ -46,7 +45,6 @@ bController(
 				sustain CMD_R("limb_gripper right_limb close"); 
 			}
 			abort(CMDfb_R2){
-				
 				emit bottleUnloaded;
 				sustain CMD_R2("limb_moveto right_limb B");  // lower horizontal place
 			}
@@ -56,6 +54,7 @@ bController(
 			abort(CMDfb_R2){
 				sustain CMD_R2("limb_moveto right_limb A"); //Move the arm back to the ready location (Position A
 			}
+			
 			emit bottleUnloaderRelease;
 		}
 	}

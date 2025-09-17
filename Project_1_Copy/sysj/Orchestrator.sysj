@@ -49,66 +49,64 @@ Orchestrator(
 //			await(!request);
 //			await(request);
 
-			emit checkCapLoader;
-			await(capLoaderFinish);
-
-			pause;
-			pause;
-
-			emit checkFiller;
-			await(fillerFinish);
-
-			pause;
-			pause;
-
-
-//			await(!request);
-//			await(request);
-			await(!enable);
-			await(enable);
-
 			emit checkConveyor;
 			await(conveyorFinish);
 			pause;
 			pause;
-			
-//			await(!enable);
-//			await(enable);
-			
-			emit checkRobotLoader;
-			await(robotLoaderFinish);
-			pause;
-			pause;
 
-			emit checkRobotUnloader;
-			await(robotUnloaderFinish);
-			pause;
-			pause;
+			{
+				emit checkCapLoader;
+				await(capLoaderFinish);
 
-			emit checkRobotUnloader;
-			await(robotUnloaderFinish);
-			pause;
-			pause;
+				pause;
+				pause;
+			}
+			||
+			{
+				emit checkFiller;
+				await(fillerFinish);
+
+				pause;
+				pause;
+			}
+			||
+			{
+				emit checkRobotLoader;
+				await(robotLoaderFinish);
+				pause;
+				pause;
+			}
+			||
+			{
+				emit checkRobotUnloader;
+				await(robotUnloaderFinish);
+				pause;
+				pause;
+			}			
 			
 			emit checkConveyor;
 			await(conveyorFinish);
 			pause;
 			pause;
 			
-			emit checkRobotLoader;
-			await(robotLoaderFinish);
-			pause;
-			pause;
+			{
+				emit checkRobotLoader;
+				await(robotLoaderFinish);
+				pause;
+				pause;
 
-			emit checkRobotUnloader;
-			await(robotUnloaderFinish);
-			pause;
-			pause;
+			}
+			||
+			{
+				emit checkRobotUnloader;
+				await(robotUnloaderFinish);
+				pause;
+				pause;
+			}
+
 
 			await(!enable);
 			await(enable);
-//			await(!request);
-//			await(request);
 
 			emit checkRotTable;
 			await(rotTableFinish);

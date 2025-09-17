@@ -136,6 +136,7 @@
 			<oSignal Name="bottleUnloaded" To="OrchestratorCD.bottleUnloaded" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10004" />
 			<oSignal Name="bottleLoaded" To="OrchestratorCD.bottleLoaded" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10004" />
 			<oSignal Name="bottleLoaderRelease" To="OrchestratorCD.bottleLoaderRelease" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10004" />
+			<oSignal Name="bottleUnloaderRelease" To="OrchestratorCD.bottleUnloaderRelease" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10004" />
 
 			<oSignal Name="CMD_L" To="baxtorRobotPlantCD.CMD_L" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10031" />
 			<oSignal Name="CMD_L2" To="baxtorRobotPlantCD.CMD_L2" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10031" />
