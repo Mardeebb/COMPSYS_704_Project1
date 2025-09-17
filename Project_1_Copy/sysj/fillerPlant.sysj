@@ -5,9 +5,10 @@ fPlant(
     input signal enable, bottleOut;
     input BottleTwin signal bottleIn;
     
-    output signal bottleAtPos2, dosUnitEvac, dosUnitFilled;
+    output signal dosUnitEvac, dosUnitFilled;
+    output BottleTwin signal bottleAtPos2;
     output signal dosUnitEvacE, dosUnitFilledE;
-    output int signal fillID;
+    output int signal fillerWorkingID, fillID;
 )
 -> {
 	BottleTwin signal bottle;
@@ -16,9 +17,11 @@ fPlant(
         while(true){
             await(bottleIn);
 			BottleTwin b = (BottleTwin)#bottleIn;
+			int id = b.ID;
 			if(b != null) {
 				emit bottle(b);
-	            emit bottleAtPos2;
+	            emit bottleAtPos2(b);
+	            emit fillerWorkingID(id);
 			}
             pause;
         }
@@ -30,6 +33,16 @@ fPlant(
     {
         while(true){
             // Retract = canister up
+            abort(dosUnitValveRetract && enable){
+                sustain  dosUnitEvac;  // at top
+            }
+            await(!enable);
+
+            // Extend = canister down
+            abort(dosUnitValveExtend && enable){
+                sustain dosUnitFilled;    // at bottom
+            }
+            await(!enable);
             abort(dosUnitValveRetract && enable){
                 sustain  dosUnitEvac;  // at top
             }

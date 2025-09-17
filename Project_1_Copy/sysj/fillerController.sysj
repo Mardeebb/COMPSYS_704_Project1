@@ -1,18 +1,71 @@
+import run.BottleTwin;
 
 fController(
-		input signal bottleAtPos2, dosUnitEvac, dosUnitFilled, startFilling;
+		input BottleTwin signal bottleAtPos2;
+		input signal dosUnitEvac, dosUnitFilled, startFilling;
 		// input signal fillerRequest
 		output signal valveInjectorOnOff, valveInletOnOff, dosUnitValveRetract, dosUnitValveExtend, filled; 
+		output String signal liquidMessage;
 		// output signal fillerStatus, bottleStatus; 
 		)
 ->{
+	int signal volume;
+	int signal liquidType;
+	signal startFillingProcess, fillingProcessFinish;
+	
 	System.out.println("filler Controller started");
+	{
+		while(true) {
+		    await(startFilling);            	 // new bottle at P2
+		    await(bottleAtPos2);
+			BottleTwin b = (BottleTwin)#bottleAtPos2;
+			if(b != null) {
+				int[] recipe = new int[5];
+				recipe = b.recipe;
+				for(int i = 0; i < 5; i++) {
+					int amount = recipe[i];
+					if(amount > 0) {
+						emit volume(amount);
+						emit liquidType(i);
+						emit startFillingProcess;
+						await(fillingProcessFinish);
+						await(!fillingProcessFinish);
+						pause;
+					}else {
+						pause;
+					}
+					pause;
+				}
+				pause;
+			}
+		    emit filled;
+			pause;
+		}
+	}
+	||
 	{
 
 	  while (true) {
-	    await(startFilling);             // new bottle at P2
+	    await(startFillingProcess);             // new bottle at P2
 	    await(bottleAtPos2);
+//	    {
+//	    	abort(fillingProcessFinish){
+//	    		while(true) {
+//	    			int v = (int)#volume;
+//	    			int l = (int)#liquidType;
+//	    			System.err.println("volume" + v);
+//	    			System.err.println("liquid" + l);
+//	    			pause;
+//	    		}
+//	    	}
+//	    	
+//	    }
+	    
+		int v = (int)#volume;
+		int l = (int)#liquidType;
 
+	    String message = "Filling " + v + "ml of liquid type " + l;
+	    emit liquidMessage(message);
 	    // Phase 1: go up & inject until TOP
 	    abort(dosUnitFilled) {
 	    	{
@@ -36,8 +89,9 @@ fController(
 	    	}
 	    }
 	    pause;
-	    
-	    emit filled;
+	    pause;
+	    emit liquidMessage("");
+	    emit fillingProcessFinish;
 	  }
 	}
 

@@ -37,8 +37,16 @@ public class BottleTwin implements Serializable {
 	    	return 0;
     	}
     }
-    public int[] getRecipe() {
-    	return recipe;
+    public String getRecipeString() {
+    	String message = "\n";
+    	for(int i = 0; i < 5; i++) {
+    		int v = this.recipe[i];
+    		if(v > 0) {
+    			message += "Liquid " + i + ": " + v + "ml";
+    			message += "\n";
+    		}
+    	}
+        return message;
     }
 
 }

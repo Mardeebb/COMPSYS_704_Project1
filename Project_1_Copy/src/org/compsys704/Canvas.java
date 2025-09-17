@@ -48,7 +48,7 @@ public class Canvas extends JPanel {
     private void showBottleInfo(BottleTwin bottle) {
         JOptionPane.showMessageDialog(
             this,
-            "Bottle ID: " + bottle.ID +"\nOrder: " + bottle.order + "\nName: " + bottle.name + "\nStatus: " + bottle.status+ "\nFilled: " + bottle.isFilled+ "\nCapOn: " + bottle.isCapOn,
+            "Bottle ID: " + bottle.ID +"\nOrder: " + bottle.order + "\nName: " + bottle.name + "\nStatus: " + bottle.status+ "\nFilled: " + bottle.isFilled + "\nCapOn: " + bottle.isCapOn + "\nCapped: " + bottle.isCapped + "\nRecipe: " + bottle.getRecipeString() ,
             "Bottle Info",
             JOptionPane.INFORMATION_MESSAGE
         );
@@ -315,6 +315,8 @@ public class Canvas extends JPanel {
 	    }
 	    g2d.drawString("bottleLeftPos5", 450, 190);
 	    
+	    g2d.drawString(Filler.liquidMessage, 150, 60);
+
 	    if(Conveyor.moving) {
 			g.drawImage(conveyor_moving, rotTable_X + -250, rotTable_Y + 190, null);
 	    }else {

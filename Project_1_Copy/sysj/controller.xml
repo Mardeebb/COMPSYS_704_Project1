@@ -104,6 +104,7 @@
 			<iSignal Name="startFilling" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10007" />
 
 
+			<oSignal Name="liquidMessage" To="UI.liquidMessage" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="filled" To="OrchestratorCD.filled" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10004" />
 			<oSignal Name="valveInjectorOnOff" To="fillerPlantCD.valveInjectorOnOff" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10008" />
 			<oSignal Name="valveInletOnOff" To="fillerPlantCD.valveInletOnOff" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10008" />
