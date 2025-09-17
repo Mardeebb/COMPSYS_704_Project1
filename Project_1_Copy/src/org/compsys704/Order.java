@@ -13,11 +13,11 @@ public class Order {
     List<BottleTwin> bottles = new ArrayList<>();
     int nextBottleIndex = 0; // pointer to track progress
 
-    public Order(String id, int qty) {
+    public Order(String id, int qty, int[] recipe, boolean isLarge) {
         this.id = id;
         for (int i = 0; i < qty; i++) {
             int uniqueId = globalIdGenerator.getAndIncrement(); // global unique ID
-            bottles.add(new BottleTwin(uniqueId, "name", id));
+            bottles.add(new BottleTwin(uniqueId, "name", id, recipe, isLarge));
         }
     }
 
@@ -34,6 +34,7 @@ public class Order {
     public int getTotal() {
         return bottles.size();
     }
+    
 
     // number of bottles that have status == "completed"
     public synchronized int getCompletedCount() {
