@@ -49,7 +49,8 @@
 			<oSignal Name="bottlePos9B" To="UI.bottlePos9" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 
 			<oSignal Name="faultUpdate" To="UI.faultUpdate" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-
+			<oSignal Name="showStartRemover" To="UI.showStartRemover" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="showStopRemover" To="UI.showStopRemover" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 
 		</ClockDomain>
 

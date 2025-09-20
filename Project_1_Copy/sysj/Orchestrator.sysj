@@ -10,6 +10,7 @@ Orchestrator(
 		output BottleTwin signal bottlePos0, bottlePos1, bottlePos2, bottlePos3, bottlePos4, bottlePos5, bottlePos6, bottlePos7, bottlePos8, bottlePos9, bottlePos1Rot;
 		output int signal bottlePos0B, bottlePos1B, bottlePos2B, bottlePos3B, bottlePos4B, bottlePos5B, bottlePos6B, bottlePos7B, bottlePos8B, bottlePos9B;
 		output int signal startRemover, faultUpdate;
+		output signal showStartRemover, showStopRemover;
 		)
 ->{
 	
@@ -20,29 +21,62 @@ Orchestrator(
 	int signal fault, stop;
 	signal pauseFaultCheck, faultSolved, addFault;
 	{
-		await(stop);
-		
-		{
-			abort(faultSolved){
-				sustain pauseFaultCheck;
-			}
-		}
-		
-		||
-		{
-			int location = (int)#fault;
-			emit startRemover(location);
-//			await(bottleRemoved);
-			await(!enable);
-			await(enable);
-			if(location == 1) {
-				emit posOneUpdate(null);
+		while(true){
+
+			await(fault);
+			
+			{
+				abort(faultSolved){
+					sustain pauseFaultCheck;
+				}
 			}
 			
-			emit faultSolved;
+			||
+			{
+				int location = (int)#fault;
+				await(!enable);
+				await(enable);
 
+				// simulate remove machine
+				emit startRemover(location);
+				emit showStartRemover;
+			    System.err.println("Start Remover");
+			    System.err.println(location);
+
+	//			await(bottleRemoved);
+				await(!enable);
+				await(enable);
+				emit showStopRemover;
+				if(location == 1) {
+					emit posOneUpdate(null);
+				}
+				else if(location == 2) {
+					emit posTwoUpdate(null);
+				}
+				else if(location == 3) {
+					emit posThreeUpdate(null);
+				}
+				else if(location == 4) {
+					emit posFourUpdate(null);
+				}
+				else if(location == 5) {
+					emit posFiveUpdate(null);
+				}
+				else if(location == 6) {
+					emit posSixUpdate(null);
+				}
+				else if(location == 7) {
+					emit posSevenUpdate(null);
+				}
+				else if(location == 8) {
+					emit posEightUpdate(null);
+				}
+
+				emit faultSolved;
+	
+			}
+			pause;
 		}
-		
 	}
 	
 	||
@@ -50,7 +84,7 @@ Orchestrator(
 	{
 		while(true){
 			await(introduceFault);
-			await(addFault);
+//			await(addFault);
 			int location = (int)#introduceFault;
 			if(location == 1) {
 				present(bottlePos1){
@@ -58,6 +92,51 @@ Orchestrator(
 					if (b != null) {
 						b.Faulty = true;
 						emit posOneUpdate(b);
+					} 			
+				}
+
+			}else if(location == 2) {
+				present(bottlePos2){
+					BottleTwin b = (BottleTwin)#posTwoUpdate;
+					if (b != null) {
+						b.Faulty = true;
+						emit posTwoUpdate(b);
+					} 			
+				}
+
+			}else if(location == 3) {
+				present(bottlePos3){
+					BottleTwin b = (BottleTwin)#posThreeUpdate;
+					if (b != null) {
+						b.Faulty = true;
+						emit posThreeUpdate(b);
+					} 			
+				}
+
+			}else if(location == 4) {
+				present(bottlePos4){
+					BottleTwin b = (BottleTwin)#posFourUpdate;
+					if (b != null) {
+						b.Faulty = true;
+						emit posFourUpdate(b);
+					} 			
+				}
+
+			}else if(location == 5) {
+				present(bottlePos5){
+					BottleTwin b = (BottleTwin)#posFiveUpdate;
+					if (b != null) {
+						b.Faulty = true;
+						emit posFiveUpdate(b);
+					} 			
+				}
+
+			}else if(location == 6) {
+				present(bottlePos6){
+					BottleTwin b = (BottleTwin)#posSixUpdate;
+					if (b != null) {
+						b.Faulty = true;
+						emit posSixUpdate(b);
 					} 			
 				}
 
@@ -99,19 +178,17 @@ Orchestrator(
 	{
 
 		while(true) {
-			abort(stop){
+			abort(fault||pauseFaultCheck){
 //				await(!request);
 //				await(request);
-				emit addFault;
-				pause;
-				pause;
 
 				present(fault){
 					int pos = (int)#fault;
 					emit stop(pos);
 				}
-				pause;
-				
+				await(!enable);
+				await(enable);
+
 				emit checkConveyor;
 				await(conveyorFinish);
 				pause;
@@ -155,15 +232,14 @@ Orchestrator(
 					pause;
 				}	
 				
-				emit addFault;
-				pause;
-				pause;
+
 				present(fault){
 					int pos = (int)#fault;
 					emit stop(pos);
 				}
-				pause;
-				
+				await(!enable);
+				await(enable);
+
 				emit checkConveyor;
 				await(conveyorFinish);
 				pause;
@@ -183,18 +259,7 @@ Orchestrator(
 					pause;
 					pause;
 				}
-				emit addFault;
-				pause;
-				pause;
 
-				present(fault){
-					int pos = (int)#fault;
-					emit stop(pos);
-				}
-				pause;
-
-				await(!enable);
-				await(enable);
 
 				emit checkRotTable;
 				await(rotTableFinish);
@@ -213,7 +278,6 @@ Orchestrator(
 	// Fault check threads
 	{
 		while(true) {
-			abort(pauseFaultCheck){
 				present(bottlePos0){
 					BottleTwin b = (BottleTwin)#posZeroUpdate;
 					if (b != null) {
@@ -222,32 +286,40 @@ Orchestrator(
 							emit fault(0);
 							int id = b.ID;
 							emit faultUpdate(id);
+							abort(faultSolved){
+								halt;
+							}
 						}
 					} 			
-				}
-				pause;
+				
 			}
+				pause;
+
 		}
 	}
 	
 	||
 	{
 		while(true) {
-			abort(pauseFaultCheck){
 				present(bottlePos1){
 					BottleTwin b = (BottleTwin)#posOneUpdate;
 					if (b != null) {
 						boolean faulty = b.Faulty;
 						if(faulty) {
+						    System.err.println("fault pos1");
+
 							emit fault(1);
 							int id = b.ID;
 							emit faultUpdate(id);
+							abort(faultSolved){
+								halt;
+							}
 
 						}
 					} 			
 				}
 
-			}
+		
 			pause;
 		}
 	}
@@ -256,7 +328,6 @@ Orchestrator(
 
 	{
 		while(true) {
-			abort(pauseFaultCheck){
 				present(bottlePos2){
 					BottleTwin b = (BottleTwin)#posTwoUpdate;
 					if (b != null) {
@@ -265,10 +336,13 @@ Orchestrator(
 							emit fault(2);
 							int id = b.ID;
 							emit faultUpdate(id);
+							abort(faultSolved){
+								halt;
+							}
 
 						}
 					} 			
-				}
+				
 
 		}
 			pause;
@@ -278,7 +352,6 @@ Orchestrator(
 	||
 	{
 		while(true) {
-			abort(pauseFaultCheck){
 				present(bottlePos3){
 					BottleTwin b = (BottleTwin)#posThreeUpdate;
 					if (b != null) {
@@ -287,12 +360,15 @@ Orchestrator(
 							emit fault(3);
 							int id = b.ID;
 							emit faultUpdate(id);
+							abort(faultSolved){
+								halt;
+							}
 
 						}
 					} 			
 				}
 
-			}
+			
 			pause;
 		}
 	}
@@ -300,7 +376,6 @@ Orchestrator(
 	||
 	{
 		while(true) {
-			abort(pauseFaultCheck){
 				present(bottlePos4){
 					BottleTwin b = (BottleTwin)#posFourUpdate;
 					if (b != null) {
@@ -309,12 +384,15 @@ Orchestrator(
 							emit fault(4);
 							int id = b.ID;
 							emit faultUpdate(id);
+							abort(faultSolved){
+								halt;
+							}
 
 						}
 					} 			
 				}
 
-		}
+		
 			pause;
 		}
 	}
@@ -322,7 +400,6 @@ Orchestrator(
 	||
 	{
 		while(true) {
-			abort(pauseFaultCheck){
 				present(bottlePos5){
 					BottleTwin b = (BottleTwin)#posFiveUpdate;
 					if (b != null) {
@@ -331,21 +408,23 @@ Orchestrator(
 							emit fault(5);
 							int id = b.ID;
 							emit faultUpdate(id);
+							abort(faultSolved){
+								halt;
+							}
 
 						}
 					} 			
-				}
-				pause;
+				
 
 			}
-			
+				pause;
+
 		}
 	}
 	
 	||
 	{
 		while(true) {
-			abort(pauseFaultCheck){
 				present(bottlePos6){
 					BottleTwin b = (BottleTwin)#posSixUpdate;
 					if (b != null) {
@@ -354,20 +433,23 @@ Orchestrator(
 							emit fault(6);
 							int id = b.ID;
 							emit faultUpdate(id);
+							abort(faultSolved){
+								halt;
+							}
 
 						}
 					} 			
-				}
+				
+
+			}				
 				pause;
 
-			}
 		}
 	}
 	
 	||
 	{
 		while(true) {
-			abort(pauseFaultCheck){
 				present(bottlePos7){
 					BottleTwin b = (BottleTwin)#posSevenUpdate;
 					if (b != null) {
@@ -376,20 +458,22 @@ Orchestrator(
 							emit fault(7);
 							int id = b.ID;
 							emit faultUpdate(id);
+							abort(faultSolved){
+								halt;
+							}
 
 						}
 					} 			
 				}
 				pause;
 
-		}
+		
 		}
 	}
 	
 	||
 	{
 		while(true) {
-			abort(pauseFaultCheck){
 				present(bottlePos8){
 					BottleTwin b = (BottleTwin)#posEightUpdate;
 					if (b != null) {
@@ -398,12 +482,15 @@ Orchestrator(
 							emit fault(8);
 							int id = b.ID;
 							emit faultUpdate(id);
+							abort(faultSolved){
+								halt;
+							}
 
 						}
 					} 			
 				}
 
-		}
+		
 			pause;
 		}
 	}
@@ -411,7 +498,6 @@ Orchestrator(
 	||
 	{
 		while(true) {
-			abort(pauseFaultCheck){
 				present(bottlePos9){
 					BottleTwin b = (BottleTwin)#posNineUpdate;
 					if (b != null) {
@@ -420,11 +506,14 @@ Orchestrator(
 							emit fault(9);
 							int id = b.ID;
 							emit faultUpdate(id);
+							abort(faultSolved){
+								halt;
+							}
 
 						}
 					} 			
 				}
-		}
+		
 			pause;
 		}
 	}

@@ -23,17 +23,17 @@ public class rotPlant extends ClockDomain{
   public Signal rotTurn = new Signal("rotTurn", Signal.OUTPUT);
   private BottleTwin b_thread_3;//sysj\rotPlant.sysj line: 32, column: 4
   private BottleTwin b_thread_4;//sysj\rotPlant.sysj line: 46, column: 4
-  private int S8929 = 1;
-  private int S8877 = 1;
-  private int S8850 = 1;
-  private int S8909 = 1;
-  private int S8927 = 1;
+  private int S10794 = 1;
+  private int S10742 = 1;
+  private int S10715 = 1;
+  private int S10774 = 1;
+  private int S10792 = 1;
   
   private int[] ends = new int[5];
   private int[] tdone = new int[5];
   
-  public void thread8937(int [] tdone, int [] ends){
-        switch(S8927){
+  public void thread10802(int [] tdone, int [] ends){
+        switch(S10792){
       case 0 : 
         active[4]=0;
         ends[4]=0;
@@ -66,8 +66,8 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread8936(int [] tdone, int [] ends){
-        switch(S8909){
+  public void thread10801(int [] tdone, int [] ends){
+        switch(S10774){
       case 0 : 
         active[3]=0;
         ends[3]=0;
@@ -107,8 +107,8 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread8935(int [] tdone, int [] ends){
-        switch(S8877){
+  public void thread10800(int [] tdone, int [] ends){
+        switch(S10742){
       case 0 : 
         active[2]=0;
         ends[2]=0;
@@ -117,18 +117,18 @@ public class rotPlant extends ClockDomain{
       
       case 1 : 
         if(!rotaryTableTrigger.getprestatus()){//sysj\rotPlant.sysj line: 18, column: 10
-          S8850=0;
+          S10715=0;
           active[2]=1;
           ends[2]=1;
           tdone[2]=1;
         }
         else {
-          switch(S8850){
+          switch(S10715){
             case 0 : 
               if(enable.getprestatus()){//sysj\rotPlant.sysj line: 19, column: 11
                 rotTurn.setPresent();//sysj\rotPlant.sysj line: 21, column: 5
                 currsigs.addElement(rotTurn);
-                S8850=1;
+                S10715=1;
                 tableAlignedWithSensorC.setPresent();//sysj\rotPlant.sysj line: 22, column: 5
                 currsigs.addElement(tableAlignedWithSensorC);
                 active[2]=1;
@@ -157,23 +157,23 @@ public class rotPlant extends ClockDomain{
     }
   }
 
-  public void thread8933(int [] tdone, int [] ends){
-        S8927=1;
+  public void thread10798(int [] tdone, int [] ends){
+        S10792=1;
     active[4]=1;
     ends[4]=1;
     tdone[4]=1;
   }
 
-  public void thread8932(int [] tdone, int [] ends){
-        S8909=1;
+  public void thread10797(int [] tdone, int [] ends){
+        S10774=1;
     active[3]=1;
     ends[3]=1;
     tdone[3]=1;
   }
 
-  public void thread8931(int [] tdone, int [] ends){
-        S8877=1;
-    S8850=0;
+  public void thread10796(int [] tdone, int [] ends){
+        S10742=1;
+    S10715=0;
     active[2]=1;
     ends[2]=1;
     tdone[2]=1;
@@ -186,58 +186,58 @@ public class rotPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S8929){
+      switch(S10794){
         case 0 : 
-          S8929=0;
+          S10794=0;
           break RUN;
         
         case 1 : 
-          S8929=2;
-          S8929=2;
-          thread8931(tdone,ends);
-          thread8932(tdone,ends);
-          thread8933(tdone,ends);
-          int biggest8934 = 0;
-          if(ends[2]>=biggest8934){
-            biggest8934=ends[2];
+          S10794=2;
+          S10794=2;
+          thread10796(tdone,ends);
+          thread10797(tdone,ends);
+          thread10798(tdone,ends);
+          int biggest10799 = 0;
+          if(ends[2]>=biggest10799){
+            biggest10799=ends[2];
           }
-          if(ends[3]>=biggest8934){
-            biggest8934=ends[3];
+          if(ends[3]>=biggest10799){
+            biggest10799=ends[3];
           }
-          if(ends[4]>=biggest8934){
-            biggest8934=ends[4];
+          if(ends[4]>=biggest10799){
+            biggest10799=ends[4];
           }
-          if(biggest8934 == 1){
+          if(biggest10799 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
         
         case 2 : 
-          thread8935(tdone,ends);
-          thread8936(tdone,ends);
-          thread8937(tdone,ends);
-          int biggest8938 = 0;
-          if(ends[2]>=biggest8938){
-            biggest8938=ends[2];
+          thread10800(tdone,ends);
+          thread10801(tdone,ends);
+          thread10802(tdone,ends);
+          int biggest10803 = 0;
+          if(ends[2]>=biggest10803){
+            biggest10803=ends[2];
           }
-          if(ends[3]>=biggest8938){
-            biggest8938=ends[3];
+          if(ends[3]>=biggest10803){
+            biggest10803=ends[3];
           }
-          if(ends[4]>=biggest8938){
-            biggest8938=ends[4];
+          if(ends[4]>=biggest10803){
+            biggest10803=ends[4];
           }
-          if(biggest8938 == 1){
+          if(biggest10803 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest8938 == 0){
-            S8929=0;
+          if(biggest10803 == 0){
+            S10794=0;
             active[1]=0;
             ends[1]=0;
-            S8929=0;
+            S10794=0;
             break RUN;
           }
         

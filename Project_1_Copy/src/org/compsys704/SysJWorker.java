@@ -252,16 +252,27 @@ public class SysJWorker extends Worker{
 	            Filler.liquidMessage = message;
 	        }
 			break;
-
+			
+		case "showStartRemover":
+			if(status) {
+				FaultTolerance.faultTolerance_On = true;
+			}
+			break;
+			
+		case "showStopRemover":
+			if(status) {
+				FaultTolerance.faultTolerance_On = false;
+			}
+			break;
 
 			
 		default: 
 			System.err.println("Wrong sig name : "+signame);
-			System.exit(1);
+			System.exit(1); 
 		}
 	}
 	
-	static final List<String> signames = Arrays.asList("faultUpdate", "liquidMessage", "capID", "bottlePos9","bottlePos8","bottlePos7","bottlePos6","bottlePos5","bottlePos4","bottlePos3","bottlePos2","bottlePos1","bottlePos0","CMD_RE", "CMD_R2E", "CMD_L2E", "CMD_LE","gripperTurnFinalPosE", "gripperTurnHomePosE", "gripperZAxisLiftedE", "gripperZAxisLoweredE", "capOnID", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","conveyorMoving","conveyorStop","fillID");
+	static final List<String> signames = Arrays.asList("showStartRemover", "showStopRemover", "faultUpdate", "liquidMessage", "capID", "bottlePos9","bottlePos8","bottlePos7","bottlePos6","bottlePos5","bottlePos4","bottlePos3","bottlePos2","bottlePos1","bottlePos0","CMD_RE", "CMD_R2E", "CMD_L2E", "CMD_LE","gripperTurnFinalPosE", "gripperTurnHomePosE", "gripperZAxisLiftedE", "gripperZAxisLoweredE", "capOnID", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","conveyorMoving","conveyorStop","fillID");
 	
 	@Override
 	public boolean hasSignal(String sn) {

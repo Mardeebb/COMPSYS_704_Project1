@@ -16,8 +16,8 @@ public class rotController extends ClockDomain{
   public Signal tableAlignedWithSensorC = new Signal("tableAlignedWithSensorC", Signal.INPUT);
   public Signal rotaryTableTrigger = new Signal("rotaryTableTrigger", Signal.OUTPUT);
   public Signal rotTableTurned = new Signal("rotTableTurned", Signal.OUTPUT);
-  private int S8847 = 1;
-  private int S8777 = 1;
+  private int S10712 = 1;
+  private int S10642 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -29,25 +29,25 @@ public class rotController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S8847){
+      switch(S10712){
         case 0 : 
-          S8847=0;
+          S10712=0;
           break RUN;
         
         case 1 : 
-          S8847=2;
-          S8847=2;
+          S10712=2;
+          S10712=2;
           System.out.println("Controller startedh");//sysj\rotController.sysj line: 11, column: 5
-          S8777=0;
+          S10642=0;
           active[1]=1;
           ends[1]=1;
           break RUN;
         
         case 2 : 
-          switch(S8777){
+          switch(S10642){
             case 0 : 
               if(!turn.getprestatus()){//sysj\rotController.sysj line: 14, column: 10
-                S8777=1;
+                S10642=1;
                 active[1]=1;
                 ends[1]=1;
                 break RUN;
@@ -60,7 +60,7 @@ public class rotController extends ClockDomain{
             
             case 1 : 
               if(turn.getprestatus()){//sysj\rotController.sysj line: 15, column: 10
-                S8777=2;
+                S10642=2;
                 rotaryTableTrigger.setPresent();//sysj\rotController.sysj line: 18, column: 5
                 currsigs.addElement(rotaryTableTrigger);
                 active[1]=1;
@@ -77,7 +77,7 @@ public class rotController extends ClockDomain{
               if(tableAlignedWithSensorC.getprestatus()){//sysj\rotController.sysj line: 17, column: 10
                 rotTableTurned.setPresent();//sysj\rotController.sysj line: 20, column: 4
                 currsigs.addElement(rotTableTurned);
-                S8777=0;
+                S10642=0;
                 active[1]=1;
                 ends[1]=1;
                 break RUN;

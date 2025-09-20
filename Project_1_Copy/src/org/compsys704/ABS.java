@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -236,11 +237,16 @@ public class ABS extends JFrame {
 		enable.addActionListener(new SignalClient(10031, "baxtorRobotPlantCD.enable", null));
 		enable.addActionListener(new SignalClient(10004, "OrchestratorCD.enable", null));
 		JButton introduceFault = new JButton("Add random fault");
-		
-		introduceFault.addActionListener(new SignalClient(10004, "OrchestratorCD.introduceFault", 1));
+		introduceFault.addActionListener(e -> {
+		    int faultNumber = ThreadLocalRandom.current().nextInt(1, 8);
+		    System.err.println(faultNumber);
+		    new SignalClient(10004, "OrchestratorCD.introduceFault", faultNumber).send();
+		});
 
 
-		Timer autoTimer = new Timer(500, e -> {
+	    JLabel faultStatus = new JLabel("Fault may not appear (empty spot)."); 
+
+		Timer autoTimer = new Timer(300, e -> {
 		    // send the same enable signals as the button
 		    new SignalClient(Ports.PORT_LOADER_PLANT, Ports.ENABLE_SIGNAL, null).actionPerformed(null);
 		    new SignalClient(10002, "rotaryTablePlantCD.enable", null).actionPerformed(null);
@@ -263,6 +269,7 @@ public class ABS extends JFrame {
 
 		JPanel ss = new JPanel();
 		ss.add(introduceFault);
+		ss.add(faultStatus);
 		ss.add(enable);
 		ss.add(autoEnable);
 

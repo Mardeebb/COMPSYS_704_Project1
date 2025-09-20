@@ -40,6 +40,7 @@ public class Canvas extends JPanel {
 	BufferedImage capper_on, capper_off;
 	BufferedImage LARM, LARM0, LARM1, LARM2, LARM3, LARM4;
 	BufferedImage SARM, SARM0, SARM1, SARM2, SARM3, SARM4;
+	BufferedImage faultToleranceIDLE, faultToleranceON;
 
     private EABSBackend backend;
 
@@ -129,6 +130,11 @@ public class Canvas extends JPanel {
 			SARM3=scaleImage(SARM3, 70,210);
 			SARM4=bi.getSubimage(1120, 45, 240, 610);
 			SARM4=scaleImage(SARM4, 70,210);
+			bi = ImageIO.read(new File("res/FaultTolerance.png"));
+			faultToleranceIDLE = bi.getSubimage(11,20, 270,370);
+			faultToleranceIDLE = scaleImage(faultToleranceIDLE, 200, 300);
+			faultToleranceON = bi.getSubimage(325,10, 270,380);
+			faultToleranceON = scaleImage(faultToleranceON, 200, 300);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -292,6 +298,13 @@ public class Canvas extends JPanel {
 		    }
 	    }
 	    
+	    // fault tolerance image
+	    if (FaultTolerance.faultTolerance_On) {
+	    	 g.drawImage(faultToleranceON, 750, 40, null);
+	    } else {
+	    	g.drawImage(faultToleranceIDLE, 750, 50, null);
+	    }
+
 	    // Draw Signals
 	    if(TurnTable.capOnBottleAtPos1) {
 	        g2d.setColor(Color.green);
