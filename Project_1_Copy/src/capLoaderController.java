@@ -61,7 +61,6 @@ public class capLoaderController extends ClockDomain{
               bottleID_1.setPresent();//sysj\capLoaderController.sysj line: 76, column: 4
               currsigs.addElement(bottleID_1);
               bottleID_1.setValue(id_thread_3);//sysj\capLoaderController.sysj line: 76, column: 4
-              System.out.println("Emitted bottleID_1");
               S181=1;
               active[3]=1;
               ends[3]=1;
@@ -129,7 +128,6 @@ public class capLoaderController extends ClockDomain{
             S3=3;
             armDest.setPresent();//sysj\capLoaderController.sysj line: 31, column: 5
             currsigs.addElement(armDest);
-            System.out.println("Emitted armDest");
             active[2]=1;
             ends[2]=1;
             tdone[2]=1;
@@ -146,7 +144,6 @@ public class capLoaderController extends ClockDomain{
             else {
               armDest.setPresent();//sysj\capLoaderController.sysj line: 31, column: 5
               currsigs.addElement(armDest);
-              System.out.println("Emitted armDest");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -158,7 +155,6 @@ public class capLoaderController extends ClockDomain{
             S3=5;
             pusherExtend.setPresent();//sysj\capLoaderController.sysj line: 35, column: 5
             currsigs.addElement(pusherExtend);
-            System.out.println("Emitted pusherExtend");
             active[2]=1;
             ends[2]=1;
             tdone[2]=1;
@@ -174,7 +170,6 @@ public class capLoaderController extends ClockDomain{
             else {
               pusherExtend.setPresent();//sysj\capLoaderController.sysj line: 35, column: 5
               currsigs.addElement(pusherExtend);
-              System.out.println("Emitted pusherExtend");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -194,7 +189,6 @@ public class capLoaderController extends ClockDomain{
               S3=8;
               armSource.setPresent();//sysj\capLoaderController.sysj line: 40, column: 5
               currsigs.addElement(armSource);
-              System.out.println("Emitted armSource");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -217,7 +211,6 @@ public class capLoaderController extends ClockDomain{
             else {
               armSource.setPresent();//sysj\capLoaderController.sysj line: 40, column: 5
               currsigs.addElement(armSource);
-              System.out.println("Emitted armSource");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -230,7 +223,6 @@ public class capLoaderController extends ClockDomain{
             S34=0;
             vacOn.setPresent();//sysj\capLoaderController.sysj line: 44, column: 5
             currsigs.addElement(vacOn);
-            System.out.println("Emitted vacOn");
             active[2]=1;
             ends[2]=1;
             tdone[2]=1;
@@ -249,7 +241,6 @@ public class capLoaderController extends ClockDomain{
                 case 0 : 
                   vacOn.setPresent();//sysj\capLoaderController.sysj line: 44, column: 5
                   currsigs.addElement(vacOn);
-                  System.out.println("Emitted vacOn");
                   active[2]=1;
                   ends[2]=1;
                   tdone[2]=1;
@@ -279,10 +270,8 @@ public class capLoaderController extends ClockDomain{
             S3=12;
             vacOn.setPresent();//sysj\capLoaderController.sysj line: 50, column: 6
             currsigs.addElement(vacOn);
-            System.out.println("Emitted vacOn");
             armDest.setPresent();//sysj\capLoaderController.sysj line: 51, column: 6
             currsigs.addElement(armDest);
-            System.out.println("Emitted armDest");
             active[2]=1;
             ends[2]=1;
             tdone[2]=1;
@@ -298,10 +287,8 @@ public class capLoaderController extends ClockDomain{
             else {
               vacOn.setPresent();//sysj\capLoaderController.sysj line: 50, column: 6
               currsigs.addElement(vacOn);
-              System.out.println("Emitted vacOn");
               armDest.setPresent();//sysj\capLoaderController.sysj line: 51, column: 6
               currsigs.addElement(armDest);
-              System.out.println("Emitted armDest");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -314,11 +301,9 @@ public class capLoaderController extends ClockDomain{
               capOnID.setPresent();//sysj\capLoaderController.sysj line: 57, column: 4
               currsigs.addElement(capOnID);
               capOnID.setValue(id_thread_2);//sysj\capLoaderController.sysj line: 57, column: 4
-              System.out.println("Emitted capOnID");
               S3=14;
               armSource.setPresent();//sysj\capLoaderController.sysj line: 59, column: 5
               currsigs.addElement(armSource);
-              System.out.println("Emitted armSource");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -341,7 +326,6 @@ public class capLoaderController extends ClockDomain{
             else {
               armSource.setPresent();//sysj\capLoaderController.sysj line: 59, column: 5
               currsigs.addElement(armSource);
-              System.out.println("Emitted armSource");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -352,7 +336,6 @@ public class capLoaderController extends ClockDomain{
             S3=15;
             capLoaded.setPresent();//sysj\capLoaderController.sysj line: 62, column: 4
             currsigs.addElement(capLoaded);
-            System.out.println("Emitted capLoaded");
             S3=0;
             active[2]=1;
             ends[2]=1;
@@ -370,7 +353,6 @@ public class capLoaderController extends ClockDomain{
     bottleID_1.setPresent();//sysj\capLoaderController.sysj line: 67, column: 3
     currsigs.addElement(bottleID_1);
     bottleID_1.setValue(-1);//sysj\capLoaderController.sysj line: 67, column: 3
-    System.out.println("Emitted bottleID_1");
     S181=0;
     active[3]=1;
     ends[3]=1;

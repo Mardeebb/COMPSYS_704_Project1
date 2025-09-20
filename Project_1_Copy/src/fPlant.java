@@ -55,7 +55,6 @@ public class fPlant extends ClockDomain{
         if(dosUnitFilled.getprestatus()){//sysj\fillerPlant.sysj line: 57, column: 30
           dosUnitFilledE.setPresent();//sysj\fillerPlant.sysj line: 57, column: 45
           currsigs.addElement(dosUnitFilledE);
-          System.out.println("Emitted dosUnitFilledE");
           active[6]=1;
           ends[6]=1;
           tdone[6]=1;
@@ -82,7 +81,6 @@ public class fPlant extends ClockDomain{
         if(dosUnitEvac.getprestatus()){//sysj\fillerPlant.sysj line: 55, column: 30
           dosUnitEvacE.setPresent();//sysj\fillerPlant.sysj line: 55, column: 43
           currsigs.addElement(dosUnitEvacE);
-          System.out.println("Emitted dosUnitEvacE");
           active[5]=1;
           ends[5]=1;
           tdone[5]=1;
@@ -152,7 +150,6 @@ public class fPlant extends ClockDomain{
             else {
               dosUnitEvac.setPresent();//sysj\fillerPlant.sysj line: 37, column: 17
               currsigs.addElement(dosUnitEvac);
-              System.out.println("Emitted dosUnitEvac");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -164,7 +161,6 @@ public class fPlant extends ClockDomain{
               S3760=2;
               dosUnitFilled.setPresent();//sysj\fillerPlant.sysj line: 43, column: 17
               currsigs.addElement(dosUnitFilled);
-              System.out.println("Emitted dosUnitFilled");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -186,7 +182,6 @@ public class fPlant extends ClockDomain{
             else {
               dosUnitFilled.setPresent();//sysj\fillerPlant.sysj line: 43, column: 17
               currsigs.addElement(dosUnitFilled);
-              System.out.println("Emitted dosUnitFilled");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -200,11 +195,9 @@ public class fPlant extends ClockDomain{
               fillID.setPresent();//sysj\fillerPlant.sysj line: 48, column: 4
               currsigs.addElement(fillID);
               fillID.setValue(id_thread_3);//sysj\fillerPlant.sysj line: 48, column: 4
-              System.out.println("Emitted fillID");
               S3760=0;
               dosUnitEvac.setPresent();//sysj\fillerPlant.sysj line: 37, column: 17
               currsigs.addElement(dosUnitEvac);
-              System.out.println("Emitted dosUnitEvac");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -240,15 +233,12 @@ public class fPlant extends ClockDomain{
                 bottle_1.setPresent();//sysj\fillerPlant.sysj line: 22, column: 5
                 currsigs.addElement(bottle_1);
                 bottle_1.setValue(b_thread_2);//sysj\fillerPlant.sysj line: 22, column: 5
-                System.out.println("Emitted bottle_1");
                 bottleAtPos2.setPresent();//sysj\fillerPlant.sysj line: 23, column: 14
                 currsigs.addElement(bottleAtPos2);
                 bottleAtPos2.setValue(b_thread_2);//sysj\fillerPlant.sysj line: 23, column: 14
-                System.out.println("Emitted bottleAtPos2");
                 fillerWorkingID.setPresent();//sysj\fillerPlant.sysj line: 24, column: 14
                 currsigs.addElement(fillerWorkingID);
                 fillerWorkingID.setValue(id_thread_2);//sysj\fillerPlant.sysj line: 24, column: 14
-                System.out.println("Emitted fillerWorkingID");
                 S3735=1;
                 active[2]=1;
                 ends[2]=1;
@@ -287,7 +277,6 @@ public class fPlant extends ClockDomain{
     if(dosUnitFilled.getprestatus()){//sysj\fillerPlant.sysj line: 57, column: 30
       dosUnitFilledE.setPresent();//sysj\fillerPlant.sysj line: 57, column: 45
       currsigs.addElement(dosUnitFilledE);
-      System.out.println("Emitted dosUnitFilledE");
       active[6]=1;
       ends[6]=1;
       tdone[6]=1;
@@ -304,7 +293,6 @@ public class fPlant extends ClockDomain{
     if(dosUnitEvac.getprestatus()){//sysj\fillerPlant.sysj line: 55, column: 30
       dosUnitEvacE.setPresent();//sysj\fillerPlant.sysj line: 55, column: 43
       currsigs.addElement(dosUnitEvacE);
-      System.out.println("Emitted dosUnitEvacE");
       active[5]=1;
       ends[5]=1;
       tdone[5]=1;
@@ -339,7 +327,6 @@ public class fPlant extends ClockDomain{
     S3760=0;
     dosUnitEvac.setPresent();//sysj\fillerPlant.sysj line: 37, column: 17
     currsigs.addElement(dosUnitEvac);
-    System.out.println("Emitted dosUnitEvac");
     active[3]=1;
     ends[3]=1;
     tdone[3]=1;

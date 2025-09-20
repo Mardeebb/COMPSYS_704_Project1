@@ -118,6 +118,17 @@ public class SysJWorker extends Worker{
 	            bottle.status = "Finished";
 	        }
 			break;
+			
+		case "faultUpdate":
+	        if (status && value != null) {
+	            int id = (int) value;
+	            BottleTwin bottle = EABSBackend.getBottleFromID(id);
+	            bottle.Faulty = true;
+	            bottle.status = "Faulty";
+	        }
+			break;
+
+			
 
 		case "gripperZAxisLoweredE":
 			if(status) {
@@ -250,7 +261,7 @@ public class SysJWorker extends Worker{
 		}
 	}
 	
-	static final List<String> signames = Arrays.asList("liquidMessage", "capID", "bottlePos9","bottlePos8","bottlePos7","bottlePos6","bottlePos5","bottlePos4","bottlePos3","bottlePos2","bottlePos1","bottlePos0","CMD_RE", "CMD_R2E", "CMD_L2E", "CMD_LE","gripperTurnFinalPosE", "gripperTurnHomePosE", "gripperZAxisLiftedE", "gripperZAxisLoweredE", "capOnID", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","conveyorMoving","conveyorStop","fillID");
+	static final List<String> signames = Arrays.asList("faultUpdate", "liquidMessage", "capID", "bottlePos9","bottlePos8","bottlePos7","bottlePos6","bottlePos5","bottlePos4","bottlePos3","bottlePos2","bottlePos1","bottlePos0","CMD_RE", "CMD_R2E", "CMD_L2E", "CMD_LE","gripperTurnFinalPosE", "gripperTurnHomePosE", "gripperZAxisLiftedE", "gripperZAxisLoweredE", "capOnID", "dosUnitEvacE","dosUnitFilledE","pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","rotTurn","rotContent", "bottleAtPos5", "tableAlignedWithSensor", "capOnBottleAtPos1","recieveTwin","conveyorMoving","conveyorStop","fillID");
 	
 	@Override
 	public boolean hasSignal(String sn) {

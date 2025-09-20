@@ -187,6 +187,13 @@ public class Canvas extends JPanel {
 				g.drawImage(finished_bottle,x, y, null);
 		        break;
 		}
+		BottleTwin bottle = backend.getBottleFromID(id);
+		
+		if (bottle.Faulty) {
+		    g.setColor(Color.RED);
+
+		    g.drawString("FAULTY!", x + 20, y); 
+		}
 	    g.setColor(Color.BLACK);
 	    g.drawString(String.valueOf(id), x + 20, y + 30); 
         clickableAreas.put(id, new Rectangle(x, y, 80, 80));

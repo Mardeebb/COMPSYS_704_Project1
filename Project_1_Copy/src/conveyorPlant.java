@@ -45,11 +45,9 @@ public class conveyorPlant extends ClockDomain{
             if(bottleAtOne.getprestatus()){//sysj\conveyorPlant.sysj line: 44, column: 12
               bottleAtPos1.setPresent();//sysj\conveyorPlant.sysj line: 45, column: 5
               currsigs.addElement(bottleAtPos1);
-              System.out.println("Emitted bottleAtPos1");
               if(!bottleAtFive.getprestatus()){//sysj\conveyorPlant.sysj line: 47, column: 12
                 bottleLeftPos5.setPresent();//sysj\conveyorPlant.sysj line: 48, column: 5
                 currsigs.addElement(bottleLeftPos5);
-                System.out.println("Emitted bottleLeftPos5");
                 S2238=1;
                 active[3]=1;
                 ends[3]=1;
@@ -66,7 +64,6 @@ public class conveyorPlant extends ClockDomain{
               if(!bottleAtFive.getprestatus()){//sysj\conveyorPlant.sysj line: 47, column: 12
                 bottleLeftPos5.setPresent();//sysj\conveyorPlant.sysj line: 48, column: 5
                 currsigs.addElement(bottleLeftPos5);
-                System.out.println("Emitted bottleLeftPos5");
                 S2238=1;
                 active[3]=1;
                 ends[3]=1;
@@ -87,11 +84,9 @@ public class conveyorPlant extends ClockDomain{
             if(bottleAtOne.getprestatus()){//sysj\conveyorPlant.sysj line: 44, column: 12
               bottleAtPos1.setPresent();//sysj\conveyorPlant.sysj line: 45, column: 5
               currsigs.addElement(bottleAtPos1);
-              System.out.println("Emitted bottleAtPos1");
               if(!bottleAtFive.getprestatus()){//sysj\conveyorPlant.sysj line: 47, column: 12
                 bottleLeftPos5.setPresent();//sysj\conveyorPlant.sysj line: 48, column: 5
                 currsigs.addElement(bottleLeftPos5);
-                System.out.println("Emitted bottleLeftPos5");
                 S2238=1;
                 active[3]=1;
                 ends[3]=1;
@@ -108,7 +103,6 @@ public class conveyorPlant extends ClockDomain{
               if(!bottleAtFive.getprestatus()){//sysj\conveyorPlant.sysj line: 47, column: 12
                 bottleLeftPos5.setPresent();//sysj\conveyorPlant.sysj line: 48, column: 5
                 currsigs.addElement(bottleLeftPos5);
-                System.out.println("Emitted bottleLeftPos5");
                 S2238=1;
                 active[3]=1;
                 ends[3]=1;
@@ -196,7 +190,6 @@ public class conveyorPlant extends ClockDomain{
                   S2164=3;
                   plantMoved.setPresent();//sysj\conveyorPlant.sysj line: 34, column: 5
                   currsigs.addElement(plantMoved);
-                  System.out.println("Emitted plantMoved");
                   active[2]=1;
                   ends[2]=1;
                   tdone[2]=1;
@@ -205,7 +198,6 @@ public class conveyorPlant extends ClockDomain{
                 case 3 : 
                   plantMoved.setPresent();//sysj\conveyorPlant.sysj line: 34, column: 5
                   currsigs.addElement(plantMoved);
-                  System.out.println("Emitted plantMoved");
                   active[2]=1;
                   ends[2]=1;
                   tdone[2]=1;
@@ -227,11 +219,9 @@ public class conveyorPlant extends ClockDomain{
     if(bottleAtOne.getprestatus()){//sysj\conveyorPlant.sysj line: 44, column: 12
       bottleAtPos1.setPresent();//sysj\conveyorPlant.sysj line: 45, column: 5
       currsigs.addElement(bottleAtPos1);
-      System.out.println("Emitted bottleAtPos1");
       if(!bottleAtFive.getprestatus()){//sysj\conveyorPlant.sysj line: 47, column: 12
         bottleLeftPos5.setPresent();//sysj\conveyorPlant.sysj line: 48, column: 5
         currsigs.addElement(bottleLeftPos5);
-        System.out.println("Emitted bottleLeftPos5");
         S2238=1;
         active[3]=1;
         ends[3]=1;
@@ -248,7 +238,6 @@ public class conveyorPlant extends ClockDomain{
       if(!bottleAtFive.getprestatus()){//sysj\conveyorPlant.sysj line: 47, column: 12
         bottleLeftPos5.setPresent();//sysj\conveyorPlant.sysj line: 48, column: 5
         currsigs.addElement(bottleLeftPos5);
-        System.out.println("Emitted bottleLeftPos5");
         S2238=1;
         active[3]=1;
         ends[3]=1;

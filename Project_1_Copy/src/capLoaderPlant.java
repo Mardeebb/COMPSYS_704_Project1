@@ -69,7 +69,6 @@ public class capLoaderPlant extends ClockDomain{
         if(empty.getprestatus()){//sysj\capLoaderPlant.sysj line: 111, column: 24
           emptyE.setPresent();//sysj\capLoaderPlant.sysj line: 111, column: 31
           currsigs.addElement(emptyE);
-          System.out.println("Emitted emptyE");
           active[13]=1;
           ends[13]=1;
           tdone[13]=1;
@@ -96,7 +95,6 @@ public class capLoaderPlant extends ClockDomain{
         if(armAtDest.getprestatus()){//sysj\capLoaderPlant.sysj line: 109, column: 24
           armAtDestE.setPresent();//sysj\capLoaderPlant.sysj line: 109, column: 35
           currsigs.addElement(armAtDestE);
-          System.out.println("Emitted armAtDestE");
           active[12]=1;
           ends[12]=1;
           tdone[12]=1;
@@ -123,7 +121,6 @@ public class capLoaderPlant extends ClockDomain{
         if(armAtSource.getprestatus()){//sysj\capLoaderPlant.sysj line: 107, column: 24
           armAtSourceE.setPresent();//sysj\capLoaderPlant.sysj line: 107, column: 37
           currsigs.addElement(armAtSourceE);
-          System.out.println("Emitted armAtSourceE");
           active[11]=1;
           ends[11]=1;
           tdone[11]=1;
@@ -150,7 +147,6 @@ public class capLoaderPlant extends ClockDomain{
         if(WPgripped.getprestatus()){//sysj\capLoaderPlant.sysj line: 105, column: 24
           WPgrippedE.setPresent();//sysj\capLoaderPlant.sysj line: 105, column: 35
           currsigs.addElement(WPgrippedE);
-          System.out.println("Emitted WPgrippedE");
           active[10]=1;
           ends[10]=1;
           tdone[10]=1;
@@ -177,7 +173,6 @@ public class capLoaderPlant extends ClockDomain{
         if(pusherExtended.getprestatus()){//sysj\capLoaderPlant.sysj line: 103, column: 24
           pusherExtendedE.setPresent();//sysj\capLoaderPlant.sysj line: 103, column: 40
           currsigs.addElement(pusherExtendedE);
-          System.out.println("Emitted pusherExtendedE");
           active[9]=1;
           ends[9]=1;
           tdone[9]=1;
@@ -204,7 +199,6 @@ public class capLoaderPlant extends ClockDomain{
         if(pusherRetracted.getprestatus()){//sysj\capLoaderPlant.sysj line: 101, column: 24
           pusherRetractedE.setPresent();//sysj\capLoaderPlant.sysj line: 101, column: 41
           currsigs.addElement(pusherRetractedE);
-          System.out.println("Emitted pusherRetractedE");
           active[8]=1;
           ends[8]=1;
           tdone[8]=1;
@@ -351,7 +345,6 @@ public class capLoaderPlant extends ClockDomain{
                     capPos_1.setPresent();//sysj\capLoaderPlant.sysj line: 73, column: 7
                     currsigs.addElement(capPos_1);
                     capPos_1.setValue(1);//sysj\capLoaderPlant.sysj line: 73, column: 7
-                    System.out.println("Emitted capPos_1");
                     S551=2;
                     active[5]=1;
                     ends[5]=1;
@@ -368,7 +361,6 @@ public class capLoaderPlant extends ClockDomain{
                   if(pusherRetracted.getprestatus()){//sysj\capLoaderPlant.sysj line: 74, column: 13
                     capDec_1.setPresent();//sysj\capLoaderPlant.sysj line: 75, column: 7
                     currsigs.addElement(capDec_1);
-                    System.out.println("Emitted capDec_1");
                     S551=0;
                     active[5]=1;
                     ends[5]=1;
@@ -425,7 +417,6 @@ public class capLoaderPlant extends ClockDomain{
                     capPos_1.setPresent();//sysj\capLoaderPlant.sysj line: 52, column: 7
                     currsigs.addElement(capPos_1);
                     capPos_1.setValue(1);//sysj\capLoaderPlant.sysj line: 52, column: 7
-                    System.out.println("Emitted capPos_1");
                     S517=1;
                     active[4]=1;
                     ends[4]=1;
@@ -441,7 +432,6 @@ public class capLoaderPlant extends ClockDomain{
                 else {
                   WPgripped.setPresent();//sysj\capLoaderPlant.sysj line: 49, column: 7
                   currsigs.addElement(WPgripped);
-                  System.out.println("Emitted WPgripped");
                   active[4]=1;
                   ends[4]=1;
                   tdone[4]=1;
@@ -455,11 +445,9 @@ public class capLoaderPlant extends ClockDomain{
                     capPos_1.setPresent();//sysj\capLoaderPlant.sysj line: 47, column: 6
                     currsigs.addElement(capPos_1);
                     capPos_1.setValue(0);//sysj\capLoaderPlant.sysj line: 47, column: 6
-                    System.out.println("Emitted capPos_1");
                     S512=0;
                     WPgripped.setPresent();//sysj\capLoaderPlant.sysj line: 49, column: 7
                     currsigs.addElement(WPgripped);
-                    System.out.println("Emitted WPgripped");
                     active[4]=1;
                     ends[4]=1;
                     tdone[4]=1;
@@ -490,11 +478,9 @@ public class capLoaderPlant extends ClockDomain{
                 capPos_1.setPresent();//sysj\capLoaderPlant.sysj line: 47, column: 6
                 currsigs.addElement(capPos_1);
                 capPos_1.setValue(0);//sysj\capLoaderPlant.sysj line: 47, column: 6
-                System.out.println("Emitted capPos_1");
                 S512=0;
                 WPgripped.setPresent();//sysj\capLoaderPlant.sysj line: 49, column: 7
                 currsigs.addElement(WPgripped);
-                System.out.println("Emitted WPgripped");
                 active[4]=1;
                 ends[4]=1;
                 tdone[4]=1;
@@ -540,7 +526,6 @@ public class capLoaderPlant extends ClockDomain{
             else {
               pusherRetracted.setPresent();//sysj\capLoaderPlant.sysj line: 33, column: 5
               currsigs.addElement(pusherRetracted);
-              System.out.println("Emitted pusherRetracted");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -552,7 +537,6 @@ public class capLoaderPlant extends ClockDomain{
               S457=2;
               pusherExtended.setPresent();//sysj\capLoaderPlant.sysj line: 37, column: 5
               currsigs.addElement(pusherExtended);
-              System.out.println("Emitted pusherExtended");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -574,7 +558,6 @@ public class capLoaderPlant extends ClockDomain{
             else {
               pusherExtended.setPresent();//sysj\capLoaderPlant.sysj line: 37, column: 5
               currsigs.addElement(pusherExtended);
-              System.out.println("Emitted pusherExtended");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -586,7 +569,6 @@ public class capLoaderPlant extends ClockDomain{
               S457=0;
               pusherRetracted.setPresent();//sysj\capLoaderPlant.sysj line: 33, column: 5
               currsigs.addElement(pusherRetracted);
-              System.out.println("Emitted pusherRetracted");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -624,7 +606,6 @@ public class capLoaderPlant extends ClockDomain{
             else {
               armAtDest.setPresent();//sysj\capLoaderPlant.sysj line: 20, column: 5
               currsigs.addElement(armAtDest);
-              System.out.println("Emitted armAtDest");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -636,7 +617,6 @@ public class capLoaderPlant extends ClockDomain{
               S404=2;
               armAtSource.setPresent();//sysj\capLoaderPlant.sysj line: 24, column: 5
               currsigs.addElement(armAtSource);
-              System.out.println("Emitted armAtSource");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -658,7 +638,6 @@ public class capLoaderPlant extends ClockDomain{
             else {
               armAtSource.setPresent();//sysj\capLoaderPlant.sysj line: 24, column: 5
               currsigs.addElement(armAtSource);
-              System.out.println("Emitted armAtSource");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -670,7 +649,6 @@ public class capLoaderPlant extends ClockDomain{
               S404=0;
               armAtDest.setPresent();//sysj\capLoaderPlant.sysj line: 20, column: 5
               currsigs.addElement(armAtDest);
-              System.out.println("Emitted armAtDest");
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -693,7 +671,6 @@ public class capLoaderPlant extends ClockDomain{
     if(empty.getprestatus()){//sysj\capLoaderPlant.sysj line: 111, column: 24
       emptyE.setPresent();//sysj\capLoaderPlant.sysj line: 111, column: 31
       currsigs.addElement(emptyE);
-      System.out.println("Emitted emptyE");
       active[13]=1;
       ends[13]=1;
       tdone[13]=1;
@@ -710,7 +687,6 @@ public class capLoaderPlant extends ClockDomain{
     if(armAtDest.getprestatus()){//sysj\capLoaderPlant.sysj line: 109, column: 24
       armAtDestE.setPresent();//sysj\capLoaderPlant.sysj line: 109, column: 35
       currsigs.addElement(armAtDestE);
-      System.out.println("Emitted armAtDestE");
       active[12]=1;
       ends[12]=1;
       tdone[12]=1;
@@ -727,7 +703,6 @@ public class capLoaderPlant extends ClockDomain{
     if(armAtSource.getprestatus()){//sysj\capLoaderPlant.sysj line: 107, column: 24
       armAtSourceE.setPresent();//sysj\capLoaderPlant.sysj line: 107, column: 37
       currsigs.addElement(armAtSourceE);
-      System.out.println("Emitted armAtSourceE");
       active[11]=1;
       ends[11]=1;
       tdone[11]=1;
@@ -744,7 +719,6 @@ public class capLoaderPlant extends ClockDomain{
     if(WPgripped.getprestatus()){//sysj\capLoaderPlant.sysj line: 105, column: 24
       WPgrippedE.setPresent();//sysj\capLoaderPlant.sysj line: 105, column: 35
       currsigs.addElement(WPgrippedE);
-      System.out.println("Emitted WPgrippedE");
       active[10]=1;
       ends[10]=1;
       tdone[10]=1;
@@ -761,7 +735,6 @@ public class capLoaderPlant extends ClockDomain{
     if(pusherExtended.getprestatus()){//sysj\capLoaderPlant.sysj line: 103, column: 24
       pusherExtendedE.setPresent();//sysj\capLoaderPlant.sysj line: 103, column: 40
       currsigs.addElement(pusherExtendedE);
-      System.out.println("Emitted pusherExtendedE");
       active[9]=1;
       ends[9]=1;
       tdone[9]=1;
@@ -778,7 +751,6 @@ public class capLoaderPlant extends ClockDomain{
     if(pusherRetracted.getprestatus()){//sysj\capLoaderPlant.sysj line: 101, column: 24
       pusherRetractedE.setPresent();//sysj\capLoaderPlant.sysj line: 101, column: 41
       currsigs.addElement(pusherRetractedE);
-      System.out.println("Emitted pusherRetractedE");
       active[8]=1;
       ends[8]=1;
       tdone[8]=1;
@@ -875,11 +847,9 @@ public class capLoaderPlant extends ClockDomain{
         capPos_1.setPresent();//sysj\capLoaderPlant.sysj line: 47, column: 6
         currsigs.addElement(capPos_1);
         capPos_1.setValue(0);//sysj\capLoaderPlant.sysj line: 47, column: 6
-        System.out.println("Emitted capPos_1");
         S512=0;
         WPgripped.setPresent();//sysj\capLoaderPlant.sysj line: 49, column: 7
         currsigs.addElement(WPgripped);
-        System.out.println("Emitted WPgripped");
         active[4]=1;
         ends[4]=1;
         tdone[4]=1;
@@ -904,7 +874,6 @@ public class capLoaderPlant extends ClockDomain{
     S457=0;
     pusherRetracted.setPresent();//sysj\capLoaderPlant.sysj line: 33, column: 5
     currsigs.addElement(pusherRetracted);
-    System.out.println("Emitted pusherRetracted");
     active[3]=1;
     ends[3]=1;
     tdone[3]=1;
@@ -915,7 +884,6 @@ public class capLoaderPlant extends ClockDomain{
     S404=0;
     armAtDest.setPresent();//sysj\capLoaderPlant.sysj line: 20, column: 5
     currsigs.addElement(armAtDest);
-    System.out.println("Emitted armAtDest");
     active[2]=1;
     ends[2]=1;
     tdone[2]=1;
@@ -942,7 +910,6 @@ public class capLoaderPlant extends ClockDomain{
           capPos_1.setPresent();//sysj\capLoaderPlant.sysj line: 16, column: 2
           currsigs.addElement(capPos_1);
           capPos_1.setValue(0);//sysj\capLoaderPlant.sysj line: 16, column: 2
-          System.out.println("Emitted capPos_1");
           thread1605(tdone,ends);
           thread1606(tdone,ends);
           thread1607(tdone,ends);

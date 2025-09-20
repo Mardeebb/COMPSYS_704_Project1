@@ -67,7 +67,6 @@ public class CapperPlant extends ClockDomain{
             else {
               gripperTurnHomePos.setPresent();//sysj\capperPlant.sysj line: 74, column: 5
               currsigs.addElement(gripperTurnHomePos);
-              System.out.println("Emitted gripperTurnHomePos");
               active[4]=1;
               ends[4]=1;
               tdone[4]=1;
@@ -81,11 +80,9 @@ public class CapperPlant extends ClockDomain{
             capID.setPresent();//sysj\capperPlant.sysj line: 87, column: 4
             currsigs.addElement(capID);
             capID.setValue(id_thread_4);//sysj\capperPlant.sysj line: 87, column: 4
-            System.out.println("Emitted capID");
             S2048=2;
             gripperTurnFinalPos.setPresent();//sysj\capperPlant.sysj line: 90, column: 5
             currsigs.addElement(gripperTurnFinalPos);
-            System.out.println("Emitted gripperTurnFinalPos");
             active[4]=1;
             ends[4]=1;
             tdone[4]=1;
@@ -96,7 +93,6 @@ public class CapperPlant extends ClockDomain{
               S2048=0;
               gripperTurnHomePos.setPresent();//sysj\capperPlant.sysj line: 74, column: 5
               currsigs.addElement(gripperTurnHomePos);
-              System.out.println("Emitted gripperTurnHomePos");
               active[4]=1;
               ends[4]=1;
               tdone[4]=1;
@@ -104,7 +100,6 @@ public class CapperPlant extends ClockDomain{
             else {
               gripperTurnFinalPos.setPresent();//sysj\capperPlant.sysj line: 90, column: 5
               currsigs.addElement(gripperTurnFinalPos);
-              System.out.println("Emitted gripperTurnFinalPos");
               active[4]=1;
               ends[4]=1;
               tdone[4]=1;
@@ -146,10 +141,8 @@ public class CapperPlant extends ClockDomain{
               S1925=2;
               gripperZAxisLiftedE.setPresent();//sysj\capperPlant.sysj line: 42, column: 5
               currsigs.addElement(gripperZAxisLiftedE);
-              System.out.println("Emitted gripperZAxisLiftedE");
               gripperZAxisLifted.setPresent();//sysj\capperPlant.sysj line: 43, column: 5
               currsigs.addElement(gripperZAxisLifted);
-              System.out.println("Emitted gripperZAxisLifted");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -171,7 +164,6 @@ public class CapperPlant extends ClockDomain{
             else {
               gripperZAxisLifted.setPresent();//sysj\capperPlant.sysj line: 43, column: 5
               currsigs.addElement(gripperZAxisLifted);
-              System.out.println("Emitted gripperZAxisLifted");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -205,10 +197,8 @@ public class CapperPlant extends ClockDomain{
               S1925=6;
               gripperZAxisLoweredE.setPresent();//sysj\capperPlant.sysj line: 49, column: 5
               currsigs.addElement(gripperZAxisLoweredE);
-              System.out.println("Emitted gripperZAxisLoweredE");
               gripperZAxisLowered.setPresent();//sysj\capperPlant.sysj line: 50, column: 5
               currsigs.addElement(gripperZAxisLowered);
-              System.out.println("Emitted gripperZAxisLowered");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -230,7 +220,6 @@ public class CapperPlant extends ClockDomain{
             else {
               gripperZAxisLowered.setPresent();//sysj\capperPlant.sysj line: 50, column: 5
               currsigs.addElement(gripperZAxisLowered);
-              System.out.println("Emitted gripperZAxisLowered");
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -260,10 +249,8 @@ public class CapperPlant extends ClockDomain{
                 bottle_1.setPresent();//sysj\capperPlant.sysj line: 27, column: 5
                 currsigs.addElement(bottle_1);
                 bottle_1.setValue(b_thread_2);//sysj\capperPlant.sysj line: 27, column: 5
-                System.out.println("Emitted bottle_1");
                 bottleAtPos4.setPresent();//sysj\capperPlant.sysj line: 28, column: 14
                 currsigs.addElement(bottleAtPos4);
-                System.out.println("Emitted bottleAtPos4");
                 S1903=1;
                 active[2]=1;
                 ends[2]=1;
@@ -302,7 +289,6 @@ public class CapperPlant extends ClockDomain{
     S2048=0;
     gripperTurnHomePos.setPresent();//sysj\capperPlant.sysj line: 74, column: 5
     currsigs.addElement(gripperTurnHomePos);
-    System.out.println("Emitted gripperTurnHomePos");
     active[4]=1;
     ends[4]=1;
     tdone[4]=1;

@@ -235,15 +235,36 @@ public class ABS extends JFrame {
 		enable.addActionListener(new SignalClient(10041, "CapperPlantCD.enable", null));
 		enable.addActionListener(new SignalClient(10031, "baxtorRobotPlantCD.enable", null));
 		enable.addActionListener(new SignalClient(10004, "OrchestratorCD.enable", null));
+		JButton introduceFault = new JButton("Add random fault");
+		
+		introduceFault.addActionListener(new SignalClient(10004, "OrchestratorCD.introduceFault", 1));
 
-		JButton request = new JButton("request");
-//		request.addActionListener(new SignalClient(Ports.PORT_LOADER_CONTROLLER, Ports.REQUEST_SIGNAL, null));
-		request.addActionListener(new SignalClient(10004, "OrchestratorCD.request", null));
+
+		Timer autoTimer = new Timer(500, e -> {
+		    // send the same enable signals as the button
+		    new SignalClient(Ports.PORT_LOADER_PLANT, Ports.ENABLE_SIGNAL, null).actionPerformed(null);
+		    new SignalClient(10002, "rotaryTablePlantCD.enable", null).actionPerformed(null);
+		    new SignalClient(10005, "conveyorPlantCD.enable", null).actionPerformed(null);
+		    new SignalClient(10008, "fillerPlantCD.enable", null).actionPerformed(null);
+		    new SignalClient(10041, "CapperPlantCD.enable", null).actionPerformed(null);
+		    new SignalClient(10031, "baxtorRobotPlantCD.enable", null).actionPerformed(null);
+		    new SignalClient(10004, "OrchestratorCD.enable", null).actionPerformed(null);
+		});
+		
         POSPanel posPanel = new POSPanel(backend);
+        JCheckBox autoEnable = new JCheckBox("Auto-Enable");
+        autoEnable.addItemListener(ev -> {
+            if (autoEnable.isSelected()) {
+                autoTimer.start();
+            } else {
+                autoTimer.stop();
+            }
+        });
 
 		JPanel ss = new JPanel();
+		ss.add(introduceFault);
 		ss.add(enable);
-//		ss.add(request);
+		ss.add(autoEnable);
 
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();

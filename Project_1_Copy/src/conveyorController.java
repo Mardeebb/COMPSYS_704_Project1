@@ -66,10 +66,8 @@ public class conveyorController extends ClockDomain{
                 S2099=2;
                 conveyorMoving.setPresent();//sysj\conveyorController.sysj line: 20, column: 5
                 currsigs.addElement(conveyorMoving);
-                System.out.println("Emitted conveyorMoving");
                 motConveyorOnOff.setPresent();//sysj\conveyorController.sysj line: 21, column: 5
                 currsigs.addElement(motConveyorOnOff);
-                System.out.println("Emitted motConveyorOnOff");
                 active[1]=1;
                 ends[1]=1;
                 break RUN;
@@ -84,10 +82,8 @@ public class conveyorController extends ClockDomain{
               if(plantMoved.getprestatus()){//sysj\conveyorController.sysj line: 17, column: 10
                 conveyorMoved.setPresent();//sysj\conveyorController.sysj line: 25, column: 4
                 currsigs.addElement(conveyorMoved);
-                System.out.println("Emitted conveyorMoved");
                 conveyorStop.setPresent();//sysj\conveyorController.sysj line: 28, column: 4
                 currsigs.addElement(conveyorStop);
-                System.out.println("Emitted conveyorStop");
                 S2099=0;
                 active[1]=1;
                 ends[1]=1;
@@ -96,7 +92,6 @@ public class conveyorController extends ClockDomain{
               else {
                 motConveyorOnOff.setPresent();//sysj\conveyorController.sysj line: 21, column: 5
                 currsigs.addElement(motConveyorOnOff);
-                System.out.println("Emitted motConveyorOnOff");
                 active[1]=1;
                 ends[1]=1;
                 break RUN;

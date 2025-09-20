@@ -54,7 +54,6 @@ public class CapperController extends ClockDomain{
             S1660=0;
             gripperTurnExtend.setPresent();//sysj\capperController.sysj line: 45, column: 6
             currsigs.addElement(gripperTurnExtend);
-            System.out.println("Emitted gripperTurnExtend");
             S1660=1;
             active[6]=1;
             ends[6]=1;
@@ -95,10 +94,8 @@ public class CapperController extends ClockDomain{
             if(gripperTurnFinalPos.getprestatus()){//sysj\capperController.sysj line: 34, column: 12
               capCapped_1.setPresent();//sysj\capperController.sysj line: 37, column: 6
               currsigs.addElement(capCapped_1);
-              System.out.println("Emitted capCapped_1");
               gripperTurnRetract.setPresent();//sysj\capperController.sysj line: 38, column: 6
               currsigs.addElement(gripperTurnRetract);
-              System.out.println("Emitted gripperTurnRetract");
               S1656=1;
               active[5]=1;
               ends[5]=1;
@@ -107,7 +104,6 @@ public class CapperController extends ClockDomain{
             else {
               capGripperPos5Extend.setPresent();//sysj\capperController.sysj line: 35, column: 7
               currsigs.addElement(capGripperPos5Extend);
-              System.out.println("Emitted capGripperPos5Extend");
               active[5]=1;
               ends[5]=1;
               tdone[5]=1;
@@ -118,7 +114,6 @@ public class CapperController extends ClockDomain{
             if(gripperTurnHomePos.getprestatus()){//sysj\capperController.sysj line: 39, column: 12
               capped.setPresent();//sysj\capperController.sysj line: 40, column: 6
               currsigs.addElement(capped);
-              System.out.println("Emitted capped");
               S1659=0;
               active[5]=0;
               ends[5]=0;
@@ -150,7 +145,6 @@ public class CapperController extends ClockDomain{
     S1656=0;
     capGripperPos5Extend.setPresent();//sysj\capperController.sysj line: 35, column: 7
     currsigs.addElement(capGripperPos5Extend);
-    System.out.println("Emitted capGripperPos5Extend");
     active[5]=1;
     ends[5]=1;
     tdone[5]=1;
@@ -239,7 +233,6 @@ public class CapperController extends ClockDomain{
         else {
           cylPos5ZAxisExtend.setPresent();//sysj\capperController.sysj line: 27, column: 6
           currsigs.addElement(cylPos5ZAxisExtend);
-          System.out.println("Emitted cylPos5ZAxisExtend");
           active[3]=1;
           ends[3]=1;
           tdone[3]=1;
@@ -267,7 +260,6 @@ public class CapperController extends ClockDomain{
         else {
           cylClampBottleExtend.setPresent();//sysj\capperController.sysj line: 21, column: 6
           currsigs.addElement(cylClampBottleExtend);
-          System.out.println("Emitted cylClampBottleExtend");
           active[2]=1;
           ends[2]=1;
           tdone[2]=1;
@@ -289,7 +281,6 @@ public class CapperController extends ClockDomain{
         S1650=1;
     cylPos5ZAxisExtend.setPresent();//sysj\capperController.sysj line: 27, column: 6
     currsigs.addElement(cylPos5ZAxisExtend);
-    System.out.println("Emitted cylPos5ZAxisExtend");
     active[3]=1;
     ends[3]=1;
     tdone[3]=1;
@@ -299,7 +290,6 @@ public class CapperController extends ClockDomain{
         S1644=1;
     cylClampBottleExtend.setPresent();//sysj\capperController.sysj line: 21, column: 6
     currsigs.addElement(cylClampBottleExtend);
-    System.out.println("Emitted cylClampBottleExtend");
     active[2]=1;
     ends[2]=1;
     tdone[2]=1;

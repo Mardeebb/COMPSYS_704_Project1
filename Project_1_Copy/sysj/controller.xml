@@ -14,6 +14,7 @@
 			<iSignal Name="bottleUnloaded" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
 			<iSignal Name="bottleLoaderRelease" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
 			<iSignal Name="bottleUnloaderRelease" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
+			<iSignal Name="introduceFault" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10004" />
 
 
 
@@ -46,6 +47,8 @@
 			<oSignal Name="bottlePos7B" To="UI.bottlePos7" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="bottlePos8B" To="UI.bottlePos8" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="bottlePos9B" To="UI.bottlePos9" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+
+			<oSignal Name="faultUpdate" To="UI.faultUpdate" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 
 
 		</ClockDomain>

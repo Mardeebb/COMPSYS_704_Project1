@@ -3,18 +3,71 @@ import run.BottleTwin;
 
 Orchestrator(
 		input BottleTwin signal newBottleTwin;
-		input signal request, enable, conveyorMoved, rotTableTurned, filled, capLoaded, capped, bottleLoaded, bottleUnloaded, bottleLoaderRelease, bottleUnloaderRelease;
-
+		input signal request, enable, conveyorMoved, rotTableTurned, filled, capLoaded, capped, bottleLoaded, bottleUnloaded, bottleLoaderRelease, bottleUnloaderRelease, bottleRemoved;
+		input int signal introduceFault;
+		
 		output signal recieveTwin, startConveyor, startRotTable, startFilling, startCapLoading, startCapping, startBottleLoading, startBottleUnloading;
 		output BottleTwin signal bottlePos0, bottlePos1, bottlePos2, bottlePos3, bottlePos4, bottlePos5, bottlePos6, bottlePos7, bottlePos8, bottlePos9, bottlePos1Rot;
 		output int signal bottlePos0B, bottlePos1B, bottlePos2B, bottlePos3B, bottlePos4B, bottlePos5B, bottlePos6B, bottlePos7B, bottlePos8B, bottlePos9B;
+		output int signal startRemover, faultUpdate;
 		)
-->{	
+->{
 	
 	BottleTwin signal posZeroUpdate, posOneUpdate, posTwoUpdate, posThreeUpdate, posFourUpdate, posFiveUpdate, posSixUpdate, posSevenUpdate, posEightUpdate, posNineUpdate;
 	signal filling, capLoading, startRobotLoaderThread, startConveyorThread, startRotThread, startCapLoaderThread, startRobotUnloaderThread, startFillerThread, startCapperThread;
 	signal checkRobotLoader, checkConveyor, checkRotTable, checkRobotUnloader, checkFiller, checkCapLoader, checkCapper;
 	signal robotLoaderFinish, conveyorFinish, rotTableFinish, robotUnloaderFinish, fillerFinish, capLoaderFinish, capperFinish;
+	int signal fault, stop;
+	signal pauseFaultCheck, faultSolved, addFault;
+	{
+		await(stop);
+		
+		{
+			abort(faultSolved){
+				sustain pauseFaultCheck;
+			}
+		}
+		
+		||
+		{
+			int location = (int)#fault;
+			emit startRemover(location);
+//			await(bottleRemoved);
+			await(!enable);
+			await(enable);
+			if(location == 1) {
+				emit posOneUpdate(null);
+			}
+			
+			emit faultSolved;
+
+		}
+		
+	}
+	
+	||
+	
+	{
+		while(true){
+			await(introduceFault);
+			await(addFault);
+			int location = (int)#introduceFault;
+			if(location == 1) {
+				present(bottlePos1){
+					BottleTwin b = (BottleTwin)#posOneUpdate;
+					if (b != null) {
+						b.Faulty = true;
+						emit posOneUpdate(b);
+					} 			
+				}
+
+			}
+		}
+	}
+	
+	
+	||
+	
 	// thread for getting new bottle
 	{
 		while(true){
@@ -42,92 +95,342 @@ Orchestrator(
 	}
 	
 	||
-	
 	// logic
 	{
+
 		while(true) {
-//			await(!request);
-//			await(request);
-
-			emit checkConveyor;
-			await(conveyorFinish);
-			pause;
-			pause;
-
-			{
-				emit checkCapLoader;
-				await(capLoaderFinish);
-
+			abort(stop){
+//				await(!request);
+//				await(request);
+				emit addFault;
 				pause;
 				pause;
+
+				present(fault){
+					int pos = (int)#fault;
+					emit stop(pos);
+				}
+				pause;
+				
+				emit checkConveyor;
+				await(conveyorFinish);
+				pause;
+				pause;
+				
+				{
+					emit checkCapLoader;
+					await(capLoaderFinish);
+
+					pause;
+					pause;
+				}
+				||
+				{
+					emit checkFiller;
+					await(fillerFinish);
+
+					pause;
+					pause;
+				}
+				||
+				{
+					emit checkCapper;
+					await(capperFinish);
+
+					pause;
+					pause;
+				}
+				||
+				{
+					emit checkRobotLoader;
+					await(robotLoaderFinish);
+					pause;
+					pause;
+				}
+				||
+				{
+					emit checkRobotUnloader;
+					await(robotUnloaderFinish);
+					pause;
+					pause;
+				}	
+				
+				emit addFault;
+				pause;
+				pause;
+				present(fault){
+					int pos = (int)#fault;
+					emit stop(pos);
+				}
+				pause;
+				
+				emit checkConveyor;
+				await(conveyorFinish);
+				pause;
+				pause;
+				
+				{
+					emit checkRobotLoader;
+					await(robotLoaderFinish);
+					pause;
+					pause;
+
+				}
+				||
+				{
+					emit checkRobotUnloader;
+					await(robotUnloaderFinish);
+					pause;
+					pause;
+				}
+				emit addFault;
+				pause;
+				pause;
+
+				present(fault){
+					int pos = (int)#fault;
+					emit stop(pos);
+				}
+				pause;
+
+				await(!enable);
+				await(enable);
+
+				emit checkRotTable;
+				await(rotTableFinish);
+				pause;
+				pause;
+
+				await(!enable);
+				await(enable);
+				
+
 			}
-			||
-			{
-				emit checkFiller;
-				await(fillerFinish);
-
-				pause;
-				pause;
-			}
-			||
-			{
-				emit checkCapper;
-				await(capperFinish);
-
-				pause;
-				pause;
-			}
-			||
-			{
-				emit checkRobotLoader;
-				await(robotLoaderFinish);
-				pause;
-				pause;
-			}
-			||
-			{
-				emit checkRobotUnloader;
-				await(robotUnloaderFinish);
-				pause;
-				pause;
-			}			
-			
-			emit checkConveyor;
-			await(conveyorFinish);
-			pause;
-			pause;
-			
-			{
-				emit checkRobotLoader;
-				await(robotLoaderFinish);
-				pause;
-				pause;
-
-			}
-			||
-			{
-				emit checkRobotUnloader;
-				await(robotUnloaderFinish);
-				pause;
-				pause;
-			}
-
-
-			await(!enable);
-			await(enable);
-
-			emit checkRotTable;
-			await(rotTableFinish);
-			pause;
-			pause;
-
-			await(!enable);
-			await(enable);
-
 		}
 	}
 	
 	||
+	// Fault check threads
+	{
+		while(true) {
+			abort(pauseFaultCheck){
+				present(bottlePos0){
+					BottleTwin b = (BottleTwin)#posZeroUpdate;
+					if (b != null) {
+						boolean faulty = b.Faulty;
+						if(faulty) {
+							emit fault(0);
+							int id = b.ID;
+							emit faultUpdate(id);
+						}
+					} 			
+				}
+				pause;
+			}
+		}
+	}
+	
+	||
+	{
+		while(true) {
+			abort(pauseFaultCheck){
+				present(bottlePos1){
+					BottleTwin b = (BottleTwin)#posOneUpdate;
+					if (b != null) {
+						boolean faulty = b.Faulty;
+						if(faulty) {
+							emit fault(1);
+							int id = b.ID;
+							emit faultUpdate(id);
+
+						}
+					} 			
+				}
+
+			}
+			pause;
+		}
+	}
+	
+	||
+
+	{
+		while(true) {
+			abort(pauseFaultCheck){
+				present(bottlePos2){
+					BottleTwin b = (BottleTwin)#posTwoUpdate;
+					if (b != null) {
+						boolean faulty = b.Faulty;
+						if(faulty) {
+							emit fault(2);
+							int id = b.ID;
+							emit faultUpdate(id);
+
+						}
+					} 			
+				}
+
+		}
+			pause;
+		}
+	}
+	
+	||
+	{
+		while(true) {
+			abort(pauseFaultCheck){
+				present(bottlePos3){
+					BottleTwin b = (BottleTwin)#posThreeUpdate;
+					if (b != null) {
+						boolean faulty = b.Faulty;
+						if(faulty) {
+							emit fault(3);
+							int id = b.ID;
+							emit faultUpdate(id);
+
+						}
+					} 			
+				}
+
+			}
+			pause;
+		}
+	}
+	
+	||
+	{
+		while(true) {
+			abort(pauseFaultCheck){
+				present(bottlePos4){
+					BottleTwin b = (BottleTwin)#posFourUpdate;
+					if (b != null) {
+						boolean faulty = b.Faulty;
+						if(faulty) {
+							emit fault(4);
+							int id = b.ID;
+							emit faultUpdate(id);
+
+						}
+					} 			
+				}
+
+		}
+			pause;
+		}
+	}
+	
+	||
+	{
+		while(true) {
+			abort(pauseFaultCheck){
+				present(bottlePos5){
+					BottleTwin b = (BottleTwin)#posFiveUpdate;
+					if (b != null) {
+						boolean faulty = b.Faulty;
+						if(faulty) {
+							emit fault(5);
+							int id = b.ID;
+							emit faultUpdate(id);
+
+						}
+					} 			
+				}
+				pause;
+
+			}
+			
+		}
+	}
+	
+	||
+	{
+		while(true) {
+			abort(pauseFaultCheck){
+				present(bottlePos6){
+					BottleTwin b = (BottleTwin)#posSixUpdate;
+					if (b != null) {
+						boolean faulty = b.Faulty;
+						if(faulty) {
+							emit fault(6);
+							int id = b.ID;
+							emit faultUpdate(id);
+
+						}
+					} 			
+				}
+				pause;
+
+			}
+		}
+	}
+	
+	||
+	{
+		while(true) {
+			abort(pauseFaultCheck){
+				present(bottlePos7){
+					BottleTwin b = (BottleTwin)#posSevenUpdate;
+					if (b != null) {
+						boolean faulty = b.Faulty;
+						if(faulty) {
+							emit fault(7);
+							int id = b.ID;
+							emit faultUpdate(id);
+
+						}
+					} 			
+				}
+				pause;
+
+		}
+		}
+	}
+	
+	||
+	{
+		while(true) {
+			abort(pauseFaultCheck){
+				present(bottlePos8){
+					BottleTwin b = (BottleTwin)#posEightUpdate;
+					if (b != null) {
+						boolean faulty = b.Faulty;
+						if(faulty) {
+							emit fault(8);
+							int id = b.ID;
+							emit faultUpdate(id);
+
+						}
+					} 			
+				}
+
+		}
+			pause;
+		}
+	}
+	
+	||
+	{
+		while(true) {
+			abort(pauseFaultCheck){
+				present(bottlePos9){
+					BottleTwin b = (BottleTwin)#posNineUpdate;
+					if (b != null) {
+						boolean faulty = b.Faulty;
+						if(faulty) {
+							emit fault(9);
+							int id = b.ID;
+							emit faultUpdate(id);
+
+						}
+					} 			
+				}
+		}
+			pause;
+		}
+	}
+	
+	||
+
 	// Bottle loader logic
 	{
 		while(true) {
